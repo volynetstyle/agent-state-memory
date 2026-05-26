@@ -8,22 +8,22 @@ Seed: 42
 
 Request timeout ms: 120000
 
-Num predict: 32
+Num predict: 64
 
-Question set: 4 total (1 current_state, 1 stable_state, 1 document_detail, 1 unknown).
+Question set: 31 total (10 current_state, 6 stable_state, 10 document_detail, 5 unknown).
 
 | System | Normalized Accuracy | Unknown Accuracy | Prompt Compliance | Hallucination Rate | Avg Context Tokens | Avg LLM ms |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| RAG + LLM | 0.7500 | 1.0000 | 0.7500 | 0.0000 | 159.7500 | 10915.6349 |
-| State + LLM | 0.5000 | 1.0000 | 0.7500 | 0.0000 | 65.5000 | 4340.5043 |
-| Hybrid + LLM | 0.7500 | 1.0000 | 0.7500 | 0.0000 | 147.5000 | 11189.9571 |
+| RAG + LLM | 0.8065 | 1.0000 | 0.8710 | 0.0323 | 207.2581 | 16788.4294 |
+| State + LLM | 0.5806 | 1.0000 | 0.9032 | 0.0000 | 64.0645 | 4073.4492 |
+| Hybrid + LLM | 0.9355 | 1.0000 | 0.9355 | 0.0000 | 187.9032 | 15343.3162 |
 
 Accuracy by question type:
 
 | Type | RAG + LLM | State + LLM | Hybrid + LLM |
 | --- | ---: | ---: | ---: |
-| current_state | 1.0000 | 1.0000 | 1.0000 |
-| stable_state | 0.0000 | 0.0000 | 0.0000 |
+| current_state | 0.7000 | 0.9000 | 0.9000 |
+| stable_state | 0.5000 | 0.6667 | 0.8333 |
 | document_detail | 1.0000 | 0.0000 | 1.0000 |
 | unknown | 1.0000 | 1.0000 | 1.0000 |
 
@@ -31,15 +31,21 @@ Latency breakdown:
 
 | System | Retrieval ms | Prompt Build ms | LLM ms | Total ms |
 | --- | ---: | ---: | ---: | ---: |
-| RAG + LLM | 4.5177 | 0.0101 | 10915.6349 | 10920.2481 |
-| State + LLM | 2.9083 | 0.0043 | 4340.5043 | 4343.4725 |
-| Hybrid + LLM | 2.5601 | 0.0122 | 11189.9571 | 11192.5571 |
+| RAG + LLM | 7.5502 | 0.0092 | 16788.4294 | 16796.0318 |
+| State + LLM | 1.5294 | 0.0044 | 4073.4492 | 4075.0086 |
+| Hybrid + LLM | 3.1123 | 0.0151 | 15343.3162 | 15346.4613 |
 
 Top failure examples:
 
 | System | Type | Error | Expected | Raw Answer |
 | --- | --- | --- | --- | --- |
+| rag | current_state | incomplete_answer | zero-dependency Node.js | UNKNOWN |
+| rag | current_state | incomplete_answer | lexical top-k retriever | Cosine embedding search. |
+| rag | current_state | incomplete_answer | structured world state | RAG retrieval. |
 | rag | stable_state | missing_fact | implementation, experiments, metrics, baseline comparison, error analysis, conclusions | includes implementation, baseline comparison, metrics, error analysis, experiments. |
-| state | stable_state | incomplete_answer | implementation, experiments, metrics, baseline comparison, error analysis, conclusions | baseline comparison, metrics, error analysis, experiments, conclusions |
+| rag | stable_state | missing_fact | user profile, projects, goals, tasks, facts | Goals, facts. |
+| rag | stable_state | missing_fact | recall, precision, context size, latency, stale fact error rate, compression ratio | UNKNOWN |
+| state | current_state | incomplete_answer | zero-dependency Node.js | Node.js |
+| state | stable_state | incomplete_answer | implementation, experiments, metrics, baseline comparison, error analysis, conclusions | experiments and conclusions |
+| state | stable_state | incomplete_answer | event logging, fact extraction, state update, state selection, prompt building | state selection, event logging, fact extraction, prompt building |
 | state | document_detail | missing_fact | VALUE-001-1 | UNKNOWN |
-| hybrid | stable_state | incomplete_answer | implementation, experiments, metrics, baseline comparison, error analysis, conclusions | experiments, conclusions |
