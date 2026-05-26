@@ -1,0 +1,18 @@
+{
+  "name": "coursework-state-memory",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Coursework MVP comparing a RAG baseline with structured State Memory for long-context LLM agents.",
+  "scripts": {
+    "generate": "node src/generateDataset.mjs",
+    "experiment": "node src/index.mjs",
+    "experiment:llm": "node src/llmExperiment.mjs",
+    "experiment:mixed": "node src/mixedExperiment.mjs",
+    "experiment:scale": "node src/scalabilityExperiment.mjs",
+    "start": "node src/index.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
