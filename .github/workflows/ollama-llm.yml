@@ -1,0 +1,55 @@
+name: Ollama LLM Experiment
+
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: "Ollama model to pull and run"
+        required: true
+        default: "llama3.2:3b"
+      questions:
+        description: "Answerable LLM questions split across current/stable/document"
+        required: true
+        default: "30"
+      unknown:
+        description: "Additional unanswerable UNKNOWN questions"
+        required: true
+        default: "5"
+
+jobs:
+  llm-experiment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Ollama
+        run: curl -fsSL https://ollama.com/install.sh | sh
+
+      - name: Start Ollama server
+        run: |
+          nohup ollama serve > ollama.log 2>&1 &
+          sleep 8
+
+      - name: Pull model
+        run: ollama pull "${{ inputs.model }}"
+
+      - name: Run mixed LLM experiment
+        run: npm run experiment:llm -- --model="${{ inputs.model }}" --questions=${{ inputs.questions }} --unknown=${{ inputs.unknown }}
+
+      - name: Generate results report
+        run: npm run results
+
+      - name: Upload LLM results
+        uses: actions/upload-artifact@v4
+        with:
+          name: llm-results
+          path: |
+            RESULTS.md
+            results/llm
+            ollama.log

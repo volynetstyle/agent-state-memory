@@ -11,7 +11,8 @@ export class OllamaError extends Error {
 export async function generateWithOllama(prompt, {
   model = process.env.OLLAMA_MODEL ?? "llama3.2:3b",
   baseUrl = process.env.OLLAMA_URL ?? DEFAULT_OLLAMA_URL,
-  temperature = 0
+  temperature = 0,
+  seed = 42
 } = {}) {
   let response;
 
@@ -25,6 +26,7 @@ export async function generateWithOllama(prompt, {
         stream: false,
         options: {
           temperature,
+          seed,
           num_predict: 64
         }
       })

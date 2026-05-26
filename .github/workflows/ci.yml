@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  deterministic-experiments:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Check JavaScript syntax
+        run: find src -name '*.mjs' -print0 | xargs -0 -n1 node --check
+
+      - name: Run deterministic memory benchmark
+        run: npm run experiment
+
+      - name: Run mixed benchmark
+        run: npm run experiment:mixed
+
+      - name: Run scalability benchmark
+        run: npm run experiment:scale
+
+      - name: Run stress benchmark
+        run: npm run experiment:stress
+
+      - name: Generate results report
+        run: npm run results
+
+      - name: Upload generated results
+        uses: actions/upload-artifact@v4
+        with:
+          name: deterministic-results
+          path: |
+            RESULTS.md
+            results

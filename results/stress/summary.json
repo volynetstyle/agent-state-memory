@@ -27,9 +27,9 @@
         "contextHitRate": 0.9285714285714286,
         "meanReciprocalRank": 0.45145502645502655,
         "averageContextTokens": 87.88095238095238,
-        "averageLatencyMs": 5.493328571428572,
+        "averageLatencyMs": 3.829892857142858,
         "contextEfficiency": 0.002438363587103766,
-        "latencyEfficiency": 0.03900835558976732,
+        "latencyEfficiency": 0.055950837863796996,
         "errorTaxonomy": {
           "stale_fact": 30,
           "none": 9,
@@ -53,9 +53,9 @@
         "contextHitRate": 0.9285714285714286,
         "meanReciprocalRank": 0.873346560846561,
         "averageContextTokens": 89.07142857142857,
-        "averageLatencyMs": 4.289961904761906,
+        "averageLatencyMs": 3.5188476190476172,
         "contextEfficiency": 0.010425020048115477,
-        "latencyEfficiency": 0.21645213854712878,
+        "latencyEfficiency": 0.2638850922515219,
         "errorTaxonomy": {
           "none": 39,
           "missing_fact": 3
@@ -78,9 +78,9 @@
         "contextHitRate": 1,
         "meanReciprocalRank": 1,
         "averageContextTokens": 65.33333333333333,
-        "averageLatencyMs": 1.0755499999999953,
+        "averageLatencyMs": 1.1232071428571435,
         "contextEfficiency": 0.015306122448979593,
-        "latencyEfficiency": 0.9297568685788706,
+        "latencyEfficiency": 0.890307728507017,
         "errorTaxonomy": {
           "none": 42
         }
@@ -110,9 +110,9 @@
         "contextHitRate": 0.9285714285714286,
         "meanReciprocalRank": 0.45145502645502655,
         "averageContextTokens": 87.88095238095238,
-        "averageLatencyMs": 3.3793714285714302,
+        "averageLatencyMs": 3.230469047619048,
         "contextEfficiency": 0.002438363587103766,
-        "latencyEfficiency": 0.06340993253183175,
+        "latencyEfficiency": 0.0663326938370294,
         "errorTaxonomy": {
           "stale_fact": 30,
           "none": 9,
@@ -136,9 +136,9 @@
         "contextHitRate": 0.9285714285714286,
         "meanReciprocalRank": 0.873346560846561,
         "averageContextTokens": 89.07142857142857,
-        "averageLatencyMs": 3.511926190476185,
+        "averageLatencyMs": 3.9099452380952364,
         "contextEfficiency": 0.010425020048115477,
-        "latencyEfficiency": 0.26440516634135836,
+        "latencyEfficiency": 0.23748962505259796,
         "errorTaxonomy": {
           "none": 39,
           "missing_fact": 3
@@ -161,9 +161,9 @@
         "contextHitRate": 0.14285714285714285,
         "meanReciprocalRank": 0.14285714285714285,
         "averageContextTokens": 62.45238095238095,
-        "averageLatencyMs": 0.7183857142857137,
+        "averageLatencyMs": 0.724754761904765,
         "contextEfficiency": 0.002287457110179184,
-        "latencyEfficiency": 0.19885855191202512,
+        "latencyEfficiency": 0.19711100963544234,
         "errorTaxonomy": {
           "stale_fact": 36,
           "none": 6
@@ -194,9 +194,9 @@
         "contextHitRate": 0.9285714285714286,
         "meanReciprocalRank": 0.45145502645502655,
         "averageContextTokens": 87.88095238095238,
-        "averageLatencyMs": 3.4623142857142746,
+        "averageLatencyMs": 3.3139119047619077,
         "contextEfficiency": 0.002438363587103766,
-        "latencyEfficiency": 0.06189089048613251,
+        "latencyEfficiency": 0.06466246552233255,
         "errorTaxonomy": {
           "stale_fact": 30,
           "none": 9,
@@ -220,9 +220,9 @@
         "contextHitRate": 0.9285714285714286,
         "meanReciprocalRank": 0.873346560846561,
         "averageContextTokens": 89.07142857142857,
-        "averageLatencyMs": 3.1199642857142966,
+        "averageLatencyMs": 3.327604761904771,
         "contextEfficiency": 0.010425020048115477,
-        "latencyEfficiency": 0.29762245446948693,
+        "latencyEfficiency": 0.2790509976430916,
         "errorTaxonomy": {
           "none": 39,
           "missing_fact": 3
@@ -245,9 +245,9 @@
         "contextHitRate": 0.9285714285714286,
         "meanReciprocalRank": 0.9285714285714286,
         "averageContextTokens": 67.35714285714286,
-        "averageLatencyMs": 0.6803595238095242,
+        "averageLatencyMs": 0.7752047619047635,
         "contextEfficiency": 0.013785790031813362,
-        "latencyEfficiency": 1.3648246200363245,
+        "latencyEfficiency": 1.197840201974284,
         "errorTaxonomy": {
           "none": 39,
           "stale_fact": 3
@@ -278,9 +278,9 @@
         "contextHitRate": 0.9285714285714286,
         "meanReciprocalRank": 0.4466089466089466,
         "averageContextTokens": 97.47619047619048,
-        "averageLatencyMs": 3.4720404761904784,
+        "averageLatencyMs": 3.356716666666687,
         "contextEfficiency": 0.0021983390327308255,
-        "latencyEfficiency": 0.061717516185418576,
+        "latencyEfficiency": 0.06383789147700271,
         "errorTaxonomy": {
           "stale_fact": 30,
           "none": 9,
@@ -304,9 +304,9 @@
         "contextHitRate": 0.9285714285714286,
         "meanReciprocalRank": 0.5458152958152958,
         "averageContextTokens": 104.28571428571429,
-        "averageLatencyMs": 3.2649976190476004,
+        "averageLatencyMs": 3.2797452380952694,
         "contextEfficiency": 0.008904109589041096,
-        "latencyEfficiency": 0.28440187005168255,
+        "latencyEfficiency": 0.2831230358339362,
         "errorTaxonomy": {
           "none": 39,
           "missing_fact": 3
@@ -329,9 +329,9 @@
         "contextHitRate": 1,
         "meanReciprocalRank": 1,
         "averageContextTokens": 68.69047619047619,
-        "averageLatencyMs": 0.6714476190476153,
+        "averageLatencyMs": 0.7214476190476186,
         "contextEfficiency": 0.014558058925476604,
-        "latencyEfficiency": 1.48931945193045,
+        "latencyEfficiency": 1.3861020171084601,
         "errorTaxonomy": {
           "none": 42
         }

@@ -11,6 +11,7 @@
     "experiment:mixed": "node src/mixedExperiment.mjs",
     "experiment:scale": "node src/scalabilityExperiment.mjs",
     "experiment:stress": "node src/stressExperiment.mjs",
+    "results": "node src/report/generateResultsReport.mjs",
     "start": "node src/index.mjs"
   },
   "engines": {

@@ -1,6 +1,6 @@
 import { existsSync } from "node:fs";
 import { generateDataset } from "./generateDataset.mjs";
-import { runLlmExperiment } from "./eval/runLlmExperiment.mjs";
+import { runLlmMixedExperiment } from "./eval/runLlmMixedExperiment.mjs";
 
 function readNumberArg(name, fallback) {
   const prefix = `--${name}=`;
@@ -20,6 +20,10 @@ if (!existsSync("data/events.jsonl") || process.argv.includes("--regenerate")) {
 
 const questionLimit = readNumberArg("questions", 50);
 const model = readStringArg("model", process.env.OLLAMA_MODEL ?? "llama3.2:3b");
+const currentCount = readNumberArg("current", Math.floor(questionLimit / 3));
+const stableCount = readNumberArg("stable", Math.floor(questionLimit / 3));
+const documentCount = readNumberArg("document", questionLimit - currentCount - stableCount);
+const unknownCount = readNumberArg("unknown", 5);
 
 if (process.argv.includes("--dry-run")) {
   console.log(
@@ -28,7 +32,10 @@ if (process.argv.includes("--dry-run")) {
         mode: "dry-run",
         message: "LLM experiment is configured. Remove --dry-run to call Ollama.",
         model,
-        questionLimit,
+        currentCount,
+        stableCount,
+        documentCount,
+        unknownCount,
         command: "npm run experiment:llm"
       },
       null,
@@ -39,8 +46,11 @@ if (process.argv.includes("--dry-run")) {
 }
 
 try {
-  const summary = await runLlmExperiment({
-    questionLimit,
+  const summary = await runLlmMixedExperiment({
+    currentCount,
+    stableCount,
+    documentCount,
+    unknownCount,
     ollama: { model }
   });
 

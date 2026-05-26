@@ -119,12 +119,28 @@ You can reduce or increase the question subset:
 npm run experiment:llm -- --questions=30
 ```
 
-The prompt explicitly instructs the model to answer only from the provided context and return `UNKNOWN` when the answer is absent. Results are written to:
+The current LLM experiment is a mixed validation benchmark. It runs the same question set through:
+
+- `RAG + LLM`
+- `State + LLM`
+- `Hybrid + LLM`
+
+The default question set is split across current-state questions, stable-state questions, document-detail questions, and additional unanswerable `UNKNOWN` questions. You can tune it:
+
+```bash
+npm run experiment:llm -- --current=10 --stable=6 --document=10 --unknown=5 --model=llama3.2:3b
+```
+
+The prompt explicitly instructs the model to answer only from the provided context and return `UNKNOWN` when the answer is absent. Generation uses `temperature: 0` and a fixed seed for lower variance. Results are written to:
 
 - `results/llm/rag-llm-results.json`
 - `results/llm/state-llm-results.json`
+- `results/llm/hybrid-llm-results.json`
+- `results/llm/raw-responses.json`
 - `results/llm/summary.json`
 - `results/llm/summary.md`
+
+The LLM summary reports normalized accuracy, unknown accuracy, prompt compliance rate, hallucination rate, context tokens, and latency breakdown into retrieval, prompt building, LLM generation, and total time.
 
 Use this mode in the coursework as an additional validation experiment, not as the primary controlled benchmark.
 
@@ -182,6 +198,32 @@ This gives two complementary experiments:
 The third experiment is important for limitations: State Memory is not a replacement for RAG over large unstructured documents. It is a state layer for evolving facts, goals, tasks and user/project state. For document-heavy QA, the stronger architecture is hybrid.
 
 The stress experiment is important for self-criticism: perfect State Memory scores depend on clean extraction. If final updates are missing or facts are assigned to the wrong slot, State Memory degrades. It also shows that stronger temporal RAG baselines can reduce stale errors, so future work should compare State Memory against temporal-aware RAG instead of only naive RAG.
+
+## Docker And CI
+
+Run the deterministic benchmark in Docker:
+
+```bash
+docker build -t coursework-state-memory .
+docker run --rm coursework-state-memory
+```
+
+Run another command in the same image:
+
+```bash
+docker run --rm coursework-state-memory npm run experiment:mixed
+```
+
+For LLM experiments, run Ollama on the host and pass its URL into the container:
+
+```bash
+docker run --rm -e OLLAMA_URL=http://host.docker.internal:11434 coursework-state-memory npm run experiment:llm -- --model=llama3.2:3b --questions=30 --unknown=5
+```
+
+GitHub Actions includes:
+
+- `CI`: runs syntax checks and deterministic experiments on push/pull request.
+- `Ollama LLM Experiment`: manual workflow that installs Ollama, pulls the selected model, runs `npm run experiment:llm`, and uploads `results/llm` as an artifact.
 
 ## Repository Shape
 
