@@ -1,66 +1,197 @@
 {
   "dataset": {
     "events": 1000,
-    "questions": 20,
-    "activeFacts": 206,
-    "obsoleteFacts": 72
+    "documentPages": 100,
+    "documentChunks": 300,
+    "questions": 4,
+    "currentStateQuestions": 1,
+    "stableStateQuestions": 1,
+    "documentQuestions": 1,
+    "unknownQuestions": 1
   },
   "configuration": {
     "model": "llama3.2:3b",
+    "temperature": 0,
+    "seed": 42,
     "ragTopK": 12,
-    "stateLimit": 8,
-    "questionLimit": 20
+    "documentTopK": 8,
+    "stateLimit": 8
   },
   "rag": {
-    "totalQuestions": 20,
-    "answered": 18,
-    "correct": 16,
-    "exactMatchAccuracy": 0.8,
-    "answerAccuracy": 0.8,
-    "recallAccuracy": 0.8,
-    "precision": 0.8888888888888888,
-    "f1Score": 0.8421052631578948,
-    "currentFactQuestions": 0,
-    "currentFactAccuracy": 0,
-    "staleFactErrorRate": 0,
-    "currentStaleFactErrorRate": 0,
-    "obsoleteFactRejectionRate": 0,
-    "contextHitRate": 0,
-    "meanReciprocalRank": 0,
-    "averageContextTokens": 116.85,
-    "averageLatencyMs": 7498.060129999998,
-    "contextEfficiency": 0.006846384253316218,
-    "latencyEfficiency": 0.0001066942630666794,
-    "errorTaxonomy": {
-      "none": 16,
-      "unknown_failed": 2,
-      "answer_mismatch": 2
+    "totalQuestions": 4,
+    "exactMatchAccuracy": 0.5,
+    "normalizedAccuracy": 0.75,
+    "promptComplianceRate": 0.75,
+    "hallucinationRate": 0.25,
+    "unknownAccuracy": 1,
+    "averageContextTokens": 159.75,
+    "averageRetrievalMs": 4.801749999998998,
+    "averagePromptBuildMs": 0.010424999998795315,
+    "averageLlmMs": 11875.382075,
+    "averageTotalMs": 11880.286325000001,
+    "byType": {
+      "current_state": {
+        "totalQuestions": 1,
+        "exactMatchAccuracy": 0,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 85,
+        "averageLlmMs": 9861.705699999999,
+        "averageTotalMs": 9866.4237
+      },
+      "stable_state": {
+        "totalQuestions": 1,
+        "exactMatchAccuracy": 0,
+        "normalizedAccuracy": 0,
+        "promptComplianceRate": 0,
+        "hallucinationRate": 1,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 126,
+        "averageLlmMs": 8359.5196,
+        "averageTotalMs": 8364.619900000002
+      },
+      "document_detail": {
+        "totalQuestions": 1,
+        "exactMatchAccuracy": 1,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 363,
+        "averageLlmMs": 26180.692199999998,
+        "averageTotalMs": 26183.969800000003
+      },
+      "unknown": {
+        "totalQuestions": 1,
+        "exactMatchAccuracy": 1,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 1,
+        "averageContextTokens": 65,
+        "averageLlmMs": 3099.610800000002,
+        "averageTotalMs": 3106.1319000000003
+      }
     }
   },
-  "stateMemory": {
-    "totalQuestions": 20,
-    "answered": 18,
-    "correct": 15,
-    "exactMatchAccuracy": 0.75,
-    "answerAccuracy": 0.75,
-    "recallAccuracy": 0.75,
-    "precision": 0.8333333333333334,
-    "f1Score": 0.7894736842105262,
-    "currentFactQuestions": 0,
-    "currentFactAccuracy": 0,
-    "staleFactErrorRate": 0,
-    "currentStaleFactErrorRate": 0,
-    "obsoleteFactRejectionRate": 0,
-    "contextHitRate": 0,
-    "meanReciprocalRank": 0,
-    "averageContextTokens": 81.15,
-    "averageLatencyMs": 7854.625565000002,
-    "contextEfficiency": 0.009242144177449167,
-    "latencyEfficiency": 0.00009548513723454618,
-    "errorTaxonomy": {
-      "none": 15,
-      "unknown_failed": 2,
-      "answer_mismatch": 3
+  "state": {
+    "totalQuestions": 4,
+    "exactMatchAccuracy": 0.25,
+    "normalizedAccuracy": 0.5,
+    "promptComplianceRate": 0.75,
+    "hallucinationRate": 0.25,
+    "unknownAccuracy": 1,
+    "averageContextTokens": 65.5,
+    "averageRetrievalMs": 2.709325000001627,
+    "averagePromptBuildMs": 0.004024999998364365,
+    "averageLlmMs": 4459.338324999999,
+    "averageTotalMs": 4462.093975,
+    "byType": {
+      "current_state": {
+        "totalQuestions": 1,
+        "exactMatchAccuracy": 0,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 73,
+        "averageLlmMs": 6327.282899999998,
+        "averageTotalMs": 6335.775800000003
+      },
+      "stable_state": {
+        "totalQuestions": 1,
+        "exactMatchAccuracy": 0,
+        "normalizedAccuracy": 0,
+        "promptComplianceRate": 0,
+        "hallucinationRate": 1,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 82,
+        "averageLlmMs": 5599.9905,
+        "averageTotalMs": 5601.201399999998
+      },
+      "document_detail": {
+        "totalQuestions": 1,
+        "exactMatchAccuracy": 0,
+        "normalizedAccuracy": 0,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 35,
+        "averageLlmMs": 1371.9988999999987,
+        "averageTotalMs": 1372.0213999999978
+      },
+      "unknown": {
+        "totalQuestions": 1,
+        "exactMatchAccuracy": 1,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 1,
+        "averageContextTokens": 72,
+        "averageLlmMs": 4538.080999999998,
+        "averageTotalMs": 4539.3773
+      }
+    }
+  },
+  "hybrid": {
+    "totalQuestions": 4,
+    "exactMatchAccuracy": 0.5,
+    "normalizedAccuracy": 0.75,
+    "promptComplianceRate": 0.75,
+    "hallucinationRate": 0.25,
+    "unknownAccuracy": 1,
+    "averageContextTokens": 147.5,
+    "averageRetrievalMs": 1.871050000003379,
+    "averagePromptBuildMs": 0.010574999996606493,
+    "averageLlmMs": 11956.627000000002,
+    "averageTotalMs": 11958.537500000002,
+    "byType": {
+      "current_state": {
+        "totalQuestions": 1,
+        "exactMatchAccuracy": 0,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 73,
+        "averageLlmMs": 7075.5000999999975,
+        "averageTotalMs": 7076.726200000005
+      },
+      "stable_state": {
+        "totalQuestions": 1,
+        "exactMatchAccuracy": 0,
+        "normalizedAccuracy": 0,
+        "promptComplianceRate": 0,
+        "hallucinationRate": 1,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 82,
+        "averageLlmMs": 5698.032600000006,
+        "averageTotalMs": 5699.616399999999
+      },
+      "document_detail": {
+        "totalQuestions": 1,
+        "exactMatchAccuracy": 1,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 363,
+        "averageLlmMs": 30019.77870000001,
+        "averageTotalMs": 30022.701
+      },
+      "unknown": {
+        "totalQuestions": 1,
+        "exactMatchAccuracy": 1,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 1,
+        "averageContextTokens": 72,
+        "averageLlmMs": 5033.196599999996,
+        "averageTotalMs": 5035.106400000004
+      }
     }
   }
 }

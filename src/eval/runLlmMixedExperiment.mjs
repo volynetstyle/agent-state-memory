@@ -250,7 +250,8 @@ async function evaluateSystem({ system, questions, events, documents, worldState
     const llmMs = performance.now() - llmStart;
     const totalMs = performance.now() - totalStart;
     const grade = gradeLlmAnswer(question, rawAnswer, {
-      contextHasGoldFact: contextInfo.contextHasGoldFact
+      contextHasGoldFact: contextInfo.contextHasGoldFact,
+      context: contextInfo.context
     });
 
     results.push({

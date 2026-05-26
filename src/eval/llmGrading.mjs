@@ -1,4 +1,4 @@
-import { normalize } from "../shared/text.mjs";
+import { normalize, tokenize } from "../shared/text.mjs";
 
 const PREFIXES = [
   "the answer is",
@@ -38,7 +38,13 @@ function normalizedExpected(question) {
   return expectedValues(question).map(normalizeLlmAnswer);
 }
 
-export function gradeLlmAnswer(question, rawAnswer, { contextHasGoldFact = false } = {}) {
+function answerUsesOnlyContext(answer, context) {
+  const answerTokens = tokenize(answer);
+  const contextTokens = new Set(tokenize(context));
+  return answerTokens.length > 0 && answerTokens.every((token) => contextTokens.has(token));
+}
+
+export function gradeLlmAnswer(question, rawAnswer, { contextHasGoldFact = false, context = "" } = {}) {
   const normalizedAnswer = normalizeLlmAnswer(rawAnswer);
   const expected = normalizedExpected(question);
   const exactExpected = Array.isArray(question.expected)
@@ -57,12 +63,13 @@ export function gradeLlmAnswer(question, rawAnswer, { contextHasGoldFact = false
       : isUnknown;
   const possibleHallucination = question.unanswerable
     ? !isUnknown
-    : !isUnknown && !normalizedMatch;
+    : !isUnknown && !normalizedMatch && !answerUsesOnlyContext(rawAnswer, context);
 
   let errorType = "none";
   if (!normalizedMatch && question.unanswerable) errorType = "unknown_failed";
   else if (!normalizedMatch && !contextHasGoldFact) errorType = "missing_fact";
   else if (!normalizedMatch && possibleHallucination) errorType = "possible_hallucination";
+  else if (!normalizedMatch && !possibleHallucination) errorType = "incomplete_answer";
   else if (!normalizedMatch) errorType = "answer_mismatch";
 
   return {
