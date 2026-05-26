@@ -223,10 +223,27 @@ function getContext({ system, question, events, documents, worldState, ragTopK, 
   };
 }
 
-async function evaluateSystem({ system, questions, events, documents, worldState, ollama, ragTopK, documentTopK, stateLimit }) {
+async function evaluateSystem({
+  system,
+  questions,
+  events,
+  documents,
+  worldState,
+  ollama,
+  ragTopK,
+  documentTopK,
+  stateLimit,
+  logProgress
+}) {
   const results = [];
 
-  for (const question of questions) {
+  for (const [index, question] of questions.entries()) {
+    if (logProgress) {
+      console.log(
+        `[${system.toUpperCase()}] ${index + 1}/${questions.length} ${question.questionType} ${question.id}`
+      );
+    }
+
     const totalStart = performance.now();
     const contextInfo = getContext({
       system,
@@ -282,6 +299,43 @@ function rounded(value) {
   return Number(value).toFixed(4);
 }
 
+function compactContext(context) {
+  return context.length > 700 ? `${context.slice(0, 700)}...` : context;
+}
+
+function compactAnswer(answer) {
+  return answer.length > 160 ? `${answer.slice(0, 160)}...` : answer;
+}
+
+function compactExpected(expected) {
+  const value = Array.isArray(expected) ? expected.join(", ") : String(expected);
+  return compactAnswer(value);
+}
+
+function tableCell(value) {
+  return String(value ?? "")
+    .replace(/\r?\n/gu, " ")
+    .replace(/\|/gu, "\\|")
+    .trim();
+}
+
+function failureExamples(results, limit = 10) {
+  return results
+    .filter((result) => !result.normalizedMatch)
+    .slice(0, limit)
+    .map((result) => ({
+      system: result.system,
+      questionType: result.questionType,
+      question: result.question,
+      expected: compactExpected(result.expected),
+      rawAnswer: compactAnswer(result.rawAnswer),
+      normalizedAnswer: compactAnswer(result.normalizedAnswer),
+      errorType: result.errorType,
+      contextHasGoldFact: result.contextHasGoldFact,
+      context: compactContext(result.context)
+    }));
+}
+
 function row(systemName, metrics) {
   return `| ${systemName} | ${rounded(metrics.normalizedAccuracy)} | ${rounded(metrics.unknownAccuracy)} | ${rounded(metrics.promptComplianceRate)} | ${rounded(metrics.hallucinationRate)} | ${rounded(metrics.averageContextTokens)} | ${rounded(metrics.averageLlmMs)} |`;
 }
@@ -299,6 +353,21 @@ function typeRows(summary) {
     .join("\n");
 }
 
+function failureRows(summary) {
+  if (!summary.failureExamples || summary.failureExamples.length === 0) {
+    return "No failures in this run.";
+  }
+
+  return [
+    "| System | Type | Error | Expected | Raw Answer |",
+    "| --- | --- | --- | --- | --- |",
+    ...summary.failureExamples.map(
+      (failure) =>
+        `| ${tableCell(failure.system)} | ${tableCell(failure.questionType)} | ${tableCell(failure.errorType)} | ${tableCell(failure.expected)} | ${tableCell(failure.rawAnswer)} |`
+    )
+  ].join("\n");
+}
+
 function buildMarkdown(summary) {
   return `# Mixed LLM Experiment
 
@@ -307,6 +376,10 @@ Model: ${summary.configuration.model}
 Temperature: ${summary.configuration.temperature}
 
 Seed: ${summary.configuration.seed}
+
+Request timeout ms: ${summary.configuration.timeoutMs}
+
+Num predict: ${summary.configuration.numPredict}
 
 Question set: ${summary.dataset.questions} total (${summary.dataset.currentStateQuestions} current_state, ${summary.dataset.stableStateQuestions} stable_state, ${summary.dataset.documentQuestions} document_detail, ${summary.dataset.unknownQuestions} unknown).
 
@@ -329,6 +402,10 @@ Latency breakdown:
 | RAG + LLM | ${rounded(summary.rag.averageRetrievalMs)} | ${rounded(summary.rag.averagePromptBuildMs)} | ${rounded(summary.rag.averageLlmMs)} | ${rounded(summary.rag.averageTotalMs)} |
 | State + LLM | ${rounded(summary.state.averageRetrievalMs)} | ${rounded(summary.state.averagePromptBuildMs)} | ${rounded(summary.state.averageLlmMs)} | ${rounded(summary.state.averageTotalMs)} |
 | Hybrid + LLM | ${rounded(summary.hybrid.averageRetrievalMs)} | ${rounded(summary.hybrid.averagePromptBuildMs)} | ${rounded(summary.hybrid.averageLlmMs)} | ${rounded(summary.hybrid.averageTotalMs)} |
+
+Top failure examples:
+
+${failureRows(summary)}
 `;
 }
 
@@ -344,7 +421,8 @@ export async function runLlmMixedExperiment({
   stateLimit = 8,
   seed = 42,
   resultsDir = "results/llm",
-  ollama = {}
+  ollama = {},
+  logProgress = true
 } = {}) {
   const stateDataset = buildDataset({ eventCount, seed });
   const documentDataset = buildDocumentDataset({
@@ -377,7 +455,8 @@ export async function runLlmMixedExperiment({
     ollama: ollamaOptions,
     ragTopK,
     documentTopK,
-    stateLimit
+    stateLimit,
+    logProgress
   });
   const stateResults = await evaluateSystem({
     system: "state",
@@ -388,7 +467,8 @@ export async function runLlmMixedExperiment({
     ollama: ollamaOptions,
     ragTopK,
     documentTopK,
-    stateLimit
+    stateLimit,
+    logProgress
   });
   const hybridResults = await evaluateSystem({
     system: "hybrid",
@@ -399,7 +479,8 @@ export async function runLlmMixedExperiment({
     ollama: ollamaOptions,
     ragTopK,
     documentTopK,
-    stateLimit
+    stateLimit,
+    logProgress
   });
   const rawResponses = [...ragResults, ...stateResults, ...hybridResults];
   const counts = {
@@ -420,13 +501,16 @@ export async function runLlmMixedExperiment({
       model,
       temperature,
       seed,
+      timeoutMs: ollamaOptions.timeoutMs,
+      numPredict: ollamaOptions.numPredict,
       ragTopK,
       documentTopK,
       stateLimit
     },
     rag: summarizeLlmResults(ragResults),
     state: summarizeLlmResults(stateResults),
-    hybrid: summarizeLlmResults(hybridResults)
+    hybrid: summarizeLlmResults(hybridResults),
+    failureExamples: failureExamples(rawResponses, 10)
   };
 
   await writeJson(`${resultsDir}/rag-llm-results.json`, ragResults);

@@ -67,14 +67,31 @@ The stress benchmark intentionally weakens ideal assumptions: missing updates, w
 | RAG | 0.0317 | 0.0093 |
 | State Memory | 0.0000 | 0.0000 |
 
-## LLM Benchmark
+## Mixed LLM Benchmark
 
-Model: llama3.2:3b.
+Model: llama3.2:3b, temperature: 0, seed: 42, timeout: 120000 ms, num_predict: 32.
 
-| System | Recall | Precision | Stale Error | Avg Context Tokens | Avg Latency ms |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| RAG + LLM | 0.8000 | 0.8889 | 0.0000 | 116.8500 | 7498.0601 |
-| State + LLM | 0.7500 | 0.8333 | 0.0000 | 81.1500 | 7854.6256 |
+| System | Normalized Accuracy | Unknown Accuracy | Prompt Compliance | Hallucination Rate | Avg Context Tokens | Avg LLM ms |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| RAG + LLM | 0.7500 | 1.0000 | 0.7500 | 0.0000 | 159.7500 | 10915.6349 |
+| State + LLM | 0.5000 | 1.0000 | 0.7500 | 0.0000 | 65.5000 | 4340.5043 |
+| Hybrid + LLM | 0.7500 | 1.0000 | 0.7500 | 0.0000 | 147.5000 | 11189.9571 |
+
+| Type | RAG + LLM | State + LLM | Hybrid + LLM |
+| --- | ---: | ---: | ---: |
+| current_state | 1.0000 | 1.0000 | 1.0000 |
+| stable_state | 0.0000 | 0.0000 | 0.0000 |
+| document_detail | 1.0000 | 0.0000 | 1.0000 |
+| unknown | 1.0000 | 1.0000 | 1.0000 |
+
+Top failure examples:
+
+| System | Type | Error | Expected | Raw Answer |
+| --- | --- | --- | --- | --- |
+| rag | stable_state | missing_fact | implementation, experiments, metrics, baseline comparison, error analysis, conclusions | includes implementation, baseline comparison, metrics, error analysis, experiments. |
+| state | stable_state | incomplete_answer | implementation, experiments, metrics, baseline comparison, error analysis, conclusions | baseline comparison, metrics, error analysis, experiments, conclusions |
+| state | document_detail | missing_fact | VALUE-001-1 | UNKNOWN |
+| hybrid | stable_state | incomplete_answer | implementation, experiments, metrics, baseline comparison, error analysis, conclusions | experiments, conclusions |
 
 ## Interpretation
 State Memory is strongest for evolving current state because it stores active and obsolete facts explicitly. RAG remains appropriate for long unstructured documents. The mixed and stress benchmarks show that the practical architecture is hybrid, and that State Memory quality depends on reliable fact extraction and update rules.

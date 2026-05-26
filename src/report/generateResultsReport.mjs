@@ -13,6 +13,13 @@ function rounded(value) {
   return Number(value).toFixed(4);
 }
 
+function tableCell(value) {
+  return String(value ?? "")
+    .replace(/\r?\n/gu, " ")
+    .replace(/\|/gu, "\\|")
+    .trim();
+}
+
 function section(title, body) {
   return [`## ${title}`, "", body.trim(), ""].join("\n");
 }
@@ -139,11 +146,23 @@ function llmBenchmark(summary) {
         return `| ${type} | ${rounded(rag)} | ${rounded(state)} | ${rounded(hybrid)} |`;
       })
       .join("\n");
+    const failures = summary.failureExamples ?? [];
+    const failureRows =
+      failures.length === 0
+        ? "No failures in this run."
+        : [
+            "| System | Type | Error | Expected | Raw Answer |",
+            "| --- | --- | --- | --- | --- |",
+            ...failures.map(
+              (failure) =>
+                `| ${tableCell(failure.system)} | ${tableCell(failure.questionType)} | ${tableCell(failure.errorType)} | ${tableCell(failure.expected)} | ${tableCell(failure.rawAnswer)} |`
+            )
+          ].join("\n");
 
     return section(
       "Mixed LLM Benchmark",
       `
-Model: ${summary.configuration.model}, temperature: ${summary.configuration.temperature}, seed: ${summary.configuration.seed}.
+Model: ${summary.configuration.model}, temperature: ${summary.configuration.temperature}, seed: ${summary.configuration.seed}, timeout: ${summary.configuration.timeoutMs ?? "n/a"} ms, num_predict: ${summary.configuration.numPredict ?? "n/a"}.
 
 | System | Normalized Accuracy | Unknown Accuracy | Prompt Compliance | Hallucination Rate | Avg Context Tokens | Avg LLM ms |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -154,6 +173,10 @@ Model: ${summary.configuration.model}, temperature: ${summary.configuration.temp
 | Type | RAG + LLM | State + LLM | Hybrid + LLM |
 | --- | ---: | ---: | ---: |
 ${typeRows}
+
+Top failure examples:
+
+${failureRows}
 `
     );
   }

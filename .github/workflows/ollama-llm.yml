@@ -15,6 +15,14 @@ on:
         description: "Additional unanswerable UNKNOWN questions"
         required: true
         default: "5"
+      timeout_ms:
+        description: "Per-request Ollama timeout in milliseconds"
+        required: true
+        default: "120000"
+      num_predict:
+        description: "Maximum generated tokens per answer"
+        required: true
+        default: "64"
 
 jobs:
   llm-experiment:
@@ -40,7 +48,7 @@ jobs:
         run: ollama pull "${{ inputs.model }}"
 
       - name: Run mixed LLM experiment
-        run: npm run experiment:llm -- --model="${{ inputs.model }}" --questions=${{ inputs.questions }} --unknown=${{ inputs.unknown }}
+        run: npm run experiment:llm -- --model="${{ inputs.model }}" --questions=${{ inputs.questions }} --unknown=${{ inputs.unknown }} --timeout-ms=${{ inputs.timeout_ms }} --num-predict=${{ inputs.num_predict }}
 
       - name: Generate results report
         run: npm run results

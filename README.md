@@ -119,6 +119,12 @@ You can reduce or increase the question subset:
 npm run experiment:llm -- --questions=30
 ```
 
+For slower CPUs or GitHub runners, the Ollama request timeout and maximum answer length can be tuned:
+
+```bash
+npm run experiment:llm -- --questions=30 --unknown=5 --timeout-ms=120000 --num-predict=64
+```
+
 The current LLM experiment is a mixed validation benchmark. It runs the same question set through:
 
 - `RAG + LLM`
@@ -140,7 +146,9 @@ The prompt explicitly instructs the model to answer only from the provided conte
 - `results/llm/summary.json`
 - `results/llm/summary.md`
 
-The LLM summary reports normalized accuracy, unknown accuracy, prompt compliance rate, hallucination rate, context tokens, and latency breakdown into retrieval, prompt building, LLM generation, and total time.
+The LLM runner prints progress lines for every system/question pair, for example `[RAG] 3/35 current_state q-001`. This is useful in CI because a 35-question run performs 105 model calls: `RAG + LLM`, `State + LLM`, and `Hybrid + LLM`.
+
+The LLM summary reports normalized accuracy, unknown accuracy, prompt compliance rate, hallucination rate, context tokens, latency breakdown into retrieval, prompt building, LLM generation, and total time, plus top failure examples. Raw answers, normalized answers, contexts, error types, and context-hit flags are stored in `results/llm/raw-responses.json`.
 
 Use this mode in the coursework as an additional validation experiment, not as the primary controlled benchmark.
 
@@ -223,7 +231,7 @@ docker run --rm -e OLLAMA_URL=http://host.docker.internal:11434 coursework-state
 GitHub Actions includes:
 
 - `CI`: runs syntax checks and deterministic experiments on push/pull request.
-- `Ollama LLM Experiment`: manual workflow that installs Ollama, pulls the selected model, runs `npm run experiment:llm`, and uploads `results/llm` as an artifact.
+- `Ollama LLM Experiment`: manual workflow that installs Ollama, pulls the selected model, runs `npm run experiment:llm`, regenerates `RESULTS.md`, and uploads `RESULTS.md` plus `results/llm` as artifacts.
 
 ## Repository Shape
 

@@ -12,14 +12,19 @@ export async function generateWithOllama(prompt, {
   model = process.env.OLLAMA_MODEL ?? "llama3.2:3b",
   baseUrl = process.env.OLLAMA_URL ?? DEFAULT_OLLAMA_URL,
   temperature = 0,
-  seed = 42
+  seed = 42,
+  numPredict = 64,
+  timeoutMs = 120_000
 } = {}) {
   let response;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
   try {
     response = await fetch(`${baseUrl}/api/generate`, {
       method: "POST",
       headers: { "content-type": "application/json" },
+      signal: controller.signal,
       body: JSON.stringify({
         model,
         prompt,
@@ -27,15 +32,24 @@ export async function generateWithOllama(prompt, {
         options: {
           temperature,
           seed,
-          num_predict: 64
+          num_predict: numPredict
         }
       })
     });
   } catch (error) {
+    if (error.name === "AbortError") {
+      throw new OllamaError(
+        `Ollama request timed out after ${timeoutMs}ms for model '${model}'.`,
+        error
+      );
+    }
+
     throw new OllamaError(
       `Could not connect to Ollama at ${baseUrl}. Start Ollama and pull the model '${model}'.`,
       error
     );
+  } finally {
+    clearTimeout(timeout);
   }
 
   if (!response.ok) {

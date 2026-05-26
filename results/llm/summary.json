@@ -13,6 +13,8 @@
     "model": "llama3.2:3b",
     "temperature": 0,
     "seed": 42,
+    "timeoutMs": 120000,
+    "numPredict": 32,
     "ragTopK": 12,
     "documentTopK": 8,
     "stateLimit": 8
@@ -22,13 +24,13 @@
     "exactMatchAccuracy": 0.5,
     "normalizedAccuracy": 0.75,
     "promptComplianceRate": 0.75,
-    "hallucinationRate": 0.25,
+    "hallucinationRate": 0,
     "unknownAccuracy": 1,
     "averageContextTokens": 159.75,
-    "averageRetrievalMs": 4.801749999998998,
-    "averagePromptBuildMs": 0.010424999998795315,
-    "averageLlmMs": 11875.382075,
-    "averageTotalMs": 11880.286325000001,
+    "averageRetrievalMs": 4.51772499999997,
+    "averagePromptBuildMs": 0.010149999999278236,
+    "averageLlmMs": 10915.63485,
+    "averageTotalMs": 10920.248125,
     "byType": {
       "current_state": {
         "totalQuestions": 1,
@@ -38,19 +40,19 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 0,
         "averageContextTokens": 85,
-        "averageLlmMs": 9861.705699999999,
-        "averageTotalMs": 9866.4237
+        "averageLlmMs": 6653.688499999999,
+        "averageTotalMs": 6658.302900000001
       },
       "stable_state": {
         "totalQuestions": 1,
         "exactMatchAccuracy": 0,
         "normalizedAccuracy": 0,
         "promptComplianceRate": 0,
-        "hallucinationRate": 1,
+        "hallucinationRate": 0,
         "unknownAccuracy": 0,
         "averageContextTokens": 126,
-        "averageLlmMs": 8359.5196,
-        "averageTotalMs": 8364.619900000002
+        "averageLlmMs": 8096.032800000001,
+        "averageTotalMs": 8101.385499999999
       },
       "document_detail": {
         "totalQuestions": 1,
@@ -60,8 +62,8 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 0,
         "averageContextTokens": 363,
-        "averageLlmMs": 26180.692199999998,
-        "averageTotalMs": 26183.969800000003
+        "averageLlmMs": 25816.5461,
+        "averageTotalMs": 25820.161500000002
       },
       "unknown": {
         "totalQuestions": 1,
@@ -71,8 +73,8 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 1,
         "averageContextTokens": 65,
-        "averageLlmMs": 3099.610800000002,
-        "averageTotalMs": 3106.1319000000003
+        "averageLlmMs": 3096.2720000000045,
+        "averageTotalMs": 3101.142599999999
       }
     }
   },
@@ -81,13 +83,13 @@
     "exactMatchAccuracy": 0.25,
     "normalizedAccuracy": 0.5,
     "promptComplianceRate": 0.75,
-    "hallucinationRate": 0.25,
+    "hallucinationRate": 0,
     "unknownAccuracy": 1,
     "averageContextTokens": 65.5,
-    "averageRetrievalMs": 2.709325000001627,
-    "averagePromptBuildMs": 0.004024999998364365,
-    "averageLlmMs": 4459.338324999999,
-    "averageTotalMs": 4462.093975,
+    "averageRetrievalMs": 2.908274999999776,
+    "averagePromptBuildMs": 0.004325000001699664,
+    "averageLlmMs": 4340.5043000000005,
+    "averageTotalMs": 4343.472474999999,
     "byType": {
       "current_state": {
         "totalQuestions": 1,
@@ -97,19 +99,19 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 0,
         "averageContextTokens": 73,
-        "averageLlmMs": 6327.282899999998,
-        "averageTotalMs": 6335.775800000003
+        "averageLlmMs": 6223.922599999998,
+        "averageTotalMs": 6232.8403000000035
       },
       "stable_state": {
         "totalQuestions": 1,
         "exactMatchAccuracy": 0,
         "normalizedAccuracy": 0,
         "promptComplianceRate": 0,
-        "hallucinationRate": 1,
+        "hallucinationRate": 0,
         "unknownAccuracy": 0,
         "averageContextTokens": 82,
-        "averageLlmMs": 5599.9905,
-        "averageTotalMs": 5601.201399999998
+        "averageLlmMs": 5351.595200000003,
+        "averageTotalMs": 5352.822999999997
       },
       "document_detail": {
         "totalQuestions": 1,
@@ -119,8 +121,8 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 0,
         "averageContextTokens": 35,
-        "averageLlmMs": 1371.9988999999987,
-        "averageTotalMs": 1372.0213999999978
+        "averageLlmMs": 1344.5299999999988,
+        "averageTotalMs": 1344.5530999999974
       },
       "unknown": {
         "totalQuestions": 1,
@@ -130,8 +132,8 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 1,
         "averageContextTokens": 72,
-        "averageLlmMs": 4538.080999999998,
-        "averageTotalMs": 4539.3773
+        "averageLlmMs": 4441.969400000002,
+        "averageTotalMs": 4443.673499999997
       }
     }
   },
@@ -140,13 +142,13 @@
     "exactMatchAccuracy": 0.5,
     "normalizedAccuracy": 0.75,
     "promptComplianceRate": 0.75,
-    "hallucinationRate": 0.25,
+    "hallucinationRate": 0,
     "unknownAccuracy": 1,
     "averageContextTokens": 147.5,
-    "averageRetrievalMs": 1.871050000003379,
-    "averagePromptBuildMs": 0.010574999996606493,
-    "averageLlmMs": 11956.627000000002,
-    "averageTotalMs": 11958.537500000002,
+    "averageRetrievalMs": 2.5600500000036845,
+    "averagePromptBuildMs": 0.012174999992566882,
+    "averageLlmMs": 11189.957124999997,
+    "averageTotalMs": 11192.557149999999,
     "byType": {
       "current_state": {
         "totalQuestions": 1,
@@ -156,19 +158,19 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 0,
         "averageContextTokens": 73,
-        "averageLlmMs": 7075.5000999999975,
-        "averageTotalMs": 7076.726200000005
+        "averageLlmMs": 6682.068899999998,
+        "averageTotalMs": 6683.538800000002
       },
       "stable_state": {
         "totalQuestions": 1,
         "exactMatchAccuracy": 0,
         "normalizedAccuracy": 0,
         "promptComplianceRate": 0,
-        "hallucinationRate": 1,
+        "hallucinationRate": 0,
         "unknownAccuracy": 0,
         "averageContextTokens": 82,
-        "averageLlmMs": 5698.032600000006,
-        "averageTotalMs": 5699.616399999999
+        "averageLlmMs": 5110.049799999993,
+        "averageTotalMs": 5111.520799999998
       },
       "document_detail": {
         "totalQuestions": 1,
@@ -178,8 +180,8 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 0,
         "averageContextTokens": 363,
-        "averageLlmMs": 30019.77870000001,
-        "averageTotalMs": 30022.701
+        "averageLlmMs": 27973.728199999998,
+        "averageTotalMs": 27978.676399999997
       },
       "unknown": {
         "totalQuestions": 1,
@@ -189,9 +191,55 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 1,
         "averageContextTokens": 72,
-        "averageLlmMs": 5033.196599999996,
-        "averageTotalMs": 5035.106400000004
+        "averageLlmMs": 4993.981599999999,
+        "averageTotalMs": 4996.492599999998
       }
     }
-  }
+  },
+  "failureExamples": [
+    {
+      "system": "rag",
+      "questionType": "stable_state",
+      "question": "What must the State Memory coursework include?",
+      "expected": "implementation, experiments, metrics, baseline comparison, error analysis, conclusions",
+      "rawAnswer": "includes implementation, baseline comparison, metrics, error analysis, experiments.",
+      "normalizedAnswer": "includes implementation baseline comparison metrics error analysis experiments",
+      "errorType": "missing_fact",
+      "contextHasGoldFact": false,
+      "context": "- Final update: State Memory coursework topic is State Memory for LLM agents.\n- Initial note: State Memory coursework topic is RAG for agents.\n- Initial note: State Memory coursework implementation language is Python.\n- Stable note: State Memory coursework requires includes implementation.\n- Stable note: State Memory coursework requires includes baseline comparison.\n- Initial note: State Memory coursework deadline is ten days.\n- Stable note: State Memory coursework requires includes metrics.\n- Revision: State Memory coursework topic is long-context prompting.\n- Revision: State Memory coursework deadline is two weeks.\n- Revision: State Memory coursework implementation language is TypeScript.\n..."
+    },
+    {
+      "system": "state",
+      "questionType": "stable_state",
+      "question": "What must the State Memory coursework include?",
+      "expected": "implementation, experiments, metrics, baseline comparison, error analysis, conclusions",
+      "rawAnswer": "baseline comparison, metrics, error analysis, experiments, conclusions",
+      "normalizedAnswer": "baseline comparison metrics error analysis experiments conclusions",
+      "errorType": "incomplete_answer",
+      "contextHasGoldFact": true,
+      "context": "- State Memory coursework.requires = implementation (active)\n- State Memory coursework.requires = baseline comparison (active)\n- State Memory coursework.requires = metrics (active)\n- State Memory coursework.requires = error analysis (active)\n- State Memory coursework.requires = experiments (active)\n- State Memory coursework.requires = conclusions (active)\n- State Memory coursework.topic = State Memory for LLM agents (active)\n- State Memory coursework.deadline = one week (active)"
+    },
+    {
+      "system": "state",
+      "questionType": "document_detail",
+      "question": "In the long document, what answer token is recorded for marker DOC-001-1?",
+      "expected": "VALUE-001-1",
+      "rawAnswer": "UNKNOWN",
+      "normalizedAnswer": "unknown",
+      "errorType": "missing_fact",
+      "contextHasGoldFact": false,
+      "context": ""
+    },
+    {
+      "system": "hybrid",
+      "questionType": "stable_state",
+      "question": "What must the State Memory coursework include?",
+      "expected": "implementation, experiments, metrics, baseline comparison, error analysis, conclusions",
+      "rawAnswer": "experiments, conclusions",
+      "normalizedAnswer": "experiments conclusions",
+      "errorType": "incomplete_answer",
+      "contextHasGoldFact": true,
+      "context": "- State Memory coursework.requires = implementation (active)\n- State Memory coursework.requires = baseline comparison (active)\n- State Memory coursework.requires = metrics (active)\n- State Memory coursework.requires = error analysis (active)\n- State Memory coursework.requires = experiments (active)\n- State Memory coursework.requires = conclusions (active)\n- State Memory coursework.topic = State Memory for LLM agents (active)\n- State Memory coursework.deadline = one week (active)"
+    }
+  ]
 }

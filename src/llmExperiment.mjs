@@ -20,6 +20,8 @@ if (!existsSync("data/events.jsonl") || process.argv.includes("--regenerate")) {
 
 const questionLimit = readNumberArg("questions", 50);
 const model = readStringArg("model", process.env.OLLAMA_MODEL ?? "llama3.2:3b");
+const timeoutMs = readNumberArg("timeout-ms", 120000);
+const numPredict = readNumberArg("num-predict", 64);
 const currentCount = readNumberArg("current", Math.floor(questionLimit / 3));
 const stableCount = readNumberArg("stable", Math.floor(questionLimit / 3));
 const documentCount = readNumberArg("document", questionLimit - currentCount - stableCount);
@@ -32,6 +34,8 @@ if (process.argv.includes("--dry-run")) {
         mode: "dry-run",
         message: "LLM experiment is configured. Remove --dry-run to call Ollama.",
         model,
+        timeoutMs,
+        numPredict,
         currentCount,
         stableCount,
         documentCount,
@@ -51,7 +55,7 @@ try {
     stableCount,
     documentCount,
     unknownCount,
-    ollama: { model }
+    ollama: { model, timeoutMs, numPredict }
   });
 
   console.log(JSON.stringify(summary, null, 2));
