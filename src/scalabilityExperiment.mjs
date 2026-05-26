@@ -1,4 +1,4 @@
-import { runScalabilityExperiment } from "./eval/runScalabilityExperiment.mjs";
+import { runExperiment } from "./experiments/runner.mjs";
 
 function readNumberArg(name, fallback) {
   const prefix = `--${name}=`;
@@ -12,7 +12,8 @@ function readEventCounts(fallback) {
   return match ? match.slice(prefix.length).split(",").map(Number) : fallback;
 }
 
-const summary = await runScalabilityExperiment({
+const summary = await runExperiment({
+  experiment: "scalability",
   eventCounts: readEventCounts([100, 250, 500, 1000, 2500, 5000]),
   seedRuns: readNumberArg("seeds", 3),
   seedStart: readNumberArg("seed", 42)

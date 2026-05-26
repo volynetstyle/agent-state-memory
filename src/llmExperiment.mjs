@@ -1,6 +1,6 @@
 import { existsSync } from "node:fs";
-import { generateDataset } from "./generateDataset.mjs";
-import { runLlmMixedExperiment } from "./eval/runLlmMixedExperiment.mjs";
+import { generateDataset } from "./dataset/generateDataset.mjs";
+import { runExperiment } from "./experiments/runner.mjs";
 
 function readNumberArg(name, fallback) {
   const prefix = `--${name}=`;
@@ -50,7 +50,8 @@ if (process.argv.includes("--dry-run")) {
 }
 
 try {
-  const summary = await runLlmMixedExperiment({
+  const summary = await runExperiment({
+    experiment: "llm_mixed",
     currentCount,
     stableCount,
     documentCount,

@@ -1,28 +1,9 @@
-import { ensureDir, writeJson, writeJsonl } from "./shared/io.mjs";
-import { fileURLToPath } from "node:url";
+export const COURSEWORK_BASE_TIME = Date.parse("2026-05-26T09:00:00.000Z");
 
-const DATA_DIR = "data";
-const BASE_TIME = Date.parse("2026-05-26T09:00:00.000Z");
-
-function mulberry32(seed) {
-  return () => {
-    let t = (seed += 0x6d2b79f5);
-    t = Math.imul(t ^ (t >>> 15), t | 1);
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-
-function choice(random, values) {
-  return values[Math.floor(random() * values.length)];
-}
-
-function slug(value) {
-  return value
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
-}
+export const COURSEWORK_DEFAULTS = {
+  eventCount: 1000,
+  seed: 42
+};
 
 const mutableSlots = [
   {
@@ -301,190 +282,57 @@ const fillerObjects = [
   "included for retrieval noise"
 ];
 
-function mutableText(slot, value, index) {
-  const prefix = index === 0 ? "Initial note" : index === 1 ? "Revision" : "Final update";
-  return `${prefix}: ${slot.subject} ${slot.predicate.replaceAll("_", " ")} is ${value}.`;
-}
-
-function appendText(slot, value) {
-  return `Stable note: ${slot.subject} ${slot.predicate.replaceAll("_", " ")} includes ${value}.`;
-}
-
-function fillerText(subject, predicate, object) {
-  return `Background note: ${subject} ${predicate} is ${object}.`;
-}
-
 function sizeValues(eventCount) {
   const first = Math.max(10, Math.floor(eventCount / 4));
   const second = Math.max(first + 1, Math.floor(eventCount / 2));
   return [`${first} events`, `${second} events`, `${eventCount} events`];
 }
 
-function getMutableSlots(eventCount) {
-  return mutableSlots.map((slot) => {
+function mutableSlotsForEventCount(eventCount) {
+  const slots = [];
+
+  for (const slot of mutableSlots) {
     if (slot.subject === "Synthetic dataset" && slot.predicate === "size") {
-      return {
+      slots.push({
         ...slot,
         values: sizeValues(eventCount)
-      };
+      });
+      continue;
     }
 
-    return slot;
-  });
-}
-
-function materializeEvents(planned, eventCount) {
-  planned.sort((a, b) => a.position - b.position);
-
-  if (planned.length <= eventCount) {
-    return planned.map((event) => ({
-      text: event.text,
-      facts: event.facts
-    }));
+    slots.push(slot);
   }
 
-  const buckets = Array.from({ length: eventCount }, () => []);
-
-  planned.forEach((event, index) => {
-    const bucketIndex = Math.min(
-      eventCount - 1,
-      Math.floor((index * eventCount) / planned.length)
-    );
-    buckets[bucketIndex].push(event);
-  });
-
-  return buckets.map((bucket) => ({
-    text: bucket.map((event) => event.text).join(" "),
-    facts: bucket.flatMap((event) => event.facts)
-  }));
+  return slots;
 }
 
-export function buildDataset({ eventCount = 1000, seed = 42 } = {}) {
-  const random = mulberry32(seed);
-  const planned = [];
-  const effectiveMutableSlots = getMutableSlots(eventCount);
-
-  for (const slot of effectiveMutableSlots) {
-    slot.values.forEach((value, index) => {
-      const bandStart = index * Math.floor(eventCount / 3);
-      const bandWidth = Math.floor(eventCount / 3) - 20;
-      const position = bandStart + 5 + Math.floor(random() * Math.max(1, bandWidth));
-      planned.push({
-        position,
-        text: mutableText(slot, value, index),
-        facts: [
-          {
-            subject: slot.subject,
-            predicate: slot.predicate,
-            object: value,
-            mutable: true,
-            confidence: 0.95
-          }
-        ]
-      });
-    });
-  }
-
-  for (const slot of appendSlots) {
-    slot.values.forEach((value) => {
-      planned.push({
-        position: 20 + Math.floor(random() * (eventCount - 40)),
-        text: appendText(slot, value),
-        facts: [
-          {
-            subject: slot.subject,
-            predicate: slot.predicate,
-            object: value,
-            mutable: false,
-            confidence: 0.95
-          }
-        ]
-      });
-    });
-  }
-
-  while (planned.length < eventCount) {
-    const subject = choice(random, fillerSubjects);
-    const predicate = choice(random, fillerPredicates);
-    const object = choice(random, fillerObjects);
-    planned.push({
-      position: Math.floor(random() * eventCount),
-      text: fillerText(subject, predicate, object),
-      facts: [
-        {
-          subject,
-          predicate,
-          object,
-          mutable: false,
-          confidence: 0.6
-        }
-      ]
-    });
-  }
-
-  const materializedEvents = materializeEvents(planned, eventCount);
-
-  const events = materializedEvents.map((event, index) => ({
-    id: `e${String(index + 1).padStart(4, "0")}`,
-    timestamp: new Date(BASE_TIME + index * 60_000).toISOString(),
-    type: "user_message",
-    text: event.text,
-    facts: event.facts
-  }));
-
-  const mutableQuestions = effectiveMutableSlots.map((slot, index) => ({
-    id: `q-current-${String(index + 1).padStart(3, "0")}`,
-    question: slot.question,
-    subject: slot.subject,
-    predicate: slot.predicate,
-    expected: slot.values.at(-1),
-    obsoleteAnswers: slot.values.slice(0, -1)
-  }));
-
-  const appendQuestions = appendSlots.map((slot, index) => ({
-    id: `q-list-${String(index + 1).padStart(3, "0")}`,
-    question: slot.question,
-    subject: slot.subject,
-    predicate: slot.predicate,
-    expected: slot.values,
-    obsoleteAnswers: []
-  }));
-
-  const questions = [...mutableQuestions, ...appendQuestions];
-  const groundTruth = Object.fromEntries(
-    questions.map((question) => [
-      question.id,
-      {
-        subject: question.subject,
-        predicate: question.predicate,
-        expected: question.expected,
-        obsoleteAnswers: question.obsoleteAnswers
-      }
-    ])
-  );
-
-  return { events, questions, groundTruth };
+export function courseworkScenario(eventCount = COURSEWORK_DEFAULTS.eventCount) {
+  return {
+    baseTime: COURSEWORK_BASE_TIME,
+    mutableSlots: mutableSlotsForEventCount(eventCount),
+    appendSlots,
+    fillerSubjects,
+    fillerPredicates,
+    fillerObjects
+  };
 }
 
-export async function generateDataset(options = {}) {
-  const dataset = buildDataset(options);
-
-  await ensureDir(DATA_DIR);
-  await writeJsonl(`${DATA_DIR}/events.jsonl`, dataset.events);
-  await writeJson(`${DATA_DIR}/questions.json`, dataset.questions);
-  await writeJson(`${DATA_DIR}/ground_truth.json`, dataset.groundTruth);
-
-  return dataset;
+export function mutableText(slot, value, index) {
+  const prefix = index === 0 ? "Initial note" : index === 1 ? "Revision" : "Final update";
+  return `${prefix}: ${slot.subject} ${slot.predicate.replaceAll("_", " ")} is ${value}.`;
 }
 
-if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
-  const dataset = await generateDataset();
-  console.log(`Generated ${dataset.events.length} events and ${dataset.questions.length} questions.`);
+export function appendText(slot, value) {
+  return `Stable note: ${slot.subject} ${slot.predicate.replaceAll("_", " ")} includes ${value}.`;
 }
 
-export const DATASET_META = {
+export function fillerText(subject, predicate, object) {
+  return `Background note: ${subject} ${predicate} is ${object}.`;
+}
+
+export const COURSEWORK_DATASET_META = {
   mutableSlotCount: mutableSlots.length,
   appendSlotCount: appendSlots.length,
-  defaultEventCount: 1000,
-  defaultSeed: 42
+  defaultEventCount: COURSEWORK_DEFAULTS.eventCount,
+  defaultSeed: COURSEWORK_DEFAULTS.seed
 };

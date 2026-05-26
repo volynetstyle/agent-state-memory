@@ -1,4 +1,4 @@
-import { retrieveEventsWithRecency } from "../rag/retrieve.mjs";
+import { retrieveEventsWithRecency } from "../rag/index.mjs";
 import { answerLatestFromRetrievedEvents } from "../rag/answer.mjs";
 import { extractFacts } from "./extractFacts.mjs";
 import { selectRelevantFacts } from "./selectState.mjs";

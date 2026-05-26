@@ -264,10 +264,18 @@ coursework-state-memory/
 |- data/
 |- results/
 |- src/
+|  |- dataset/
+|  |  |- scenarios/
+|  |  |- documentDataset.mjs
+|  |  |- events.mjs
+|  |  |- generateDataset.mjs
+|  |  `- questions.mjs
+|  |- experiments/
 |  |- eval/
 |  |- document/
 |  |- llm/
 |  |- rag/
+|  |  `- retrievers/
 |  |- shared/
 |  `- state-memory/
 |- package.json

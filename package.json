@@ -5,7 +5,7 @@
   "type": "module",
   "description": "Coursework MVP comparing a RAG baseline with structured State Memory for long-context LLM agents.",
   "scripts": {
-    "generate": "node src/generateDataset.mjs",
+    "generate": "node src/dataset/generateDataset.mjs",
     "experiment": "node src/index.mjs",
     "experiment:llm": "node src/llmExperiment.mjs",
     "experiment:mixed": "node src/mixedExperiment.mjs",

@@ -1,4 +1,4 @@
-import { runRobustQuestionExperiment } from "./eval/runRobustQuestionExperiment.mjs";
+import { runExperiment } from "./experiments/runner.mjs";
 
 function readNumberArg(name, fallback) {
   const prefix = `--${name}=`;
@@ -6,7 +6,8 @@ function readNumberArg(name, fallback) {
   return match ? Number(match.slice(prefix.length)) : fallback;
 }
 
-const summary = await runRobustQuestionExperiment({
+const summary = await runExperiment({
+  experiment: "robust",
   eventCount: readNumberArg("events", 1000),
   seed: readNumberArg("seed", 42),
   ragTopK: readNumberArg("rag-top-k", 12),
