@@ -24,6 +24,9 @@ jobs:
       - name: Run mixed benchmark
         run: npm run experiment:mixed
 
+      - name: Run robust question benchmark
+        run: npm run experiment:robust
+
       - name: Run scalability benchmark
         run: npm run experiment:scale
 

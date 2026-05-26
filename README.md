@@ -72,6 +72,22 @@ The mixed benchmark includes current-state questions, stable non-current state q
 - `results/mixed/summary.json`
 - `results/mixed/summary.md`
 
+Run the robust question experiment:
+
+```bash
+npm run experiment:robust
+```
+
+This benchmark removes the oracle assumption from the deterministic setup. The systems receive only paraphrased, indirect, noisy and temporal multi-step question text, then infer the target `subject/predicate` slot before answering. Slot metadata is still present in the dataset, but only for grading. It also adds extra domains beyond the coursework world:
+
+- calendar
+- CRM
+- tasks
+- shopping
+- support chat
+
+The robust results are written to `results/robust/`.
+
 Run the stress experiment:
 
 ```bash
@@ -205,8 +221,11 @@ This gives two complementary experiments:
 - `Experiment 1`: RAG vs State Memory with deterministic answerer over 1000 events.
 - `Experiment 2`: RAG vs State Memory with local LLM answerer over a smaller question subset.
 - `Experiment 3`: RAG-only vs State-only vs Hybrid on mixed structured state and unstructured 100-page document QA.
+- `Experiment 4`: robust non-oracle question answering with paraphrases, noisy wording, temporal multi-step questions and multiple domains.
 
 The third experiment is important for limitations: State Memory is not a replacement for RAG over large unstructured documents. It is a state layer for evolving facts, goals, tasks and user/project state. For document-heavy QA, the stronger architecture is hybrid.
+
+The fourth experiment is important for validity: the base deterministic benchmark intentionally isolates memory quality, but it gives the answerer explicit `subject/predicate` metadata. The robust benchmark removes that shortcut by forcing a slot-inference step from question text before retrieval or state lookup.
 
 The stress experiment is important for self-criticism: perfect State Memory scores depend on clean extraction. If final updates are missing or facts are assigned to the wrong slot, State Memory degrades. The defensive variant shows practical mitigations: low-confidence facts are rejected into a buffer, conflicting facts are preserved instead of silently overwriting each other, recent versions are retained, and uncertain slots fall back to Temporal RAG. It also shows the remaining hard limit: if extraction fully misses an update, the state layer needs reconciliation against raw events or documents to recover it. Stronger temporal RAG baselines can reduce stale errors, so future work should compare State Memory against temporal-aware RAG instead of only naive RAG.
 

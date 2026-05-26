@@ -78,6 +78,48 @@ ${typeRows}
   );
 }
 
+function robustBenchmark(summary) {
+  if (!summary) return "";
+
+  const typeRows = Object.keys(summary.byType.stateNoOracle)
+    .map((type) => {
+      const rag = summary.byType.rag[type] ?? {};
+      const temporal = summary.byType.temporalRag[type] ?? {};
+      const state = summary.byType.stateNoOracle[type] ?? {};
+      return `| ${type} | ${rounded(rag.exactMatchAccuracy)} | ${rounded(temporal.exactMatchAccuracy)} | ${rounded(state.exactMatchAccuracy)} | ${rounded(state.slotInferenceAccuracy)} |`;
+    })
+    .join("\n");
+  const domainRows = Object.keys(summary.byDomain.stateNoOracle)
+    .map((domain) => {
+      const rag = summary.byDomain.rag[domain] ?? {};
+      const temporal = summary.byDomain.temporalRag[domain] ?? {};
+      const state = summary.byDomain.stateNoOracle[domain] ?? {};
+      return `| ${domain} | ${rounded(rag.exactMatchAccuracy)} | ${rounded(temporal.exactMatchAccuracy)} | ${rounded(state.exactMatchAccuracy)} | ${rounded(state.slotInferenceAccuracy)} |`;
+    })
+    .join("\n");
+
+  return section(
+    "Robust Question Benchmark",
+    `
+Dataset: ${summary.dataset.events} events, ${summary.dataset.questions} non-oracle questions.
+
+| System | Exact Match | Current Fact Accuracy | Context Hit | Slot Inference Accuracy | Avg Context Tokens | Avg Latency ms |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| RAG | ${rounded(summary.rag.exactMatchAccuracy)} | ${rounded(summary.rag.currentFactAccuracy)} | ${rounded(summary.rag.contextHitRate)} | ${rounded(summary.rag.slotInferenceAccuracy)} | ${rounded(summary.rag.averageContextTokens)} | ${rounded(summary.rag.averageLatencyMs)} |
+| Temporal RAG | ${rounded(summary.temporalRag.exactMatchAccuracy)} | ${rounded(summary.temporalRag.currentFactAccuracy)} | ${rounded(summary.temporalRag.contextHitRate)} | ${rounded(summary.temporalRag.slotInferenceAccuracy)} | ${rounded(summary.temporalRag.averageContextTokens)} | ${rounded(summary.temporalRag.averageLatencyMs)} |
+| State no-oracle | ${rounded(summary.stateNoOracle.exactMatchAccuracy)} | ${rounded(summary.stateNoOracle.currentFactAccuracy)} | ${rounded(summary.stateNoOracle.contextHitRate)} | ${rounded(summary.stateNoOracle.slotInferenceAccuracy)} | ${rounded(summary.stateNoOracle.averageContextTokens)} | ${rounded(summary.stateNoOracle.averageLatencyMs)} |
+
+| Type | RAG | Temporal RAG | State no-oracle | State slot inference |
+| --- | ---: | ---: | ---: | ---: |
+${typeRows}
+
+| Domain | RAG | Temporal RAG | State no-oracle | State slot inference |
+| --- | ---: | ---: | ---: | ---: |
+${domainRows}
+`
+  );
+}
+
 function stressBenchmark(summary) {
   if (!summary) return "";
 
@@ -212,6 +254,7 @@ Model: ${summary.configuration.model}.
 export async function generateResultsReport() {
   const main = await readIfExists("results/summary.json");
   const mixed = await readIfExists("results/mixed/summary.json");
+  const robust = await readIfExists("results/robust/summary.json");
   const stress = await readIfExists("results/stress/summary.json");
   const scalability = await readIfExists("results/scalability/summary.json");
   const llm = await readIfExists("results/llm/summary.json");
@@ -223,6 +266,7 @@ export async function generateResultsReport() {
     "",
     mainBenchmark(main),
     mixedBenchmark(mixed),
+    robustBenchmark(robust),
     stressBenchmark(stress),
     scalabilityBenchmark(scalability),
     llmBenchmark(llm),

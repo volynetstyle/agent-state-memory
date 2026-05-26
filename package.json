@@ -9,6 +9,7 @@
     "experiment": "node src/index.mjs",
     "experiment:llm": "node src/llmExperiment.mjs",
     "experiment:mixed": "node src/mixedExperiment.mjs",
+    "experiment:robust": "node src/robustQuestionExperiment.mjs",
     "experiment:scale": "node src/scalabilityExperiment.mjs",
     "experiment:stress": "node src/stressExperiment.mjs",
     "results": "node src/report/generateResultsReport.mjs",

@@ -32,6 +32,32 @@ Dataset: 1000 events, 100 document pages, 102 questions.
 | stable_state | 0.5000 | 1.0000 | 1.0000 |
 | document_detail | 1.0000 | 0.0000 | 1.0000 |
 
+## Robust Question Benchmark
+
+Dataset: 1011 events, 52 non-oracle questions.
+
+| System | Exact Match | Current Fact Accuracy | Context Hit | Slot Inference Accuracy | Avg Context Tokens | Avg Latency ms |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| RAG | 0.1346 | 0.1591 | 0.6923 | 0.8269 | 75.8846 | 3.9732 |
+| Temporal RAG | 0.6923 | 0.8182 | 0.7308 | 0.8269 | 76.8077 | 3.8460 |
+| State no-oracle | 0.8269 | 0.9318 | 0.8846 | 0.8269 | 69.2308 | 1.1228 |
+
+| Type | RAG | Temporal RAG | State no-oracle | State slot inference |
+| --- | ---: | ---: | ---: | ---: |
+| paraphrase | 0.1538 | 0.6923 | 0.9231 | 0.9231 |
+| indirect | 0.1538 | 0.6923 | 0.7692 | 0.7692 |
+| noisy | 0.0769 | 0.6154 | 0.7692 | 0.7692 |
+| temporal_multi_step | 0.1538 | 0.7692 | 0.8462 | 0.8462 |
+
+| Domain | RAG | Temporal RAG | State no-oracle | State slot inference |
+| --- | ---: | ---: | ---: | ---: |
+| coursework_memory | 0.1563 | 0.5000 | 0.7188 | 0.7188 |
+| calendar | 0.0000 | 1.0000 | 1.0000 | 1.0000 |
+| crm | 0.0000 | 1.0000 | 1.0000 | 1.0000 |
+| tasks | 0.0000 | 1.0000 | 1.0000 | 1.0000 |
+| shopping | 0.0000 | 1.0000 | 1.0000 | 1.0000 |
+| chat | 0.5000 | 1.0000 | 1.0000 | 1.0000 |
+
 ## Stress Benchmark
 
 | Scenario | System | Exact Match | Current Fact Accuracy | Stale Error | Context Hit | Fallback Rate |
