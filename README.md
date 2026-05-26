@@ -72,6 +72,27 @@ The mixed benchmark includes current-state questions, stable non-current state q
 - `results/mixed/summary.json`
 - `results/mixed/summary.md`
 
+Run the stress experiment:
+
+```bash
+npm run experiment:stress
+```
+
+This intentionally weakens the clean benchmark assumptions:
+
+- `clean_extraction`: ideal structured facts
+- `missing_final_updates`: extractor misses final mutable updates
+- `wrong_extraction_slot`: extractor assigns some facts to the wrong entity slot
+- `ambiguous_similar_entities`: similar legacy entities add noise
+
+It compares:
+
+- classic RAG
+- RAG with recency reranking and latest-fact answering
+- State Memory
+
+The stress results are written to `results/stress/`.
+
 ## Optional LLM Experiment
 
 The LLM-backed experiment uses local Ollama by default:
@@ -159,6 +180,8 @@ This gives two complementary experiments:
 - `Experiment 3`: RAG-only vs State-only vs Hybrid on mixed structured state and unstructured 100-page document QA.
 
 The third experiment is important for limitations: State Memory is not a replacement for RAG over large unstructured documents. It is a state layer for evolving facts, goals, tasks and user/project state. For document-heavy QA, the stronger architecture is hybrid.
+
+The stress experiment is important for self-criticism: perfect State Memory scores depend on clean extraction. If final updates are missing or facts are assigned to the wrong slot, State Memory degrades. It also shows that stronger temporal RAG baselines can reduce stale errors, so future work should compare State Memory against temporal-aware RAG instead of only naive RAG.
 
 ## Repository Shape
 

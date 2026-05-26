@@ -8,20 +8,19 @@
     "answerValues": [
       "reactive graph runtime"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0948-f1",
       "e0839-f1",
       "e0953-f1",
+      "e0540-f2",
       "e0017-f1",
       "e0036-f1",
       "e0058-f1",
-      "e0135-f1",
-      "e0173-f1"
+      "e0135-f1"
     ],
-    "contextTokens": 57,
-    "latencyMs": 13.848299999999995,
+    "contextTokens": 59,
+    "latencyMs": 0.6975999999999658,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -38,20 +37,19 @@
     "answerValues": [
       "graph-indexed store"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0839-f1",
       "e0948-f1",
       "e0953-f1",
+      "e0540-f2",
       "e0017-f1",
       "e0036-f1",
       "e0058-f1",
-      "e0135-f1",
-      "e0173-f1"
+      "e0135-f1"
     ],
-    "contextTokens": 57,
-    "latencyMs": 0.97199999999998,
+    "contextTokens": 59,
+    "latencyMs": 0.6468999999999596,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -68,20 +66,19 @@
     "answerValues": [
       "dependency-tracked selectors"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0953-f1",
+      "e0540-f2",
       "e0839-f1",
       "e0948-f1",
       "e0683-f1",
       "e0696-f1",
       "e0736-f1",
-      "e0017-f1",
-      "e0036-f1"
+      "e0503-f2"
     ],
-    "contextTokens": 64,
-    "latencyMs": 0.8976999999999862,
+    "contextTokens": 68,
+    "latencyMs": 0.8013999999998305,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -98,20 +95,19 @@
     "answerValues": [
       "State Memory for LLM agents"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0960-f1",
+      "e0960-f2",
       "e0173-f1",
       "e0221-f1",
       "e0357-f1",
       "e0625-f1",
       "e0650-f1",
-      "e0734-f1",
-      "e0871-f1"
+      "e0734-f1"
     ],
-    "contextTokens": 68,
-    "latencyMs": 1.4712000000000103,
+    "contextTokens": 69,
+    "latencyMs": 0.6379000000001724,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -128,20 +124,19 @@
     "answerValues": [
       "one week"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0734-f1",
+      "e0734-f2",
       "e0173-f1",
       "e0221-f1",
       "e0357-f1",
       "e0625-f1",
       "e0650-f1",
-      "e0871-f1",
-      "e0881-f1"
+      "e0871-f1"
     ],
-    "contextTokens": 65,
-    "latencyMs": 1.6181000000000267,
+    "contextTokens": 68,
+    "latencyMs": 0.7462000000000444,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -158,20 +153,19 @@
     "answerValues": [
       "zero-dependency Node.js"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0871-f1",
+      "e0871-f2",
       "e0173-f1",
       "e0221-f1",
       "e0357-f1",
       "e0625-f1",
       "e0650-f1",
-      "e0734-f1",
-      "e0881-f1"
+      "e0734-f1"
     ],
-    "contextTokens": 68,
-    "latencyMs": 1.4436000000000035,
+    "contextTokens": 74,
+    "latencyMs": 0.6053000000001703,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -188,20 +182,19 @@
     "answerValues": [
       "lexical top-k retriever"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0942-f1",
       "e0685-f1",
       "e0732-f1",
+      "e0013-f2",
       "e0058-f1",
       "e0304-f1",
       "e0700-f1",
-      "e0702-f1",
-      "e0221-f1"
+      "e0702-f1"
     ],
-    "contextTokens": 60,
-    "latencyMs": 1.613299999999981,
+    "contextTokens": 62,
+    "latencyMs": 0.592200000000048,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -218,20 +211,19 @@
     "answerValues": [
       "event chunks"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0685-f1",
+      "e0013-f2",
       "e0732-f1",
       "e0942-f1",
       "e0058-f1",
       "e0304-f1",
       "e0700-f1",
-      "e0702-f1",
-      "e0730-f1"
+      "e0702-f1"
     ],
-    "contextTokens": 60,
-    "latencyMs": 0.7382999999999811,
+    "contextTokens": 63,
+    "latencyMs": 0.6299999999998818,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -248,20 +240,19 @@
     "answerValues": [
       "12"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0732-f1",
       "e0942-f1",
       "e0685-f1",
+      "e0013-f2",
       "e0058-f1",
       "e0304-f1",
       "e0700-f1",
-      "e0702-f1",
-      "e0221-f1"
+      "e0702-f1"
     ],
-    "contextTokens": 62,
-    "latencyMs": 0.7213999999999601,
+    "contextTokens": 64,
+    "latencyMs": 0.8054999999999382,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -278,20 +269,19 @@
     "answerValues": [
       "structured world state"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0683-f1",
       "e0828-f1",
       "e0960-f1",
+      "e0960-f2",
       "e0036-f1",
       "e0235-f1",
       "e0017-f1",
-      "e0173-f1",
-      "e0221-f1"
+      "e0173-f1"
     ],
-    "contextTokens": 72,
-    "latencyMs": 0.7386999999999944,
+    "contextTokens": 76,
+    "latencyMs": 0.6743999999998778,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -308,20 +298,19 @@
     "answerValues": [
       "selected active facts"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0828-f1",
       "e0683-f1",
       "e0960-f1",
+      "e0960-f2",
       "e0036-f1",
       "e0235-f1",
       "e0017-f1",
-      "e0173-f1",
-      "e0221-f1"
+      "e0173-f1"
     ],
-    "contextTokens": 72,
-    "latencyMs": 1.039100000000019,
+    "contextTokens": 76,
+    "latencyMs": 0.7096999999998843,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -338,20 +327,19 @@
     "answerValues": [
       "rule-based JSON extraction"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0817-f1",
+      "e0817-f2",
       "e0853-f1",
+      "e0370-f2",
       "e0911-f1",
+      "e0434-f2",
       "e0360-f1",
-      "e0493-f1",
-      "e0715-f1",
-      "e0768-f1",
-      "e0965-f1"
+      "e0493-f1"
     ],
-    "contextTokens": 74,
-    "latencyMs": 1.0302000000000362,
+    "contextTokens": 75,
+    "latencyMs": 0.8351999999999862,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -368,20 +356,19 @@
     "answerValues": [
       "numeric confidence"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0853-f1",
+      "e0370-f2",
       "e0817-f1",
+      "e0817-f2",
       "e0911-f1",
       "e0944-f1",
-      "e0360-f1",
-      "e0493-f1",
-      "e0715-f1",
-      "e0768-f1"
+      "e0434-f2",
+      "e0360-f1"
     ],
-    "contextTokens": 77,
-    "latencyMs": 1.082899999999995,
+    "contextTokens": 80,
+    "latencyMs": 0.616800000000012,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -398,20 +385,19 @@
     "answerValues": [
       "latest wins"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0882-f1",
       "e0911-f1",
+      "e0434-f2",
       "e0036-f1",
       "e0235-f1",
       "e0360-f1",
       "e0683-f1",
-      "e0817-f1",
-      "e0960-f1"
+      "e0817-f1"
     ],
     "contextTokens": 75,
-    "latencyMs": 1.093500000000006,
+    "latencyMs": 0.6412000000000262,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -428,20 +414,19 @@
     "answerValues": [
       "marked obsolete"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0911-f1",
+      "e0434-f2",
       "e0882-f1",
       "e0002-f1",
       "e0010-f1",
       "e0026-f1",
       "e0034-f1",
-      "e0035-f1",
-      "e0038-f1"
+      "e0035-f1"
     ],
-    "contextTokens": 71,
-    "latencyMs": 1.2164000000000215,
+    "contextTokens": 72,
+    "latencyMs": 0.6669999999999163,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -458,20 +443,19 @@
     "answerValues": [
       "slot and keyword scoring"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0736-f1",
       "e0696-f1",
+      "e0503-f2",
+      "e0696-f2",
       "e0036-f1",
       "e0235-f1",
       "e0633-f1",
-      "e0683-f1",
-      "e0828-f1",
-      "e0896-f1"
+      "e0683-f1"
     ],
-    "contextTokens": 69,
-    "latencyMs": 0.8860000000000241,
+    "contextTokens": 70,
+    "latencyMs": 0.5944999999999254,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -488,20 +472,19 @@
     "answerValues": [
       "8 facts"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0696-f1",
+      "e0696-f2",
       "e0736-f1",
       "e0911-f1",
+      "e0434-f2",
+      "e0503-f2",
       "e0036-f1",
-      "e0235-f1",
-      "e0360-f1",
-      "e0683-f1",
-      "e0960-f1"
+      "e0235-f1"
     ],
     "contextTokens": 72,
-    "latencyMs": 0.7264999999999873,
+    "latencyMs": 0.595600000000104,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -518,20 +501,19 @@
     "answerValues": [
       "JSON facts"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0896-f1",
       "e0979-f1",
+      "e0214-f2",
       "e0683-f1",
       "e0036-f1",
       "e0235-f1",
       "e0960-f1",
-      "e0017-f1",
-      "e0173-f1"
+      "e0960-f2"
     ],
-    "contextTokens": 70,
-    "latencyMs": 0.8903000000000247,
+    "contextTokens": 77,
+    "latencyMs": 0.5858000000000629,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -548,20 +530,19 @@
     "answerValues": [
       "stores obsolete facts with validTo"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0979-f1",
       "e0896-f1",
       "e0683-f1",
+      "e0214-f2",
       "e0036-f1",
       "e0235-f1",
       "e0633-f1",
-      "e0696-f1",
-      "e0828-f1"
+      "e0696-f1"
     ],
-    "contextTokens": 72,
-    "latencyMs": 1.4710999999999785,
+    "contextTokens": 70,
+    "latencyMs": 0.6293000000000575,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -578,7 +559,7 @@
     "answerValues": [
       "JSONL"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0718-f1",
       "e0287-f1",
       "e0685-f1",
@@ -589,9 +570,8 @@
       "e0135-f1"
     ],
     "contextTokens": 58,
-    "latencyMs": 0.7845999999999549,
+    "latencyMs": 0.8525999999999385,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -608,20 +588,19 @@
     "answerValues": [
       "1000 events"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0783-f1",
+      "e0356-f2",
       "e0965-f1",
+      "e0536-f2",
+      "e0512-f2",
       "e0017-f1",
       "e0036-f1",
-      "e0058-f1",
-      "e0135-f1",
-      "e0173-f1",
-      "e0199-f1"
+      "e0058-f1"
     ],
-    "contextTokens": 60,
-    "latencyMs": 0.7712999999999965,
+    "contextTokens": 70,
+    "latencyMs": 0.6150000000000091,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -638,20 +617,19 @@
     "answerValues": [
       "stable facts and fact updates"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0965-f1",
       "e0783-f1",
+      "e0536-f2",
+      "e0356-f2",
+      "e0512-f2",
       "e0017-f1",
       "e0036-f1",
-      "e0058-f1",
-      "e0135-f1",
-      "e0173-f1",
-      "e0199-f1"
+      "e0058-f1"
     ],
-    "contextTokens": 57,
-    "latencyMs": 0.9397000000000162,
+    "contextTokens": 67,
+    "latencyMs": 0.5885999999998148,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -668,20 +646,19 @@
     "answerValues": [
       "stale fact error rate"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0974-f1",
       "e0730-f1",
+      "e0563-f2",
       "e0017-f1",
       "e0036-f1",
       "e0058-f1",
       "e0135-f1",
-      "e0173-f1",
-      "e0199-f1"
+      "e0173-f1"
     ],
-    "contextTokens": 60,
-    "latencyMs": 1.192200000000014,
+    "contextTokens": 64,
+    "latencyMs": 0.615099999999984,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -698,20 +675,19 @@
     "answerValues": [
       "milliseconds"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0730-f1",
+      "e0563-f2",
       "e0974-f1",
       "e0685-f1",
+      "e0013-f2",
       "e0596-f1",
       "e0017-f1",
-      "e0036-f1",
-      "e0058-f1",
-      "e0135-f1"
+      "e0036-f1"
     ],
-    "contextTokens": 59,
-    "latencyMs": 0.7236000000000331,
+    "contextTokens": 66,
+    "latencyMs": 0.5877000000000407,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -728,7 +704,7 @@
     "answerValues": [
       "JSON result files"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0711-f1",
       "e0199-f1",
       "e0222-f1",
@@ -739,9 +715,8 @@
       "e0357-f1"
     ],
     "contextTokens": 48,
-    "latencyMs": 0.6982999999999606,
+    "latencyMs": 0.6019000000001142,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -758,20 +733,19 @@
     "answerValues": [
       "selected state slice"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0967-f1",
       "e0776-f1",
       "e0768-f1",
+      "e0768-f2",
       "e0222-f1",
       "e0702-f1",
       "e0986-f1",
-      "e0007-f1",
-      "e0014-f1"
+      "e0007-f1"
     ],
-    "contextTokens": 70,
-    "latencyMs": 1.0020999999999844,
+    "contextTokens": 73,
+    "latencyMs": 0.6109000000001288,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -788,7 +762,7 @@
     "answerValues": [
       "structured memory prompt"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0776-f1",
       "e0967-f1",
       "e0702-f1",
@@ -799,9 +773,8 @@
       "e0135-f1"
     ],
     "contextTokens": 62,
-    "latencyMs": 1.1003000000000043,
+    "latencyMs": 0.6048000000000684,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -818,20 +791,19 @@
     "answerValues": [
       "exact normalized matching"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0906-f1",
+      "e0195-f2",
       "e0944-f1",
       "e0817-f1",
       "e0828-f1",
+      "e0817-f2",
       "e0017-f1",
-      "e0036-f1",
-      "e0058-f1",
-      "e0135-f1"
+      "e0036-f1"
     ],
-    "contextTokens": 68,
-    "latencyMs": 1.0532999999999788,
+    "contextTokens": 76,
+    "latencyMs": 0.6020999999998367,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -848,20 +820,19 @@
     "answerValues": [
       "return unknown when evidence is missing"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0944-f1",
       "e0906-f1",
+      "e0195-f2",
       "e0828-f1",
       "e0853-f1",
+      "e0370-f2",
       "e0017-f1",
-      "e0036-f1",
-      "e0058-f1",
-      "e0135-f1"
+      "e0036-f1"
     ],
-    "contextTokens": 67,
-    "latencyMs": 0.7690000000000055,
+    "contextTokens": 74,
+    "latencyMs": 0.805699999999888,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -878,20 +849,19 @@
     "answerValues": [
       "results"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0964-f1",
+      "e0964-f2",
       "e0760-f1",
+      "e0512-f2",
       "e0173-f1",
       "e0221-f1",
       "e0357-f1",
-      "e0625-f1",
-      "e0650-f1",
-      "e0734-f1"
+      "e0625-f1"
     ],
-    "contextTokens": 63,
-    "latencyMs": 0.8911999999999694,
+    "contextTokens": 66,
+    "latencyMs": 0.6130000000000564,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -908,20 +878,19 @@
     "answerValues": [
       "data"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0760-f1",
+      "e0512-f2",
       "e0964-f1",
+      "e0964-f2",
       "e0173-f1",
       "e0221-f1",
       "e0357-f1",
-      "e0625-f1",
-      "e0650-f1",
-      "e0734-f1"
+      "e0625-f1"
     ],
-    "contextTokens": 63,
-    "latencyMs": 0.7264999999999873,
+    "contextTokens": 66,
+    "latencyMs": 0.6026000000001659,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -938,20 +907,19 @@
     "answerValues": [
       "stale fact usage"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0768-f1",
+      "e0768-f2",
       "e0828-f1",
       "e0683-f1",
       "e0967-f1",
       "e0222-f1",
       "e0007-f1",
-      "e0014-f1",
-      "e0023-f1"
+      "e0014-f1"
     ],
-    "contextTokens": 77,
-    "latencyMs": 0.7516999999999712,
+    "contextTokens": 81,
+    "latencyMs": 0.6243999999999232,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -968,20 +936,19 @@
     "answerValues": [
       "RAG versus State Memory"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0701-f1",
       "e0715-f1",
+      "e0715-f2",
       "e0683-f1",
       "e0221-f1",
       "e0960-f1",
-      "e0017-f1",
-      "e0036-f1",
-      "e0173-f1"
+      "e0960-f2",
+      "e0017-f1"
     ],
-    "contextTokens": 73,
-    "latencyMs": 0.6989000000000374,
+    "contextTokens": 83,
+    "latencyMs": 0.6114000000000033,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -998,20 +965,19 @@
     "answerValues": [
       "State Memory reduces stale fact errors"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0715-f1",
+      "e0715-f2",
       "e0701-f1",
       "e0683-f1",
       "e0960-f1",
+      "e0960-f2",
       "e0017-f1",
-      "e0036-f1",
-      "e0173-f1",
-      "e0221-f1"
+      "e0036-f1"
     ],
-    "contextTokens": 73,
-    "latencyMs": 0.838799999999992,
+    "contextTokens": 83,
+    "latencyMs": 0.6906000000001313,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -1028,20 +994,19 @@
     "answerValues": [
       "single Node command"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0901-f1",
       "e0805-f1",
+      "e0312-f2",
+      "e0228-f2",
       "e0005-f1",
       "e0014-f1",
       "e0015-f1",
-      "e0035-f1",
-      "e0047-f1",
-      "e0053-f1"
+      "e0035-f1"
     ],
-    "contextTokens": 69,
-    "latencyMs": 0.7577999999999747,
+    "contextTokens": 73,
+    "latencyMs": 0.6729000000000269,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -1058,20 +1023,19 @@
     "answerValues": [
       "deterministic seeded data"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0805-f1",
+      "e0228-f2",
       "e0901-f1",
+      "e0312-f2",
       "e0005-f1",
       "e0014-f1",
       "e0015-f1",
-      "e0035-f1",
-      "e0047-f1",
-      "e0053-f1"
+      "e0035-f1"
     ],
-    "contextTokens": 70,
-    "latencyMs": 0.9776999999999703,
+    "contextTokens": 74,
+    "latencyMs": 0.6924999999998818,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -1100,7 +1064,7 @@
       "experiments",
       "conclusions"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0173-f1",
       "e0221-f1",
       "e0357-f1",
@@ -1111,9 +1075,8 @@
       "e0734-f1"
     ],
     "contextTokens": 66,
-    "latencyMs": 1.3258000000000152,
+    "latencyMs": 0.9414999999999054,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -1138,7 +1101,7 @@
       "machine learning",
       "LLM agents"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0135-f1",
       "e0344-f1",
       "e0400-f1",
@@ -1149,9 +1112,8 @@
       "e0058-f1"
     ],
     "contextTokens": 54,
-    "latencyMs": 1.3770999999999844,
+    "latencyMs": 0.8297999999999774,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -1178,7 +1140,7 @@
       "tasks",
       "user profile"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0017-f1",
       "e0385-f1",
       "e0633-f1",
@@ -1186,12 +1148,11 @@
       "e0856-f1",
       "e0683-f1",
       "e0960-f1",
-      "e0036-f1"
+      "e0960-f2"
     ],
-    "contextTokens": 64,
-    "latencyMs": 1.2600999999999658,
+    "contextTokens": 68,
+    "latencyMs": 0.7670000000000528,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -1220,7 +1181,7 @@
       "recall",
       "precision"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0199-f1",
       "e0222-f1",
       "e0493-f1",
@@ -1231,9 +1192,8 @@
       "e0357-f1"
     ],
     "contextTokens": 46,
-    "latencyMs": 0.8186000000000035,
+    "latencyMs": 0.63799999999992,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -1258,7 +1218,7 @@
       "retrieval",
       "prompt building"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0058-f1",
       "e0304-f1",
       "e0700-f1",
@@ -1269,9 +1229,8 @@
       "e0360-f1"
     ],
     "contextTokens": 61,
-    "latencyMs": 0.738900000000001,
+    "latencyMs": 0.6575000000000273,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -1298,7 +1257,7 @@
       "fact extraction",
       "prompt building"
     ],
-    "selectedFactIds": [
+    "contextIds": [
       "e0036-f1",
       "e0235-f1",
       "e0287-f1",
@@ -1306,12 +1265,11 @@
       "e0986-f1",
       "e0683-f1",
       "e0960-f1",
-      "e0058-f1"
+      "e0960-f2"
     ],
-    "contextTokens": 71,
-    "latencyMs": 0.8695000000000164,
+    "contextTokens": 77,
+    "latencyMs": 0.6627000000000862,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",

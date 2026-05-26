@@ -8,7 +8,7 @@
     "answerValues": [
       "event-sourced runtime"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0196",
       "e0480",
       "e0948",
@@ -20,9 +20,8 @@
       "e0953"
     ],
     "contextTokens": 59,
-    "latencyMs": 8.84259999999999,
+    "latencyMs": 2.9337999999999056,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
     "errorType": "stale_fact",
@@ -39,7 +38,7 @@
     "answerValues": [
       "local arrays"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0217",
       "e0396",
       "e0839",
@@ -51,9 +50,8 @@
       "e0953"
     ],
     "contextTokens": 59,
-    "latencyMs": 7.124399999999994,
+    "latencyMs": 3.051499999999919,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
     "errorType": "stale_fact",
@@ -70,7 +68,7 @@
     "answerValues": [
       "selector cache"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0540",
       "e0090",
       "e0953",
@@ -85,9 +83,8 @@
       "e0503"
     ],
     "contextTokens": 80,
-    "latencyMs": 5.664500000000004,
+    "latencyMs": 2.9429999999999836,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
     "errorType": "stale_fact",
@@ -104,7 +101,7 @@
     "answerValues": [
       "RAG for agents"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0143",
       "e0418",
       "e0960",
@@ -119,9 +116,8 @@
       "e0070"
     ],
     "contextTokens": 98,
-    "latencyMs": 5.715499999999992,
+    "latencyMs": 4.029099999999971,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
     "errorType": "stale_fact",
@@ -138,7 +134,7 @@
     "answerValues": [
       "ten days"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0243",
       "e0436",
       "e0734",
@@ -153,9 +149,8 @@
       "e0027"
     ],
     "contextTokens": 95,
-    "latencyMs": 7.227800000000002,
+    "latencyMs": 3.0604999999999336,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
     "errorType": "stale_fact",
@@ -172,7 +167,7 @@
     "answerValues": [
       "Python"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0157",
       "e0554",
       "e0871",
@@ -187,9 +182,8 @@
       "e0031"
     ],
     "contextTokens": 102,
-    "latencyMs": 7.403700000000001,
+    "latencyMs": 4.542300000000068,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
     "errorType": "stale_fact",
@@ -206,7 +200,7 @@
     "answerValues": [
       "lexical top-k retriever"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0942",
       "e0004",
       "e0487",
@@ -221,9 +215,8 @@
       "e0146"
     ],
     "contextTokens": 90,
-    "latencyMs": 6.838899999999995,
+    "latencyMs": 4.661699999999996,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -240,7 +233,7 @@
     "answerValues": [
       "paragraph chunks"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0013",
       "e0527",
       "e0685",
@@ -255,9 +248,8 @@
       "e0143"
     ],
     "contextTokens": 89,
-    "latencyMs": 6.7730999999999995,
+    "latencyMs": 6.274499999999989,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
     "errorType": "stale_fact",
@@ -274,7 +266,7 @@
     "answerValues": [
       "3"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0086",
       "e0371",
       "e0732",
@@ -289,9 +281,8 @@
       "e0146"
     ],
     "contextTokens": 90,
-    "latencyMs": 6.602699999999999,
+    "latencyMs": 5.5548,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
     "errorType": "stale_fact",
@@ -308,7 +299,7 @@
     "answerValues": [
       "structured world state"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0683",
       "e0256",
       "e0508",
@@ -323,9 +314,8 @@
       "e0715"
     ],
     "contextTokens": 112,
-    "latencyMs": 5.187299999999993,
+    "latencyMs": 5.306799999999953,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -342,7 +332,7 @@
     "answerValues": [
       "free-form generation"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0049",
       "e0598",
       "e0828",
@@ -357,9 +347,8 @@
       "e0715"
     ],
     "contextTokens": 112,
-    "latencyMs": 5.635300000000001,
+    "latencyMs": 5.710700000000088,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
     "errorType": "stale_fact",
@@ -376,7 +365,7 @@
     "answerValues": [
       "manual annotation"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0263",
       "e0439",
       "e0817",
@@ -391,9 +380,8 @@
       "e0768"
     ],
     "contextTokens": 99,
-    "latencyMs": 6.887799999999999,
+    "latencyMs": 4.0674999999999955,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
     "errorType": "stale_fact",
@@ -410,7 +398,7 @@
     "answerValues": [
       "binary confidence"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0370",
       "e0853",
       "e0009",
@@ -425,9 +413,8 @@
       "e0493"
     ],
     "contextTokens": 94,
-    "latencyMs": 5.884500000000003,
+    "latencyMs": 2.9692000000000007,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 2,
     "reciprocalRank": 0.5,
     "errorType": "stale_fact",
@@ -444,7 +431,7 @@
     "answerValues": [
       "append everything"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0194",
       "e0417",
       "e0882",
@@ -459,9 +446,8 @@
       "e0683"
     ],
     "contextTokens": 105,
-    "latencyMs": 6.4605999999999995,
+    "latencyMs": 3.0183000000000675,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
     "errorType": "stale_fact",
@@ -478,7 +464,7 @@
     "answerValues": [
       "kept active"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0064",
       "e0434",
       "e0911",
@@ -493,9 +479,8 @@
       "e0062"
     ],
     "contextTokens": 99,
-    "latencyMs": 7.2120000000000175,
+    "latencyMs": 3.3595000000000255,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
     "errorType": "stale_fact",
@@ -512,7 +497,7 @@
     "answerValues": [
       "random facts"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0093",
       "e0275",
       "e0431",
@@ -527,9 +512,8 @@
       "e0979"
     ],
     "contextTokens": 93,
-    "latencyMs": 5.944999999999993,
+    "latencyMs": 3.4797999999999547,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 9,
     "reciprocalRank": 0.1111111111111111,
     "errorType": "stale_fact",
@@ -546,7 +530,7 @@
     "answerValues": [
       "3 facts"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0093",
       "e0431",
       "e0696",
@@ -561,9 +545,8 @@
       "e0036"
     ],
     "contextTokens": 95,
-    "latencyMs": 6.197300000000013,
+    "latencyMs": 3.1153000000000475,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
     "errorType": "stale_fact",
@@ -580,7 +563,7 @@
     "answerValues": [
       "YAML"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0683",
       "e0214",
       "e0299",
@@ -595,9 +578,8 @@
       "e0049"
     ],
     "contextTokens": 102,
-    "latencyMs": 7.403099999999995,
+    "latencyMs": 2.897100000000023,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 6,
     "reciprocalRank": 0.16666666666666666,
     "errorType": "stale_fact",
@@ -614,7 +596,7 @@
     "answerValues": [
       "keeps obsolete facts active"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0299",
       "e0377",
       "e0979",
@@ -629,9 +611,8 @@
       "e0696"
     ],
     "contextTokens": 91,
-    "latencyMs": 6.087799999999987,
+    "latencyMs": 2.789099999999962,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
     "errorType": "stale_fact",
@@ -648,7 +629,7 @@
     "answerValues": [
       "CSV"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0128",
       "e0637",
       "e0718",
@@ -659,9 +640,8 @@
       "e0839"
     ],
     "contextTokens": 56,
-    "latencyMs": 9.039899999999989,
+    "latencyMs": 2.9266000000000076,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
     "errorType": "stale_fact",
@@ -678,7 +658,7 @@
     "answerValues": [
       "250 events"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0030",
       "e0356",
       "e0783",
@@ -688,9 +668,8 @@
       "e0512"
     ],
     "contextTokens": 50,
-    "latencyMs": 7.114799999999974,
+    "latencyMs": 3.493600000000015,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
     "errorType": "stale_fact",
@@ -707,7 +686,7 @@
     "answerValues": [
       "only stable facts"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0030",
       "e0151",
       "e0356",
@@ -717,9 +696,8 @@
       "e0512"
     ],
     "contextTokens": 50,
-    "latencyMs": 7.115600000000001,
+    "latencyMs": 3.38029999999992,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 6,
     "reciprocalRank": 0.16666666666666666,
     "errorType": "stale_fact",
@@ -736,7 +714,7 @@
     "answerValues": [
       "BLEU"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0016",
       "e0568",
       "e0974",
@@ -745,9 +723,8 @@
       "e0730"
     ],
     "contextTokens": 44,
-    "latencyMs": 7.587500000000006,
+    "latencyMs": 3.0942000000000007,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
     "errorType": "stale_fact",
@@ -764,7 +741,7 @@
     "answerValues": [
       "seconds"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0092",
       "e0563",
       "e0730",
@@ -777,9 +754,8 @@
       "e0685"
     ],
     "contextTokens": 72,
-    "latencyMs": 7.778199999999998,
+    "latencyMs": 3.1259999999999764,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
     "errorType": "stale_fact",
@@ -796,7 +772,7 @@
     "answerValues": [
       "terminal only"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0164",
       "e0591",
       "e0711",
@@ -810,9 +786,8 @@
       "e0900"
     ],
     "contextTokens": 71,
-    "latencyMs": 6.442700000000002,
+    "latencyMs": 3.0535999999999603,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
     "errorType": "stale_fact",
@@ -829,7 +804,7 @@
     "answerValues": [
       "full transcript"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0322",
       "e0515",
       "e0967",
@@ -844,9 +819,8 @@
       "e0037"
     ],
     "contextTokens": 100,
-    "latencyMs": 5.792100000000005,
+    "latencyMs": 3.2754999999999654,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
     "errorType": "stale_fact",
@@ -863,7 +837,7 @@
     "answerValues": [
       "structured memory prompt"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0776",
       "e0130",
       "e0523",
@@ -874,9 +848,8 @@
       "e0986"
     ],
     "contextTokens": 63,
-    "latencyMs": 5.883099999999985,
+    "latencyMs": 3.086500000000001,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -893,7 +866,7 @@
     "answerValues": [
       "manual grading"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0195",
       "e0441",
       "e0906",
@@ -908,9 +881,8 @@
       "e0828"
     ],
     "contextTokens": 99,
-    "latencyMs": 4.345000000000027,
+    "latencyMs": 3.173999999999978,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
     "errorType": "stale_fact",
@@ -927,7 +899,7 @@
     "answerValues": [
       "return unknown when evidence is missing"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0944",
       "e0097",
       "e0481",
@@ -942,9 +914,8 @@
       "e0853"
     ],
     "contextTokens": 100,
-    "latencyMs": 3.539299999999969,
+    "latencyMs": 3.0149000000000115,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -961,7 +932,7 @@
     "answerValues": [
       "output"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0225",
       "e0652",
       "e0964",
@@ -976,9 +947,8 @@
       "e0050"
     ],
     "contextTokens": 89,
-    "latencyMs": 3.5272999999999683,
+    "latencyMs": 3.115699999999947,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
     "errorType": "stale_fact",
@@ -995,7 +965,7 @@
     "answerValues": [
       "data"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0760",
       "e0131",
       "e0512",
@@ -1010,9 +980,8 @@
       "e0050"
     ],
     "contextTokens": 89,
-    "latencyMs": 3.926999999999964,
+    "latencyMs": 3.1072000000000344,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -1029,7 +998,7 @@
     "answerValues": [
       "syntax errors"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0028",
       "e0560",
       "e0768",
@@ -1044,9 +1013,8 @@
       "e0037"
     ],
     "contextTokens": 109,
-    "latencyMs": 3.657100000000014,
+    "latencyMs": 3.2432000000000016,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
     "errorType": "stale_fact",
@@ -1063,7 +1031,7 @@
     "answerValues": [
       "State Memory only"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0260",
       "e0701",
       "e0623",
@@ -1078,9 +1046,8 @@
       "e0004"
     ],
     "contextTokens": 105,
-    "latencyMs": 3.5200999999999567,
+    "latencyMs": 2.9506999999999834,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 2,
     "reciprocalRank": 0.5,
     "errorType": "stale_fact",
@@ -1097,7 +1064,7 @@
     "answerValues": [
       "State Memory reduces stale fact errors"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0715",
       "e0146",
       "e0592",
@@ -1112,9 +1079,8 @@
       "e0017"
     ],
     "contextTokens": 103,
-    "latencyMs": 3.450900000000047,
+    "latencyMs": 3.04200000000003,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -1131,7 +1097,7 @@
     "answerValues": [
       "manual notebook cells"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0228",
       "e0312",
       "e0397",
@@ -1146,9 +1112,8 @@
       "e0053"
     ],
     "contextTokens": 94,
-    "latencyMs": 3.5679999999999836,
+    "latencyMs": 2.953800000000001,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 6,
     "reciprocalRank": 0.16666666666666666,
     "errorType": "stale_fact",
@@ -1165,7 +1130,7 @@
     "answerValues": [
       "random each run"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0228",
       "e0411",
       "e0805",
@@ -1180,9 +1145,8 @@
       "e0053"
     ],
     "contextTokens": 94,
-    "latencyMs": 3.685299999999984,
+    "latencyMs": 3.1266999999999143,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
     "errorType": "stale_fact",
@@ -1210,7 +1174,7 @@
       "error analysis",
       "experiments"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0960",
       "e0143",
       "e0157",
@@ -1225,9 +1189,8 @@
       "e0650"
     ],
     "contextTokens": 98,
-    "latencyMs": 3.922300000000007,
+    "latencyMs": 3.0978000000000065,
     "contextHasGoldFact": false,
-    "contextHasObsoleteFact": false,
     "goldRank": 4,
     "reciprocalRank": 0.25,
     "errorType": "missing_fact",
@@ -1252,7 +1215,7 @@
       "machine learning",
       "LLM agents"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0135",
       "e0344",
       "e0400",
@@ -1260,9 +1223,8 @@
       "e0856"
     ],
     "contextTokens": 36,
-    "latencyMs": 5.4635000000000105,
+    "latencyMs": 3.0715000000000146,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -1285,7 +1247,7 @@
     "answerValues": [
       "goals"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0683",
       "e0960",
       "e0036",
@@ -1300,9 +1262,8 @@
       "e0143"
     ],
     "contextTokens": 108,
-    "latencyMs": 5.7683999999999855,
+    "latencyMs": 3.050899999999956,
     "contextHasGoldFact": false,
-    "contextHasObsoleteFact": false,
     "goldRank": 10,
     "reciprocalRank": 0.1,
     "errorType": "missing_fact",
@@ -1324,7 +1285,7 @@
     ],
     "answer": "unknown",
     "answerValues": [],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0002",
       "e0003",
       "e0006",
@@ -1339,9 +1300,8 @@
       "e0076"
     ],
     "contextTokens": 92,
-    "latencyMs": 3.576000000000022,
+    "latencyMs": 2.992999999999938,
     "contextHasGoldFact": false,
-    "contextHasObsoleteFact": false,
     "goldRank": null,
     "reciprocalRank": 0,
     "errorType": "missing_fact",
@@ -1366,7 +1326,7 @@
       "retrieval",
       "prompt building"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0058",
       "e0304",
       "e0700",
@@ -1381,9 +1341,8 @@
       "e0287"
     ],
     "contextTokens": 95,
-    "latencyMs": 4.9138000000000375,
+    "latencyMs": 2.979000000000042,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
@@ -1410,7 +1369,7 @@
       "fact extraction",
       "prompt building"
     ],
-    "retrievedEventIds": [
+    "contextIds": [
       "e0036",
       "e0235",
       "e0287",
@@ -1425,9 +1384,8 @@
       "e0715"
     ],
     "contextTokens": 110,
-    "latencyMs": 4.1533000000000015,
+    "latencyMs": 3.2959999999999354,
     "contextHasGoldFact": true,
-    "contextHasObsoleteFact": false,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",

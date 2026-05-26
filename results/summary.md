@@ -9,8 +9,8 @@ Dataset: 1000 events, 42 questions, 8158 approximate full-history tokens.
 
 | System | Avg Context Tokens | Avg Latency ms | Context Efficiency | Latency Efficiency | Compression Ratio |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| RAG | 87.8810 | 4.3566 | 0.0024 | 0.0492 | 92.8301 |
-| State Memory | 65.3333 | 1.1325 | 0.0153 | 0.8830 | 124.8673 |
+| RAG | 87.8810 | 5.7825 | 0.0024 | 0.0371 | 92.8301 |
+| State Memory | 65.3333 | 1.2992 | 0.0153 | 0.7697 | 124.8673 |
 
 Paired comparison:
 
