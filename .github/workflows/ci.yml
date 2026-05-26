@@ -1,30 +1,68 @@
-name: CI
+name: CI/CD
 
 on:
   push:
   pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  deterministic-experiments:
+  quality-gate:
+    name: Syntax and unit tests (Node ${{ matrix.node-version }})
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [20, 22]
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ matrix.node-version }}
 
       - name: Check JavaScript syntax
-        run: find src -name '*.mjs' -print0 | xargs -0 -n1 node --check
+        run: npm run check
+
+      - name: Run unit and invariant tests
+        run: npm test
+
+  deterministic-benchmarks:
+    name: Deterministic benchmark verification
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: quality-gate
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Regenerate base dataset
+        run: npm run generate
 
       - name: Run deterministic memory benchmark
         run: npm run experiment
 
-      - name: Run mixed benchmark
+      - name: Run mixed structured/document benchmark
         run: npm run experiment:mixed
 
-      - name: Run robust question benchmark
+      - name: Run robust non-oracle benchmark
         run: npm run experiment:robust
 
       - name: Run scalability benchmark
@@ -33,13 +71,58 @@ jobs:
       - name: Run stress benchmark
         run: npm run experiment:stress
 
-      - name: Generate results report
+      - name: Generate report
         run: npm run results
 
-      - name: Upload generated results
+      - name: Verify benchmark claims and report reproducibility
+        run: node scripts/verifyResults.mjs
+
+      - name: Upload verified benchmark artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: deterministic-results
+          name: verified-deterministic-results
+          if-no-files-found: error
           path: |
             RESULTS.md
+            data
             results
+
+  cli-smoke:
+    name: CLI smoke checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: quality-gate
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: LLM dry run without Ollama
+        run: npm run experiment:llm -- --dry-run
+
+      - name: Import public module entry points
+        run: |
+          node --input-type=module -e "await Promise.all([
+            './src/dataset/generateDataset.mjs',
+            './src/experiments/runner.mjs',
+            './src/rag/index.mjs',
+            './src/eval/runExperiment.mjs'
+          ].map((path) => import(path)))"
+
+  docker-build:
+    name: Docker image build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: quality-gate
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t coursework-state-memory:ci .

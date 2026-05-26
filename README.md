@@ -9,6 +9,37 @@ The main experiment is intentionally zero-dependency. It uses deterministic synt
 
 An optional LLM-backed experiment is also included. The deterministic experiment isolates memory quality; the LLM experiment validates the same RAG and State Memory contexts with a real local language model.
 
+## Key Results
+
+### Evolving Current Facts
+
+State Memory avoids stale facts better than lexical RAG in the controlled memory benchmark.
+
+| System | Exact Match | Stale Error |
+| --- | ---: | ---: |
+| RAG | 0.2143 | 0.7143 |
+| State Memory | 1.0000 | 0.0000 |
+
+### Non-Oracle Robust Questions
+
+Removing oracle slot access reduces State Memory from perfect to more realistic performance.
+
+| System | Exact Match | Slot Inference |
+| --- | ---: | ---: |
+| RAG | 0.1346 | 0.8269 |
+| Temporal RAG | 0.6923 | 0.8269 |
+| State no-oracle | 0.8269 | 0.8269 |
+
+### Mixed Structured + Document Knowledge
+
+Hybrid wins because evolving state and document details need different memory mechanisms.
+
+| System | Exact Match |
+| --- | ---: |
+| RAG-only | 0.6765 |
+| State-only | 0.4118 |
+| Hybrid | 1.0000 |
+
 ## Run
 
 ```bash

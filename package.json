@@ -5,6 +5,7 @@
   "type": "module",
   "description": "Coursework MVP comparing a RAG baseline with structured State Memory for long-context LLM agents.",
   "scripts": {
+    "check": "node scripts/checkSyntax.mjs",
     "generate": "node src/dataset/generateDataset.mjs",
     "experiment": "node src/index.mjs",
     "experiment:llm": "node src/llmExperiment.mjs",
@@ -13,7 +14,9 @@
     "experiment:scale": "node src/scalabilityExperiment.mjs",
     "experiment:stress": "node src/stressExperiment.mjs",
     "results": "node src/report/generateResultsReport.mjs",
-    "start": "node src/index.mjs"
+    "start": "node src/index.mjs",
+    "test": "node --test",
+    "verify": "npm run check && npm test && npm run results && node scripts/verifyResults.mjs"
   },
   "engines": {
     "node": ">=18"
