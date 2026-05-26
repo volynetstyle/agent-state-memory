@@ -56,6 +56,11 @@ const robust = await readJson("results/robust/summary.json");
 const stress = await readJson("results/stress/summary.json");
 const scalability = await readJson("results/scalability/summary.json");
 const llm = await readJson("results/llm/summary.json");
+const llmResultSets = {
+  rag: await readJson("results/llm/rag-llm-results.json"),
+  state: await readJson("results/llm/state-llm-results.json"),
+  hybrid: await readJson("results/llm/hybrid-llm-results.json")
+};
 
 assert.equal(main.dataset.events, 1000, "deterministic dataset event count");
 assert.equal(main.dataset.questions, 42, "deterministic dataset question count");
@@ -113,6 +118,30 @@ assert.ok(
 
 assertRate(llm.hybrid.normalizedAccuracy, "llm.hybrid.normalizedAccuracy");
 assertRate(llm.hybrid.hallucinationRate, "llm.hybrid.hallucinationRate");
+assert.equal(llmResultSets.rag.length, llm.rag.totalQuestions, "RAG LLM result count");
+assert.equal(llmResultSets.state.length, llm.state.totalQuestions, "State LLM result count");
+assert.equal(llmResultSets.hybrid.length, llm.hybrid.totalQuestions, "Hybrid LLM result count");
+assert.equal(
+  llm.rag.totalQuestions,
+  llm.state.totalQuestions,
+  "RAG and State LLM totals must match"
+);
+assert.equal(
+  llm.state.totalQuestions,
+  llm.hybrid.totalQuestions,
+  "State and Hybrid LLM totals must match"
+);
+for (const [system, results] of Object.entries(llmResultSets)) {
+  for (const result of results) {
+    assert.equal(typeof result.questionId, "string", `${system} result questionId`);
+    assert.equal(typeof result.errorType, "string", `${system} result errorType`);
+    assertRate(Number(result.normalizedMatch), `${system}.${result.questionId}.normalizedMatch`);
+    assert.ok(
+      Array.isArray(result.contextIds),
+      `${system}.${result.questionId}.contextIds must be an array`
+    );
+  }
+}
 assert.ok(
   llm.hybrid.normalizedAccuracy > llm.state.normalizedAccuracy,
   "Hybrid + LLM must outperform State + LLM on normalized accuracy"

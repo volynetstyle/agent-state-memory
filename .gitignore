@@ -1,2 +1,4 @@
 ollama-server.log
 ollama-server.err
+.ollama/
+ollama.log

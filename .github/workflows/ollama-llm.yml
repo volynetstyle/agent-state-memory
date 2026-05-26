@@ -27,23 +27,78 @@ on:
         description: "Bump this value to force a fresh Ollama model cache"
         required: true
         default: "v1"
+      publish_results:
+        description: "Commit verified RESULTS.md and results/llm back to the branch"
+        required: true
+        type: boolean
+        default: false
 
 permissions:
   contents: write
 
+concurrency:
+  group: ollama-llm-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   llm-experiment:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 90
     env:
       OLLAMA_MODELS: ${{ github.workspace }}/.ollama/models
 
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          node-version: 20
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Validate workflow inputs
+        env:
+          MODEL_NAME: ${{ inputs.model }}
+          QUESTIONS: ${{ inputs.questions }}
+          UNKNOWN: ${{ inputs.unknown }}
+          TIMEOUT_MS: ${{ inputs.timeout_ms }}
+          NUM_PREDICT: ${{ inputs.num_predict }}
+        run: |
+          node --input-type=module <<'NODE'
+          const values = {
+            QUESTIONS: process.env.QUESTIONS,
+            UNKNOWN: process.env.UNKNOWN,
+            TIMEOUT_MS: process.env.TIMEOUT_MS,
+            NUM_PREDICT: process.env.NUM_PREDICT
+          };
+
+          if (!/^[A-Za-z0-9._:/-]+$/.test(process.env.MODEL_NAME ?? "")) {
+            throw new Error(`Unsafe model name: ${process.env.MODEL_NAME}`);
+          }
+
+          for (const [name, value] of Object.entries(values)) {
+            if (!/^\d+$/.test(value ?? "")) {
+              throw new Error(`${name} must be a non-negative integer, got "${value}"`);
+            }
+          }
+
+          if (Number(values.QUESTIONS) <= 0) throw new Error("QUESTIONS must be greater than 0");
+          if (Number(values.TIMEOUT_MS) < 1000) throw new Error("TIMEOUT_MS must be at least 1000");
+          if (Number(values.NUM_PREDICT) <= 0) throw new Error("NUM_PREDICT must be greater than 0");
+          NODE
+
+      - name: Run static checks and unit tests
+        run: |
+          npm run check
+          npm test
+
+      - name: Verify checked-in benchmark results before LLM run
+        run: |
+          npm run results
+          node scripts/verifyResults.mjs
+          node scripts/ensureAllowedChanges.mjs
 
       - name: Install Ollama
         run: curl -fsSL https://ollama.com/install.sh | sh
@@ -74,7 +129,16 @@ jobs:
       - name: Start Ollama server
         run: |
           nohup ollama serve > ollama.log 2>&1 &
-          sleep 8
+          for attempt in {1..45}; do
+            if ollama list >/dev/null 2>&1; then
+              echo "Ollama is ready."
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "::error::Ollama did not become ready in time."
+          cat ollama.log
+          exit 1
 
       - name: Pull model
         env:
@@ -82,27 +146,46 @@ jobs:
         run: ollama pull "$MODEL_NAME"
 
       - name: Run mixed LLM experiment
-        run: npm run experiment:llm -- --model="${{ inputs.model }}" --questions=${{ inputs.questions }} --unknown=${{ inputs.unknown }} --timeout-ms=${{ inputs.timeout_ms }} --num-predict=${{ inputs.num_predict }}
+        env:
+          MODEL_NAME: ${{ inputs.model }}
+          QUESTIONS: ${{ inputs.questions }}
+          UNKNOWN: ${{ inputs.unknown }}
+          TIMEOUT_MS: ${{ inputs.timeout_ms }}
+          NUM_PREDICT: ${{ inputs.num_predict }}
+        run: |
+          npm run experiment:llm -- \
+            --model="$MODEL_NAME" \
+            --questions="$QUESTIONS" \
+            --unknown="$UNKNOWN" \
+            --timeout-ms="$TIMEOUT_MS" \
+            --num-predict="$NUM_PREDICT"
 
-      - name: Generate results report
-        run: npm run results
+      - name: Generate and verify report with new LLM results
+        run: |
+          npm run results
+          node scripts/verifyResults.mjs
+          node scripts/ensureAllowedChanges.mjs RESULTS.md results/llm/
 
-      - name: Commit generated LLM results
+      - name: Commit verified LLM results
+        if: ${{ inputs.publish_results }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add RESULTS.md results/llm
+          node scripts/ensureAllowedChanges.mjs RESULTS.md results/llm/
           if git diff --cached --quiet; then
-            echo "No generated result changes to commit."
+            echo "No verified LLM result changes to commit."
           else
-            git commit -m "Update generated LLM results"
+            git commit -m "Update verified LLM results"
             git push
           fi
 
       - name: Upload LLM results
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: llm-results
+          name: llm-results-${{ github.run_id }}
+          if-no-files-found: warn
           path: |
             RESULTS.md
             results/llm
