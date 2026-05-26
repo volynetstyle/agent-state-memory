@@ -23,11 +23,17 @@ on:
         description: "Maximum generated tokens per answer"
         required: true
         default: "64"
+      cache_version:
+        description: "Bump this value to force a fresh Ollama model cache"
+        required: true
+        default: "v1"
 
 jobs:
   llm-experiment:
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    env:
+      OLLAMA_MODELS: ${{ github.workspace }}/.ollama/models
 
     steps:
       - uses: actions/checkout@v4
@@ -39,13 +45,38 @@ jobs:
       - name: Install Ollama
         run: curl -fsSL https://ollama.com/install.sh | sh
 
+      - name: Prepare Ollama model cache
+        id: ollama-cache-key
+        env:
+          MODEL_NAME: ${{ inputs.model }}
+          CACHE_VERSION: ${{ inputs.cache_version }}
+        run: |
+          mkdir -p "$OLLAMA_MODELS"
+          safe_model="$(printf '%s' "$MODEL_NAME" | sed 's#[/:]#-#g')"
+          safe_version="$(printf '%s' "$CACHE_VERSION" | sed 's#[/:]#-#g')"
+          echo "key=ollama-${RUNNER_OS}-${safe_model}-${safe_version}" >> "$GITHUB_OUTPUT"
+
+      - name: Restore Ollama model cache
+        id: ollama-model-cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.OLLAMA_MODELS }}
+          key: ${{ steps.ollama-cache-key.outputs.key }}
+          restore-keys: |
+            ollama-${{ runner.os }}-
+
+      - name: Report Ollama cache status
+        run: echo "cache-hit=${{ steps.ollama-model-cache.outputs.cache-hit }}"
+
       - name: Start Ollama server
         run: |
           nohup ollama serve > ollama.log 2>&1 &
           sleep 8
 
       - name: Pull model
-        run: ollama pull "${{ inputs.model }}"
+        env:
+          MODEL_NAME: ${{ inputs.model }}
+        run: ollama pull "$MODEL_NAME"
 
       - name: Run mixed LLM experiment
         run: npm run experiment:llm -- --model="${{ inputs.model }}" --questions=${{ inputs.questions }} --unknown=${{ inputs.unknown }} --timeout-ms=${{ inputs.timeout_ms }} --num-predict=${{ inputs.num_predict }}

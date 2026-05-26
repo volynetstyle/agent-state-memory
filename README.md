@@ -233,6 +233,8 @@ GitHub Actions includes:
 - `CI`: runs syntax checks and deterministic experiments on push/pull request.
 - `Ollama LLM Experiment`: manual workflow that installs Ollama, pulls the selected model, runs `npm run experiment:llm`, regenerates `RESULTS.md`, and uploads `RESULTS.md` plus `results/llm` as artifacts.
 
+The Ollama workflow caches downloaded model files with `actions/cache`. The first run for a model still downloads it, but later runs restore `${{ github.workspace }}/.ollama/models` before `ollama pull`, so the pull step should become a quick availability check. If a model tag changes or the cache needs to be refreshed, bump the workflow input `cache_version`.
+
 ## Repository Shape
 
 ```text
