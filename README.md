@@ -70,6 +70,25 @@ Run a fresh experiment with regenerated data:
 node src/index.mjs --regenerate
 ```
 
+## Verification
+
+Run the full local quality gate:
+
+```bash
+npm run verify
+```
+
+This checks syntax for every `.mjs` file, runs the `node:test` suite, regenerates `RESULTS.md`, and verifies that the published benchmark claims match `results/**/summary.json`.
+
+Individual checks:
+
+```bash
+npm run check
+npm test
+npm run results
+node scripts/verifyResults.mjs
+```
+
 Run the scalability experiment:
 
 ```bash
@@ -283,7 +302,7 @@ docker run --rm -e OLLAMA_URL=http://host.docker.internal:11434 coursework-state
 
 GitHub Actions includes:
 
-- `CI`: runs syntax checks and deterministic experiments on push/pull request.
+- `CI/CD`: runs syntax checks on Node 20 and 22, unit/invariant tests, deterministic/mixed/robust/scalability/stress benchmark verification, report validation, CLI smoke checks, Docker image build, and uploads verified artifacts.
 - `Ollama LLM Experiment`: manual workflow that installs Ollama, pulls the selected model, runs `npm run experiment:llm`, regenerates `RESULTS.md`, commits `RESULTS.md` plus `results/llm` back to the branch, and uploads the same files as artifacts.
 
 The Ollama workflow caches downloaded model files with `actions/cache`. The first run for a model still downloads it, but later runs restore `${{ github.workspace }}/.ollama/models` before `ollama pull`, so the pull step should become a quick availability check. If a model tag changes or the cache needs to be refreshed, bump the workflow input `cache_version`.
