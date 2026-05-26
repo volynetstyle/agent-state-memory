@@ -4,28 +4,28 @@
     "questionType": "current_fact",
     "question": "What runtime does Reflex use?",
     "expected": "reactive graph runtime",
-    "answer": "reactive graph runtime",
+    "answer": "reactive graph runtime disputed",
     "answerValues": [
-      "reactive graph runtime"
+      "reactive graph runtime disputed"
     ],
     "contextIds": [
-      "e0948-f1",
-      "e0196-f1",
-      "e0839-f1",
-      "e0953-f1",
-      "e0217-f1",
+      "e0948-f2",
+      "e0839-f2",
+      "e0953-f2",
       "e0017-f1",
       "e0036-f1",
-      "e0049-f1"
+      "e0058-f1",
+      "e0135-f1",
+      "e0173-f1"
     ],
-    "contextTokens": 64,
-    "latencyMs": 0.6966999999999643,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 60,
+    "latencyMs": 0.6755999999998039,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -33,28 +33,28 @@
     "questionType": "current_fact",
     "question": "What storage does Reflex use?",
     "expected": "graph-indexed store",
-    "answer": "graph-indexed store",
+    "answer": "graph-indexed store disputed",
     "answerValues": [
-      "graph-indexed store"
+      "graph-indexed store disputed"
     ],
     "contextIds": [
-      "e0839-f1",
-      "e0217-f1",
-      "e0948-f1",
-      "e0953-f1",
-      "e0196-f1",
+      "e0839-f2",
+      "e0948-f2",
+      "e0953-f2",
       "e0017-f1",
       "e0036-f1",
-      "e0049-f1"
+      "e0058-f1",
+      "e0135-f1",
+      "e0173-f1"
     ],
-    "contextTokens": 64,
-    "latencyMs": 0.6145999999998821,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 60,
+    "latencyMs": 0.5113999999998668,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -62,28 +62,28 @@
     "questionType": "current_fact",
     "question": "What selector strategy does Reflex use?",
     "expected": "dependency-tracked selectors",
-    "answer": "dependency-tracked selectors",
+    "answer": "dependency-tracked selectors disputed",
     "answerValues": [
-      "dependency-tracked selectors"
+      "dependency-tracked selectors disputed"
     ],
     "contextIds": [
-      "e0953-f1",
-      "e0839-f1",
-      "e0948-f1",
-      "e0196-f1",
-      "e0217-f1",
-      "e0683-f1",
-      "e0696-f1",
-      "e0736-f1"
+      "e0953-f2",
+      "e0839-f2",
+      "e0948-f2",
+      "e0683-f2",
+      "e0696-f2",
+      "e0736-f2",
+      "e0017-f1",
+      "e0036-f1"
     ],
-    "contextTokens": 65,
-    "latencyMs": 0.6299999999998818,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 70,
+    "latencyMs": 0.5739999999998417,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -91,28 +91,28 @@
     "questionType": "current_fact",
     "question": "What is the current coursework topic?",
     "expected": "State Memory for LLM agents",
-    "answer": "State Memory for LLM agents",
+    "answer": "State Memory for LLM agents disputed",
     "answerValues": [
-      "State Memory for LLM agents"
+      "State Memory for LLM agents disputed"
     ],
     "contextIds": [
-      "e0960-f1",
+      "e0960-f2",
       "e0173-f1",
       "e0221-f1",
       "e0357-f1",
       "e0625-f1",
       "e0650-f1",
-      "e0734-f1",
-      "e0871-f1"
+      "e0881-f1",
+      "e0734-f2"
     ],
-    "contextTokens": 68,
-    "latencyMs": 0.6391000000000986,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 66,
+    "latencyMs": 0.5151000000000749,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -120,28 +120,28 @@
     "questionType": "current_fact",
     "question": "What is the current coursework deadline?",
     "expected": "one week",
-    "answer": "one week",
+    "answer": "one week disputed",
     "answerValues": [
-      "one week"
+      "one week disputed"
     ],
     "contextIds": [
-      "e0734-f1",
+      "e0734-f2",
       "e0173-f1",
       "e0221-f1",
       "e0357-f1",
       "e0625-f1",
       "e0650-f1",
-      "e0871-f1",
-      "e0881-f1"
+      "e0881-f1",
+      "e0871-f2"
     ],
-    "contextTokens": 65,
-    "latencyMs": 0.603800000000092,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 67,
+    "latencyMs": 0.5590000000001965,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -149,28 +149,28 @@
     "questionType": "current_fact",
     "question": "What implementation language is used for the coursework MVP?",
     "expected": "zero-dependency Node.js",
-    "answer": "zero-dependency Node.js",
+    "answer": "zero-dependency Node.js disputed",
     "answerValues": [
-      "zero-dependency Node.js"
+      "zero-dependency Node.js disputed"
     ],
     "contextIds": [
-      "e0871-f1",
+      "e0871-f2",
       "e0173-f1",
       "e0221-f1",
       "e0357-f1",
       "e0625-f1",
       "e0650-f1",
-      "e0734-f1",
-      "e0881-f1"
+      "e0881-f1",
+      "e0734-f2"
     ],
-    "contextTokens": 68,
-    "latencyMs": 0.8444999999999254,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 70,
+    "latencyMs": 0.5552999999999884,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -178,28 +178,28 @@
     "questionType": "current_fact",
     "question": "What retriever does the RAG baseline use?",
     "expected": "lexical top-k retriever",
-    "answer": "lexical top-k retriever",
+    "answer": "lexical top-k retriever disputed",
     "answerValues": [
-      "lexical top-k retriever"
+      "lexical top-k retriever disputed"
     ],
     "contextIds": [
-      "e0942-f1",
-      "e0685-f1",
-      "e0732-f1",
-      "e0371-f1",
+      "e0942-f2",
+      "e0685-f2",
+      "e0732-f2",
       "e0058-f1",
       "e0304-f1",
       "e0700-f1",
-      "e0702-f1"
+      "e0702-f1",
+      "e0221-f1"
     ],
-    "contextTokens": 60,
-    "latencyMs": 0.6192000000000917,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 63,
+    "latencyMs": 0.5235999999999876,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -207,28 +207,28 @@
     "questionType": "current_fact",
     "question": "What chunk unit does the RAG baseline use?",
     "expected": "event chunks",
-    "answer": "event chunks",
+    "answer": "event chunks disputed",
     "answerValues": [
-      "event chunks"
+      "event chunks disputed"
     ],
     "contextIds": [
-      "e0685-f1",
-      "e0732-f1",
-      "e0942-f1",
-      "e0371-f1",
+      "e0685-f2",
+      "e0732-f2",
+      "e0942-f2",
       "e0058-f1",
       "e0304-f1",
       "e0700-f1",
-      "e0702-f1"
+      "e0702-f1",
+      "e0730-f2"
     ],
-    "contextTokens": 61,
-    "latencyMs": 0.6358999999999924,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 64,
+    "latencyMs": 0.5289000000000215,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -236,28 +236,28 @@
     "questionType": "current_fact",
     "question": "What top-k value does the RAG baseline use?",
     "expected": "12",
-    "answer": "12",
+    "answer": "12 disputed",
     "answerValues": [
-      "12"
+      "12 disputed"
     ],
     "contextIds": [
-      "e0732-f1",
-      "e0371-f1",
-      "e0942-f1",
-      "e0685-f1",
+      "e0732-f2",
+      "e0942-f2",
+      "e0685-f2",
       "e0058-f1",
       "e0304-f1",
       "e0700-f1",
-      "e0702-f1"
+      "e0702-f1",
+      "e0221-f1"
     ],
-    "contextTokens": 62,
-    "latencyMs": 0.6641999999999371,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 65,
+    "latencyMs": 0.5322999999998501,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -265,28 +265,28 @@
     "questionType": "current_fact",
     "question": "What memory strategy does the State Memory agent use?",
     "expected": "structured world state",
-    "answer": "structured world state",
+    "answer": "structured world state disputed",
     "answerValues": [
-      "structured world state"
+      "structured world state disputed"
     ],
     "contextIds": [
-      "e0683-f1",
-      "e0828-f1",
-      "e0049-f1",
-      "e0960-f1",
+      "e0683-f2",
+      "e0828-f2",
+      "e0960-f2",
       "e0036-f1",
       "e0235-f1",
       "e0017-f1",
-      "e0173-f1"
+      "e0173-f1",
+      "e0221-f1"
     ],
     "contextTokens": 75,
-    "latencyMs": 0.623299999999972,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "latencyMs": 0.5537999999999101,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -294,28 +294,28 @@
     "questionType": "current_fact",
     "question": "What answer mode does the State Memory agent use?",
     "expected": "selected active facts",
-    "answer": "selected active facts",
+    "answer": "selected active facts disputed",
     "answerValues": [
-      "selected active facts"
+      "selected active facts disputed"
     ],
     "contextIds": [
-      "e0828-f1",
-      "e0049-f1",
-      "e0683-f1",
-      "e0960-f1",
+      "e0828-f2",
+      "e0683-f2",
+      "e0960-f2",
       "e0036-f1",
       "e0235-f1",
       "e0017-f1",
-      "e0173-f1"
+      "e0173-f1",
+      "e0221-f1"
     ],
     "contextTokens": 75,
-    "latencyMs": 0.671500000000151,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "latencyMs": 0.5588000000000193,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -323,28 +323,28 @@
     "questionType": "current_fact",
     "question": "What method does the Fact extractor use?",
     "expected": "rule-based JSON extraction",
-    "answer": "rule-based JSON extraction",
+    "answer": "rule-based JSON extraction disputed",
     "answerValues": [
-      "rule-based JSON extraction"
+      "rule-based JSON extraction disputed"
     ],
     "contextIds": [
-      "e0817-f1",
-      "e0853-f1",
-      "e0434-f1",
-      "e0911-f1",
+      "e0817-f2",
+      "e0853-f2",
+      "e0911-f2",
       "e0360-f1",
       "e0493-f1",
-      "e0715-f1",
-      "e0768-f1"
+      "e0715-f2",
+      "e0768-f2",
+      "e0965-f2"
     ],
-    "contextTokens": 74,
-    "latencyMs": 0.6154999999998836,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 80,
+    "latencyMs": 0.5147999999999229,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -352,28 +352,28 @@
     "questionType": "current_fact",
     "question": "What confidence policy does the Fact extractor use?",
     "expected": "numeric confidence",
-    "answer": "numeric confidence",
+    "answer": "numeric confidence disputed",
     "answerValues": [
-      "numeric confidence"
+      "numeric confidence disputed"
     ],
     "contextIds": [
-      "e0853-f1",
-      "e0817-f1",
-      "e0434-f1",
-      "e0911-f1",
-      "e0944-f1",
+      "e0853-f2",
+      "e0817-f2",
+      "e0911-f2",
+      "e0944-f2",
       "e0360-f1",
       "e0493-f1",
-      "e0715-f1"
+      "e0715-f2",
+      "e0768-f2"
     ],
-    "contextTokens": 76,
-    "latencyMs": 0.6255999999998494,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 83,
+    "latencyMs": 0.5289999999999964,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -381,57 +381,57 @@
     "questionType": "current_fact",
     "question": "What mutable fact rule does the State updater use?",
     "expected": "latest wins",
-    "answer": "manual overwrite",
+    "answer": "latest wins disputed",
     "answerValues": [
-      "manual overwrite"
+      "latest wins disputed"
     ],
     "contextIds": [
-      "e0417-f1",
-      "e0882-f1",
-      "e0911-f1",
-      "e0434-f1",
+      "e0882-f2",
+      "e0911-f2",
       "e0036-f1",
       "e0235-f1",
       "e0360-f1",
-      "e0683-f1"
+      "e0683-f2",
+      "e0817-f2",
+      "e0960-f2"
     ],
-    "contextTokens": 74,
-    "latencyMs": 0.6368999999999687,
+    "contextTokens": 80,
+    "latencyMs": 0.5381999999999607,
     "contextHasGoldFact": false,
     "goldRank": null,
     "reciprocalRank": 0,
-    "errorType": "stale_fact",
+    "errorType": "missing_fact",
     "answered": true,
     "correct": false,
-    "staleFactError": true
+    "staleFactError": false
   },
   {
     "questionId": "q-current-015",
     "questionType": "current_fact",
     "question": "What status is assigned to old mutable facts?",
     "expected": "marked obsolete",
-    "answer": "marked obsolete",
+    "answer": "marked obsolete disputed",
     "answerValues": [
-      "marked obsolete"
+      "marked obsolete disputed"
     ],
     "contextIds": [
-      "e0911-f1",
-      "e0434-f1",
-      "e0417-f1",
-      "e0882-f1",
+      "e0911-f2",
+      "e0882-f2",
       "e0002-f1",
       "e0010-f1",
       "e0026-f1",
-      "e0034-f1"
+      "e0034-f1",
+      "e0035-f1",
+      "e0038-f1"
     ],
-    "contextTokens": 72,
-    "latencyMs": 0.64650000000006,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 73,
+    "latencyMs": 0.5447000000001481,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -439,28 +439,28 @@
     "questionType": "current_fact",
     "question": "How does the State selector rank facts?",
     "expected": "slot and keyword scoring",
-    "answer": "slot and keyword scoring",
+    "answer": "slot and keyword scoring disputed",
     "answerValues": [
-      "slot and keyword scoring"
+      "slot and keyword scoring disputed"
     ],
     "contextIds": [
-      "e0736-f1",
-      "e0696-f1",
+      "e0736-f2",
+      "e0696-f2",
       "e0036-f1",
       "e0235-f1",
       "e0633-f1",
-      "e0683-f1",
-      "e0828-f1",
-      "e0896-f1"
+      "e0683-f2",
+      "e0828-f2",
+      "e0896-f2"
     ],
-    "contextTokens": 70,
-    "latencyMs": 0.6324999999999363,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 74,
+    "latencyMs": 0.5200999999999567,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -468,28 +468,28 @@
     "questionType": "current_fact",
     "question": "What fact limit does the State selector use?",
     "expected": "8 facts",
-    "answer": "8 facts",
+    "answer": "8 facts disputed",
     "answerValues": [
-      "8 facts"
+      "8 facts disputed"
     ],
     "contextIds": [
-      "e0696-f1",
-      "e0736-f1",
-      "e0434-f1",
-      "e0911-f1",
+      "e0696-f2",
+      "e0736-f2",
+      "e0911-f2",
       "e0036-f1",
       "e0235-f1",
       "e0360-f1",
-      "e0683-f1"
+      "e0683-f2",
+      "e0960-f2"
     ],
-    "contextTokens": 71,
-    "latencyMs": 0.6231000000000222,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 77,
+    "latencyMs": 0.5224000000000615,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -497,57 +497,57 @@
     "questionType": "current_fact",
     "question": "How is the World state serialized?",
     "expected": "JSON facts",
-    "answer": "YAML",
+    "answer": "JSON facts disputed",
     "answerValues": [
-      "YAML"
+      "JSON facts disputed"
     ],
     "contextIds": [
-      "e0214-f1",
-      "e0979-f1",
-      "e0896-f1",
-      "e0683-f1",
+      "e0896-f2",
+      "e0979-f2",
+      "e0683-f2",
       "e0036-f1",
       "e0235-f1",
-      "e0960-f1",
-      "e0017-f1"
+      "e0960-f2",
+      "e0017-f1",
+      "e0173-f1"
     ],
-    "contextTokens": 70,
-    "latencyMs": 0.618099999999913,
+    "contextTokens": 74,
+    "latencyMs": 0.6706000000001495,
     "contextHasGoldFact": false,
     "goldRank": null,
     "reciprocalRank": 0,
-    "errorType": "stale_fact",
+    "errorType": "missing_fact",
     "answered": true,
     "correct": false,
-    "staleFactError": true
+    "staleFactError": false
   },
   {
     "questionId": "q-current-019",
     "questionType": "current_fact",
     "question": "How does World state handle obsolete facts?",
     "expected": "stores obsolete facts with validTo",
-    "answer": "stores obsolete facts with validTo",
+    "answer": "stores obsolete facts with validTo disputed",
     "answerValues": [
-      "stores obsolete facts with validTo"
+      "stores obsolete facts with validTo disputed"
     ],
     "contextIds": [
-      "e0979-f1",
-      "e0214-f1",
-      "e0896-f1",
-      "e0683-f1",
+      "e0979-f2",
+      "e0896-f2",
+      "e0683-f2",
       "e0036-f1",
       "e0235-f1",
       "e0633-f1",
-      "e0696-f1"
+      "e0696-f2",
+      "e0828-f2"
     ],
-    "contextTokens": 69,
-    "latencyMs": 0.6274000000000797,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 77,
+    "latencyMs": 0.5157999999998992,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -555,28 +555,28 @@
     "questionType": "current_fact",
     "question": "What format does the Event store use?",
     "expected": "JSONL",
-    "answer": "JSONL",
+    "answer": "JSONL disputed",
     "answerValues": [
-      "JSONL"
+      "JSONL disputed"
     ],
     "contextIds": [
-      "e0718-f1",
-      "e0637-f1",
-      "e0196-f1",
+      "e0718-f2",
       "e0287-f1",
-      "e0685-f1",
-      "e0839-f1",
+      "e0685-f2",
+      "e0839-f2",
       "e0017-f1",
-      "e0036-f1"
+      "e0036-f1",
+      "e0058-f1",
+      "e0135-f1"
     ],
-    "contextTokens": 63,
-    "latencyMs": 0.6380999999998949,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 61,
+    "latencyMs": 0.5724999999999909,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -584,28 +584,28 @@
     "questionType": "current_fact",
     "question": "How many events are in the synthetic dataset?",
     "expected": "1000 events",
-    "answer": "1000 events",
+    "answer": "1000 events disputed",
     "answerValues": [
-      "1000 events"
+      "1000 events disputed"
     ],
     "contextIds": [
-      "e0783-f1",
-      "e0965-f1",
+      "e0783-f2",
+      "e0965-f2",
       "e0017-f1",
       "e0036-f1",
-      "e0049-f1",
       "e0058-f1",
       "e0135-f1",
-      "e0173-f1"
+      "e0173-f1",
+      "e0199-f1"
     ],
-    "contextTokens": 66,
-    "latencyMs": 0.70900000000006,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 62,
+    "latencyMs": 0.5369000000000597,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -613,28 +613,28 @@
     "questionType": "current_fact",
     "question": "What does the synthetic dataset contain?",
     "expected": "stable facts and fact updates",
-    "answer": "stable facts and fact updates",
+    "answer": "stable facts and fact updates disputed",
     "answerValues": [
-      "stable facts and fact updates"
+      "stable facts and fact updates disputed"
     ],
     "contextIds": [
-      "e0965-f1",
-      "e0783-f1",
+      "e0965-f2",
+      "e0783-f2",
       "e0017-f1",
       "e0036-f1",
-      "e0049-f1",
       "e0058-f1",
       "e0135-f1",
-      "e0173-f1"
+      "e0173-f1",
+      "e0199-f1"
     ],
-    "contextTokens": 63,
-    "latencyMs": 0.9044999999998709,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 59,
+    "latencyMs": 0.5119999999999436,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -642,28 +642,28 @@
     "questionType": "current_fact",
     "question": "What is the primary metric in the Evaluation suite?",
     "expected": "stale fact error rate",
-    "answer": "stale fact error rate",
+    "answer": "stale fact error rate disputed",
     "answerValues": [
-      "stale fact error rate"
+      "stale fact error rate disputed"
     ],
     "contextIds": [
-      "e0974-f1",
-      "e0730-f1",
+      "e0974-f2",
+      "e0730-f2",
       "e0017-f1",
       "e0036-f1",
-      "e0049-f1",
       "e0058-f1",
       "e0135-f1",
-      "e0173-f1"
+      "e0173-f1",
+      "e0199-f1"
     ],
-    "contextTokens": 66,
-    "latencyMs": 0.724100000000135,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 62,
+    "latencyMs": 0.5398999999999887,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -671,28 +671,28 @@
     "questionType": "current_fact",
     "question": "What latency unit does the Evaluation suite use?",
     "expected": "milliseconds",
-    "answer": "milliseconds",
+    "answer": "milliseconds disputed",
     "answerValues": [
-      "milliseconds"
+      "milliseconds disputed"
     ],
     "contextIds": [
-      "e0730-f1",
-      "e0974-f1",
-      "e0685-f1",
+      "e0730-f2",
+      "e0974-f2",
+      "e0685-f2",
       "e0596-f1",
       "e0017-f1",
       "e0036-f1",
-      "e0049-f1",
-      "e0058-f1"
+      "e0058-f1",
+      "e0135-f1"
     ],
-    "contextTokens": 64,
-    "latencyMs": 0.8677000000000135,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 62,
+    "latencyMs": 0.5294000000001233,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -700,12 +700,12 @@
     "questionType": "current_fact",
     "question": "What output does the Metrics report produce?",
     "expected": "JSON result files",
-    "answer": "JSON result files",
+    "answer": "JSON result files disputed",
     "answerValues": [
-      "JSON result files"
+      "JSON result files disputed"
     ],
     "contextIds": [
-      "e0711-f1",
+      "e0711-f2",
       "e0199-f1",
       "e0222-f1",
       "e0493-f1",
@@ -714,14 +714,14 @@
       "e0900-f1",
       "e0357-f1"
     ],
-    "contextTokens": 48,
-    "latencyMs": 0.6515999999999167,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 49,
+    "latencyMs": 0.5296000000000731,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -729,28 +729,28 @@
     "questionType": "current_fact",
     "question": "What context source does the Prompt builder use?",
     "expected": "selected state slice",
-    "answer": "selected state slice",
+    "answer": "selected state slice disputed",
     "answerValues": [
-      "selected state slice"
+      "selected state slice disputed"
     ],
     "contextIds": [
-      "e0967-f1",
-      "e0322-f1",
-      "e0776-f1",
-      "e0560-f1",
-      "e0768-f1",
+      "e0967-f2",
+      "e0776-f2",
+      "e0768-f2",
       "e0222-f1",
       "e0702-f1",
-      "e0986-f1"
+      "e0986-f1",
+      "e0007-f1",
+      "e0014-f1"
     ],
-    "contextTokens": 70,
-    "latencyMs": 0.6330999999997857,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 73,
+    "latencyMs": 0.5354999999999563,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -758,28 +758,28 @@
     "questionType": "current_fact",
     "question": "What prompt style does the Prompt builder use?",
     "expected": "structured memory prompt",
-    "answer": "structured memory prompt",
+    "answer": "structured memory prompt disputed",
     "answerValues": [
-      "structured memory prompt"
+      "structured memory prompt disputed"
     ],
     "contextIds": [
-      "e0776-f1",
-      "e0967-f1",
-      "e0322-f1",
+      "e0776-f2",
+      "e0967-f2",
       "e0702-f1",
       "e0986-f1",
       "e0017-f1",
       "e0036-f1",
-      "e0049-f1"
+      "e0058-f1",
+      "e0135-f1"
     ],
-    "contextTokens": 70,
-    "latencyMs": 0.621199999999817,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 64,
+    "latencyMs": 0.5269000000000688,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -787,28 +787,28 @@
     "questionType": "current_fact",
     "question": "What grading method does the Answer evaluator use?",
     "expected": "exact normalized matching",
-    "answer": "exact normalized matching",
+    "answer": "exact normalized matching disputed",
     "answerValues": [
-      "exact normalized matching"
+      "exact normalized matching disputed"
     ],
     "contextIds": [
-      "e0906-f1",
-      "e0441-f1",
-      "e0944-f1",
-      "e0049-f1",
-      "e0817-f1",
-      "e0828-f1",
+      "e0906-f2",
+      "e0944-f2",
+      "e0817-f2",
+      "e0828-f2",
       "e0017-f1",
-      "e0036-f1"
+      "e0036-f1",
+      "e0058-f1",
+      "e0135-f1"
     ],
-    "contextTokens": 75,
-    "latencyMs": 0.6244000000001506,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 72,
+    "latencyMs": 0.5292999999999211,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -816,28 +816,28 @@
     "questionType": "current_fact",
     "question": "What unknown policy does the Answer evaluator use?",
     "expected": "return unknown when evidence is missing",
-    "answer": "return unknown when evidence is missing",
+    "answer": "return unknown when evidence is missing disputed",
     "answerValues": [
-      "return unknown when evidence is missing"
+      "return unknown when evidence is missing disputed"
     ],
     "contextIds": [
-      "e0944-f1",
-      "e0906-f1",
-      "e0441-f1",
-      "e0049-f1",
-      "e0828-f1",
-      "e0853-f1",
+      "e0944-f2",
+      "e0906-f2",
+      "e0828-f2",
+      "e0853-f2",
       "e0017-f1",
-      "e0036-f1"
+      "e0036-f1",
+      "e0058-f1",
+      "e0135-f1"
     ],
-    "contextTokens": 74,
-    "latencyMs": 0.6248000000000502,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 71,
+    "latencyMs": 0.5290999999999713,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -845,28 +845,28 @@
     "questionType": "current_fact",
     "question": "What result directory does the Coursework repository use?",
     "expected": "results",
-    "answer": "results",
+    "answer": "results disputed",
     "answerValues": [
-      "results"
+      "results disputed"
     ],
     "contextIds": [
-      "e0964-f1",
-      "e0760-f1",
+      "e0964-f2",
+      "e0760-f2",
       "e0173-f1",
       "e0221-f1",
       "e0357-f1",
       "e0625-f1",
       "e0650-f1",
-      "e0734-f1"
+      "e0881-f1"
     ],
-    "contextTokens": 63,
-    "latencyMs": 0.6276000000000295,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 64,
+    "latencyMs": 0.5452999999999975,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -874,28 +874,28 @@
     "questionType": "current_fact",
     "question": "What data directory does the Coursework repository use?",
     "expected": "data",
-    "answer": "data",
+    "answer": "data disputed",
     "answerValues": [
-      "data"
+      "data disputed"
     ],
     "contextIds": [
-      "e0760-f1",
-      "e0964-f1",
+      "e0760-f2",
+      "e0964-f2",
       "e0173-f1",
       "e0221-f1",
       "e0357-f1",
       "e0625-f1",
       "e0650-f1",
-      "e0734-f1"
+      "e0881-f1"
     ],
-    "contextTokens": 63,
-    "latencyMs": 0.6209000000001197,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 64,
+    "latencyMs": 0.5324000000000524,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -903,28 +903,28 @@
     "questionType": "current_fact",
     "question": "What failure mode is studied for the Long-context agent?",
     "expected": "stale fact usage",
-    "answer": "stale fact usage",
+    "answer": "stale fact usage disputed",
     "answerValues": [
-      "stale fact usage"
+      "stale fact usage disputed"
     ],
     "contextIds": [
-      "e0768-f1",
-      "e0560-f1",
-      "e0049-f1",
-      "e0828-f1",
-      "e0322-f1",
-      "e0683-f1",
-      "e0967-f1",
-      "e0222-f1"
+      "e0768-f2",
+      "e0828-f2",
+      "e0683-f2",
+      "e0967-f2",
+      "e0222-f1",
+      "e0007-f1",
+      "e0014-f1",
+      "e0023-f1"
     ],
-    "contextTokens": 80,
-    "latencyMs": 0.6479999999999109,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 81,
+    "latencyMs": 0.5599999999999454,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -932,28 +932,28 @@
     "questionType": "current_fact",
     "question": "What comparison does the Memory benchmark run?",
     "expected": "RAG versus State Memory",
-    "answer": "RAG versus State Memory",
+    "answer": "RAG versus State Memory disputed",
     "answerValues": [
-      "RAG versus State Memory"
+      "RAG versus State Memory disputed"
     ],
     "contextIds": [
-      "e0701-f1",
-      "e0623-f1",
-      "e0715-f1",
-      "e0683-f1",
+      "e0701-f2",
+      "e0715-f2",
+      "e0683-f2",
       "e0221-f1",
-      "e0960-f1",
+      "e0960-f2",
       "e0017-f1",
-      "e0036-f1"
+      "e0036-f1",
+      "e0173-f1"
     ],
-    "contextTokens": 75,
-    "latencyMs": 0.6250999999999749,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 77,
+    "latencyMs": 0.5315000000000509,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -961,28 +961,28 @@
     "questionType": "current_fact",
     "question": "What hypothesis does the Memory benchmark test?",
     "expected": "State Memory reduces stale fact errors",
-    "answer": "State Memory reduces stale fact errors",
+    "answer": "State Memory reduces stale fact errors disputed",
     "answerValues": [
-      "State Memory reduces stale fact errors"
+      "State Memory reduces stale fact errors disputed"
     ],
     "contextIds": [
-      "e0715-f1",
-      "e0701-f1",
-      "e0623-f1",
-      "e0683-f1",
-      "e0960-f1",
+      "e0715-f2",
+      "e0701-f2",
+      "e0683-f2",
+      "e0960-f2",
       "e0017-f1",
       "e0036-f1",
-      "e0049-f1"
+      "e0173-f1",
+      "e0221-f1"
     ],
-    "contextTokens": 78,
-    "latencyMs": 0.6207999999999174,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 77,
+    "latencyMs": 0.522899999999936,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -990,28 +990,28 @@
     "questionType": "current_fact",
     "question": "How is the Experiment runner executed?",
     "expected": "single Node command",
-    "answer": "single Node command",
+    "answer": "single Node command disputed",
     "answerValues": [
-      "single Node command"
+      "single Node command disputed"
     ],
     "contextIds": [
-      "e0901-f1",
-      "e0411-f1",
-      "e0805-f1",
+      "e0901-f2",
+      "e0805-f2",
       "e0005-f1",
       "e0014-f1",
       "e0015-f1",
       "e0035-f1",
-      "e0047-f1"
+      "e0047-f1",
+      "e0053-f1"
     ],
-    "contextTokens": 70,
-    "latencyMs": 0.6188999999999396,
-    "contextHasGoldFact": true,
-    "goldRank": 1,
-    "reciprocalRank": 1,
-    "errorType": "none",
+    "contextTokens": 71,
+    "latencyMs": 0.5586000000000695,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
     "answered": true,
-    "correct": true,
+    "correct": false,
     "staleFactError": false
   },
   {
@@ -1019,29 +1019,29 @@
     "questionType": "current_fact",
     "question": "How is Experiment runner reproducibility handled?",
     "expected": "deterministic seeded data",
-    "answer": "external API dependent",
+    "answer": "deterministic seeded data disputed",
     "answerValues": [
-      "external API dependent"
+      "deterministic seeded data disputed"
     ],
     "contextIds": [
-      "e0411-f1",
-      "e0805-f1",
-      "e0901-f1",
+      "e0805-f2",
+      "e0901-f2",
       "e0005-f1",
       "e0014-f1",
       "e0015-f1",
       "e0035-f1",
-      "e0047-f1"
+      "e0047-f1",
+      "e0053-f1"
     ],
-    "contextTokens": 71,
-    "latencyMs": 0.6151999999999589,
+    "contextTokens": 72,
+    "latencyMs": 0.71550000000002,
     "contextHasGoldFact": false,
     "goldRank": null,
     "reciprocalRank": 0,
-    "errorType": "stale_fact",
+    "errorType": "missing_fact",
     "answered": true,
     "correct": false,
-    "staleFactError": true
+    "staleFactError": false
   },
   {
     "questionId": "q-list-001",
@@ -1071,11 +1071,11 @@
       "e0625-f1",
       "e0650-f1",
       "e0881-f1",
-      "e0960-f1",
-      "e0734-f1"
+      "e0960-f2",
+      "e0734-f2"
     ],
-    "contextTokens": 66,
-    "latencyMs": 0.6194000000000415,
+    "contextTokens": 68,
+    "latencyMs": 0.5437999999999192,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
@@ -1109,10 +1109,10 @@
       "e0856-f1",
       "e0017-f1",
       "e0036-f1",
-      "e0049-f1"
+      "e0058-f1"
     ],
-    "contextTokens": 59,
-    "latencyMs": 0.6114000000000033,
+    "contextTokens": 54,
+    "latencyMs": 0.5208999999999833,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
@@ -1146,12 +1146,12 @@
       "e0633-f1",
       "e0731-f1",
       "e0856-f1",
-      "e0683-f1",
-      "e0960-f1",
+      "e0683-f2",
+      "e0960-f2",
       "e0036-f1"
     ],
-    "contextTokens": 64,
-    "latencyMs": 0.6210000000000946,
+    "contextTokens": 66,
+    "latencyMs": 0.6027999999998883,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
@@ -1188,11 +1188,11 @@
       "e0596-f1",
       "e0868-f1",
       "e0900-f1",
-      "e0711-f1",
+      "e0711-f2",
       "e0357-f1"
     ],
-    "contextTokens": 46,
-    "latencyMs": 0.5958999999998014,
+    "contextTokens": 47,
+    "latencyMs": 0.5434000000000196,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
@@ -1229,7 +1229,7 @@
       "e0360-f1"
     ],
     "contextTokens": 61,
-    "latencyMs": 0.6136000000001332,
+    "latencyMs": 0.5278000000000702,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
@@ -1263,12 +1263,12 @@
       "e0287-f1",
       "e0360-f1",
       "e0986-f1",
-      "e0683-f1",
-      "e0960-f1",
+      "e0683-f2",
+      "e0960-f2",
       "e0058-f1"
     ],
-    "contextTokens": 71,
-    "latencyMs": 0.7955999999999221,
+    "contextTokens": 73,
+    "latencyMs": 0.527599999999893,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,

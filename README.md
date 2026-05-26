@@ -83,6 +83,8 @@ This intentionally weakens the clean benchmark assumptions:
 - `clean_extraction`: ideal structured facts
 - `missing_final_updates`: extractor misses final mutable updates
 - `wrong_extraction_slot`: extractor assigns some facts to the wrong entity slot
+- `low_confidence_final_updates`: extractor sees updates but assigns low confidence
+- `near_simultaneous_conflicts`: two competing updates for the same slot arrive at almost the same time
 - `ambiguous_similar_entities`: similar legacy entities add noise
 
 It compares:
@@ -90,6 +92,7 @@ It compares:
 - classic RAG
 - RAG with recency reranking and latest-fact answering
 - State Memory
+- Defensive State Memory with confidence thresholding, conflict tracking, short version history and Temporal RAG fallback for uncertain slots
 
 The stress results are written to `results/stress/`.
 
@@ -205,7 +208,7 @@ This gives two complementary experiments:
 
 The third experiment is important for limitations: State Memory is not a replacement for RAG over large unstructured documents. It is a state layer for evolving facts, goals, tasks and user/project state. For document-heavy QA, the stronger architecture is hybrid.
 
-The stress experiment is important for self-criticism: perfect State Memory scores depend on clean extraction. If final updates are missing or facts are assigned to the wrong slot, State Memory degrades. It also shows that stronger temporal RAG baselines can reduce stale errors, so future work should compare State Memory against temporal-aware RAG instead of only naive RAG.
+The stress experiment is important for self-criticism: perfect State Memory scores depend on clean extraction. If final updates are missing or facts are assigned to the wrong slot, State Memory degrades. The defensive variant shows practical mitigations: low-confidence facts are rejected into a buffer, conflicting facts are preserved instead of silently overwriting each other, recent versions are retained, and uncertain slots fall back to Temporal RAG. It also shows the remaining hard limit: if extraction fully misses an update, the state layer needs reconciliation against raw events or documents to recover it. Stronger temporal RAG baselines can reduce stale errors, so future work should compare State Memory against temporal-aware RAG instead of only naive RAG.
 
 ## Docker And CI
 

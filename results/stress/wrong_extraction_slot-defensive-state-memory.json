@@ -19,14 +19,18 @@
       "e0049-f1"
     ],
     "contextTokens": 64,
-    "latencyMs": 0.6966999999999643,
+    "latencyMs": 0.580600000000004,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-002",
@@ -48,14 +52,18 @@
       "e0049-f1"
     ],
     "contextTokens": 64,
-    "latencyMs": 0.6145999999998821,
+    "latencyMs": 0.7269000000001142,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-003",
@@ -77,14 +85,18 @@
       "e0736-f1"
     ],
     "contextTokens": 65,
-    "latencyMs": 0.6299999999998818,
+    "latencyMs": 0.5442999999997937,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-004",
@@ -106,14 +118,18 @@
       "e0871-f1"
     ],
     "contextTokens": 68,
-    "latencyMs": 0.6391000000000986,
+    "latencyMs": 0.6328000000000884,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-005",
@@ -135,14 +151,18 @@
       "e0881-f1"
     ],
     "contextTokens": 65,
-    "latencyMs": 0.603800000000092,
+    "latencyMs": 0.6287999999999556,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-006",
@@ -164,14 +184,18 @@
       "e0881-f1"
     ],
     "contextTokens": 68,
-    "latencyMs": 0.8444999999999254,
+    "latencyMs": 0.6348000000000411,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-007",
@@ -193,14 +217,18 @@
       "e0702-f1"
     ],
     "contextTokens": 60,
-    "latencyMs": 0.6192000000000917,
+    "latencyMs": 0.5794999999998254,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-008",
@@ -222,14 +250,18 @@
       "e0702-f1"
     ],
     "contextTokens": 61,
-    "latencyMs": 0.6358999999999924,
+    "latencyMs": 0.5883000000001175,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-009",
@@ -251,14 +283,18 @@
       "e0702-f1"
     ],
     "contextTokens": 62,
-    "latencyMs": 0.6641999999999371,
+    "latencyMs": 0.5944999999999254,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-010",
@@ -280,14 +316,18 @@
       "e0173-f1"
     ],
     "contextTokens": 75,
-    "latencyMs": 0.623299999999972,
+    "latencyMs": 0.6067000000000462,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-011",
@@ -309,14 +349,18 @@
       "e0173-f1"
     ],
     "contextTokens": 75,
-    "latencyMs": 0.671500000000151,
+    "latencyMs": 0.6081000000001495,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-012",
@@ -338,14 +382,18 @@
       "e0768-f1"
     ],
     "contextTokens": 74,
-    "latencyMs": 0.6154999999998836,
+    "latencyMs": 0.5775000000001,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-013",
@@ -367,14 +415,18 @@
       "e0715-f1"
     ],
     "contextTokens": 76,
-    "latencyMs": 0.6255999999998494,
+    "latencyMs": 0.6792000000000371,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-014",
@@ -396,14 +448,18 @@
       "e0683-f1"
     ],
     "contextTokens": 74,
-    "latencyMs": 0.6368999999999687,
+    "latencyMs": 0.8743999999999232,
     "contextHasGoldFact": false,
     "goldRank": null,
     "reciprocalRank": 0,
     "errorType": "stale_fact",
     "answered": true,
     "correct": false,
-    "staleFactError": true
+    "staleFactError": true,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-015",
@@ -419,20 +475,24 @@
       "e0434-f1",
       "e0417-f1",
       "e0882-f1",
-      "e0002-f1",
-      "e0010-f1",
-      "e0026-f1",
-      "e0034-f1"
+      "e0633-f1",
+      "e0696-f1",
+      "e0828-f1",
+      "e0896-f1"
     ],
-    "contextTokens": 72,
-    "latencyMs": 0.64650000000006,
+    "contextTokens": 71,
+    "latencyMs": 0.7280000000000655,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-016",
@@ -454,14 +514,18 @@
       "e0896-f1"
     ],
     "contextTokens": 70,
-    "latencyMs": 0.6324999999999363,
+    "latencyMs": 0.5889999999999418,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-017",
@@ -483,14 +547,18 @@
       "e0683-f1"
     ],
     "contextTokens": 71,
-    "latencyMs": 0.6231000000000222,
+    "latencyMs": 0.5929000000000997,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-018",
@@ -512,14 +580,18 @@
       "e0017-f1"
     ],
     "contextTokens": 70,
-    "latencyMs": 0.618099999999913,
+    "latencyMs": 0.8542999999999665,
     "contextHasGoldFact": false,
     "goldRank": null,
     "reciprocalRank": 0,
     "errorType": "stale_fact",
     "answered": true,
     "correct": false,
-    "staleFactError": true
+    "staleFactError": true,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-019",
@@ -541,14 +613,18 @@
       "e0696-f1"
     ],
     "contextTokens": 69,
-    "latencyMs": 0.6274000000000797,
+    "latencyMs": 0.5589999999999691,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-020",
@@ -570,14 +646,18 @@
       "e0036-f1"
     ],
     "contextTokens": 63,
-    "latencyMs": 0.6380999999998949,
+    "latencyMs": 0.5715000000000146,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-021",
@@ -599,14 +679,18 @@
       "e0173-f1"
     ],
     "contextTokens": 66,
-    "latencyMs": 0.70900000000006,
+    "latencyMs": 0.557399999999916,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-022",
@@ -628,14 +712,18 @@
       "e0173-f1"
     ],
     "contextTokens": 63,
-    "latencyMs": 0.9044999999998709,
+    "latencyMs": 0.5449000000000979,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-023",
@@ -657,14 +745,18 @@
       "e0173-f1"
     ],
     "contextTokens": 66,
-    "latencyMs": 0.724100000000135,
+    "latencyMs": 0.5606000000000222,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-024",
@@ -686,14 +778,18 @@
       "e0058-f1"
     ],
     "contextTokens": 64,
-    "latencyMs": 0.8677000000000135,
+    "latencyMs": 0.5875999999998385,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-025",
@@ -715,14 +811,18 @@
       "e0357-f1"
     ],
     "contextTokens": 48,
-    "latencyMs": 0.6515999999999167,
+    "latencyMs": 0.5799999999999272,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-026",
@@ -744,14 +844,18 @@
       "e0986-f1"
     ],
     "contextTokens": 70,
-    "latencyMs": 0.6330999999997857,
+    "latencyMs": 0.5830000000000837,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-027",
@@ -773,14 +877,18 @@
       "e0049-f1"
     ],
     "contextTokens": 70,
-    "latencyMs": 0.621199999999817,
+    "latencyMs": 0.581000000000131,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-028",
@@ -802,14 +910,18 @@
       "e0036-f1"
     ],
     "contextTokens": 75,
-    "latencyMs": 0.6244000000001506,
+    "latencyMs": 0.5987999999999829,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-029",
@@ -831,14 +943,18 @@
       "e0036-f1"
     ],
     "contextTokens": 74,
-    "latencyMs": 0.6248000000000502,
+    "latencyMs": 0.5958000000000538,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-030",
@@ -860,14 +976,18 @@
       "e0734-f1"
     ],
     "contextTokens": 63,
-    "latencyMs": 0.6276000000000295,
+    "latencyMs": 0.605199999999968,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-031",
@@ -889,14 +1009,18 @@
       "e0734-f1"
     ],
     "contextTokens": 63,
-    "latencyMs": 0.6209000000001197,
+    "latencyMs": 0.6535000000001219,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-032",
@@ -918,14 +1042,18 @@
       "e0222-f1"
     ],
     "contextTokens": 80,
-    "latencyMs": 0.6479999999999109,
+    "latencyMs": 0.6212999999997919,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-033",
@@ -947,14 +1075,18 @@
       "e0036-f1"
     ],
     "contextTokens": 75,
-    "latencyMs": 0.6250999999999749,
+    "latencyMs": 0.5921000000000731,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-034",
@@ -976,14 +1108,18 @@
       "e0049-f1"
     ],
     "contextTokens": 78,
-    "latencyMs": 0.6207999999999174,
+    "latencyMs": 0.7116000000000895,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-035",
@@ -998,21 +1134,25 @@
       "e0901-f1",
       "e0411-f1",
       "e0805-f1",
-      "e0005-f1",
-      "e0014-f1",
-      "e0015-f1",
-      "e0035-f1",
-      "e0047-f1"
+      "e0017-f1",
+      "e0036-f1",
+      "e0049-f1",
+      "e0058-f1",
+      "e0135-f1"
     ],
-    "contextTokens": 70,
-    "latencyMs": 0.6188999999999396,
+    "contextTokens": 66,
+    "latencyMs": 0.5935000000001764,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-current-036",
@@ -1027,21 +1167,25 @@
       "e0411-f1",
       "e0805-f1",
       "e0901-f1",
-      "e0005-f1",
-      "e0014-f1",
-      "e0015-f1",
-      "e0035-f1",
-      "e0047-f1"
+      "e0017-f1",
+      "e0036-f1",
+      "e0049-f1",
+      "e0058-f1",
+      "e0135-f1"
     ],
-    "contextTokens": 71,
-    "latencyMs": 0.6151999999999589,
+    "contextTokens": 67,
+    "latencyMs": 0.5797999999999774,
     "contextHasGoldFact": false,
     "goldRank": null,
     "reciprocalRank": 0,
     "errorType": "stale_fact",
     "answered": true,
     "correct": false,
-    "staleFactError": true
+    "staleFactError": true,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-list-001",
@@ -1075,14 +1219,18 @@
       "e0734-f1"
     ],
     "contextTokens": 66,
-    "latencyMs": 0.6194000000000415,
+    "latencyMs": 0.6139000000000578,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-list-002",
@@ -1112,14 +1260,18 @@
       "e0049-f1"
     ],
     "contextTokens": 59,
-    "latencyMs": 0.6114000000000033,
+    "latencyMs": 0.5563999999999396,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-list-003",
@@ -1151,14 +1303,18 @@
       "e0036-f1"
     ],
     "contextTokens": 64,
-    "latencyMs": 0.6210000000000946,
+    "latencyMs": 0.6025999999999385,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-list-004",
@@ -1192,14 +1348,18 @@
       "e0357-f1"
     ],
     "contextTokens": 46,
-    "latencyMs": 0.5958999999998014,
+    "latencyMs": 0.8505000000000109,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-list-005",
@@ -1229,14 +1389,18 @@
       "e0360-f1"
     ],
     "contextTokens": 61,
-    "latencyMs": 0.6136000000001332,
+    "latencyMs": 0.7235999999998057,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   },
   {
     "questionId": "q-list-006",
@@ -1268,13 +1432,17 @@
       "e0058-f1"
     ],
     "contextTokens": 71,
-    "latencyMs": 0.7955999999999221,
+    "latencyMs": 0.6231999999999971,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
     "errorType": "none",
     "answered": true,
     "correct": true,
-    "staleFactError": false
+    "staleFactError": false,
+    "memoryMode": "state",
+    "fallbackReason": "none",
+    "conflictCount": 0,
+    "lowConfidenceCount": 0
   }
 ]

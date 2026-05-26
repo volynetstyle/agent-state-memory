@@ -5,6 +5,10 @@ import { answerFromRetrievedEvents, answerLatestFromRetrievedEvents } from "../r
 import { buildWorldState } from "../state-memory/worldState.mjs";
 import { answerFromFacts, buildPrompt } from "../state-memory/buildPrompt.mjs";
 import { selectRelevantFacts } from "../state-memory/selectState.mjs";
+import {
+  answerWithDefensiveStateFallback,
+  buildDefensiveWorldState
+} from "../state-memory/defensiveState.mjs";
 import { tokenCount } from "../shared/text.mjs";
 import { writeJson, writeText } from "../shared/io.mjs";
 import { gradeAnswer, summarizeResults } from "./metrics.mjs";
@@ -18,7 +22,7 @@ function mutateExtractedFacts(events, { mode, seed = 1 }) {
   let counter = seed;
 
   for (const event of nextEvents) {
-    for (const fact of event.facts) {
+    for (const fact of [...event.facts]) {
       const slotKey = `${fact.subject}.${fact.predicate}`;
       counter += 1;
 
@@ -29,6 +33,22 @@ function mutateExtractedFacts(events, { mode, seed = 1 }) {
 
       if (mode === "wrong_slot" && fact.mutable && counter % 7 === 0) {
         fact.subject = `${fact.subject} archive`;
+        continue;
+      }
+
+      if (mode === "low_confidence_updates" && fact.mutable && event.text.startsWith("Final update")) {
+        fact.confidence = 0.6;
+        fact.sourceReliability = 0.6;
+        continue;
+      }
+
+      if (mode === "conflicting_updates" && fact.mutable && event.text.startsWith("Final update")) {
+        event.facts.push({
+          ...fact,
+          object: `${fact.object} disputed`,
+          confidence: 0.92,
+          sourceReliability: 0.85
+        });
         continue;
       }
 
@@ -212,6 +232,90 @@ function evaluateStateMemory(eventsForExtractor, questions, options) {
   });
 }
 
+function summarizeDefensiveResults(results, worldState) {
+  const summary = summarizeResults(results);
+  const fallbackCount = results.filter((result) => result.memoryMode === "temporal_rag_fallback").length;
+  const conflictCount = results.filter((result) => result.conflictCount > 0).length;
+  const lowConfidenceCount = results.filter((result) => result.lowConfidenceCount > 0).length;
+
+  return {
+    ...summary,
+    fallbackRate: results.length === 0 ? 0 : fallbackCount / results.length,
+    conflictQuestionRate: results.length === 0 ? 0 : conflictCount / results.length,
+    lowConfidenceQuestionRate: results.length === 0 ? 0 : lowConfidenceCount / results.length,
+    rejectedLowConfidenceFacts: worldState.diagnostics.rejectedLowConfidenceFacts,
+    storedConflicts: worldState.diagnostics.conflicts,
+    softReplacements: worldState.diagnostics.softReplacements
+  };
+}
+
+function evaluateDefensiveStateMemory(rawEvents, eventsForExtractor, questions, options) {
+  const worldState = buildDefensiveWorldState(eventsForExtractor, options.defensiveState);
+  const results = questions.map((question) => {
+    const start = performance.now();
+    const decision = answerWithDefensiveStateFallback({
+      worldState,
+      events: rawEvents,
+      question,
+      stateLimit: options.stateLimit,
+      ragTopK: options.ragTopK
+    });
+    const latencyMs = performance.now() - start;
+    const contextMetrics =
+      decision.mode === "temporal_rag_fallback"
+        ? contextMetricsFromEvents(question, decision.context)
+        : contextMetricsFromFacts(question, decision.context);
+    const contextTokens =
+      decision.mode === "temporal_rag_fallback"
+        ? tokenCount(decision.context.map((event) => event.text).join("\n"))
+        : tokenCount(buildPrompt(question, decision.context));
+
+    return {
+      ...decorateResult({
+        question,
+        answer: decision.answer,
+        contextMetrics,
+        contextTokens,
+        latencyMs,
+        contextIds: decision.contextIds
+      }),
+      memoryMode: decision.mode,
+      fallbackReason: decision.fallbackReason,
+      conflictCount: decision.conflictCount,
+      lowConfidenceCount: decision.lowConfidenceCount
+    };
+  });
+
+  return {
+    results,
+    summary: summarizeDefensiveResults(results, worldState),
+    diagnostics: worldState.diagnostics,
+    conflicts: worldState.conflicts,
+    lowConfidenceFacts: worldState.lowConfidenceFacts,
+    versions: worldState.versions
+  };
+}
+
+function compactDefensiveDiagnostics(defensive, limit = 20) {
+  return {
+    diagnostics: defensive.diagnostics,
+    conflictExamples: defensive.conflicts.slice(0, limit),
+    lowConfidenceExamples: defensive.lowConfidenceFacts.slice(0, limit).map((fact) => ({
+      id: fact.id,
+      subject: fact.subject,
+      predicate: fact.predicate,
+      object: fact.object,
+      confidence: fact.confidence,
+      sourceReliability: fact.sourceReliability,
+      sourceEventId: fact.sourceEventId,
+      rejectionReason: fact.rejectionReason
+    })),
+    versionSlots: Object.fromEntries(
+      Object.entries(defensive.versions).map(([slot, versions]) => [slot, versions.length])
+    )
+  };
+}
+
 function rounded(value) {
   return Number(value).toFixed(4);
 }
@@ -222,25 +326,38 @@ function buildMarkdown(summary) {
       [
         ["Classic RAG", scenario.classicRag],
         ["RAG + recency/latest", scenario.recencyRag],
-        ["State Memory", scenario.stateMemory]
+        ["State Memory", scenario.stateMemory],
+        ["Defensive State + fallback", scenario.defensiveStateMemory]
       ]
         .map(
           ([name, metrics]) =>
-            `| ${scenario.name} | ${name} | ${rounded(metrics.exactMatchAccuracy)} | ${rounded(metrics.currentFactAccuracy)} | ${rounded(metrics.staleFactErrorRate)} | ${rounded(metrics.contextHitRate)} | ${rounded(metrics.meanReciprocalRank)} |`
+            `| ${scenario.name} | ${name} | ${rounded(metrics.exactMatchAccuracy)} | ${rounded(metrics.currentFactAccuracy)} | ${rounded(metrics.staleFactErrorRate)} | ${rounded(metrics.contextHitRate)} | ${rounded(metrics.meanReciprocalRank)} | ${rounded(metrics.fallbackRate ?? 0)} |`
         )
         .join("\n")
     )
+    .join("\n");
+  const diagnosticRows = summary.scenarios
+    .map((scenario) => {
+      const metrics = scenario.defensiveStateMemory;
+      return `| ${scenario.name} | ${metrics.rejectedLowConfidenceFacts} | ${metrics.storedConflicts} | ${metrics.softReplacements} | ${rounded(metrics.lowConfidenceQuestionRate ?? 0)} | ${rounded(metrics.conflictQuestionRate ?? 0)} |`;
+    })
     .join("\n");
 
   return `# Stress Experiment
 
 This benchmark intentionally weakens the idealized assumptions of the base experiment.
 
-| Scenario | System | Exact Match | Current Fact Accuracy | Stale Error | Context Hit | MRR |
-| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Scenario | System | Exact Match | Current Fact Accuracy | Stale Error | Context Hit | MRR | Fallback Rate |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 ${rows}
 
-Interpretation: the perfect State Memory result depends on clean fact extraction. When updates are missing or facts are assigned to the wrong slot, State Memory degrades. A stronger RAG baseline with recency/latest-wins can reduce stale errors, so future work should compare against temporal-aware RAG variants instead of only a naive RAG baseline.
+Defensive State diagnostics:
+
+| Scenario | Rejected Low-Confidence Facts | Stored Conflicts | Soft Replacements | Low-Confidence Question Rate | Conflict Question Rate |
+| --- | ---: | ---: | ---: | ---: | ---: |
+${diagnosticRows}
+
+Interpretation: the perfect State Memory result depends on clean fact extraction. When updates are missing or facts are assigned to the wrong slot, State Memory degrades. Defensive State Memory adds a confidence threshold, conflict tracking, versioning and a Temporal RAG fallback for uncertain slots. It helps when uncertainty is visible, but it cannot recover an update that the extractor completely missed unless raw events are rechecked by a reconciliation step.
 `;
 }
 
@@ -249,6 +366,12 @@ export async function runStressExperiment({
   seed = 42,
   ragTopK = 12,
   stateLimit = 8,
+  defensiveState = {
+    confidenceThreshold: 0.75,
+    replacementMargin: 0.05,
+    conflictWindowMs: 2 * 60 * 1000,
+    versionLimit: 4
+  },
   resultsDir = "results/stress"
 } = {}) {
   const dataset = buildDataset({ eventCount, seed });
@@ -269,6 +392,16 @@ export async function runStressExperiment({
       stateEvents: mutateExtractedFacts(dataset.events, { mode: "wrong_slot", seed })
     },
     {
+      name: "low_confidence_final_updates",
+      ragEvents: dataset.events,
+      stateEvents: mutateExtractedFacts(dataset.events, { mode: "low_confidence_updates", seed })
+    },
+    {
+      name: "near_simultaneous_conflicts",
+      ragEvents: dataset.events,
+      stateEvents: mutateExtractedFacts(dataset.events, { mode: "conflicting_updates", seed })
+    },
+    {
       name: "ambiguous_similar_entities",
       ragEvents: addAmbiguousNoise(dataset.events, dataset.questions),
       stateEvents: mutateExtractedFacts(dataset.events, { mode: "ambiguous_entities", seed })
@@ -285,21 +418,36 @@ export async function runStressExperiment({
     const stateResults = evaluateStateMemory(scenario.stateEvents, dataset.questions, {
       stateLimit
     });
+    const defensive = evaluateDefensiveStateMemory(
+      scenario.ragEvents,
+      scenario.stateEvents,
+      dataset.questions,
+      {
+        ragTopK,
+        stateLimit,
+        defensiveState
+      }
+    );
 
     return {
       name: scenario.name,
       classicRag: summarizeResults(classicRagResults),
       recencyRag: summarizeResults(recencyRagResults),
       stateMemory: summarizeResults(stateResults),
+      defensiveStateMemory: defensive.summary,
       resultFiles: {
         classicRag: `${scenario.name}-classic-rag.json`,
         recencyRag: `${scenario.name}-recency-rag.json`,
-        stateMemory: `${scenario.name}-state-memory.json`
+        stateMemory: `${scenario.name}-state-memory.json`,
+        defensiveStateMemory: `${scenario.name}-defensive-state-memory.json`,
+        defensiveDiagnostics: `${scenario.name}-defensive-diagnostics.json`
       },
       rawResults: {
         classicRagResults,
         recencyRagResults,
-        stateResults
+        stateResults,
+        defensiveStateResults: defensive.results,
+        defensiveDiagnostics: compactDefensiveDiagnostics(defensive)
       }
     };
   });
@@ -308,6 +456,14 @@ export async function runStressExperiment({
     await writeJson(`${resultsDir}/${scenario.resultFiles.classicRag}`, scenario.rawResults.classicRagResults);
     await writeJson(`${resultsDir}/${scenario.resultFiles.recencyRag}`, scenario.rawResults.recencyRagResults);
     await writeJson(`${resultsDir}/${scenario.resultFiles.stateMemory}`, scenario.rawResults.stateResults);
+    await writeJson(
+      `${resultsDir}/${scenario.resultFiles.defensiveStateMemory}`,
+      scenario.rawResults.defensiveStateResults
+    );
+    await writeJson(
+      `${resultsDir}/${scenario.resultFiles.defensiveDiagnostics}`,
+      scenario.rawResults.defensiveDiagnostics
+    );
     delete scenario.rawResults;
   }
 
@@ -318,7 +474,8 @@ export async function runStressExperiment({
     },
     configuration: {
       ragTopK,
-      stateLimit
+      stateLimit,
+      defensiveState
     },
     scenarios: evaluatedScenarios
   };

@@ -34,22 +34,45 @@ Dataset: 1000 events, 100 document pages, 102 questions.
 
 ## Stress Benchmark
 
-| Scenario | System | Exact Match | Current Fact Accuracy | Stale Error | Context Hit |
-| --- | --- | ---: | ---: | ---: | ---: |
-| clean_extraction | Classic RAG | 0.2143 | 0.1667 | 0.7143 | 0.9286 |
-| clean_extraction | RAG + recency/latest | 0.9286 | 1.0000 | 0.0000 | 0.9286 |
-| clean_extraction | State Memory | 1.0000 | 1.0000 | 0.0000 | 1.0000 |
-| missing_final_updates | Classic RAG | 0.2143 | 0.1667 | 0.7143 | 0.9286 |
-| missing_final_updates | RAG + recency/latest | 0.9286 | 1.0000 | 0.0000 | 0.9286 |
-| missing_final_updates | State Memory | 0.1429 | 0.0000 | 0.8571 | 0.1429 |
-| wrong_extraction_slot | Classic RAG | 0.2143 | 0.1667 | 0.7143 | 0.9286 |
-| wrong_extraction_slot | RAG + recency/latest | 0.9286 | 1.0000 | 0.0000 | 0.9286 |
-| wrong_extraction_slot | State Memory | 0.9286 | 0.9167 | 0.0714 | 0.9286 |
-| ambiguous_similar_entities | Classic RAG | 0.2143 | 0.1667 | 0.7143 | 0.9286 |
-| ambiguous_similar_entities | RAG + recency/latest | 0.9286 | 1.0000 | 0.0000 | 0.9286 |
-| ambiguous_similar_entities | State Memory | 1.0000 | 1.0000 | 0.0000 | 1.0000 |
+| Scenario | System | Exact Match | Current Fact Accuracy | Stale Error | Context Hit | Fallback Rate |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| clean_extraction | Classic RAG | 0.2143 | 0.1667 | 0.7143 | 0.9286 | 0.0000 |
+| clean_extraction | RAG + recency/latest | 0.9286 | 1.0000 | 0.0000 | 0.9286 | 0.0000 |
+| clean_extraction | State Memory | 1.0000 | 1.0000 | 0.0000 | 1.0000 | 0.0000 |
+| clean_extraction | Defensive State + fallback | 1.0000 | 1.0000 | 0.0000 | 1.0000 | 0.0000 |
+| missing_final_updates | Classic RAG | 0.2143 | 0.1667 | 0.7143 | 0.9286 | 0.0000 |
+| missing_final_updates | RAG + recency/latest | 0.9286 | 1.0000 | 0.0000 | 0.9286 | 0.0000 |
+| missing_final_updates | State Memory | 0.1429 | 0.0000 | 0.8571 | 0.1429 | 0.0000 |
+| missing_final_updates | Defensive State + fallback | 0.1429 | 0.0000 | 0.8571 | 0.1429 | 0.0000 |
+| wrong_extraction_slot | Classic RAG | 0.2143 | 0.1667 | 0.7143 | 0.9286 | 0.0000 |
+| wrong_extraction_slot | RAG + recency/latest | 0.9286 | 1.0000 | 0.0000 | 0.9286 | 0.0000 |
+| wrong_extraction_slot | State Memory | 0.9286 | 0.9167 | 0.0714 | 0.9286 | 0.0000 |
+| wrong_extraction_slot | Defensive State + fallback | 0.9286 | 0.9167 | 0.0714 | 0.9286 | 0.0000 |
+| low_confidence_final_updates | Classic RAG | 0.2143 | 0.1667 | 0.7143 | 0.9286 | 0.0000 |
+| low_confidence_final_updates | RAG + recency/latest | 0.9286 | 1.0000 | 0.0000 | 0.9286 | 0.0000 |
+| low_confidence_final_updates | State Memory | 1.0000 | 1.0000 | 0.0000 | 1.0000 | 0.0000 |
+| low_confidence_final_updates | Defensive State + fallback | 1.0000 | 1.0000 | 0.0000 | 1.0000 | 0.8571 |
+| near_simultaneous_conflicts | Classic RAG | 0.2143 | 0.1667 | 0.7143 | 0.9286 | 0.0000 |
+| near_simultaneous_conflicts | RAG + recency/latest | 0.9286 | 1.0000 | 0.0000 | 0.9286 | 0.0000 |
+| near_simultaneous_conflicts | State Memory | 0.1429 | 0.0000 | 0.0000 | 0.1429 | 0.0000 |
+| near_simultaneous_conflicts | Defensive State + fallback | 1.0000 | 1.0000 | 0.0000 | 1.0000 | 0.8571 |
+| ambiguous_similar_entities | Classic RAG | 0.2143 | 0.1667 | 0.7143 | 0.9286 | 0.0000 |
+| ambiguous_similar_entities | RAG + recency/latest | 0.9286 | 1.0000 | 0.0000 | 0.9286 | 0.0000 |
+| ambiguous_similar_entities | State Memory | 1.0000 | 1.0000 | 0.0000 | 1.0000 | 0.0000 |
+| ambiguous_similar_entities | Defensive State + fallback | 1.0000 | 1.0000 | 0.0000 | 1.0000 | 0.0000 |
 
-The stress benchmark intentionally weakens ideal assumptions: missing updates, wrong extraction slots and ambiguous similar entities.
+Defensive State diagnostics:
+
+| Scenario | Rejected Low-Confidence Facts | Stored Conflicts | Soft Replacements | Low-Confidence Question Rate | Conflict Question Rate |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| clean_extraction | 862 | 0 | 72 | 0.0000 | 0.0000 |
+| missing_final_updates | 862 | 0 | 36 | 0.0000 | 0.0000 |
+| wrong_extraction_slot | 862 | 0 | 59 | 0.0000 | 0.0000 |
+| low_confidence_final_updates | 898 | 0 | 36 | 0.8571 | 0.0000 |
+| near_simultaneous_conflicts | 862 | 36 | 72 | 0.0000 | 0.8571 |
+| ambiguous_similar_entities | 887 | 0 | 72 | 0.0000 | 0.0000 |
+
+The stress benchmark intentionally weakens ideal assumptions: missing updates, wrong extraction slots, low-confidence updates, near-simultaneous conflicts and ambiguous similar entities.
 
 ## Scalability Benchmark
 

@@ -1,0 +1,229 @@
+{
+  "diagnostics": {
+    "acceptedFacts": 138,
+    "rejectedLowConfidenceFacts": 887,
+    "conflicts": 0,
+    "softReplacements": 72
+  },
+  "conflictExamples": [],
+  "lowConfidenceExamples": [
+    {
+      "id": "e0001-f1",
+      "subject": "Methodology section",
+      "predicate": "summary",
+      "object": "not part of the scored questions",
+      "confidence": 0.6,
+      "sourceEventId": "e0001",
+      "rejectionReason": "below_confidence_threshold"
+    },
+    {
+      "id": "e0002-f1",
+      "subject": "Notebook",
+      "predicate": "status",
+      "object": "included for retrieval noise",
+      "confidence": 0.6,
+      "sourceEventId": "e0002",
+      "rejectionReason": "below_confidence_threshold"
+    },
+    {
+      "id": "e0003-f1",
+      "subject": "Chart script",
+      "predicate": "note",
+      "object": "included for retrieval noise",
+      "confidence": 0.6,
+      "sourceEventId": "e0003",
+      "rejectionReason": "below_confidence_threshold"
+    },
+    {
+      "id": "e0005-f1",
+      "subject": "Experiment notes",
+      "predicate": "focus",
+      "object": "kept short for the deadline",
+      "confidence": 0.6,
+      "sourceEventId": "e0005",
+      "rejectionReason": "below_confidence_threshold"
+    },
+    {
+      "id": "e0006-f1",
+      "subject": "Methodology section",
+      "predicate": "focus",
+      "object": "included for retrieval noise",
+      "confidence": 0.6,
+      "sourceEventId": "e0006",
+      "rejectionReason": "below_confidence_threshold"
+    },
+    {
+      "id": "e0007-f1",
+      "subject": "Related work section",
+      "predicate": "focus",
+      "object": "used only as background context",
+      "confidence": 0.6,
+      "sourceEventId": "e0007",
+      "rejectionReason": "below_confidence_threshold"
+    },
+    {
+      "id": "e0008-f1",
+      "subject": "Chart script",
+      "predicate": "summary",
+      "object": "included for retrieval noise",
+      "confidence": 0.6,
+      "sourceEventId": "e0008",
+      "rejectionReason": "below_confidence_threshold"
+    },
+    {
+      "id": "e0010-f1",
+      "subject": "README",
+      "predicate": "status",
+      "object": "not part of the scored questions",
+      "confidence": 0.6,
+      "sourceEventId": "e0010",
+      "rejectionReason": "below_confidence_threshold"
+    },
+    {
+      "id": "e0011-f1",
+      "subject": "Limitations section",
+      "predicate": "focus",
+      "object": "not part of the scored questions",
+      "confidence": 0.6,
+      "sourceEventId": "e0011",
+      "rejectionReason": "below_confidence_threshold"
+    },
+    {
+      "id": "e0012-f1",
+      "subject": "Chart script",
+      "predicate": "focus",
+      "object": "kept short for the deadline",
+      "confidence": 0.6,
+      "sourceEventId": "e0012",
+      "rejectionReason": "below_confidence_threshold"
+    },
+    {
+      "id": "e0013-f2",
+      "subject": "RAG baseline legacy",
+      "predicate": "chunk_unit",
+      "object": "paragraph chunks legacy",
+      "confidence": 0.7,
+      "sourceEventId": "e0013",
+      "rejectionReason": "below_confidence_threshold"
+    },
+    {
+      "id": "e0014-f1",
+      "subject": "Experiment notes",
+      "predicate": "note",
+      "object": "used only as background context",
+      "confidence": 0.6,
+      "sourceEventId": "e0014",
+      "rejectionReason": "below_confidence_threshold"
+    },
+    {
+      "id": "e0015-f1",
+      "subject": "Experiment notes",
+      "predicate": "focus",
+      "object": "ready for coursework text",
+      "confidence": 0.6,
+      "sourceEventId": "e0015",
+      "rejectionReason": "below_confidence_threshold"
+    },
+    {
+      "id": "e0018-f1",
+      "subject": "Notebook",
+      "predicate": "summary",
+      "object": "included for retrieval noise",
+      "confidence": 0.6,
+      "sourceEventId": "e0018",
+      "rejectionReason": "below_confidence_threshold"
+    },
+    {
+      "id": "e0019-f1",
+      "subject": "Notebook",
+      "predicate": "note",
+      "object": "not part of the scored questions",
+      "confidence": 0.6,
+      "sourceEventId": "e0019",
+      "rejectionReason": "below_confidence_threshold"
+    },
+    {
+      "id": "e0020-f1",
+      "subject": "Limitations section",
+      "predicate": "focus",
+      "object": "ready for coursework text",
+      "confidence": 0.6,
+      "sourceEventId": "e0020",
+      "rejectionReason": "below_confidence_threshold"
+    },
+    {
+      "id": "e0021-f1",
+      "subject": "Limitations section",
+      "predicate": "focus",
+      "object": "kept short for the deadline",
+      "confidence": 0.6,
+      "sourceEventId": "e0021",
+      "rejectionReason": "below_confidence_threshold"
+    },
+    {
+      "id": "e0022-f1",
+      "subject": "Related work section",
+      "predicate": "note",
+      "object": "not part of the scored questions",
+      "confidence": 0.6,
+      "sourceEventId": "e0022",
+      "rejectionReason": "below_confidence_threshold"
+    },
+    {
+      "id": "e0023-f1",
+      "subject": "README",
+      "predicate": "summary",
+      "object": "used only as background context",
+      "confidence": 0.6,
+      "sourceEventId": "e0023",
+      "rejectionReason": "below_confidence_threshold"
+    },
+    {
+      "id": "e0024-f1",
+      "subject": "Limitations section",
+      "predicate": "focus",
+      "object": "kept short for the deadline",
+      "confidence": 0.6,
+      "sourceEventId": "e0024",
+      "rejectionReason": "below_confidence_threshold"
+    }
+  ],
+  "versionSlots": {
+    "synthetic dataset.size": 2,
+    "fact extractor.confidence_policy": 2,
+    "rag baseline.top_k": 2,
+    "world state.obsolete_handling": 2,
+    "reflex.storage": 2,
+    "experiment runner.execution": 2,
+    "experiment runner.reproducibility": 2,
+    "state updater.mutable_rule": 2,
+    "state memory coursework.topic": 2,
+    "state selector.limit": 2,
+    "state updater.old_fact_status": 2,
+    "state memory coursework.deadline": 2,
+    "fact extractor.method": 2,
+    "answer evaluator.grading": 2,
+    "reflex.runtime": 2,
+    "answer evaluator.unknown_policy": 2,
+    "rag baseline.retriever": 2,
+    "state selector.ranking": 2,
+    "state memory agent.memory_strategy": 2,
+    "coursework repository.data_directory": 2,
+    "prompt builder.context_source": 2,
+    "prompt builder.style": 2,
+    "rag baseline.chunk_unit": 2,
+    "synthetic dataset.contains": 2,
+    "reflex.selector_strategy": 2,
+    "world state.serialization": 2,
+    "state memory coursework.implementation_language": 2,
+    "long context agent.failure_mode": 2,
+    "evaluation suite.latency_unit": 2,
+    "evaluation suite.primary_metric": 2,
+    "metrics report.output": 2,
+    "memory benchmark.hypothesis": 2,
+    "state memory agent.answer_mode": 2,
+    "memory benchmark.comparison": 2,
+    "event store.format": 2,
+    "coursework repository.result_directory": 2
+  }
+}

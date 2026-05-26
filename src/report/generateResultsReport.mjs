@@ -86,24 +86,39 @@ function stressBenchmark(summary) {
       [
         ["Classic RAG", scenario.classicRag],
         ["RAG + recency/latest", scenario.recencyRag],
-        ["State Memory", scenario.stateMemory]
+        ["State Memory", scenario.stateMemory],
+        ["Defensive State + fallback", scenario.defensiveStateMemory]
       ]
+        .filter(([, metrics]) => metrics)
         .map(
           ([system, metrics]) =>
-            `| ${scenario.name} | ${system} | ${rounded(metrics.exactMatchAccuracy)} | ${rounded(metrics.currentFactAccuracy)} | ${rounded(metrics.staleFactErrorRate)} | ${rounded(metrics.contextHitRate)} |`
+            `| ${scenario.name} | ${system} | ${rounded(metrics.exactMatchAccuracy)} | ${rounded(metrics.currentFactAccuracy)} | ${rounded(metrics.staleFactErrorRate)} | ${rounded(metrics.contextHitRate)} | ${rounded(metrics.fallbackRate ?? 0)} |`
         )
         .join("\n")
     )
+    .join("\n");
+  const diagnosticRows = summary.scenarios
+    .filter((scenario) => scenario.defensiveStateMemory)
+    .map((scenario) => {
+      const metrics = scenario.defensiveStateMemory;
+      return `| ${scenario.name} | ${metrics.rejectedLowConfidenceFacts} | ${metrics.storedConflicts} | ${metrics.softReplacements} | ${rounded(metrics.lowConfidenceQuestionRate ?? 0)} | ${rounded(metrics.conflictQuestionRate ?? 0)} |`;
+    })
     .join("\n");
 
   return section(
     "Stress Benchmark",
     `
-| Scenario | System | Exact Match | Current Fact Accuracy | Stale Error | Context Hit |
-| --- | --- | ---: | ---: | ---: | ---: |
+| Scenario | System | Exact Match | Current Fact Accuracy | Stale Error | Context Hit | Fallback Rate |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
 ${rows}
 
-The stress benchmark intentionally weakens ideal assumptions: missing updates, wrong extraction slots and ambiguous similar entities.
+Defensive State diagnostics:
+
+| Scenario | Rejected Low-Confidence Facts | Stored Conflicts | Soft Replacements | Low-Confidence Question Rate | Conflict Question Rate |
+| --- | ---: | ---: | ---: | ---: | ---: |
+${diagnosticRows}
+
+The stress benchmark intentionally weakens ideal assumptions: missing updates, wrong extraction slots, low-confidence updates, near-simultaneous conflicts and ambiguous similar entities.
 `
   );
 }
