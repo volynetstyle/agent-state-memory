@@ -10,8 +10,28 @@ function sameFact(a, b) {
   return sameSlot(a, b) && a.object === b.object;
 }
 
+function cloneFacts(facts) {
+  const clones = [];
+
+  for (const fact of facts) {
+    clones.push({ ...fact });
+  }
+
+  return clones;
+}
+
+function activeDuplicateExists(facts, fact) {
+  for (const oldFact of facts) {
+    if (oldFact.status === "active" && sameFact(oldFact, fact)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 export function applyFact(state, fact) {
-  const facts = state.facts.map((oldFact) => ({ ...oldFact }));
+  const facts = cloneFacts(state.facts);
 
   if (fact.mutable) {
     for (const oldFact of facts) {
@@ -26,9 +46,7 @@ export function applyFact(state, fact) {
     }
   }
 
-  const duplicateActive = facts.some(
-    (oldFact) => oldFact.status === "active" && sameFact(oldFact, fact)
-  );
+  const duplicateActive = activeDuplicateExists(facts, fact);
 
   if (!duplicateActive) {
     facts.push({ ...fact });

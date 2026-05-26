@@ -1,52 +1,72 @@
 import { unique } from "../shared/text.mjs";
 
-export function answerFromRetrievedEvents(question, retrievedEvents) {
-  const matchingFacts = retrievedEvents.flatMap((event) =>
-    event.facts
-      .filter((fact) => fact.subject === question.subject && fact.predicate === question.predicate)
-      .map((fact) => fact.object)
-  );
+function factMatchesQuestionSlot(fact, question) {
+  return fact.subject === question.subject && fact.predicate === question.predicate;
+}
 
+function slotValuesFromEvents(events, question) {
+  const values = [];
+
+  for (const event of events) {
+    for (const fact of event.facts ?? []) {
+      if (factMatchesQuestionSlot(fact, question)) {
+        values.push(fact.object);
+      }
+    }
+  }
+
+  return values;
+}
+
+function eventsContainingQuestionSlot(events, question) {
+  const matchingEvents = [];
+
+  for (const event of events) {
+    const facts = event.facts ?? [];
+
+    for (const fact of facts) {
+      if (factMatchesQuestionSlot(fact, question)) {
+        matchingEvents.push(event);
+        break;
+      }
+    }
+  }
+
+  return matchingEvents;
+}
+
+function compareNewestEventsFirst(left, right) {
+  return new Date(right.timestamp).getTime() - new Date(left.timestamp).getTime();
+}
+
+function answerFromValues(question, values) {
   if (Array.isArray(question.expected)) {
-    const values = unique(matchingFacts);
+    const uniqueValues = unique(values);
+
     return {
-      answer: values.length > 0 ? values.join(", ") : "unknown",
-      values
+      answer: uniqueValues.length > 0 ? uniqueValues.join(", ") : "unknown",
+      values: uniqueValues
     };
   }
 
-  const value = matchingFacts[0];
+  const value = values[0];
+
   return {
     answer: value ?? "unknown",
     values: value ? [value] : []
   };
 }
 
+export function answerFromRetrievedEvents(question, retrievedEvents) {
+  const values = slotValuesFromEvents(retrievedEvents, question);
+  return answerFromValues(question, values);
+}
+
 export function answerLatestFromRetrievedEvents(question, retrievedEvents) {
-  const matching = retrievedEvents
-    .filter((event) =>
-      event.facts.some(
-        (fact) => fact.subject === question.subject && fact.predicate === question.predicate
-      )
-    )
-    .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
-    .flatMap((event) =>
-      event.facts
-        .filter((fact) => fact.subject === question.subject && fact.predicate === question.predicate)
-        .map((fact) => fact.object)
-    );
+  const newestSlotEvents = eventsContainingQuestionSlot(retrievedEvents, question);
 
-  if (Array.isArray(question.expected)) {
-    const values = unique(matching);
-    return {
-      answer: values.length > 0 ? values.join(", ") : "unknown",
-      values
-    };
-  }
+  newestSlotEvents.sort(compareNewestEventsFirst);
 
-  const value = matching[0];
-  return {
-    answer: value ?? "unknown",
-    values: value ? [value] : []
-  };
+  const values = slotValuesFromEvents(newestSlotEvents, question);
+  return answerFromValues(question, values);
 }

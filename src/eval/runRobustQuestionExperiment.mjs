@@ -238,6 +238,66 @@ function slotId(question) {
   return `${question.subject}.${question.predicate}`;
 }
 
+function baseQuestionsBySlot(baseQuestions) {
+  const bySlot = new Map();
+
+  for (const question of baseQuestions) {
+    bySlot.set(slotId(question), question);
+  }
+
+  return bySlot;
+}
+
+function selectedCourseworkQuestions(baseQuestions, selectedIds) {
+  const bySlot = baseQuestionsBySlot(baseQuestions);
+  const selected = [];
+
+  for (const id of selectedIds) {
+    const question = bySlot.get(id);
+
+    if (question) {
+      selected.push(question);
+    }
+  }
+
+  return selected;
+}
+
+function domainQuestionWithTemplate(question) {
+  return {
+    ...question,
+    question: QUESTION_TEMPLATES[slotId(question)].paraphrase
+  };
+}
+
+function domainQuestionsWithTemplates(domainQuestions) {
+  const questions = [];
+
+  for (const question of domainQuestions) {
+    questions.push(domainQuestionWithTemplate(question));
+  }
+
+  return questions;
+}
+
+function robustQuestionVariants(question, variants) {
+  const templates = QUESTION_TEMPLATES[slotId(question)];
+  const questions = [];
+
+  for (const variant of variants) {
+    questions.push({
+      ...question,
+      id: `robust-${question.id}-${variant}`,
+      question: templates[variant],
+      questionType: variant === "multi_step" ? "temporal_multi_step" : variant,
+      domain: question.domain ?? "coursework_memory",
+      variant
+    });
+  }
+
+  return questions;
+}
+
 function buildRobustQuestions(baseQuestions, domainQuestions) {
   const selectedIds = [
     "Reflex.runtime",
@@ -249,25 +309,24 @@ function buildRobustQuestions(baseQuestions, domainQuestions) {
     "State Memory coursework.requires",
     "Metrics.include"
   ];
-  const bySlot = new Map(baseQuestions.map((question) => [slotId(question), question]));
-  const selected = selectedIds.map((id) => bySlot.get(id)).filter(Boolean);
-  const domains = domainQuestions.map((question) => ({
-    ...question,
-    question: QUESTION_TEMPLATES[slotId(question)].paraphrase
-  }));
+  const selected = selectedCourseworkQuestions(baseQuestions, selectedIds);
+  const domains = domainQuestionsWithTemplates(domainQuestions);
   const variants = ["paraphrase", "indirect", "noisy", "multi_step"];
+  const robustQuestions = [];
 
-  return [...selected, ...domains].flatMap((question) => {
-    const templates = QUESTION_TEMPLATES[slotId(question)];
-    return variants.map((variant) => ({
-      ...question,
-      id: `robust-${question.id}-${variant}`,
-      question: templates[variant],
-      questionType: variant === "multi_step" ? "temporal_multi_step" : variant,
-      domain: question.domain ?? "coursework_memory",
-      variant
-    }));
-  });
+  for (const question of selected) {
+    for (const robustQuestion of robustQuestionVariants(question, variants)) {
+      robustQuestions.push(robustQuestion);
+    }
+  }
+
+  for (const question of domains) {
+    for (const robustQuestion of robustQuestionVariants(question, variants)) {
+      robustQuestions.push(robustQuestion);
+    }
+  }
+
+  return robustQuestions;
 }
 
 function candidateSlots(events) {
@@ -312,25 +371,57 @@ function scoreSlot(questionText, slot) {
   return score;
 }
 
+function createSlotCandidate(questionText, slot) {
+  return {
+    slot,
+    score: scoreSlot(questionText, slot)
+  };
+}
+
+function compareSlotCandidates(left, right) {
+  return right.score - left.score;
+}
+
+function rankedSlotCandidates(questionText, slots) {
+  const candidates = [];
+
+  for (const slot of slots) {
+    candidates.push(createSlotCandidate(questionText, slot));
+  }
+
+  candidates.sort(compareSlotCandidates);
+  return candidates;
+}
+
+function topSlotCandidates(candidates, limit) {
+  const selected = [];
+
+  for (const candidate of candidates) {
+    if (selected.length >= limit) break;
+    selected.push(candidate);
+  }
+
+  return selected;
+}
+
 function inferSlot(questionText, slots, threshold = 5) {
-  const ranked = slots
-    .map((slot) => ({ slot, score: scoreSlot(questionText, slot) }))
-    .sort((a, b) => b.score - a.score);
-  const best = ranked[0];
+  const rankedCandidates = rankedSlotCandidates(questionText, slots);
+  const best = rankedCandidates[0];
+  const candidates = topSlotCandidates(rankedCandidates, 3);
 
   if (!best || best.score < threshold) {
     return {
       subject: null,
       predicate: null,
       score: best?.score ?? 0,
-      candidates: ranked.slice(0, 3)
+      candidates
     };
   }
 
   return {
     ...best.slot,
     score: best.score,
-    candidates: ranked.slice(0, 3)
+    candidates
   };
 }
 

@@ -1,20 +1,39 @@
-import { overlapScore, tokenize } from "../shared/text.mjs";
+import { createLexicalQuery, scoreTextRelevance, topCandidateItems } from "../shared/relevance.mjs";
+
+function createTextItemCandidate(item, index, query) {
+  const relevance = scoreTextRelevance(query, item.text);
+
+  return {
+    item,
+    index,
+    score: relevance.score
+  };
+}
+
+function relevantTextItemCandidates(items, query) {
+  const candidates = [];
+
+  for (let index = 0; index < items.length; index += 1) {
+    const candidate = createTextItemCandidate(items[index], index, query);
+
+    if (candidate.score > 0) {
+      candidates.push(candidate);
+    }
+  }
+
+  return candidates;
+}
+
+function compareTextItemCandidates(left, right) {
+  return right.score - left.score || left.index - right.index;
+}
 
 export function retrieveTextItems(items, question, { topK = 8 } = {}) {
-  const queryTokens = new Set(tokenize(question));
+  const query = createLexicalQuery(question);
+  const candidates = relevantTextItemCandidates(items, query);
 
-  return items
-    .map((item, index) => {
-      const textTokens = tokenize(item.text);
-      const exactMatches = textTokens.filter((token) => queryTokens.has(token)).length;
-      const score = overlapScore(question, item.text) + exactMatches * 0.1;
-
-      return { item, index, score };
-    })
-    .filter((entry) => entry.score > 0)
-    .sort((a, b) => b.score - a.score || a.index - b.index)
-    .slice(0, topK)
-    .map((entry) => entry.item);
+  candidates.sort(compareTextItemCandidates);
+  return topCandidateItems(candidates, topK, (candidate) => candidate.item);
 }
 
 export function answerFromDocumentChunks(question, chunks) {

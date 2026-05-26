@@ -1,6 +1,51 @@
 import { normalize, tokenize } from "../shared/text.mjs";
 
-function scoreFact(fact, question) {
+const ACTIVE_STATUS = "active";
+
+class FactSelection {
+  constructor() {
+    this.factsById = new Map();
+  }
+
+  addFact(fact) {
+    if (!this.factsById.has(fact.id)) {
+      this.factsById.set(fact.id, fact);
+    }
+  }
+
+  addFacts(facts) {
+    for (const fact of facts) {
+      this.addFact(fact);
+    }
+  }
+
+  addCandidates(candidates) {
+    for (const candidate of candidates) {
+      this.addFact(candidate.fact);
+    }
+  }
+
+  take(limit) {
+    const facts = [];
+
+    for (const fact of this.factsById.values()) {
+      if (facts.length >= limit) break;
+      facts.push(fact);
+    }
+
+    return facts;
+  }
+}
+
+function isActiveFact(fact) {
+  return fact.status === ACTIVE_STATUS;
+}
+
+function factMatchesQuestionSlot(fact, question) {
+  return fact.subject === question.subject && fact.predicate === question.predicate;
+}
+
+function scoreFactAgainstQuestion(fact, question) {
   const queryTokens = new Set(tokenize(question.question ?? question));
   const factTokens = tokenize(`${fact.subject} ${fact.predicate} ${fact.object}`);
   const slotTokens = tokenize(`${fact.subject} ${fact.predicate}`);
@@ -19,29 +64,61 @@ function scoreFact(fact, question) {
 
   if (fact.subject === question.subject) score += 5;
   if (fact.predicate === question.predicate) score += 4;
-  if (fact.status === "active") score += 2;
+  if (fact.status === ACTIVE_STATUS) score += 2;
   if (fact.status === "obsolete") score -= 8;
 
   score += fact.confidence ?? 0;
   return score;
 }
 
+function createFactCandidate(fact, question) {
+  return {
+    fact,
+    score: scoreFactAgainstQuestion(fact, question),
+    normalizedId: normalize(fact.id)
+  };
+}
+
+function compareFactCandidates(left, right) {
+  return right.score - left.score || left.normalizedId.localeCompare(right.normalizedId);
+}
+
+function rankedActiveFactCandidates(facts, question) {
+  const candidates = [];
+
+  for (const fact of facts) {
+    if (!isActiveFact(fact)) continue;
+
+    const candidate = createFactCandidate(fact, question);
+    if (candidate.score > 0) {
+      candidates.push(candidate);
+    }
+  }
+
+  candidates.sort(compareFactCandidates);
+  return candidates;
+}
+
+function activeQuestionSlotFacts(facts, question) {
+  const slotFacts = [];
+
+  for (const fact of facts) {
+    if (isActiveFact(fact) && factMatchesQuestionSlot(fact, question)) {
+      slotFacts.push(fact);
+    }
+  }
+
+  return slotFacts;
+}
+
 export function selectRelevantFacts(worldState, question, { limit = 8 } = {}) {
-  const selected = worldState.facts
-    .filter((fact) => fact.status === "active")
-    .map((fact) => ({ fact, score: scoreFact(fact, question) }))
-    .filter((item) => item.score > 0)
-    .sort((a, b) => b.score - a.score || normalize(a.fact.id).localeCompare(normalize(b.fact.id)))
-    .slice(0, limit)
-    .map((item) => item.fact);
+  const requiredSlotFacts = activeQuestionSlotFacts(worldState.facts, question);
+  const rankedCandidates = rankedActiveFactCandidates(worldState.facts, question);
+  const selectionLimit = Math.max(limit, requiredSlotFacts.length);
+  const selection = new FactSelection();
 
-  const directSlotFacts = worldState.facts.filter(
-    (fact) =>
-      fact.status === "active" &&
-      fact.subject === question.subject &&
-      fact.predicate === question.predicate
-  );
+  selection.addFacts(requiredSlotFacts);
+  selection.addCandidates(rankedCandidates);
 
-  const byId = new Map([...directSlotFacts, ...selected].map((fact) => [fact.id, fact]));
-  return [...byId.values()].slice(0, Math.max(limit, directSlotFacts.length));
+  return selection.take(selectionLimit);
 }

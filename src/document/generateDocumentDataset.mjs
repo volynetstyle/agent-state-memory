@@ -53,6 +53,33 @@ function makeChunk(page, paragraph) {
   };
 }
 
+function questionSamplingStride(chunks, questionLimit) {
+  return Math.max(1, Math.floor(chunks.length / questionLimit));
+}
+
+function selectDocumentQuestions(chunks, questionLimit) {
+  const questions = [];
+  const stride = questionSamplingStride(chunks, questionLimit);
+
+  for (let index = 0; index < chunks.length; index += stride) {
+    if (questions.length >= questionLimit) break;
+    questions.push(chunks[index].question);
+  }
+
+  return questions;
+}
+
+function documentChunks(chunks) {
+  const documents = [];
+
+  for (const chunk of chunks) {
+    const { question, ...document } = chunk;
+    documents.push(document);
+  }
+
+  return documents;
+}
+
 export function buildDocumentDataset({
   pageCount = 100,
   paragraphsPerPage = 3,
@@ -66,13 +93,10 @@ export function buildDocumentDataset({
     }
   }
 
-  const questions = chunks
-    .filter((_, index) => index % Math.max(1, Math.floor(chunks.length / questionLimit)) === 0)
-    .slice(0, questionLimit)
-    .map((chunk) => chunk.question);
+  const questions = selectDocumentQuestions(chunks, questionLimit);
 
   return {
-    documents: chunks.map(({ question, ...chunk }) => chunk),
+    documents: documentChunks(chunks),
     questions,
     meta: {
       pageCount,

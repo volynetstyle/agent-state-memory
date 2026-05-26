@@ -1,46 +1,77 @@
-import { overlapScore, tokenize } from "../shared/text.mjs";
+import { createLexicalQuery, scoreTextRelevance, topCandidateItems } from "../shared/relevance.mjs";
 
 function eventText(event) {
-  return `${event.text} ${event.facts
-    .map((fact) => `${fact.subject} ${fact.predicate} ${fact.object}`)
-    .join(" ")}`;
+  const factTexts = [];
+
+  for (const fact of event.facts ?? []) {
+    factTexts.push(`${fact.subject} ${fact.predicate} ${fact.object}`);
+  }
+
+  return `${event.text} ${factTexts.join(" ")}`;
+}
+
+function createEventCandidate(event, index, query) {
+  const text = eventText(event);
+  const relevance = scoreTextRelevance(query, text);
+
+  return {
+    event,
+    index,
+    relevance: relevance.score,
+    score: relevance.score
+  };
+}
+
+function createRecentEventCandidate(event, index, query, maxIndex, recencyWeight) {
+  const candidate = createEventCandidate(event, index, query);
+  const recency = index / maxIndex;
+
+  return {
+    ...candidate,
+    recency,
+    score: candidate.relevance + recency * recencyWeight
+  };
+}
+
+function relevantEventCandidates(events, buildCandidate) {
+  const candidates = [];
+
+  for (let index = 0; index < events.length; index += 1) {
+    const candidate = buildCandidate(events[index], index);
+
+    if (candidate.relevance > 0) {
+      candidates.push(candidate);
+    }
+  }
+
+  return candidates;
+}
+
+function compareStableEventCandidates(left, right) {
+  return right.score - left.score || left.index - right.index;
+}
+
+function compareRecentEventCandidates(left, right) {
+  return right.score - left.score || right.index - left.index;
 }
 
 export function retrieveEvents(events, question, { topK = 12 } = {}) {
-  const queryTokens = new Set(tokenize(question));
+  const query = createLexicalQuery(question);
+  const candidates = relevantEventCandidates(events, (event, index) =>
+    createEventCandidate(event, index, query)
+  );
 
-  return events
-    .map((event, index) => {
-      const text = eventText(event);
-      const textTokens = tokenize(text);
-      const exactMatches = textTokens.filter((token) => queryTokens.has(token)).length;
-      const score = overlapScore(question, text) + exactMatches * 0.1;
-
-      return { event, score, index };
-    })
-    .filter((item) => item.score > 0)
-    .sort((a, b) => b.score - a.score || a.index - b.index)
-    .slice(0, topK)
-    .map((item) => item.event);
+  candidates.sort(compareStableEventCandidates);
+  return topCandidateItems(candidates, topK, (candidate) => candidate.event);
 }
 
 export function retrieveEventsWithRecency(events, question, { topK = 12, recencyWeight = 0.35 } = {}) {
-  const queryTokens = new Set(tokenize(question));
+  const query = createLexicalQuery(question);
   const maxIndex = Math.max(1, events.length - 1);
+  const candidates = relevantEventCandidates(events, (event, index) =>
+    createRecentEventCandidate(event, index, query, maxIndex, recencyWeight)
+  );
 
-  return events
-    .map((event, index) => {
-      const text = eventText(event);
-      const textTokens = tokenize(text);
-      const exactMatches = textTokens.filter((token) => queryTokens.has(token)).length;
-      const relevance = overlapScore(question, text) + exactMatches * 0.1;
-      const recency = index / maxIndex;
-      const score = relevance + recency * recencyWeight;
-
-      return { event, score, relevance, index };
-    })
-    .filter((item) => item.relevance > 0)
-    .sort((a, b) => b.score - a.score || b.index - a.index)
-    .slice(0, topK)
-    .map((item) => item.event);
+  candidates.sort(compareRecentEventCandidates);
+  return topCandidateItems(candidates, topK, (candidate) => candidate.event);
 }

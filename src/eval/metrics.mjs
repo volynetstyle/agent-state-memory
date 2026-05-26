@@ -11,7 +11,12 @@ function valueIncluded(actual, expected) {
 }
 
 function arrayAnswerCorrect(actualValues, expectedValues) {
-  const actual = new Set(actualValues.map(normalize));
+  const actual = new Set();
+
+  for (const value of actualValues) {
+    actual.add(normalize(value));
+  }
+
   return expectedValues.every((value) => actual.has(normalize(value)));
 }
 
@@ -53,10 +58,6 @@ export function gradeGeneratedAnswer(question, answerText) {
   };
 }
 
-function average(values) {
-  return values.length === 0 ? 0 : values.reduce((sum, value) => sum + value, 0) / values.length;
-}
-
 function safeRate(numerator, denominator) {
   return denominator === 0 ? 0 : numerator / denominator;
 }
@@ -73,55 +74,99 @@ function classifyError(result) {
   return "answer_mismatch";
 }
 
-export function summarizeResults(results) {
-  const total = results.length;
-  const answered = results.filter((result) => result.answered).length;
-  const correct = results.filter((result) => result.correct).length;
-  const stale = results.filter((result) => result.staleFactError).length;
-  const currentFactResults = results.filter((result) =>
-    ["current_fact", "current_state"].includes(result.questionType)
-  );
-  const currentFactCount = currentFactResults.length;
-  const currentFactCorrect = currentFactResults.filter((result) => result.correct).length;
-  const currentFactStale = currentFactResults.filter((result) => result.staleFactError).length;
-  const contextHits = results.filter((result) => result.contextHasGoldFact).length;
-  const recallAccuracy = safeRate(correct, total);
-  const precision = safeRate(correct, answered);
-  const averageContextTokens = average(results.map((result) => result.contextTokens));
-  const averageLatencyMs = average(results.map((result) => result.latencyMs));
-  const errorTaxonomy = {};
+function isCurrentFactResult(result) {
+  return result.questionType === "current_fact" || result.questionType === "current_state";
+}
 
-  for (const result of results) {
-    const type = result.errorType ?? classifyError(result);
-    errorTaxonomy[type] = (errorTaxonomy[type] ?? 0) + 1;
+function createResultSummaryCounts() {
+  return {
+    total: 0,
+    answered: 0,
+    correct: 0,
+    stale: 0,
+    currentFactCount: 0,
+    currentFactCorrect: 0,
+    currentFactStale: 0,
+    contextHits: 0,
+    contextTokenSum: 0,
+    latencyMsSum: 0,
+    reciprocalRankSum: 0,
+    errorTaxonomy: {}
+  };
+}
+
+function countResult(summary, result) {
+  summary.total += 1;
+  summary.contextTokenSum += result.contextTokens;
+  summary.latencyMsSum += result.latencyMs;
+  summary.reciprocalRankSum += result.reciprocalRank ?? 0;
+
+  if (result.answered) summary.answered += 1;
+  if (result.correct) summary.correct += 1;
+  if (result.staleFactError) summary.stale += 1;
+  if (result.contextHasGoldFact) summary.contextHits += 1;
+
+  if (isCurrentFactResult(result)) {
+    summary.currentFactCount += 1;
+    if (result.correct) summary.currentFactCorrect += 1;
+    if (result.staleFactError) summary.currentFactStale += 1;
   }
 
+  const type = result.errorType ?? classifyError(result);
+  summary.errorTaxonomy[type] = (summary.errorTaxonomy[type] ?? 0) + 1;
+}
+
+export function summarizeResults(results) {
+  const counts = createResultSummaryCounts();
+
+  for (const result of results) {
+    countResult(counts, result);
+  }
+
+  const recallAccuracy = safeRate(counts.correct, counts.total);
+  const precision = safeRate(counts.correct, counts.answered);
+  const averageContextTokens = safeRate(counts.contextTokenSum, counts.total);
+  const averageLatencyMs = safeRate(counts.latencyMsSum, counts.total);
+
   return {
-    totalQuestions: total,
-    answered,
-    correct,
+    totalQuestions: counts.total,
+    answered: counts.answered,
+    correct: counts.correct,
     exactMatchAccuracy: recallAccuracy,
     answerAccuracy: recallAccuracy,
     recallAccuracy,
     precision,
     f1Score: f1Score(precision, recallAccuracy),
-    currentFactQuestions: currentFactCount,
-    currentFactAccuracy: safeRate(currentFactCorrect, currentFactCount),
-    staleFactErrorRate: safeRate(stale, total),
-    currentStaleFactErrorRate: safeRate(currentFactStale, currentFactCount),
-    obsoleteFactRejectionRate: safeRate(currentFactCount - currentFactStale, currentFactCount),
-    contextHitRate: safeRate(contextHits, total),
-    meanReciprocalRank: average(results.map((result) => result.reciprocalRank ?? 0)),
+    currentFactQuestions: counts.currentFactCount,
+    currentFactAccuracy: safeRate(counts.currentFactCorrect, counts.currentFactCount),
+    staleFactErrorRate: safeRate(counts.stale, counts.total),
+    currentStaleFactErrorRate: safeRate(counts.currentFactStale, counts.currentFactCount),
+    obsoleteFactRejectionRate: safeRate(
+      counts.currentFactCount - counts.currentFactStale,
+      counts.currentFactCount
+    ),
+    contextHitRate: safeRate(counts.contextHits, counts.total),
+    meanReciprocalRank: safeRate(counts.reciprocalRankSum, counts.total),
     averageContextTokens,
     averageLatencyMs,
     contextEfficiency: safeRate(recallAccuracy, averageContextTokens),
     latencyEfficiency: safeRate(recallAccuracy, averageLatencyMs),
-    errorTaxonomy
+    errorTaxonomy: counts.errorTaxonomy
   };
 }
 
+function resultsByQuestionId(results) {
+  const byId = new Map();
+
+  for (const result of results) {
+    byId.set(result.questionId, result);
+  }
+
+  return byId;
+}
+
 export function pairedComparison(leftResults, rightResults) {
-  const rightById = new Map(rightResults.map((result) => [result.questionId, result]));
+  const rightById = resultsByQuestionId(rightResults);
   const comparison = {
     bothCorrect: 0,
     rightCorrectLeftWrong: 0,

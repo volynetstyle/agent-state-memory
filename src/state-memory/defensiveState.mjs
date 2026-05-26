@@ -40,7 +40,122 @@ function timestampMs(fact) {
 function keepRecentVersions(versions, fact, limit) {
   const key = slotKey(fact);
   const current = versions[key] ?? [];
-  versions[key] = [{ ...fact }, ...current].slice(0, limit);
+  const nextVersions = [{ ...fact }];
+
+  for (const version of current) {
+    if (nextVersions.length >= limit) break;
+    nextVersions.push(version);
+  }
+
+  versions[key] = nextVersions;
+}
+
+function cloneFactList(facts) {
+  const clones = [];
+
+  for (const fact of facts) {
+    clones.push({ ...fact });
+  }
+
+  return clones;
+}
+
+function cloneConflictList(conflicts) {
+  const clones = [];
+
+  for (const conflict of conflicts) {
+    clones.push({ ...conflict });
+  }
+
+  return clones;
+}
+
+function cloneVersionHistory(versions) {
+  const history = {};
+
+  for (const [key, slotVersions] of Object.entries(versions)) {
+    history[key] = cloneFactList(slotVersions);
+  }
+
+  return history;
+}
+
+function activeFactsInSameSlot(facts, fact) {
+  const matchingFacts = [];
+
+  for (const oldFact of facts) {
+    if (oldFact.status === "active" && sameSlot(oldFact, fact)) {
+      matchingFacts.push(oldFact);
+    }
+  }
+
+  return matchingFacts;
+}
+
+function activeFactsForQuestionSlot(facts, question) {
+  const matchingFacts = [];
+
+  for (const fact of facts) {
+    if (fact.status === "active" && slotMatchesQuestion(fact, question)) {
+      matchingFacts.push(fact);
+    }
+  }
+
+  return matchingFacts;
+}
+
+function factsForQuestionSlot(facts, question) {
+  const matchingFacts = [];
+
+  for (const fact of facts) {
+    if (slotMatchesQuestion(fact, question)) {
+      matchingFacts.push(fact);
+    }
+  }
+
+  return matchingFacts;
+}
+
+function conflictsForSlot(conflicts, slot) {
+  const matchingConflicts = [];
+
+  for (const conflict of conflicts) {
+    if (conflict.slot === slot) {
+      matchingConflicts.push(conflict);
+    }
+  }
+
+  return matchingConflicts;
+}
+
+function eventIds(events) {
+  const ids = [];
+
+  for (const event of events) {
+    ids.push(event.id);
+  }
+
+  return ids;
+}
+
+function factIds(facts) {
+  const ids = [];
+
+  for (const fact of facts) {
+    ids.push(fact.id);
+  }
+
+  return ids;
+}
+
+function factObjects(facts) {
+  const values = [];
+
+  for (const fact of facts) {
+    values.push(fact.object);
+  }
+
+  return values;
 }
 
 export function createDefensiveWorldState() {
@@ -65,15 +180,10 @@ export function applyDefensiveFact(state, fact, {
   versionLimit = 4
 } = {}) {
   const next = {
-    facts: state.facts.map((oldFact) => ({ ...oldFact })),
-    lowConfidenceFacts: state.lowConfidenceFacts.map((oldFact) => ({ ...oldFact })),
-    conflicts: state.conflicts.map((conflict) => ({ ...conflict })),
-    versions: Object.fromEntries(
-      Object.entries(state.versions).map(([key, versions]) => [
-        key,
-        versions.map((version) => ({ ...version }))
-      ])
-    ),
+    facts: cloneFactList(state.facts),
+    lowConfidenceFacts: cloneFactList(state.lowConfidenceFacts),
+    conflicts: cloneConflictList(state.conflicts),
+    versions: cloneVersionHistory(state.versions),
     diagnostics: { ...state.diagnostics }
   };
   const incoming = {
@@ -92,9 +202,7 @@ export function applyDefensiveFact(state, fact, {
   }
 
   if (incoming.mutable) {
-    const activeSlotFacts = next.facts.filter(
-      (oldFact) => oldFact.status === "active" && sameSlot(oldFact, incoming)
-    );
+    const activeSlotFacts = activeFactsInSameSlot(next.facts, incoming);
 
     for (const oldFact of activeSlotFacts) {
       if (sameFact(oldFact, incoming)) {
@@ -162,14 +270,10 @@ function slotMatchesQuestion(fact, question) {
 }
 
 export function defensiveStateDiagnostics(worldState, question) {
-  const activeSlotFacts = worldState.facts.filter(
-    (fact) => fact.status === "active" && slotMatchesQuestion(fact, question)
-  );
-  const lowConfidenceSlotFacts = worldState.lowConfidenceFacts.filter((fact) =>
-    slotMatchesQuestion(fact, question)
-  );
   const slot = `${canonicalEntity(question.subject)}.${question.predicate}`;
-  const slotConflicts = worldState.conflicts.filter((conflict) => conflict.slot === slot);
+  const activeSlotFacts = activeFactsForQuestionSlot(worldState.facts, question);
+  const lowConfidenceSlotFacts = factsForQuestionSlot(worldState.lowConfidenceFacts, question);
+  const slotConflicts = conflictsForSlot(worldState.conflicts, slot);
 
   return {
     activeSlotFacts,
@@ -199,7 +303,7 @@ export function answerWithDefensiveStateFallback({
       mode: "temporal_rag_fallback",
       answer,
       context: retrievedEvents,
-      contextIds: retrievedEvents.map((event) => event.id),
+      contextIds: eventIds(retrievedEvents),
       conflictCount: diagnostics.slotConflicts.length,
       lowConfidenceCount: diagnostics.lowConfidenceSlotFacts.length,
       fallbackReason:
@@ -212,15 +316,16 @@ export function answerWithDefensiveStateFallback({
   }
 
   const facts = selectRelevantFacts(worldState, question, { limit: stateLimit });
+  const answerValues = factObjects(diagnostics.activeSlotFacts);
 
   return {
     mode: "state",
     answer: {
-      answer: diagnostics.activeSlotFacts.map((fact) => fact.object).join(", "),
-      values: diagnostics.activeSlotFacts.map((fact) => fact.object)
+      answer: answerValues.join(", "),
+      values: answerValues
     },
     context: facts,
-    contextIds: facts.map((fact) => fact.id),
+    contextIds: factIds(facts),
     conflictCount: 0,
     lowConfidenceCount: 0,
     fallbackReason: "none"
