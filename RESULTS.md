@@ -96,9 +96,9 @@ Model: llama3.2:3b, temperature: 0, seed: 42, timeout: 120000 ms, num_predict: 6
 
 | System | Normalized Accuracy | Unknown Accuracy | Prompt Compliance | Hallucination Rate | Avg Context Tokens | Avg LLM ms |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| RAG + LLM | 0.8065 | 1.0000 | 0.8710 | 0.0323 | 207.2581 | 16788.4294 |
-| State + LLM | 0.5806 | 1.0000 | 0.9032 | 0.0000 | 64.0645 | 4073.4492 |
-| Hybrid + LLM | 0.9355 | 1.0000 | 0.9355 | 0.0000 | 187.9032 | 15343.3162 |
+| RAG + LLM | 0.8065 | 1.0000 | 0.8710 | 0.0323 | 207.2581 | 17200.8146 |
+| State + LLM | 0.5806 | 1.0000 | 0.9032 | 0.0323 | 64.0645 | 4282.1757 |
+| Hybrid + LLM | 0.9355 | 1.0000 | 0.9355 | 0.0000 | 187.9032 | 15777.7850 |
 
 | Type | RAG + LLM | State + LLM | Hybrid + LLM |
 | --- | ---: | ---: | ---: |
@@ -115,11 +115,11 @@ Top failure examples:
 | rag | current_state | incomplete_answer | lexical top-k retriever | Cosine embedding search. |
 | rag | current_state | incomplete_answer | structured world state | RAG retrieval. |
 | rag | stable_state | missing_fact | implementation, experiments, metrics, baseline comparison, error analysis, conclusions | includes implementation, baseline comparison, metrics, error analysis, experiments. |
-| rag | stable_state | missing_fact | user profile, projects, goals, tasks, facts | Goals, facts. |
+| rag | stable_state | missing_fact | user profile, projects, goals, tasks, facts | Goals, state updates. |
 | rag | stable_state | missing_fact | recall, precision, context size, latency, stale fact error rate, compression ratio | UNKNOWN |
 | state | current_state | incomplete_answer | zero-dependency Node.js | Node.js |
 | state | stable_state | incomplete_answer | implementation, experiments, metrics, baseline comparison, error analysis, conclusions | experiments and conclusions |
-| state | stable_state | incomplete_answer | event logging, fact extraction, state update, state selection, prompt building | state selection, event logging, fact extraction, prompt building |
+| state | stable_state | possible_hallucination | event logging, fact extraction, state update, state selection, prompt building | State Memory pipeline:  1. state selection 2. event logging 3. fact extraction 4. prompt building |
 | state | document_detail | missing_fact | VALUE-001-1 | UNKNOWN |
 
 ## Interpretation
