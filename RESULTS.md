@@ -8,7 +8,7 @@ This file is generated from `results/**/summary.json` and LLM result files by `n
 4. RAG remains strong for document-detail questions, while State-only fails on document details. Hybrid reaches 1.0000 Exact Match on mixed structured/document tasks.
 5. Defensive State is useful when uncertainty is visible: it recovers near-simultaneous conflicts at 1.0000 Exact Match, but cannot recover missing final updates (0.1429).
 6. State Memory lookup scales with near-constant latency. At 5000 events, RAG averages 15.5933 ms and State Memory averages 0.5495 ms, a 28.4x speedup.
-7. The LLM benchmark supports the same conclusion at generation time: Hybrid + LLM reaches 0.9355 normalized accuracy with 0.0000 hallucination rate.
+7. The LLM benchmark supports the same conclusion at generation time: Hybrid + LLM reaches 0.8889 normalized accuracy with 0.0000 hallucination rate.
 
 ## Level 1: Main Findings
 
@@ -90,7 +90,7 @@ These timings are local JavaScript measurements, not a full production database 
 ### Claim 6: LLM answering preserves the hybrid advantage
 
 **Evidence.**
-Hybrid + LLM reaches 0.9355 normalized accuracy, above RAG + LLM at 0.8065 and State + LLM at 0.5806.
+Hybrid + LLM reaches 0.8889 normalized accuracy, above RAG + LLM at 0.8889 and State + LLM at 0.6667.
 
 **Interpretation.**
 The retrieval/state routing decision remains useful even when a generative model produces the final answer.
@@ -194,7 +194,7 @@ Checks whether the memory-routing conclusions survive real local LLM answer gene
 llama3.2:3b with temperature 0.
 
 **Key result.**
-Hybrid + LLM reaches 0.9355 normalized accuracy with 0.0000 hallucination rate.
+Hybrid + LLM reaches 0.8889 normalized accuracy with 0.0000 hallucination rate.
 
 **Main limitation.**
 LLM output introduces formatting and incomplete-answer errors that are separate from memory retrieval.
@@ -256,9 +256,8 @@ In the mixed benchmark, State-only scores 0.0000 on document-detail questions. T
 | --- | ---: | --- | --- |
 | stale_fact | 30 | RAG | Deterministic benchmark |
 | slot_inference_failed | 9 | State no-oracle | Robust benchmark |
-| incomplete_answer | 7 | RAG + LLM, State + LLM, Hybrid + LLM | Mixed LLM benchmark |
-| missing_fact | 13 | RAG + LLM, State + LLM | Mixed LLM benchmark |
-| possible_hallucination | 1 | State + LLM | Mixed LLM benchmark |
+| missing_fact | 3 | RAG + LLM, State + LLM | Mixed LLM benchmark |
+| incomplete_answer | 2 | State + LLM, Hybrid + LLM | Mixed LLM benchmark |
 
 The deterministic and robust rows come from aggregate summaries. The LLM rows are counted from full result files, not only from the displayed failure examples.
 

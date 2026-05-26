@@ -98,7 +98,7 @@ jobs:
         run: |
           npm run results
           node scripts/verifyResults.mjs
-          node scripts/ensureAllowedChanges.mjs
+          node scripts/ensureAllowedChanges.mjs RESULTS.md
 
       - name: Install Ollama
         run: curl -fsSL https://ollama.com/install.sh | sh
