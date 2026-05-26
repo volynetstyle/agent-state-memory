@@ -1,0 +1,3122 @@
+[
+  {
+    "questionId": "q-current-001",
+    "questionType": "current_state",
+    "question": "What runtime does Reflex use?",
+    "expected": "reactive graph runtime",
+    "answer": "reactive graph runtime",
+    "answerValues": [
+      "reactive graph runtime"
+    ],
+    "contextIds": [
+      "e0948-f1",
+      "e0839-f1",
+      "e0953-f1",
+      "e0017-f1",
+      "e0036-f1",
+      "e0058-f1",
+      "e0135-f1",
+      "e0173-f1"
+    ],
+    "contextTokens": 57,
+    "latencyMs": 1.1852999999999838,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-002",
+    "questionType": "current_state",
+    "question": "What storage does Reflex use?",
+    "expected": "graph-indexed store",
+    "answer": "graph-indexed store",
+    "answerValues": [
+      "graph-indexed store"
+    ],
+    "contextIds": [
+      "e0839-f1",
+      "e0948-f1",
+      "e0953-f1",
+      "e0017-f1",
+      "e0036-f1",
+      "e0058-f1",
+      "e0135-f1",
+      "e0173-f1"
+    ],
+    "contextTokens": 57,
+    "latencyMs": 1.001100000000008,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-003",
+    "questionType": "current_state",
+    "question": "What selector strategy does Reflex use?",
+    "expected": "dependency-tracked selectors",
+    "answer": "dependency-tracked selectors",
+    "answerValues": [
+      "dependency-tracked selectors"
+    ],
+    "contextIds": [
+      "e0953-f1",
+      "e0839-f1",
+      "e0948-f1",
+      "e0683-f1",
+      "e0696-f1",
+      "e0736-f1",
+      "e0017-f1",
+      "e0036-f1"
+    ],
+    "contextTokens": 64,
+    "latencyMs": 1.0370000000000346,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-004",
+    "questionType": "current_state",
+    "question": "What is the current coursework topic?",
+    "expected": "State Memory for LLM agents",
+    "answer": "State Memory for LLM agents",
+    "answerValues": [
+      "State Memory for LLM agents"
+    ],
+    "contextIds": [
+      "e0960-f1",
+      "e0173-f1",
+      "e0221-f1",
+      "e0357-f1",
+      "e0625-f1",
+      "e0650-f1",
+      "e0734-f1",
+      "e0871-f1"
+    ],
+    "contextTokens": 68,
+    "latencyMs": 1.0131000000000085,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-005",
+    "questionType": "current_state",
+    "question": "What is the current coursework deadline?",
+    "expected": "one week",
+    "answer": "one week",
+    "answerValues": [
+      "one week"
+    ],
+    "contextIds": [
+      "e0734-f1",
+      "e0173-f1",
+      "e0221-f1",
+      "e0357-f1",
+      "e0625-f1",
+      "e0650-f1",
+      "e0871-f1",
+      "e0881-f1"
+    ],
+    "contextTokens": 65,
+    "latencyMs": 1.2660000000000196,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-006",
+    "questionType": "current_state",
+    "question": "What implementation language is used for the coursework MVP?",
+    "expected": "zero-dependency Node.js",
+    "answer": "zero-dependency Node.js",
+    "answerValues": [
+      "zero-dependency Node.js"
+    ],
+    "contextIds": [
+      "e0871-f1",
+      "e0173-f1",
+      "e0221-f1",
+      "e0357-f1",
+      "e0625-f1",
+      "e0650-f1",
+      "e0734-f1",
+      "e0881-f1"
+    ],
+    "contextTokens": 68,
+    "latencyMs": 1.0638999999999896,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-007",
+    "questionType": "current_state",
+    "question": "What retriever does the RAG baseline use?",
+    "expected": "lexical top-k retriever",
+    "answer": "lexical top-k retriever",
+    "answerValues": [
+      "lexical top-k retriever"
+    ],
+    "contextIds": [
+      "e0942-f1",
+      "e0685-f1",
+      "e0732-f1",
+      "e0058-f1",
+      "e0304-f1",
+      "e0700-f1",
+      "e0702-f1",
+      "e0221-f1"
+    ],
+    "contextTokens": 60,
+    "latencyMs": 1.7467999999999506,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-008",
+    "questionType": "current_state",
+    "question": "What chunk unit does the RAG baseline use?",
+    "expected": "event chunks",
+    "answer": "event chunks",
+    "answerValues": [
+      "event chunks"
+    ],
+    "contextIds": [
+      "e0685-f1",
+      "e0732-f1",
+      "e0942-f1",
+      "e0058-f1",
+      "e0304-f1",
+      "e0700-f1",
+      "e0702-f1",
+      "e0730-f1"
+    ],
+    "contextTokens": 60,
+    "latencyMs": 1.1883000000000266,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-009",
+    "questionType": "current_state",
+    "question": "What top-k value does the RAG baseline use?",
+    "expected": "12",
+    "answer": "12",
+    "answerValues": [
+      "12"
+    ],
+    "contextIds": [
+      "e0732-f1",
+      "e0942-f1",
+      "e0685-f1",
+      "e0058-f1",
+      "e0304-f1",
+      "e0700-f1",
+      "e0702-f1",
+      "e0221-f1"
+    ],
+    "contextTokens": 62,
+    "latencyMs": 1.4329000000000178,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-010",
+    "questionType": "current_state",
+    "question": "What memory strategy does the State Memory agent use?",
+    "expected": "structured world state",
+    "answer": "structured world state",
+    "answerValues": [
+      "structured world state"
+    ],
+    "contextIds": [
+      "e0683-f1",
+      "e0828-f1",
+      "e0960-f1",
+      "e0036-f1",
+      "e0235-f1",
+      "e0017-f1",
+      "e0173-f1",
+      "e0221-f1"
+    ],
+    "contextTokens": 72,
+    "latencyMs": 1.103300000000047,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-011",
+    "questionType": "current_state",
+    "question": "What answer mode does the State Memory agent use?",
+    "expected": "selected active facts",
+    "answer": "selected active facts",
+    "answerValues": [
+      "selected active facts"
+    ],
+    "contextIds": [
+      "e0828-f1",
+      "e0683-f1",
+      "e0960-f1",
+      "e0036-f1",
+      "e0235-f1",
+      "e0017-f1",
+      "e0173-f1",
+      "e0221-f1"
+    ],
+    "contextTokens": 72,
+    "latencyMs": 0.9476999999999975,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-012",
+    "questionType": "current_state",
+    "question": "What method does the Fact extractor use?",
+    "expected": "rule-based JSON extraction",
+    "answer": "rule-based JSON extraction",
+    "answerValues": [
+      "rule-based JSON extraction"
+    ],
+    "contextIds": [
+      "e0817-f1",
+      "e0853-f1",
+      "e0911-f1",
+      "e0360-f1",
+      "e0493-f1",
+      "e0715-f1",
+      "e0768-f1",
+      "e0965-f1"
+    ],
+    "contextTokens": 74,
+    "latencyMs": 0.6138000000000261,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-013",
+    "questionType": "current_state",
+    "question": "What confidence policy does the Fact extractor use?",
+    "expected": "numeric confidence",
+    "answer": "numeric confidence",
+    "answerValues": [
+      "numeric confidence"
+    ],
+    "contextIds": [
+      "e0853-f1",
+      "e0817-f1",
+      "e0911-f1",
+      "e0944-f1",
+      "e0360-f1",
+      "e0493-f1",
+      "e0715-f1",
+      "e0768-f1"
+    ],
+    "contextTokens": 77,
+    "latencyMs": 0.7830999999999904,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-014",
+    "questionType": "current_state",
+    "question": "What mutable fact rule does the State updater use?",
+    "expected": "latest wins",
+    "answer": "latest wins",
+    "answerValues": [
+      "latest wins"
+    ],
+    "contextIds": [
+      "e0882-f1",
+      "e0911-f1",
+      "e0036-f1",
+      "e0235-f1",
+      "e0360-f1",
+      "e0683-f1",
+      "e0817-f1",
+      "e0960-f1"
+    ],
+    "contextTokens": 75,
+    "latencyMs": 0.6247000000000185,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-015",
+    "questionType": "current_state",
+    "question": "What status is assigned to old mutable facts?",
+    "expected": "marked obsolete",
+    "answer": "marked obsolete",
+    "answerValues": [
+      "marked obsolete"
+    ],
+    "contextIds": [
+      "e0911-f1",
+      "e0882-f1",
+      "e0002-f1",
+      "e0010-f1",
+      "e0026-f1",
+      "e0034-f1",
+      "e0035-f1",
+      "e0038-f1"
+    ],
+    "contextTokens": 71,
+    "latencyMs": 0.6387000000000285,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-016",
+    "questionType": "current_state",
+    "question": "How does the State selector rank facts?",
+    "expected": "slot and keyword scoring",
+    "answer": "slot and keyword scoring",
+    "answerValues": [
+      "slot and keyword scoring"
+    ],
+    "contextIds": [
+      "e0736-f1",
+      "e0696-f1",
+      "e0036-f1",
+      "e0235-f1",
+      "e0633-f1",
+      "e0683-f1",
+      "e0828-f1",
+      "e0896-f1"
+    ],
+    "contextTokens": 69,
+    "latencyMs": 0.5957000000000221,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-017",
+    "questionType": "current_state",
+    "question": "What fact limit does the State selector use?",
+    "expected": "8 facts",
+    "answer": "8 facts",
+    "answerValues": [
+      "8 facts"
+    ],
+    "contextIds": [
+      "e0696-f1",
+      "e0736-f1",
+      "e0911-f1",
+      "e0036-f1",
+      "e0235-f1",
+      "e0360-f1",
+      "e0683-f1",
+      "e0960-f1"
+    ],
+    "contextTokens": 72,
+    "latencyMs": 0.602800000000002,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-018",
+    "questionType": "current_state",
+    "question": "How is the World state serialized?",
+    "expected": "JSON facts",
+    "answer": "JSON facts",
+    "answerValues": [
+      "JSON facts"
+    ],
+    "contextIds": [
+      "e0896-f1",
+      "e0979-f1",
+      "e0683-f1",
+      "e0036-f1",
+      "e0235-f1",
+      "e0960-f1",
+      "e0017-f1",
+      "e0173-f1"
+    ],
+    "contextTokens": 70,
+    "latencyMs": 0.8578999999999724,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-019",
+    "questionType": "current_state",
+    "question": "How does World state handle obsolete facts?",
+    "expected": "stores obsolete facts with validTo",
+    "answer": "stores obsolete facts with validTo",
+    "answerValues": [
+      "stores obsolete facts with validTo"
+    ],
+    "contextIds": [
+      "e0979-f1",
+      "e0896-f1",
+      "e0683-f1",
+      "e0036-f1",
+      "e0235-f1",
+      "e0633-f1",
+      "e0696-f1",
+      "e0828-f1"
+    ],
+    "contextTokens": 72,
+    "latencyMs": 0.6311000000000035,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-020",
+    "questionType": "current_state",
+    "question": "What format does the Event store use?",
+    "expected": "JSONL",
+    "answer": "JSONL",
+    "answerValues": [
+      "JSONL"
+    ],
+    "contextIds": [
+      "e0718-f1",
+      "e0287-f1",
+      "e0685-f1",
+      "e0839-f1",
+      "e0017-f1",
+      "e0036-f1",
+      "e0058-f1",
+      "e0135-f1"
+    ],
+    "contextTokens": 58,
+    "latencyMs": 0.6350999999999658,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-021",
+    "questionType": "current_state",
+    "question": "How many events are in the synthetic dataset?",
+    "expected": "1000 events",
+    "answer": "1000 events",
+    "answerValues": [
+      "1000 events"
+    ],
+    "contextIds": [
+      "e0783-f1",
+      "e0965-f1",
+      "e0017-f1",
+      "e0036-f1",
+      "e0058-f1",
+      "e0135-f1",
+      "e0173-f1",
+      "e0199-f1"
+    ],
+    "contextTokens": 60,
+    "latencyMs": 0.6204000000000178,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-022",
+    "questionType": "current_state",
+    "question": "What does the synthetic dataset contain?",
+    "expected": "stable facts and fact updates",
+    "answer": "stable facts and fact updates",
+    "answerValues": [
+      "stable facts and fact updates"
+    ],
+    "contextIds": [
+      "e0965-f1",
+      "e0783-f1",
+      "e0017-f1",
+      "e0036-f1",
+      "e0058-f1",
+      "e0135-f1",
+      "e0173-f1",
+      "e0199-f1"
+    ],
+    "contextTokens": 57,
+    "latencyMs": 0.6426999999999907,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-023",
+    "questionType": "current_state",
+    "question": "What is the primary metric in the Evaluation suite?",
+    "expected": "stale fact error rate",
+    "answer": "stale fact error rate",
+    "answerValues": [
+      "stale fact error rate"
+    ],
+    "contextIds": [
+      "e0974-f1",
+      "e0730-f1",
+      "e0017-f1",
+      "e0036-f1",
+      "e0058-f1",
+      "e0135-f1",
+      "e0173-f1",
+      "e0199-f1"
+    ],
+    "contextTokens": 60,
+    "latencyMs": 0.7875999999999976,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-024",
+    "questionType": "current_state",
+    "question": "What latency unit does the Evaluation suite use?",
+    "expected": "milliseconds",
+    "answer": "milliseconds",
+    "answerValues": [
+      "milliseconds"
+    ],
+    "contextIds": [
+      "e0730-f1",
+      "e0974-f1",
+      "e0685-f1",
+      "e0596-f1",
+      "e0017-f1",
+      "e0036-f1",
+      "e0058-f1",
+      "e0135-f1"
+    ],
+    "contextTokens": 59,
+    "latencyMs": 0.6424000000000092,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-025",
+    "questionType": "current_state",
+    "question": "What output does the Metrics report produce?",
+    "expected": "JSON result files",
+    "answer": "JSON result files",
+    "answerValues": [
+      "JSON result files"
+    ],
+    "contextIds": [
+      "e0711-f1",
+      "e0199-f1",
+      "e0222-f1",
+      "e0493-f1",
+      "e0596-f1",
+      "e0868-f1",
+      "e0900-f1",
+      "e0357-f1"
+    ],
+    "contextTokens": 48,
+    "latencyMs": 0.6003999999999792,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-026",
+    "questionType": "current_state",
+    "question": "What context source does the Prompt builder use?",
+    "expected": "selected state slice",
+    "answer": "selected state slice",
+    "answerValues": [
+      "selected state slice"
+    ],
+    "contextIds": [
+      "e0967-f1",
+      "e0776-f1",
+      "e0768-f1",
+      "e0222-f1",
+      "e0702-f1",
+      "e0986-f1",
+      "e0007-f1",
+      "e0014-f1"
+    ],
+    "contextTokens": 70,
+    "latencyMs": 0.6508000000000038,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-027",
+    "questionType": "current_state",
+    "question": "What prompt style does the Prompt builder use?",
+    "expected": "structured memory prompt",
+    "answer": "structured memory prompt",
+    "answerValues": [
+      "structured memory prompt"
+    ],
+    "contextIds": [
+      "e0776-f1",
+      "e0967-f1",
+      "e0702-f1",
+      "e0986-f1",
+      "e0017-f1",
+      "e0036-f1",
+      "e0058-f1",
+      "e0135-f1"
+    ],
+    "contextTokens": 62,
+    "latencyMs": 1.0436000000000263,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-028",
+    "questionType": "current_state",
+    "question": "What grading method does the Answer evaluator use?",
+    "expected": "exact normalized matching",
+    "answer": "exact normalized matching",
+    "answerValues": [
+      "exact normalized matching"
+    ],
+    "contextIds": [
+      "e0906-f1",
+      "e0944-f1",
+      "e0817-f1",
+      "e0828-f1",
+      "e0017-f1",
+      "e0036-f1",
+      "e0058-f1",
+      "e0135-f1"
+    ],
+    "contextTokens": 68,
+    "latencyMs": 0.6148000000000025,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-029",
+    "questionType": "current_state",
+    "question": "What unknown policy does the Answer evaluator use?",
+    "expected": "return unknown when evidence is missing",
+    "answer": "return unknown when evidence is missing",
+    "answerValues": [
+      "return unknown when evidence is missing"
+    ],
+    "contextIds": [
+      "e0944-f1",
+      "e0906-f1",
+      "e0828-f1",
+      "e0853-f1",
+      "e0017-f1",
+      "e0036-f1",
+      "e0058-f1",
+      "e0135-f1"
+    ],
+    "contextTokens": 67,
+    "latencyMs": 0.6005000000000109,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-030",
+    "questionType": "current_state",
+    "question": "What result directory does the Coursework repository use?",
+    "expected": "results",
+    "answer": "results",
+    "answerValues": [
+      "results"
+    ],
+    "contextIds": [
+      "e0964-f1",
+      "e0760-f1",
+      "e0173-f1",
+      "e0221-f1",
+      "e0357-f1",
+      "e0625-f1",
+      "e0650-f1",
+      "e0734-f1"
+    ],
+    "contextTokens": 63,
+    "latencyMs": 0.6230000000000473,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-031",
+    "questionType": "current_state",
+    "question": "What data directory does the Coursework repository use?",
+    "expected": "data",
+    "answer": "data",
+    "answerValues": [
+      "data"
+    ],
+    "contextIds": [
+      "e0760-f1",
+      "e0964-f1",
+      "e0173-f1",
+      "e0221-f1",
+      "e0357-f1",
+      "e0625-f1",
+      "e0650-f1",
+      "e0734-f1"
+    ],
+    "contextTokens": 63,
+    "latencyMs": 0.9660000000000082,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-032",
+    "questionType": "current_state",
+    "question": "What failure mode is studied for the Long-context agent?",
+    "expected": "stale fact usage",
+    "answer": "stale fact usage",
+    "answerValues": [
+      "stale fact usage"
+    ],
+    "contextIds": [
+      "e0768-f1",
+      "e0828-f1",
+      "e0683-f1",
+      "e0967-f1",
+      "e0222-f1",
+      "e0007-f1",
+      "e0014-f1",
+      "e0023-f1"
+    ],
+    "contextTokens": 77,
+    "latencyMs": 0.9091000000000236,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-033",
+    "questionType": "current_state",
+    "question": "What comparison does the Memory benchmark run?",
+    "expected": "RAG versus State Memory",
+    "answer": "RAG versus State Memory",
+    "answerValues": [
+      "RAG versus State Memory"
+    ],
+    "contextIds": [
+      "e0701-f1",
+      "e0715-f1",
+      "e0683-f1",
+      "e0221-f1",
+      "e0960-f1",
+      "e0017-f1",
+      "e0036-f1",
+      "e0173-f1"
+    ],
+    "contextTokens": 73,
+    "latencyMs": 0.6173999999999751,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-034",
+    "questionType": "current_state",
+    "question": "What hypothesis does the Memory benchmark test?",
+    "expected": "State Memory reduces stale fact errors",
+    "answer": "State Memory reduces stale fact errors",
+    "answerValues": [
+      "State Memory reduces stale fact errors"
+    ],
+    "contextIds": [
+      "e0715-f1",
+      "e0701-f1",
+      "e0683-f1",
+      "e0960-f1",
+      "e0017-f1",
+      "e0036-f1",
+      "e0173-f1",
+      "e0221-f1"
+    ],
+    "contextTokens": 73,
+    "latencyMs": 0.6025999999999954,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-035",
+    "questionType": "current_state",
+    "question": "How is the Experiment runner executed?",
+    "expected": "single Node command",
+    "answer": "single Node command",
+    "answerValues": [
+      "single Node command"
+    ],
+    "contextIds": [
+      "e0901-f1",
+      "e0805-f1",
+      "e0005-f1",
+      "e0014-f1",
+      "e0015-f1",
+      "e0035-f1",
+      "e0047-f1",
+      "e0053-f1"
+    ],
+    "contextTokens": 69,
+    "latencyMs": 0.6230999999999653,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-current-036",
+    "questionType": "current_state",
+    "question": "How is Experiment runner reproducibility handled?",
+    "expected": "deterministic seeded data",
+    "answer": "deterministic seeded data",
+    "answerValues": [
+      "deterministic seeded data"
+    ],
+    "contextIds": [
+      "e0805-f1",
+      "e0901-f1",
+      "e0005-f1",
+      "e0014-f1",
+      "e0015-f1",
+      "e0035-f1",
+      "e0047-f1",
+      "e0053-f1"
+    ],
+    "contextTokens": 70,
+    "latencyMs": 0.6166000000000054,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-list-001",
+    "questionType": "stable_state",
+    "question": "What must the State Memory coursework include?",
+    "expected": [
+      "implementation",
+      "experiments",
+      "metrics",
+      "baseline comparison",
+      "error analysis",
+      "conclusions"
+    ],
+    "answer": "implementation, baseline comparison, metrics, error analysis, experiments, conclusions",
+    "answerValues": [
+      "implementation",
+      "baseline comparison",
+      "metrics",
+      "error analysis",
+      "experiments",
+      "conclusions"
+    ],
+    "contextIds": [
+      "e0173-f1",
+      "e0221-f1",
+      "e0357-f1",
+      "e0625-f1",
+      "e0650-f1",
+      "e0881-f1",
+      "e0960-f1",
+      "e0734-f1"
+    ],
+    "contextTokens": 66,
+    "latencyMs": 0.7549000000000206,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-list-002",
+    "questionType": "stable_state",
+    "question": "What interests are stored for the user?",
+    "expected": [
+      "reactive systems",
+      "LLM agents",
+      "machine learning",
+      "memory architectures"
+    ],
+    "answer": "memory architectures, reactive systems, machine learning, LLM agents",
+    "answerValues": [
+      "memory architectures",
+      "reactive systems",
+      "machine learning",
+      "LLM agents"
+    ],
+    "contextIds": [
+      "e0135-f1",
+      "e0344-f1",
+      "e0400-f1",
+      "e0780-f1",
+      "e0856-f1",
+      "e0017-f1",
+      "e0036-f1",
+      "e0058-f1"
+    ],
+    "contextTokens": 54,
+    "latencyMs": 0.5990000000000464,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-list-003",
+    "questionType": "stable_state",
+    "question": "What entity types does State Memory store?",
+    "expected": [
+      "user profile",
+      "projects",
+      "goals",
+      "tasks",
+      "facts"
+    ],
+    "answer": "goals, projects, facts, tasks, user profile",
+    "answerValues": [
+      "goals",
+      "projects",
+      "facts",
+      "tasks",
+      "user profile"
+    ],
+    "contextIds": [
+      "e0017-f1",
+      "e0385-f1",
+      "e0633-f1",
+      "e0731-f1",
+      "e0856-f1",
+      "e0683-f1",
+      "e0960-f1",
+      "e0036-f1"
+    ],
+    "contextTokens": 64,
+    "latencyMs": 0.5834999999999582,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-list-004",
+    "questionType": "stable_state",
+    "question": "What metrics are included?",
+    "expected": [
+      "recall",
+      "precision",
+      "context size",
+      "latency",
+      "stale fact error rate",
+      "compression ratio"
+    ],
+    "answer": "compression ratio, context size, stale fact error rate, latency, recall, precision",
+    "answerValues": [
+      "compression ratio",
+      "context size",
+      "stale fact error rate",
+      "latency",
+      "recall",
+      "precision"
+    ],
+    "contextIds": [
+      "e0199-f1",
+      "e0222-f1",
+      "e0493-f1",
+      "e0596-f1",
+      "e0868-f1",
+      "e0900-f1",
+      "e0711-f1",
+      "e0357-f1"
+    ],
+    "contextTokens": 46,
+    "latencyMs": 0.5886000000000422,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-list-005",
+    "questionType": "stable_state",
+    "question": "What steps are in the RAG pipeline?",
+    "expected": [
+      "chunking",
+      "retrieval",
+      "prompt building",
+      "answering"
+    ],
+    "answer": "chunking, answering, retrieval, prompt building",
+    "answerValues": [
+      "chunking",
+      "answering",
+      "retrieval",
+      "prompt building"
+    ],
+    "contextIds": [
+      "e0058-f1",
+      "e0304-f1",
+      "e0700-f1",
+      "e0702-f1",
+      "e0036-f1",
+      "e0235-f1",
+      "e0287-f1",
+      "e0360-f1"
+    ],
+    "contextTokens": 61,
+    "latencyMs": 0.8774000000000228,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "q-list-006",
+    "questionType": "stable_state",
+    "question": "What steps are in the State Memory pipeline?",
+    "expected": [
+      "event logging",
+      "fact extraction",
+      "state update",
+      "state selection",
+      "prompt building"
+    ],
+    "answer": "state update, state selection, event logging, fact extraction, prompt building",
+    "answerValues": [
+      "state update",
+      "state selection",
+      "event logging",
+      "fact extraction",
+      "prompt building"
+    ],
+    "contextIds": [
+      "e0036-f1",
+      "e0235-f1",
+      "e0287-f1",
+      "e0360-f1",
+      "e0986-f1",
+      "e0683-f1",
+      "e0960-f1",
+      "e0058-f1"
+    ],
+    "contextTokens": 71,
+    "latencyMs": 0.9535999999999945,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "state_memory"
+  },
+  {
+    "questionId": "doc-q-001-1",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-001-1?",
+    "expected": "VALUE-001-1",
+    "answer": "VALUE-001-1",
+    "answerValues": [
+      "VALUE-001-1"
+    ],
+    "contextIds": [
+      "doc-page-001-p1",
+      "doc-page-001-p2",
+      "doc-page-001-p3",
+      "doc-page-002-p1",
+      "doc-page-003-p1",
+      "doc-page-004-p1",
+      "doc-page-005-p1",
+      "doc-page-006-p1"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.8847999999999843,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-002-3",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-002-3?",
+    "expected": "VALUE-002-3",
+    "answer": "VALUE-002-3",
+    "answerValues": [
+      "VALUE-002-3"
+    ],
+    "contextIds": [
+      "doc-page-002-p3",
+      "doc-page-003-p3",
+      "doc-page-001-p3",
+      "doc-page-004-p3",
+      "doc-page-005-p3",
+      "doc-page-006-p3",
+      "doc-page-007-p3",
+      "doc-page-008-p3"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.9993000000000052,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-004-2",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-004-2?",
+    "expected": "VALUE-004-2",
+    "answer": "VALUE-004-2",
+    "answerValues": [
+      "VALUE-004-2"
+    ],
+    "contextIds": [
+      "doc-page-004-p2",
+      "doc-page-002-p2",
+      "doc-page-001-p2",
+      "doc-page-003-p2",
+      "doc-page-005-p2",
+      "doc-page-006-p2",
+      "doc-page-007-p2",
+      "doc-page-008-p2"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 3.129099999999994,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-006-1",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-006-1?",
+    "expected": "VALUE-006-1",
+    "answer": "VALUE-006-1",
+    "answerValues": [
+      "VALUE-006-1"
+    ],
+    "contextIds": [
+      "doc-page-006-p1",
+      "doc-page-001-p1",
+      "doc-page-002-p1",
+      "doc-page-003-p1",
+      "doc-page-004-p1",
+      "doc-page-005-p1",
+      "doc-page-007-p1",
+      "doc-page-008-p1"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 3.384299999999996,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-007-3",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-007-3?",
+    "expected": "VALUE-007-3",
+    "answer": "VALUE-007-3",
+    "answerValues": [
+      "VALUE-007-3"
+    ],
+    "contextIds": [
+      "doc-page-007-p3",
+      "doc-page-003-p3",
+      "doc-page-001-p3",
+      "doc-page-002-p3",
+      "doc-page-004-p3",
+      "doc-page-005-p3",
+      "doc-page-006-p3",
+      "doc-page-008-p3"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.832300000000032,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-009-2",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-009-2?",
+    "expected": "VALUE-009-2",
+    "answer": "VALUE-009-2",
+    "answerValues": [
+      "VALUE-009-2"
+    ],
+    "contextIds": [
+      "doc-page-009-p2",
+      "doc-page-002-p2",
+      "doc-page-001-p2",
+      "doc-page-003-p2",
+      "doc-page-004-p2",
+      "doc-page-005-p2",
+      "doc-page-006-p2",
+      "doc-page-007-p2"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.9008000000000038,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-011-1",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-011-1?",
+    "expected": "VALUE-011-1",
+    "answer": "VALUE-011-1",
+    "answerValues": [
+      "VALUE-011-1"
+    ],
+    "contextIds": [
+      "doc-page-011-p1",
+      "doc-page-001-p1",
+      "doc-page-002-p1",
+      "doc-page-003-p1",
+      "doc-page-004-p1",
+      "doc-page-005-p1",
+      "doc-page-006-p1",
+      "doc-page-007-p1"
+    ],
+    "contextTokens": 330,
+    "latencyMs": 2.127900000000011,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-012-3",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-012-3?",
+    "expected": "VALUE-012-3",
+    "answer": "VALUE-012-3",
+    "answerValues": [
+      "VALUE-012-3"
+    ],
+    "contextIds": [
+      "doc-page-012-p3",
+      "doc-page-003-p3",
+      "doc-page-001-p3",
+      "doc-page-002-p3",
+      "doc-page-004-p3",
+      "doc-page-005-p3",
+      "doc-page-006-p3",
+      "doc-page-007-p3"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.8736999999999853,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-014-2",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-014-2?",
+    "expected": "VALUE-014-2",
+    "answer": "VALUE-014-2",
+    "answerValues": [
+      "VALUE-014-2"
+    ],
+    "contextIds": [
+      "doc-page-014-p2",
+      "doc-page-002-p2",
+      "doc-page-001-p2",
+      "doc-page-003-p2",
+      "doc-page-004-p2",
+      "doc-page-005-p2",
+      "doc-page-006-p2",
+      "doc-page-007-p2"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.7946000000000026,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-016-1",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-016-1?",
+    "expected": "VALUE-016-1",
+    "answer": "VALUE-016-1",
+    "answerValues": [
+      "VALUE-016-1"
+    ],
+    "contextIds": [
+      "doc-page-016-p1",
+      "doc-page-001-p1",
+      "doc-page-002-p1",
+      "doc-page-003-p1",
+      "doc-page-004-p1",
+      "doc-page-005-p1",
+      "doc-page-006-p1",
+      "doc-page-007-p1"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 2.5772999999999797,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-017-3",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-017-3?",
+    "expected": "VALUE-017-3",
+    "answer": "VALUE-017-3",
+    "answerValues": [
+      "VALUE-017-3"
+    ],
+    "contextIds": [
+      "doc-page-017-p3",
+      "doc-page-003-p3",
+      "doc-page-001-p3",
+      "doc-page-002-p3",
+      "doc-page-004-p3",
+      "doc-page-005-p3",
+      "doc-page-006-p3",
+      "doc-page-007-p3"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 2.310600000000079,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-019-2",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-019-2?",
+    "expected": "VALUE-019-2",
+    "answer": "VALUE-019-2",
+    "answerValues": [
+      "VALUE-019-2"
+    ],
+    "contextIds": [
+      "doc-page-019-p2",
+      "doc-page-002-p2",
+      "doc-page-001-p2",
+      "doc-page-003-p2",
+      "doc-page-004-p2",
+      "doc-page-005-p2",
+      "doc-page-006-p2",
+      "doc-page-007-p2"
+    ],
+    "contextTokens": 330,
+    "latencyMs": 2.3828999999999496,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-021-1",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-021-1?",
+    "expected": "VALUE-021-1",
+    "answer": "VALUE-021-1",
+    "answerValues": [
+      "VALUE-021-1"
+    ],
+    "contextIds": [
+      "doc-page-021-p1",
+      "doc-page-001-p1",
+      "doc-page-002-p1",
+      "doc-page-003-p1",
+      "doc-page-004-p1",
+      "doc-page-005-p1",
+      "doc-page-006-p1",
+      "doc-page-007-p1"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.8162999999999556,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-022-3",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-022-3?",
+    "expected": "VALUE-022-3",
+    "answer": "VALUE-022-3",
+    "answerValues": [
+      "VALUE-022-3"
+    ],
+    "contextIds": [
+      "doc-page-022-p3",
+      "doc-page-003-p3",
+      "doc-page-001-p3",
+      "doc-page-002-p3",
+      "doc-page-004-p3",
+      "doc-page-005-p3",
+      "doc-page-006-p3",
+      "doc-page-007-p3"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.9418000000000575,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-024-2",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-024-2?",
+    "expected": "VALUE-024-2",
+    "answer": "VALUE-024-2",
+    "answerValues": [
+      "VALUE-024-2"
+    ],
+    "contextIds": [
+      "doc-page-024-p2",
+      "doc-page-002-p2",
+      "doc-page-001-p2",
+      "doc-page-003-p2",
+      "doc-page-004-p2",
+      "doc-page-005-p2",
+      "doc-page-006-p2",
+      "doc-page-007-p2"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.921199999999999,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-026-1",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-026-1?",
+    "expected": "VALUE-026-1",
+    "answer": "VALUE-026-1",
+    "answerValues": [
+      "VALUE-026-1"
+    ],
+    "contextIds": [
+      "doc-page-026-p1",
+      "doc-page-001-p1",
+      "doc-page-002-p1",
+      "doc-page-003-p1",
+      "doc-page-004-p1",
+      "doc-page-005-p1",
+      "doc-page-006-p1",
+      "doc-page-007-p1"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.9039999999999964,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-027-3",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-027-3?",
+    "expected": "VALUE-027-3",
+    "answer": "VALUE-027-3",
+    "answerValues": [
+      "VALUE-027-3"
+    ],
+    "contextIds": [
+      "doc-page-027-p3",
+      "doc-page-003-p3",
+      "doc-page-001-p3",
+      "doc-page-002-p3",
+      "doc-page-004-p3",
+      "doc-page-005-p3",
+      "doc-page-006-p3",
+      "doc-page-007-p3"
+    ],
+    "contextTokens": 330,
+    "latencyMs": 1.9404000000000678,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-029-2",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-029-2?",
+    "expected": "VALUE-029-2",
+    "answer": "VALUE-029-2",
+    "answerValues": [
+      "VALUE-029-2"
+    ],
+    "contextIds": [
+      "doc-page-029-p2",
+      "doc-page-002-p2",
+      "doc-page-001-p2",
+      "doc-page-003-p2",
+      "doc-page-004-p2",
+      "doc-page-005-p2",
+      "doc-page-006-p2",
+      "doc-page-007-p2"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 2.203700000000026,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-031-1",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-031-1?",
+    "expected": "VALUE-031-1",
+    "answer": "VALUE-031-1",
+    "answerValues": [
+      "VALUE-031-1"
+    ],
+    "contextIds": [
+      "doc-page-031-p1",
+      "doc-page-001-p1",
+      "doc-page-002-p1",
+      "doc-page-003-p1",
+      "doc-page-004-p1",
+      "doc-page-005-p1",
+      "doc-page-006-p1",
+      "doc-page-007-p1"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 2.516200000000026,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-032-3",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-032-3?",
+    "expected": "VALUE-032-3",
+    "answer": "VALUE-032-3",
+    "answerValues": [
+      "VALUE-032-3"
+    ],
+    "contextIds": [
+      "doc-page-032-p3",
+      "doc-page-003-p3",
+      "doc-page-001-p3",
+      "doc-page-002-p3",
+      "doc-page-004-p3",
+      "doc-page-005-p3",
+      "doc-page-006-p3",
+      "doc-page-007-p3"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 2.1867999999999483,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-034-2",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-034-2?",
+    "expected": "VALUE-034-2",
+    "answer": "VALUE-034-2",
+    "answerValues": [
+      "VALUE-034-2"
+    ],
+    "contextIds": [
+      "doc-page-034-p2",
+      "doc-page-002-p2",
+      "doc-page-001-p2",
+      "doc-page-003-p2",
+      "doc-page-004-p2",
+      "doc-page-005-p2",
+      "doc-page-006-p2",
+      "doc-page-007-p2"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 2.870300000000043,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-036-1",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-036-1?",
+    "expected": "VALUE-036-1",
+    "answer": "VALUE-036-1",
+    "answerValues": [
+      "VALUE-036-1"
+    ],
+    "contextIds": [
+      "doc-page-036-p1",
+      "doc-page-001-p1",
+      "doc-page-002-p1",
+      "doc-page-003-p1",
+      "doc-page-004-p1",
+      "doc-page-005-p1",
+      "doc-page-006-p1",
+      "doc-page-007-p1"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 2.1282999999999674,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-037-3",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-037-3?",
+    "expected": "VALUE-037-3",
+    "answer": "VALUE-037-3",
+    "answerValues": [
+      "VALUE-037-3"
+    ],
+    "contextIds": [
+      "doc-page-037-p3",
+      "doc-page-003-p3",
+      "doc-page-001-p3",
+      "doc-page-002-p3",
+      "doc-page-004-p3",
+      "doc-page-005-p3",
+      "doc-page-006-p3",
+      "doc-page-007-p3"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.9849000000000387,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-039-2",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-039-2?",
+    "expected": "VALUE-039-2",
+    "answer": "VALUE-039-2",
+    "answerValues": [
+      "VALUE-039-2"
+    ],
+    "contextIds": [
+      "doc-page-039-p2",
+      "doc-page-002-p2",
+      "doc-page-001-p2",
+      "doc-page-003-p2",
+      "doc-page-004-p2",
+      "doc-page-005-p2",
+      "doc-page-006-p2",
+      "doc-page-007-p2"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.841099999999983,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-041-1",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-041-1?",
+    "expected": "VALUE-041-1",
+    "answer": "VALUE-041-1",
+    "answerValues": [
+      "VALUE-041-1"
+    ],
+    "contextIds": [
+      "doc-page-041-p1",
+      "doc-page-001-p1",
+      "doc-page-002-p1",
+      "doc-page-003-p1",
+      "doc-page-004-p1",
+      "doc-page-005-p1",
+      "doc-page-006-p1",
+      "doc-page-007-p1"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 2.074700000000007,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-042-3",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-042-3?",
+    "expected": "VALUE-042-3",
+    "answer": "VALUE-042-3",
+    "answerValues": [
+      "VALUE-042-3"
+    ],
+    "contextIds": [
+      "doc-page-042-p3",
+      "doc-page-003-p3",
+      "doc-page-001-p3",
+      "doc-page-002-p3",
+      "doc-page-004-p3",
+      "doc-page-005-p3",
+      "doc-page-006-p3",
+      "doc-page-007-p3"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 2.8698000000000548,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-044-2",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-044-2?",
+    "expected": "VALUE-044-2",
+    "answer": "VALUE-044-2",
+    "answerValues": [
+      "VALUE-044-2"
+    ],
+    "contextIds": [
+      "doc-page-044-p2",
+      "doc-page-002-p2",
+      "doc-page-001-p2",
+      "doc-page-003-p2",
+      "doc-page-004-p2",
+      "doc-page-005-p2",
+      "doc-page-006-p2",
+      "doc-page-007-p2"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 2.4055000000000746,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-046-1",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-046-1?",
+    "expected": "VALUE-046-1",
+    "answer": "VALUE-046-1",
+    "answerValues": [
+      "VALUE-046-1"
+    ],
+    "contextIds": [
+      "doc-page-046-p1",
+      "doc-page-001-p1",
+      "doc-page-002-p1",
+      "doc-page-003-p1",
+      "doc-page-004-p1",
+      "doc-page-005-p1",
+      "doc-page-006-p1",
+      "doc-page-007-p1"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.7999000000000933,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-047-3",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-047-3?",
+    "expected": "VALUE-047-3",
+    "answer": "VALUE-047-3",
+    "answerValues": [
+      "VALUE-047-3"
+    ],
+    "contextIds": [
+      "doc-page-047-p3",
+      "doc-page-003-p3",
+      "doc-page-001-p3",
+      "doc-page-002-p3",
+      "doc-page-004-p3",
+      "doc-page-005-p3",
+      "doc-page-006-p3",
+      "doc-page-007-p3"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 2.0021000000000413,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-049-2",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-049-2?",
+    "expected": "VALUE-049-2",
+    "answer": "VALUE-049-2",
+    "answerValues": [
+      "VALUE-049-2"
+    ],
+    "contextIds": [
+      "doc-page-049-p2",
+      "doc-page-002-p2",
+      "doc-page-001-p2",
+      "doc-page-003-p2",
+      "doc-page-004-p2",
+      "doc-page-005-p2",
+      "doc-page-006-p2",
+      "doc-page-007-p2"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 2.9080999999999904,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-051-1",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-051-1?",
+    "expected": "VALUE-051-1",
+    "answer": "VALUE-051-1",
+    "answerValues": [
+      "VALUE-051-1"
+    ],
+    "contextIds": [
+      "doc-page-051-p1",
+      "doc-page-001-p1",
+      "doc-page-002-p1",
+      "doc-page-003-p1",
+      "doc-page-004-p1",
+      "doc-page-005-p1",
+      "doc-page-006-p1",
+      "doc-page-007-p1"
+    ],
+    "contextTokens": 330,
+    "latencyMs": 2.06230000000005,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-052-3",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-052-3?",
+    "expected": "VALUE-052-3",
+    "answer": "VALUE-052-3",
+    "answerValues": [
+      "VALUE-052-3"
+    ],
+    "contextIds": [
+      "doc-page-052-p3",
+      "doc-page-003-p3",
+      "doc-page-001-p3",
+      "doc-page-002-p3",
+      "doc-page-004-p3",
+      "doc-page-005-p3",
+      "doc-page-006-p3",
+      "doc-page-007-p3"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.823099999999954,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-054-2",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-054-2?",
+    "expected": "VALUE-054-2",
+    "answer": "VALUE-054-2",
+    "answerValues": [
+      "VALUE-054-2"
+    ],
+    "contextIds": [
+      "doc-page-054-p2",
+      "doc-page-002-p2",
+      "doc-page-001-p2",
+      "doc-page-003-p2",
+      "doc-page-004-p2",
+      "doc-page-005-p2",
+      "doc-page-006-p2",
+      "doc-page-007-p2"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 3.2860999999999194,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-056-1",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-056-1?",
+    "expected": "VALUE-056-1",
+    "answer": "VALUE-056-1",
+    "answerValues": [
+      "VALUE-056-1"
+    ],
+    "contextIds": [
+      "doc-page-056-p1",
+      "doc-page-001-p1",
+      "doc-page-002-p1",
+      "doc-page-003-p1",
+      "doc-page-004-p1",
+      "doc-page-005-p1",
+      "doc-page-006-p1",
+      "doc-page-007-p1"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 2.8103999999999587,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-057-3",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-057-3?",
+    "expected": "VALUE-057-3",
+    "answer": "VALUE-057-3",
+    "answerValues": [
+      "VALUE-057-3"
+    ],
+    "contextIds": [
+      "doc-page-057-p3",
+      "doc-page-003-p3",
+      "doc-page-001-p3",
+      "doc-page-002-p3",
+      "doc-page-004-p3",
+      "doc-page-005-p3",
+      "doc-page-006-p3",
+      "doc-page-007-p3"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 2.0398999999999887,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-059-2",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-059-2?",
+    "expected": "VALUE-059-2",
+    "answer": "VALUE-059-2",
+    "answerValues": [
+      "VALUE-059-2"
+    ],
+    "contextIds": [
+      "doc-page-059-p2",
+      "doc-page-002-p2",
+      "doc-page-001-p2",
+      "doc-page-003-p2",
+      "doc-page-004-p2",
+      "doc-page-005-p2",
+      "doc-page-006-p2",
+      "doc-page-007-p2"
+    ],
+    "contextTokens": 330,
+    "latencyMs": 1.8297999999999774,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-061-1",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-061-1?",
+    "expected": "VALUE-061-1",
+    "answer": "VALUE-061-1",
+    "answerValues": [
+      "VALUE-061-1"
+    ],
+    "contextIds": [
+      "doc-page-061-p1",
+      "doc-page-001-p1",
+      "doc-page-002-p1",
+      "doc-page-003-p1",
+      "doc-page-004-p1",
+      "doc-page-005-p1",
+      "doc-page-006-p1",
+      "doc-page-007-p1"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.9055999999999358,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-062-3",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-062-3?",
+    "expected": "VALUE-062-3",
+    "answer": "VALUE-062-3",
+    "answerValues": [
+      "VALUE-062-3"
+    ],
+    "contextIds": [
+      "doc-page-062-p3",
+      "doc-page-003-p3",
+      "doc-page-001-p3",
+      "doc-page-002-p3",
+      "doc-page-004-p3",
+      "doc-page-005-p3",
+      "doc-page-006-p3",
+      "doc-page-007-p3"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.9236999999999398,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-064-2",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-064-2?",
+    "expected": "VALUE-064-2",
+    "answer": "VALUE-064-2",
+    "answerValues": [
+      "VALUE-064-2"
+    ],
+    "contextIds": [
+      "doc-page-064-p2",
+      "doc-page-002-p2",
+      "doc-page-001-p2",
+      "doc-page-003-p2",
+      "doc-page-004-p2",
+      "doc-page-005-p2",
+      "doc-page-006-p2",
+      "doc-page-007-p2"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.879000000000019,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-066-1",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-066-1?",
+    "expected": "VALUE-066-1",
+    "answer": "VALUE-066-1",
+    "answerValues": [
+      "VALUE-066-1"
+    ],
+    "contextIds": [
+      "doc-page-066-p1",
+      "doc-page-001-p1",
+      "doc-page-002-p1",
+      "doc-page-003-p1",
+      "doc-page-004-p1",
+      "doc-page-005-p1",
+      "doc-page-006-p1",
+      "doc-page-007-p1"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.951599999999985,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-067-3",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-067-3?",
+    "expected": "VALUE-067-3",
+    "answer": "VALUE-067-3",
+    "answerValues": [
+      "VALUE-067-3"
+    ],
+    "contextIds": [
+      "doc-page-067-p3",
+      "doc-page-003-p3",
+      "doc-page-001-p3",
+      "doc-page-002-p3",
+      "doc-page-004-p3",
+      "doc-page-005-p3",
+      "doc-page-006-p3",
+      "doc-page-007-p3"
+    ],
+    "contextTokens": 330,
+    "latencyMs": 2.0341000000000804,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-069-2",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-069-2?",
+    "expected": "VALUE-069-2",
+    "answer": "VALUE-069-2",
+    "answerValues": [
+      "VALUE-069-2"
+    ],
+    "contextIds": [
+      "doc-page-069-p2",
+      "doc-page-002-p2",
+      "doc-page-001-p2",
+      "doc-page-003-p2",
+      "doc-page-004-p2",
+      "doc-page-005-p2",
+      "doc-page-006-p2",
+      "doc-page-007-p2"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.9506000000000085,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-071-1",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-071-1?",
+    "expected": "VALUE-071-1",
+    "answer": "VALUE-071-1",
+    "answerValues": [
+      "VALUE-071-1"
+    ],
+    "contextIds": [
+      "doc-page-071-p1",
+      "doc-page-001-p1",
+      "doc-page-002-p1",
+      "doc-page-003-p1",
+      "doc-page-004-p1",
+      "doc-page-005-p1",
+      "doc-page-006-p1",
+      "doc-page-007-p1"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.8830000000000382,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-072-3",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-072-3?",
+    "expected": "VALUE-072-3",
+    "answer": "VALUE-072-3",
+    "answerValues": [
+      "VALUE-072-3"
+    ],
+    "contextIds": [
+      "doc-page-072-p3",
+      "doc-page-003-p3",
+      "doc-page-001-p3",
+      "doc-page-002-p3",
+      "doc-page-004-p3",
+      "doc-page-005-p3",
+      "doc-page-006-p3",
+      "doc-page-007-p3"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.769200000000069,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-074-2",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-074-2?",
+    "expected": "VALUE-074-2",
+    "answer": "VALUE-074-2",
+    "answerValues": [
+      "VALUE-074-2"
+    ],
+    "contextIds": [
+      "doc-page-074-p2",
+      "doc-page-002-p2",
+      "doc-page-001-p2",
+      "doc-page-003-p2",
+      "doc-page-004-p2",
+      "doc-page-005-p2",
+      "doc-page-006-p2",
+      "doc-page-007-p2"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.8490000000000464,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-076-1",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-076-1?",
+    "expected": "VALUE-076-1",
+    "answer": "VALUE-076-1",
+    "answerValues": [
+      "VALUE-076-1"
+    ],
+    "contextIds": [
+      "doc-page-076-p1",
+      "doc-page-001-p1",
+      "doc-page-002-p1",
+      "doc-page-003-p1",
+      "doc-page-004-p1",
+      "doc-page-005-p1",
+      "doc-page-006-p1",
+      "doc-page-007-p1"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.8551000000001068,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-077-3",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-077-3?",
+    "expected": "VALUE-077-3",
+    "answer": "VALUE-077-3",
+    "answerValues": [
+      "VALUE-077-3"
+    ],
+    "contextIds": [
+      "doc-page-077-p3",
+      "doc-page-003-p3",
+      "doc-page-001-p3",
+      "doc-page-002-p3",
+      "doc-page-004-p3",
+      "doc-page-005-p3",
+      "doc-page-006-p3",
+      "doc-page-007-p3"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.8378999999999905,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-079-2",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-079-2?",
+    "expected": "VALUE-079-2",
+    "answer": "VALUE-079-2",
+    "answerValues": [
+      "VALUE-079-2"
+    ],
+    "contextIds": [
+      "doc-page-079-p2",
+      "doc-page-002-p2",
+      "doc-page-001-p2",
+      "doc-page-003-p2",
+      "doc-page-004-p2",
+      "doc-page-005-p2",
+      "doc-page-006-p2",
+      "doc-page-007-p2"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.7756999999999152,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-081-1",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-081-1?",
+    "expected": "VALUE-081-1",
+    "answer": "VALUE-081-1",
+    "answerValues": [
+      "VALUE-081-1"
+    ],
+    "contextIds": [
+      "doc-page-081-p1",
+      "doc-page-001-p1",
+      "doc-page-002-p1",
+      "doc-page-003-p1",
+      "doc-page-004-p1",
+      "doc-page-005-p1",
+      "doc-page-006-p1",
+      "doc-page-007-p1"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 2.1381000000000085,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-082-3",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-082-3?",
+    "expected": "VALUE-082-3",
+    "answer": "VALUE-082-3",
+    "answerValues": [
+      "VALUE-082-3"
+    ],
+    "contextIds": [
+      "doc-page-082-p3",
+      "doc-page-003-p3",
+      "doc-page-001-p3",
+      "doc-page-002-p3",
+      "doc-page-004-p3",
+      "doc-page-005-p3",
+      "doc-page-006-p3",
+      "doc-page-007-p3"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.931600000000003,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-084-2",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-084-2?",
+    "expected": "VALUE-084-2",
+    "answer": "VALUE-084-2",
+    "answerValues": [
+      "VALUE-084-2"
+    ],
+    "contextIds": [
+      "doc-page-084-p2",
+      "doc-page-002-p2",
+      "doc-page-001-p2",
+      "doc-page-003-p2",
+      "doc-page-004-p2",
+      "doc-page-005-p2",
+      "doc-page-006-p2",
+      "doc-page-007-p2"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.8196000000000367,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-086-1",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-086-1?",
+    "expected": "VALUE-086-1",
+    "answer": "VALUE-086-1",
+    "answerValues": [
+      "VALUE-086-1"
+    ],
+    "contextIds": [
+      "doc-page-086-p1",
+      "doc-page-001-p1",
+      "doc-page-002-p1",
+      "doc-page-003-p1",
+      "doc-page-004-p1",
+      "doc-page-005-p1",
+      "doc-page-006-p1",
+      "doc-page-007-p1"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.9076000000000022,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-087-3",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-087-3?",
+    "expected": "VALUE-087-3",
+    "answer": "VALUE-087-3",
+    "answerValues": [
+      "VALUE-087-3"
+    ],
+    "contextIds": [
+      "doc-page-087-p3",
+      "doc-page-003-p3",
+      "doc-page-001-p3",
+      "doc-page-002-p3",
+      "doc-page-004-p3",
+      "doc-page-005-p3",
+      "doc-page-006-p3",
+      "doc-page-007-p3"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.8783000000000811,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-089-2",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-089-2?",
+    "expected": "VALUE-089-2",
+    "answer": "VALUE-089-2",
+    "answerValues": [
+      "VALUE-089-2"
+    ],
+    "contextIds": [
+      "doc-page-089-p2",
+      "doc-page-002-p2",
+      "doc-page-001-p2",
+      "doc-page-003-p2",
+      "doc-page-004-p2",
+      "doc-page-005-p2",
+      "doc-page-006-p2",
+      "doc-page-007-p2"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.8851999999999407,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-091-1",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-091-1?",
+    "expected": "VALUE-091-1",
+    "answer": "VALUE-091-1",
+    "answerValues": [
+      "VALUE-091-1"
+    ],
+    "contextIds": [
+      "doc-page-091-p1",
+      "doc-page-001-p1",
+      "doc-page-002-p1",
+      "doc-page-003-p1",
+      "doc-page-004-p1",
+      "doc-page-005-p1",
+      "doc-page-006-p1",
+      "doc-page-007-p1"
+    ],
+    "contextTokens": 330,
+    "latencyMs": 1.7717000000000098,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-092-3",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-092-3?",
+    "expected": "VALUE-092-3",
+    "answer": "VALUE-092-3",
+    "answerValues": [
+      "VALUE-092-3"
+    ],
+    "contextIds": [
+      "doc-page-092-p3",
+      "doc-page-003-p3",
+      "doc-page-001-p3",
+      "doc-page-002-p3",
+      "doc-page-004-p3",
+      "doc-page-005-p3",
+      "doc-page-006-p3",
+      "doc-page-007-p3"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 2.0137999999999465,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-094-2",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-094-2?",
+    "expected": "VALUE-094-2",
+    "answer": "VALUE-094-2",
+    "answerValues": [
+      "VALUE-094-2"
+    ],
+    "contextIds": [
+      "doc-page-094-p2",
+      "doc-page-002-p2",
+      "doc-page-001-p2",
+      "doc-page-003-p2",
+      "doc-page-004-p2",
+      "doc-page-005-p2",
+      "doc-page-006-p2",
+      "doc-page-007-p2"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 2.44380000000001,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-096-1",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-096-1?",
+    "expected": "VALUE-096-1",
+    "answer": "VALUE-096-1",
+    "answerValues": [
+      "VALUE-096-1"
+    ],
+    "contextIds": [
+      "doc-page-096-p1",
+      "doc-page-001-p1",
+      "doc-page-002-p1",
+      "doc-page-003-p1",
+      "doc-page-004-p1",
+      "doc-page-005-p1",
+      "doc-page-006-p1",
+      "doc-page-007-p1"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 3.477800000000002,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-097-3",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-097-3?",
+    "expected": "VALUE-097-3",
+    "answer": "VALUE-097-3",
+    "answerValues": [
+      "VALUE-097-3"
+    ],
+    "contextIds": [
+      "doc-page-097-p3",
+      "doc-page-003-p3",
+      "doc-page-001-p3",
+      "doc-page-002-p3",
+      "doc-page-004-p3",
+      "doc-page-005-p3",
+      "doc-page-006-p3",
+      "doc-page-007-p3"
+    ],
+    "contextTokens": 329,
+    "latencyMs": 1.9564000000000306,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  },
+  {
+    "questionId": "doc-q-099-2",
+    "questionType": "document_detail",
+    "question": "In the long document, what answer token is recorded for marker DOC-099-2?",
+    "expected": "VALUE-099-2",
+    "answer": "VALUE-099-2",
+    "answerValues": [
+      "VALUE-099-2"
+    ],
+    "contextIds": [
+      "doc-page-099-p2",
+      "doc-page-002-p2",
+      "doc-page-001-p2",
+      "doc-page-003-p2",
+      "doc-page-004-p2",
+      "doc-page-005-p2",
+      "doc-page-006-p2",
+      "doc-page-007-p2"
+    ],
+    "contextTokens": 330,
+    "latencyMs": 1.9041999999999462,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false,
+    "routedTo": "document_rag"
+  }
+]

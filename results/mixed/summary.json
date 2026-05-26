@@ -1,0 +1,317 @@
+{
+  "dataset": {
+    "events": 1000,
+    "documentPages": 100,
+    "documentChunks": 300,
+    "questions": 102,
+    "currentStateQuestions": 36,
+    "stableStateQuestions": 6,
+    "documentQuestions": 60
+  },
+  "configuration": {
+    "ragTopK": 12,
+    "documentTopK": 8,
+    "stateLimit": 8
+  },
+  "ragOnly": {
+    "totalQuestions": 102,
+    "answered": 101,
+    "correct": 69,
+    "exactMatchAccuracy": 0.6764705882352942,
+    "answerAccuracy": 0.6764705882352942,
+    "recallAccuracy": 0.6764705882352942,
+    "precision": 0.6831683168316832,
+    "f1Score": 0.6798029556650248,
+    "currentFactQuestions": 36,
+    "currentFactAccuracy": 0.16666666666666666,
+    "staleFactErrorRate": 0.29411764705882354,
+    "currentStaleFactErrorRate": 0.8333333333333334,
+    "obsoleteFactRejectionRate": 0.16666666666666666,
+    "contextHitRate": 0.9705882352941176,
+    "meanReciprocalRank": 0.7741285403050109,
+    "averageContextTokens": 229.7941176470588,
+    "averageLatencyMs": 3.406064705882354,
+    "contextEfficiency": 0.0029438115960578526,
+    "latencyEfficiency": 0.19860767385511305,
+    "errorTaxonomy": {
+      "stale_fact": 30,
+      "none": 69,
+      "missing_fact": 3
+    }
+  },
+  "stateOnly": {
+    "totalQuestions": 102,
+    "answered": 42,
+    "correct": 42,
+    "exactMatchAccuracy": 0.4117647058823529,
+    "answerAccuracy": 0.4117647058823529,
+    "recallAccuracy": 0.4117647058823529,
+    "precision": 1,
+    "f1Score": 0.5833333333333334,
+    "currentFactQuestions": 36,
+    "currentFactAccuracy": 1,
+    "staleFactErrorRate": 0,
+    "currentStaleFactErrorRate": 0,
+    "obsoleteFactRejectionRate": 1,
+    "contextHitRate": 0.4117647058823529,
+    "meanReciprocalRank": 0.4117647058823529,
+    "averageContextTokens": 26.901960784313726,
+    "averageLatencyMs": 0.45870588235294074,
+    "contextEfficiency": 0.015306122448979591,
+    "latencyEfficiency": 0.897666068222622,
+    "errorTaxonomy": {
+      "none": 42,
+      "missing_fact": 60
+    }
+  },
+  "hybrid": {
+    "totalQuestions": 102,
+    "answered": 102,
+    "correct": 102,
+    "exactMatchAccuracy": 1,
+    "answerAccuracy": 1,
+    "recallAccuracy": 1,
+    "precision": 1,
+    "f1Score": 1,
+    "currentFactQuestions": 36,
+    "currentFactAccuracy": 1,
+    "staleFactErrorRate": 0,
+    "currentStaleFactErrorRate": 0,
+    "obsoleteFactRejectionRate": 1,
+    "contextHitRate": 1,
+    "meanReciprocalRank": 1,
+    "averageContextTokens": 220.50980392156862,
+    "averageLatencyMs": 1.5940509803921632,
+    "contextEfficiency": 0.0045349457584919085,
+    "latencyEfficiency": 0.6273325083705813,
+    "errorTaxonomy": {
+      "none": 102
+    }
+  },
+  "byType": {
+    "ragOnly": {
+      "current_state": {
+        "totalQuestions": 36,
+        "answered": 36,
+        "correct": 6,
+        "exactMatchAccuracy": 0.16666666666666666,
+        "answerAccuracy": 0.16666666666666666,
+        "recallAccuracy": 0.16666666666666666,
+        "precision": 0.16666666666666666,
+        "f1Score": 0.16666666666666666,
+        "currentFactQuestions": 36,
+        "currentFactAccuracy": 0.16666666666666666,
+        "staleFactErrorRate": 0.8333333333333334,
+        "currentStaleFactErrorRate": 0.8333333333333334,
+        "obsoleteFactRejectionRate": 0.16666666666666666,
+        "contextHitRate": 1,
+        "meanReciprocalRank": 0.433641975308642,
+        "averageContextTokens": 87.55555555555556,
+        "averageLatencyMs": 4.2706583333333334,
+        "contextEfficiency": 0.0019035532994923856,
+        "latencyEfficiency": 0.0390259893576127,
+        "errorTaxonomy": {
+          "stale_fact": 30,
+          "none": 6
+        }
+      },
+      "stable_state": {
+        "totalQuestions": 6,
+        "answered": 5,
+        "correct": 3,
+        "exactMatchAccuracy": 0.5,
+        "answerAccuracy": 0.5,
+        "recallAccuracy": 0.5,
+        "precision": 0.6,
+        "f1Score": 0.5454545454545454,
+        "currentFactQuestions": 0,
+        "currentFactAccuracy": 0,
+        "staleFactErrorRate": 0,
+        "currentStaleFactErrorRate": 0,
+        "obsoleteFactRejectionRate": 0,
+        "contextHitRate": 0.5,
+        "meanReciprocalRank": 0.5583333333333333,
+        "averageContextTokens": 89.83333333333333,
+        "averageLatencyMs": 4.621549999999999,
+        "contextEfficiency": 0.0055658627087198514,
+        "latencyEfficiency": 0.1081888111131547,
+        "errorTaxonomy": {
+          "missing_fact": 3,
+          "none": 3
+        }
+      },
+      "document_detail": {
+        "totalQuestions": 60,
+        "answered": 60,
+        "correct": 60,
+        "exactMatchAccuracy": 1,
+        "answerAccuracy": 1,
+        "recallAccuracy": 1,
+        "precision": 1,
+        "f1Score": 1,
+        "currentFactQuestions": 0,
+        "currentFactAccuracy": 0,
+        "staleFactErrorRate": 0,
+        "currentStaleFactErrorRate": 0,
+        "obsoleteFactRejectionRate": 0,
+        "contextHitRate": 1,
+        "meanReciprocalRank": 1,
+        "averageContextTokens": 329.1333333333333,
+        "averageLatencyMs": 2.765760000000003,
+        "contextEfficiency": 0.00303828235770711,
+        "latencyEfficiency": 0.36156427166493077,
+        "errorTaxonomy": {
+          "none": 60
+        }
+      }
+    },
+    "stateOnly": {
+      "current_state": {
+        "totalQuestions": 36,
+        "answered": 36,
+        "correct": 36,
+        "exactMatchAccuracy": 1,
+        "answerAccuracy": 1,
+        "recallAccuracy": 1,
+        "precision": 1,
+        "f1Score": 1,
+        "currentFactQuestions": 36,
+        "currentFactAccuracy": 1,
+        "staleFactErrorRate": 0,
+        "currentStaleFactErrorRate": 0,
+        "obsoleteFactRejectionRate": 1,
+        "contextHitRate": 1,
+        "meanReciprocalRank": 1,
+        "averageContextTokens": 66.16666666666667,
+        "averageLatencyMs": 1.1128055555555518,
+        "contextEfficiency": 0.015113350125944584,
+        "latencyEfficiency": 0.898629589875443,
+        "errorTaxonomy": {
+          "none": 36
+        }
+      },
+      "stable_state": {
+        "totalQuestions": 6,
+        "answered": 6,
+        "correct": 6,
+        "exactMatchAccuracy": 1,
+        "answerAccuracy": 1,
+        "recallAccuracy": 1,
+        "precision": 1,
+        "f1Score": 1,
+        "currentFactQuestions": 0,
+        "currentFactAccuracy": 0,
+        "staleFactErrorRate": 0,
+        "currentStaleFactErrorRate": 0,
+        "obsoleteFactRejectionRate": 0,
+        "contextHitRate": 1,
+        "meanReciprocalRank": 1,
+        "averageContextTokens": 60.333333333333336,
+        "averageLatencyMs": 1.1188666666666716,
+        "contextEfficiency": 0.016574585635359115,
+        "latencyEfficiency": 0.8937615444199448,
+        "errorTaxonomy": {
+          "none": 6
+        }
+      },
+      "document_detail": {
+        "totalQuestions": 60,
+        "answered": 0,
+        "correct": 0,
+        "exactMatchAccuracy": 0,
+        "answerAccuracy": 0,
+        "recallAccuracy": 0,
+        "precision": 0,
+        "f1Score": 0,
+        "currentFactQuestions": 0,
+        "currentFactAccuracy": 0,
+        "staleFactErrorRate": 0,
+        "currentStaleFactErrorRate": 0,
+        "obsoleteFactRejectionRate": 0,
+        "contextHitRate": 0,
+        "meanReciprocalRank": 0,
+        "averageContextTokens": 0,
+        "averageLatencyMs": 0.00023000000000100346,
+        "contextEfficiency": 0,
+        "latencyEfficiency": 0,
+        "errorTaxonomy": {
+          "missing_fact": 60
+        }
+      }
+    },
+    "hybrid": {
+      "current_state": {
+        "totalQuestions": 36,
+        "answered": 36,
+        "correct": 36,
+        "exactMatchAccuracy": 1,
+        "answerAccuracy": 1,
+        "recallAccuracy": 1,
+        "precision": 1,
+        "f1Score": 1,
+        "currentFactQuestions": 36,
+        "currentFactAccuracy": 1,
+        "staleFactErrorRate": 0,
+        "currentStaleFactErrorRate": 0,
+        "obsoleteFactRejectionRate": 1,
+        "contextHitRate": 1,
+        "meanReciprocalRank": 1,
+        "averageContextTokens": 66.16666666666667,
+        "averageLatencyMs": 0.8369250000000048,
+        "contextEfficiency": 0.015113350125944584,
+        "latencyEfficiency": 1.1948501956567126,
+        "errorTaxonomy": {
+          "none": 36
+        }
+      },
+      "stable_state": {
+        "totalQuestions": 6,
+        "answered": 6,
+        "correct": 6,
+        "exactMatchAccuracy": 1,
+        "answerAccuracy": 1,
+        "recallAccuracy": 1,
+        "precision": 1,
+        "f1Score": 1,
+        "currentFactQuestions": 0,
+        "currentFactAccuracy": 0,
+        "staleFactErrorRate": 0,
+        "currentStaleFactErrorRate": 0,
+        "obsoleteFactRejectionRate": 0,
+        "contextHitRate": 1,
+        "meanReciprocalRank": 1,
+        "averageContextTokens": 60.333333333333336,
+        "averageLatencyMs": 0.7261666666666807,
+        "contextEfficiency": 0.016574585635359115,
+        "latencyEfficiency": 1.3770943309616441,
+        "errorTaxonomy": {
+          "none": 6
+        }
+      },
+      "document_detail": {
+        "totalQuestions": 60,
+        "answered": 60,
+        "correct": 60,
+        "exactMatchAccuracy": 1,
+        "answerAccuracy": 1,
+        "recallAccuracy": 1,
+        "precision": 1,
+        "f1Score": 1,
+        "currentFactQuestions": 0,
+        "currentFactAccuracy": 0,
+        "staleFactErrorRate": 0,
+        "currentStaleFactErrorRate": 0,
+        "obsoleteFactRejectionRate": 0,
+        "contextHitRate": 1,
+        "meanReciprocalRank": 1,
+        "averageContextTokens": 329.1333333333333,
+        "averageLatencyMs": 2.1351150000000065,
+        "contextEfficiency": 0.00303828235770711,
+        "latencyEfficiency": 0.4683588471815321,
+        "errorTaxonomy": {
+          "none": 60
+        }
+      }
+    }
+  }
+}

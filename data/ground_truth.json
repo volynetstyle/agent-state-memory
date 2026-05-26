@@ -1,0 +1,398 @@
+{
+  "q-current-001": {
+    "subject": "Reflex",
+    "predicate": "runtime",
+    "expected": "reactive graph runtime",
+    "obsoleteAnswers": [
+      "event-sourced runtime",
+      "actor runtime"
+    ]
+  },
+  "q-current-002": {
+    "subject": "Reflex",
+    "predicate": "storage",
+    "expected": "graph-indexed store",
+    "obsoleteAnswers": [
+      "local arrays",
+      "normalized object store"
+    ]
+  },
+  "q-current-003": {
+    "subject": "Reflex",
+    "predicate": "selector_strategy",
+    "expected": "dependency-tracked selectors",
+    "obsoleteAnswers": [
+      "manual subscriptions",
+      "selector cache"
+    ]
+  },
+  "q-current-004": {
+    "subject": "State Memory coursework",
+    "predicate": "topic",
+    "expected": "State Memory for LLM agents",
+    "obsoleteAnswers": [
+      "RAG for agents",
+      "long-context prompting"
+    ]
+  },
+  "q-current-005": {
+    "subject": "State Memory coursework",
+    "predicate": "deadline",
+    "expected": "one week",
+    "obsoleteAnswers": [
+      "ten days",
+      "two weeks"
+    ]
+  },
+  "q-current-006": {
+    "subject": "State Memory coursework",
+    "predicate": "implementation_language",
+    "expected": "zero-dependency Node.js",
+    "obsoleteAnswers": [
+      "Python",
+      "TypeScript"
+    ]
+  },
+  "q-current-007": {
+    "subject": "RAG baseline",
+    "predicate": "retriever",
+    "expected": "lexical top-k retriever",
+    "obsoleteAnswers": [
+      "random memory sampler",
+      "cosine embedding search"
+    ]
+  },
+  "q-current-008": {
+    "subject": "RAG baseline",
+    "predicate": "chunk_unit",
+    "expected": "event chunks",
+    "obsoleteAnswers": [
+      "paragraph chunks",
+      "daily summaries"
+    ]
+  },
+  "q-current-009": {
+    "subject": "RAG baseline",
+    "predicate": "top_k",
+    "expected": "12",
+    "obsoleteAnswers": [
+      "3",
+      "8"
+    ]
+  },
+  "q-current-010": {
+    "subject": "State Memory agent",
+    "predicate": "memory_strategy",
+    "expected": "structured world state",
+    "obsoleteAnswers": [
+      "full history",
+      "RAG retrieval"
+    ]
+  },
+  "q-current-011": {
+    "subject": "State Memory agent",
+    "predicate": "answer_mode",
+    "expected": "selected active facts",
+    "obsoleteAnswers": [
+      "free-form generation",
+      "retrieved chunks only"
+    ]
+  },
+  "q-current-012": {
+    "subject": "Fact extractor",
+    "predicate": "method",
+    "expected": "rule-based JSON extraction",
+    "obsoleteAnswers": [
+      "manual annotation",
+      "LLM extraction"
+    ]
+  },
+  "q-current-013": {
+    "subject": "Fact extractor",
+    "predicate": "confidence_policy",
+    "expected": "numeric confidence",
+    "obsoleteAnswers": [
+      "unscored facts",
+      "binary confidence"
+    ]
+  },
+  "q-current-014": {
+    "subject": "State updater",
+    "predicate": "mutable_rule",
+    "expected": "latest wins",
+    "obsoleteAnswers": [
+      "append everything",
+      "manual overwrite"
+    ]
+  },
+  "q-current-015": {
+    "subject": "State updater",
+    "predicate": "old_fact_status",
+    "expected": "marked obsolete",
+    "obsoleteAnswers": [
+      "kept active",
+      "deleted"
+    ]
+  },
+  "q-current-016": {
+    "subject": "State selector",
+    "predicate": "ranking",
+    "expected": "slot and keyword scoring",
+    "obsoleteAnswers": [
+      "random facts",
+      "recency only"
+    ]
+  },
+  "q-current-017": {
+    "subject": "State selector",
+    "predicate": "limit",
+    "expected": "8 facts",
+    "obsoleteAnswers": [
+      "3 facts",
+      "5 facts"
+    ]
+  },
+  "q-current-018": {
+    "subject": "World state",
+    "predicate": "serialization",
+    "expected": "JSON facts",
+    "obsoleteAnswers": [
+      "YAML",
+      "SQLite rows"
+    ]
+  },
+  "q-current-019": {
+    "subject": "World state",
+    "predicate": "obsolete_handling",
+    "expected": "stores obsolete facts with validTo",
+    "obsoleteAnswers": [
+      "keeps obsolete facts active",
+      "removes obsolete facts"
+    ]
+  },
+  "q-current-020": {
+    "subject": "Event store",
+    "predicate": "format",
+    "expected": "JSONL",
+    "obsoleteAnswers": [
+      "CSV",
+      "plain text transcript"
+    ]
+  },
+  "q-current-021": {
+    "subject": "Synthetic dataset",
+    "predicate": "size",
+    "expected": "1000 events",
+    "obsoleteAnswers": [
+      "250 events",
+      "500 events"
+    ]
+  },
+  "q-current-022": {
+    "subject": "Synthetic dataset",
+    "predicate": "contains",
+    "expected": "stable facts and fact updates",
+    "obsoleteAnswers": [
+      "only stable facts",
+      "only random notes"
+    ]
+  },
+  "q-current-023": {
+    "subject": "Evaluation suite",
+    "predicate": "primary_metric",
+    "expected": "stale fact error rate",
+    "obsoleteAnswers": [
+      "BLEU",
+      "semantic similarity"
+    ]
+  },
+  "q-current-024": {
+    "subject": "Evaluation suite",
+    "predicate": "latency_unit",
+    "expected": "milliseconds",
+    "obsoleteAnswers": [
+      "seconds",
+      "microseconds"
+    ]
+  },
+  "q-current-025": {
+    "subject": "Metrics report",
+    "predicate": "output",
+    "expected": "JSON result files",
+    "obsoleteAnswers": [
+      "terminal only",
+      "CSV only"
+    ]
+  },
+  "q-current-026": {
+    "subject": "Prompt builder",
+    "predicate": "context_source",
+    "expected": "selected state slice",
+    "obsoleteAnswers": [
+      "full transcript",
+      "retrieved memories"
+    ]
+  },
+  "q-current-027": {
+    "subject": "Prompt builder",
+    "predicate": "style",
+    "expected": "structured memory prompt",
+    "obsoleteAnswers": [
+      "chat transcript",
+      "bullet state summary"
+    ]
+  },
+  "q-current-028": {
+    "subject": "Answer evaluator",
+    "predicate": "grading",
+    "expected": "exact normalized matching",
+    "obsoleteAnswers": [
+      "manual grading",
+      "LLM judge"
+    ]
+  },
+  "q-current-029": {
+    "subject": "Answer evaluator",
+    "predicate": "unknown_policy",
+    "expected": "return unknown when evidence is missing",
+    "obsoleteAnswers": [
+      "always guess",
+      "hallucinate likely answers"
+    ]
+  },
+  "q-current-030": {
+    "subject": "Coursework repository",
+    "predicate": "result_directory",
+    "expected": "results",
+    "obsoleteAnswers": [
+      "output",
+      "reports"
+    ]
+  },
+  "q-current-031": {
+    "subject": "Coursework repository",
+    "predicate": "data_directory",
+    "expected": "data",
+    "obsoleteAnswers": [
+      "fixtures",
+      "dataset"
+    ]
+  },
+  "q-current-032": {
+    "subject": "Long-context agent",
+    "predicate": "failure_mode",
+    "expected": "stale fact usage",
+    "obsoleteAnswers": [
+      "syntax errors",
+      "retrieval noise"
+    ]
+  },
+  "q-current-033": {
+    "subject": "Memory benchmark",
+    "predicate": "comparison",
+    "expected": "RAG versus State Memory",
+    "obsoleteAnswers": [
+      "State Memory only",
+      "Full History only"
+    ]
+  },
+  "q-current-034": {
+    "subject": "Memory benchmark",
+    "predicate": "hypothesis",
+    "expected": "State Memory reduces stale fact errors",
+    "obsoleteAnswers": [
+      "RAG is always perfect",
+      "longer prompts are always better"
+    ]
+  },
+  "q-current-035": {
+    "subject": "Experiment runner",
+    "predicate": "execution",
+    "expected": "single Node command",
+    "obsoleteAnswers": [
+      "manual notebook cells",
+      "shell script"
+    ]
+  },
+  "q-current-036": {
+    "subject": "Experiment runner",
+    "predicate": "reproducibility",
+    "expected": "deterministic seeded data",
+    "obsoleteAnswers": [
+      "random each run",
+      "external API dependent"
+    ]
+  },
+  "q-list-001": {
+    "subject": "State Memory coursework",
+    "predicate": "requires",
+    "expected": [
+      "implementation",
+      "experiments",
+      "metrics",
+      "baseline comparison",
+      "error analysis",
+      "conclusions"
+    ],
+    "obsoleteAnswers": []
+  },
+  "q-list-002": {
+    "subject": "User",
+    "predicate": "interest",
+    "expected": [
+      "reactive systems",
+      "LLM agents",
+      "machine learning",
+      "memory architectures"
+    ],
+    "obsoleteAnswers": []
+  },
+  "q-list-003": {
+    "subject": "State Memory",
+    "predicate": "stores",
+    "expected": [
+      "user profile",
+      "projects",
+      "goals",
+      "tasks",
+      "facts"
+    ],
+    "obsoleteAnswers": []
+  },
+  "q-list-004": {
+    "subject": "Metrics",
+    "predicate": "include",
+    "expected": [
+      "recall",
+      "precision",
+      "context size",
+      "latency",
+      "stale fact error rate",
+      "compression ratio"
+    ],
+    "obsoleteAnswers": []
+  },
+  "q-list-005": {
+    "subject": "RAG pipeline",
+    "predicate": "step",
+    "expected": [
+      "chunking",
+      "retrieval",
+      "prompt building",
+      "answering"
+    ],
+    "obsoleteAnswers": []
+  },
+  "q-list-006": {
+    "subject": "State Memory pipeline",
+    "predicate": "step",
+    "expected": [
+      "event logging",
+      "fact extraction",
+      "state update",
+      "state selection",
+      "prompt building"
+    ],
+    "obsoleteAnswers": []
+  }
+}

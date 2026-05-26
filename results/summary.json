@@ -1,0 +1,71 @@
+{
+  "dataset": {
+    "events": 1000,
+    "questions": 42,
+    "activeFacts": 206,
+    "obsoleteFacts": 72,
+    "fullHistoryTokens": 8158
+  },
+  "configuration": {
+    "ragTopK": 12,
+    "stateLimit": 8
+  },
+  "rag": {
+    "totalQuestions": 42,
+    "answered": 41,
+    "correct": 9,
+    "exactMatchAccuracy": 0.21428571428571427,
+    "answerAccuracy": 0.21428571428571427,
+    "recallAccuracy": 0.21428571428571427,
+    "precision": 0.21951219512195122,
+    "f1Score": 0.21686746987951805,
+    "currentFactQuestions": 36,
+    "currentFactAccuracy": 0.16666666666666666,
+    "staleFactErrorRate": 0.7142857142857143,
+    "currentStaleFactErrorRate": 0.8333333333333334,
+    "obsoleteFactRejectionRate": 0.16666666666666666,
+    "contextHitRate": 0.9285714285714286,
+    "meanReciprocalRank": 0.45145502645502655,
+    "averageContextTokens": 87.88095238095238,
+    "averageLatencyMs": 4.356616666666669,
+    "contextEfficiency": 0.002438363587103766,
+    "latencyEfficiency": 0.0491862678498332,
+    "errorTaxonomy": {
+      "stale_fact": 30,
+      "none": 9,
+      "missing_fact": 3
+    },
+    "contextCompressionRatio": 92.8301273367651
+  },
+  "stateMemory": {
+    "totalQuestions": 42,
+    "answered": 42,
+    "correct": 42,
+    "exactMatchAccuracy": 1,
+    "answerAccuracy": 1,
+    "recallAccuracy": 1,
+    "precision": 1,
+    "f1Score": 1,
+    "currentFactQuestions": 36,
+    "currentFactAccuracy": 1,
+    "staleFactErrorRate": 0,
+    "currentStaleFactErrorRate": 0,
+    "obsoleteFactRejectionRate": 1,
+    "contextHitRate": 1,
+    "meanReciprocalRank": 1,
+    "averageContextTokens": 65.33333333333333,
+    "averageLatencyMs": 1.1324976190476204,
+    "contextEfficiency": 0.015306122448979593,
+    "latencyEfficiency": 0.8830040639210837,
+    "errorTaxonomy": {
+      "none": 42
+    },
+    "contextCompressionRatio": 124.86734693877553
+  },
+  "pairedComparison": {
+    "bothCorrect": 9,
+    "rightCorrectLeftWrong": 33,
+    "leftCorrectRightWrong": 0,
+    "bothWrong": 0
+  }
+}
