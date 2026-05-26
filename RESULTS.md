@@ -8,7 +8,7 @@ This file is generated from `results/**/summary.json` and LLM result files by `n
 4. RAG remains strong for document-detail questions, while State-only fails on document details. Hybrid reaches 1.0000 Exact Match on mixed structured/document tasks.
 5. Defensive State is useful when uncertainty is visible: it recovers near-simultaneous conflicts at 1.0000 Exact Match, but cannot recover missing final updates (0.1429).
 6. State Memory lookup scales with near-constant latency. At 5000 events, RAG averages 15.5933 ms and State Memory averages 0.5495 ms, a 28.4x speedup.
-7. The LLM benchmark supports the same conclusion at generation time: Hybrid + LLM reaches 0.8889 normalized accuracy with 0.0000 hallucination rate.
+7. The LLM benchmark supports the same conclusion at generation time: Hybrid + LLM reaches 0.9355 normalized accuracy with 0.0000 hallucination rate.
 
 ## Level 1: Main Findings
 
@@ -90,7 +90,7 @@ These timings are local JavaScript measurements, not a full production database 
 ### Claim 6: LLM answering preserves the hybrid advantage
 
 **Evidence.**
-Hybrid + LLM reaches 0.8889 normalized accuracy, above RAG + LLM at 0.8889 and State + LLM at 0.6667.
+Hybrid + LLM reaches 0.9355 normalized accuracy, above RAG + LLM at 0.8065 and State + LLM at 0.5806.
 
 **Interpretation.**
 The retrieval/state routing decision remains useful even when a generative model produces the final answer.
@@ -194,7 +194,7 @@ Checks whether the memory-routing conclusions survive real local LLM answer gene
 llama3.2:3b with temperature 0.
 
 **Key result.**
-Hybrid + LLM reaches 0.8889 normalized accuracy with 0.0000 hallucination rate.
+Hybrid + LLM reaches 0.9355 normalized accuracy with 0.0000 hallucination rate.
 
 **Main limitation.**
 LLM output introduces formatting and incomplete-answer errors that are separate from memory retrieval.
@@ -256,8 +256,8 @@ In the mixed benchmark, State-only scores 0.0000 on document-detail questions. T
 | --- | ---: | --- | --- |
 | stale_fact | 30 | RAG | Deterministic benchmark |
 | slot_inference_failed | 9 | State no-oracle | Robust benchmark |
-| missing_fact | 3 | RAG + LLM, State + LLM | Mixed LLM benchmark |
-| incomplete_answer | 2 | State + LLM, Hybrid + LLM | Mixed LLM benchmark |
+| incomplete_answer | 8 | RAG + LLM, State + LLM, Hybrid + LLM | Mixed LLM benchmark |
+| missing_fact | 13 | RAG + LLM, State + LLM | Mixed LLM benchmark |
 
 The deterministic and robust rows come from aggregate summaries. The LLM rows are counted from full result files, not only from the displayed failure examples.
 
@@ -408,14 +408,14 @@ Model: llama3.2:3b, temperature: 0, seed: 42, timeout: 120000 ms, num_predict: 6
 
 | System | Normalized Accuracy | Unknown Accuracy | Prompt Compliance | Hallucination Rate | Avg Context Tokens | Avg LLM ms |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| RAG + LLM | 0.8889 | 1.0000 | 0.8889 | 0.0000 | 145.0000 | 11500.3988 |
-| State + LLM | 0.6667 | 1.0000 | 0.8889 | 0.0000 | 65.4444 | 4275.4373 |
-| Hybrid + LLM | 0.8889 | 1.0000 | 0.8889 | 0.0000 | 138.4444 | 10916.4702 |
+| RAG + LLM | 0.8065 | 1.0000 | 0.8710 | 0.0323 | 207.2581 | 16652.0086 |
+| State + LLM | 0.5806 | 1.0000 | 0.9032 | 0.0000 | 64.0645 | 4021.4874 |
+| Hybrid + LLM | 0.9355 | 1.0000 | 0.9355 | 0.0000 | 187.9032 | 15229.8465 |
 
 | Type | RAG + LLM | State + LLM | Hybrid + LLM |
 | --- | ---: | ---: | ---: |
-| current_state | 1.0000 | 1.0000 | 1.0000 |
-| stable_state | 0.5000 | 0.5000 | 0.5000 |
+| current_state | 0.7000 | 0.9000 | 0.9000 |
+| stable_state | 0.5000 | 0.6667 | 0.8333 |
 | document_detail | 1.0000 | 0.0000 | 1.0000 |
 | unknown | 1.0000 | 1.0000 | 1.0000 |
 
@@ -423,11 +423,16 @@ Top failure examples:
 
 | System | Type | Error | Expected | Raw Answer |
 | --- | --- | --- | --- | --- |
+| rag | current_state | incomplete_answer | zero-dependency Node.js | UNKNOWN |
+| rag | current_state | incomplete_answer | lexical top-k retriever | Cosine embedding search. |
+| rag | current_state | incomplete_answer | structured world state | RAG retrieval. |
 | rag | stable_state | missing_fact | implementation, experiments, metrics, baseline comparison, error analysis, conclusions | includes implementation, baseline comparison, metrics, error analysis, experiments. |
+| rag | stable_state | missing_fact | user profile, projects, goals, tasks, facts | Goals, facts. |
+| rag | stable_state | missing_fact | recall, precision, context size, latency, stale fact error rate, compression ratio | UNKNOWN |
+| state | current_state | incomplete_answer | zero-dependency Node.js | Node.js |
 | state | stable_state | incomplete_answer | implementation, experiments, metrics, baseline comparison, error analysis, conclusions | experiments and conclusions |
+| state | stable_state | incomplete_answer | event logging, fact extraction, state update, state selection, prompt building | state selection, event logging, fact extraction, prompt building |
 | state | document_detail | missing_fact | VALUE-001-1 | UNKNOWN |
-| state | document_detail | missing_fact | VALUE-011-1 | UNKNOWN |
-| hybrid | stable_state | incomplete_answer | implementation, experiments, metrics, baseline comparison, error analysis, conclusions | baseline comparison, metrics, error analysis, experiments, conclusions |
 
 ## Interpretation
 
