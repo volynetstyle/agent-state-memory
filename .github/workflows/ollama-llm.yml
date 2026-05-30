@@ -28,7 +28,7 @@ on:
         required: true
         default: "v1"
       publish_results:
-        description: "Commit verified RESULTS.md and results/llm back to the branch"
+        description: "Commit verified RESULTS.md and per-model results history back to the branch"
         required: true
         type: boolean
         default: false
@@ -37,7 +37,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: ollama-llm-${{ github.ref }}
+  group: ollama-llm-${{ github.ref }}-${{ inputs.model }}
   cancel-in-progress: false
 
 jobs:
@@ -113,6 +113,7 @@ jobs:
           safe_model="$(printf '%s' "$MODEL_NAME" | sed 's#[/:]#-#g')"
           safe_version="$(printf '%s' "$CACHE_VERSION" | sed 's#[/:]#-#g')"
           echo "key=ollama-${RUNNER_OS}-${safe_model}-${safe_version}" >> "$GITHUB_OUTPUT"
+          echo "safe_model=${safe_model}" >> "$GITHUB_OUTPUT"
 
       - name: Restore Ollama model cache
         id: ollama-model-cache
@@ -152,51 +153,57 @@ jobs:
           UNKNOWN: ${{ inputs.unknown }}
           TIMEOUT_MS: ${{ inputs.timeout_ms }}
           NUM_PREDICT: ${{ inputs.num_predict }}
+          MODEL_RESULTS_DIR: results/models/${{ steps.ollama-cache-key.outputs.safe_model }}
         run: |
           npm run experiment:llm -- \
             --model="$MODEL_NAME" \
             --questions="$QUESTIONS" \
             --unknown="$UNKNOWN" \
             --timeout-ms="$TIMEOUT_MS" \
-            --num-predict="$NUM_PREDICT"
+            --num-predict="$NUM_PREDICT" \
+            --results-dir="$MODEL_RESULTS_DIR/llm"
 
       - name: Run real trace with Ollama extractor
         env:
           MODEL_NAME: ${{ inputs.model }}
           TIMEOUT_MS: ${{ inputs.timeout_ms }}
           NUM_PREDICT: ${{ inputs.num_predict }}
+          MODEL_RESULTS_DIR: results/models/${{ steps.ollama-cache-key.outputs.safe_model }}
         run: |
           npm run experiment:real -- \
             --llm-extractor \
             --model="$MODEL_NAME" \
             --timeout-ms="$TIMEOUT_MS" \
-            --num-predict="$NUM_PREDICT"
+            --num-predict="$NUM_PREDICT" \
+            --results-dir="$MODEL_RESULTS_DIR/real"
 
       - name: Run extractor benchmark with Ollama extractor
         env:
           MODEL_NAME: ${{ inputs.model }}
           TIMEOUT_MS: ${{ inputs.timeout_ms }}
           NUM_PREDICT: ${{ inputs.num_predict }}
+          MODEL_RESULTS_DIR: results/models/${{ steps.ollama-cache-key.outputs.safe_model }}
         run: |
           npm run experiment:extractor -- \
             --llm-extractor \
             --model="$MODEL_NAME" \
             --timeout-ms="$TIMEOUT_MS" \
-            --num-predict="$NUM_PREDICT"
+            --num-predict="$NUM_PREDICT" \
+            --results-dir="$MODEL_RESULTS_DIR/extractor"
 
       - name: Generate and verify report with new Ollama results
         run: |
           npm run results
           node scripts/verifyResults.mjs
-          node scripts/ensureAllowedChanges.mjs RESULTS.md results/llm/ results/real/ results/extractor/
+          node scripts/ensureAllowedChanges.mjs RESULTS.md results/models/
 
       - name: Commit verified LLM results
         if: ${{ inputs.publish_results == true }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add RESULTS.md results/llm results/real results/extractor
-          node scripts/ensureAllowedChanges.mjs RESULTS.md results/llm/ results/real/ results/extractor/
+          git add RESULTS.md results/models
+          node scripts/ensureAllowedChanges.mjs RESULTS.md results/models/
           if git diff --cached --quiet; then
             echo "No verified Ollama result changes to commit."
           else
@@ -215,4 +222,5 @@ jobs:
             results/llm
             results/real
             results/extractor
+            results/models
             ollama.log

@@ -14,6 +14,7 @@ function readStringArg(name, fallback) {
 
 const summary = await runExperiment({
   experiment: "real",
+  resultsDir: readStringArg("results-dir", "results/real"),
   topK: readNumberArg("top-k", 6),
   stateLimit: readNumberArg("state-limit", 6),
   langChainWindowSize: readNumberArg("langchain-window", 6),

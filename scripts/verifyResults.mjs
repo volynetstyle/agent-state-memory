@@ -11,6 +11,7 @@ const REQUIRED_REPORT_SECTIONS = [
   "## Level 2: Benchmark Cards",
   "## Derived Metrics",
   "## Statistical Checks",
+  "## Model Comparison",
   "## Pipeline Breakdown",
   "## Negative Results",
   "## Threats To Validity",
@@ -182,6 +183,8 @@ assertReportContains(afterReport, `${oneDecimal(lastScaleSpeedup)}x speedup`);
 assertReportContains(afterReport, "State Memory cannot recover facts that were never stored");
 assertReportContains(afterReport, "Real Project Trace Benchmark");
 assertReportContains(afterReport, "Real Extractor Benchmark");
+assertReportContains(afterReport, "results/models/<safe_model>/");
+assertReportContains(afterReport, "Hybrid LLM Acc");
 assertReportContains(afterReport, "Extraction Precision");
 assertReportContains(afterReport, "LangChain BufferMemory-style");
 assertReportContains(afterReport, "The experiments do not show that State Memory is a universal replacement for RAG.");

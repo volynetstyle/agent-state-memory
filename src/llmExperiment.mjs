@@ -26,6 +26,7 @@ const currentCount = readNumberArg("current", Math.floor(questionLimit / 3));
 const stableCount = readNumberArg("stable", Math.floor(questionLimit / 3));
 const documentCount = readNumberArg("document", questionLimit - currentCount - stableCount);
 const unknownCount = readNumberArg("unknown", 5);
+const resultsDir = readStringArg("results-dir", "results/llm");
 
 if (process.argv.includes("--dry-run")) {
   console.log(
@@ -40,6 +41,7 @@ if (process.argv.includes("--dry-run")) {
         stableCount,
         documentCount,
         unknownCount,
+        resultsDir,
         command: "npm run experiment:llm"
       },
       null,
@@ -56,6 +58,7 @@ try {
     stableCount,
     documentCount,
     unknownCount,
+    resultsDir,
     ollama: { model, timeoutMs, numPredict }
   });
 

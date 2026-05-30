@@ -281,6 +281,17 @@ The LLM runner prints progress lines for every system/question pair, for example
 
 The LLM summary reports normalized accuracy, unknown accuracy, prompt compliance rate, hallucination rate, context tokens, latency breakdown into retrieval, prompt building, LLM generation, and total time, plus top failure examples. Raw answers, normalized answers, contexts, error types, and context-hit flags are stored in `results/llm/raw-responses.json`.
 
+For side-by-side model history, write each model run to a stable model-scoped directory and regenerate the report:
+
+```bash
+npm run experiment:llm -- --model=llama3.2:3b --results-dir=results/models/llama3.2-3b/llm
+npm run experiment:real -- --llm-extractor --model=llama3.2:3b --results-dir=results/models/llama3.2-3b/real
+npm run experiment:extractor -- --llm-extractor --model=llama3.2:3b --results-dir=results/models/llama3.2-3b/extractor
+npm run results
+```
+
+`RESULTS.md` includes a `Model Comparison` table that reads all `results/models/<safe_model>/` runs and compares Hybrid LLM accuracy, hallucination, real-trace State Memory accuracy, BufferMemory accuracy, and LLM extractor degradation metrics. Running a new model updates that model's row without deleting previous model rows.
+
 Use this mode in the coursework as an additional validation experiment, not as the primary controlled benchmark.
 
 ## What Is Implemented
@@ -371,9 +382,11 @@ docker run --rm -e OLLAMA_URL=http://host.docker.internal:11434 coursework-state
 GitHub Actions includes:
 
 - `CI/CD`: runs syntax checks on Node 20 and 22, unit/invariant tests, deterministic/mixed/real/extractor/robust/scalability/stress benchmark verification, report validation, CLI smoke checks, Docker image build, and uploads verified artifacts.
-- `Ollama LLM Experiment`: manual workflow that installs Ollama, pulls the selected model, runs `npm run experiment:llm`, `npm run experiment:real -- --llm-extractor`, and `npm run experiment:extractor -- --llm-extractor`, regenerates `RESULTS.md`, optionally commits `RESULTS.md` plus `results/llm`, `results/real`, and `results/extractor` back to the branch, and uploads the same files as artifacts.
+- `Ollama LLM Experiment`: manual workflow that installs Ollama, pulls the selected model, runs `npm run experiment:llm`, `npm run experiment:real -- --llm-extractor`, and `npm run experiment:extractor -- --llm-extractor`, writes the run to `results/models/<safe_model>/`, regenerates `RESULTS.md`, optionally commits `RESULTS.md` plus the per-model history directory back to the branch, and uploads the same files as artifacts.
 
 The Ollama workflow caches downloaded model files with `actions/cache`. The first run for a model still downloads it, but later runs restore `${{ github.workspace }}/.ollama/models` before `ollama pull`, so the pull step should become a quick availability check. If a model tag changes or the cache needs to be refreshed, bump the workflow input `cache_version`.
+
+Ollama workflow concurrency is scoped by branch and model name. Runs for different models can execute at the same time, while duplicate runs for the same model on the same branch queue behind each other to avoid racing on the same `results/models/<safe_model>/` directory.
 
 ## Repository Shape
 

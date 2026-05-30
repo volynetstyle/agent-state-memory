@@ -14,6 +14,7 @@ function readStringArg(name, fallback) {
 
 const summary = await runExperiment({
   experiment: "extractor",
+  resultsDir: readStringArg("results-dir", "results/extractor"),
   stateLimit: readNumberArg("state-limit", 6),
   includeLlmExtractor: process.argv.includes("--llm-extractor"),
   ollama: {

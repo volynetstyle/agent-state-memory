@@ -1,4 +1,5 @@
 import { existsSync } from "node:fs";
+import { readdir } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import { bootstrapMetricIntervals, mcnemarExactTest } from "../eval/metrics.mjs";
 import { readJson, writeText } from "../shared/io.mjs";
@@ -7,6 +8,30 @@ const OUT = "RESULTS.md";
 
 async function readIfExists(path) {
   return existsSync(path) ? readJson(path) : null;
+}
+
+async function readModelRuns(root = "results/models") {
+  if (!existsSync(root)) return [];
+
+  const entries = await readdir(root, { withFileTypes: true });
+  const runs = await Promise.all(
+    entries
+      .filter((entry) => entry.isDirectory())
+      .map(async (entry) => {
+        const base = `${root}/${entry.name}`;
+        return {
+          id: entry.name,
+          source: base,
+          llm: await readIfExists(`${base}/llm/summary.json`),
+          real: await readIfExists(`${base}/real/summary.json`),
+          extractor: await readIfExists(`${base}/extractor/summary.json`)
+        };
+      })
+  );
+
+  return runs
+    .filter((run) => run.llm || run.real || run.extractor)
+    .sort((left, right) => left.id.localeCompare(right.id));
 }
 
 function rounded(value) {
@@ -486,6 +511,60 @@ These tests quantify uncertainty on the fixed benchmark samples. They do not rem
   );
 }
 
+function llmExtractorSummary(summary) {
+  return summary?.extractors?.find((item) => item.key === "llm") ?? null;
+}
+
+function modelName(run) {
+  return (
+    run.llm?.configuration?.model ??
+    run.real?.extractor?.model ??
+    llmExtractorSummary(run.extractor)?.extractor?.model ??
+    run.id
+  );
+}
+
+function activeModelRun(summaries) {
+  if (!summaries.llm) return null;
+  return {
+    id: "active-results",
+    source: "results/llm + results/real + results/extractor",
+    llm: summaries.llm,
+    real: summaries.real,
+    extractor: summaries.extractor
+  };
+}
+
+function modelComparison(modelRuns, summaries) {
+  const runs = [...modelRuns];
+  const active = activeModelRun(summaries);
+
+  if (active && !runs.some((run) => modelName(run) === modelName(active))) {
+    runs.unshift(active);
+  }
+
+  const rows = runs.map((run) => {
+    const llmExtractor = llmExtractorSummary(run.extractor);
+    return `| ${tableCell(modelName(run))} | ${tableCell(run.source)} | ${rounded(run.llm?.hybrid?.normalizedAccuracy)} | ${rounded(run.llm?.hybrid?.hallucinationRate)} | ${rounded(run.llm?.hybrid?.averageLlmMs)} | ${rounded(run.real?.stateMemory?.exactMatchAccuracy)} | ${rounded(run.real?.langChainBufferMemory?.exactMatchAccuracy)} | ${rounded(llmExtractor?.metrics?.extractionPrecision)} | ${rounded(llmExtractor?.metrics?.extractionRecall)} | ${rounded(llmExtractor?.metrics?.extractionF1)} | ${rounded(llmExtractor?.qa?.exactMatchAccuracy)} |`;
+  });
+
+  const body =
+    rows.length === 0
+      ? "| n/a | No `results/models/<model>/` runs are available yet | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |"
+      : rows.join("\n");
+
+  return section(
+    "Model Comparison",
+    `
+This table is the multi-model history surface for Ollama runs. GitHub Actions writes each model into \`results/models/<safe_model>/\`, so running a new model adds or refreshes that row instead of replacing the previous model history. The checked-in active LLM summary is shown as a fallback row until per-model history is committed.
+
+| Model | Source | Hybrid LLM Acc | Hybrid Hallucination | Hybrid Avg LLM ms | Real State EM | Real Buffer EM | Extractor Precision | Extractor Recall | Extractor F1 | Extractor QA EM |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+${body}
+`
+  );
+}
+
 function threatsToValidity() {
   return section(
     "Threats To Validity",
@@ -571,6 +650,7 @@ function visualizationPlan() {
 | Robust benchmark heatmap | paraphrase, indirect, noisy and temporal_multi_step by system plus slot inference | results/robust/summary.json |
 | Real trace comparison | Temporal RAG, State Memory and LangChain BufferMemory-style on repository events | results/real/summary.json |
 | Extractor degradation chart | Extraction recall versus downstream State Memory QA | results/extractor/summary.json |
+| Model history comparison | Hybrid LLM quality, real-trace accuracy and extractor degradation across Ollama models | results/models/*/{llm,real,extractor}/summary.json |
 | Failure taxonomy chart | incomplete_answer, missing_fact, possible_hallucination, stale_fact and slot_inference_failed | LLM result files plus robust summaries |
 `
   );
@@ -975,6 +1055,7 @@ export async function generateResultsReport() {
     realState: await readIfExists("results/real/state-memory-results.json"),
     realLangChain: await readIfExists("results/real/langchain-buffer-memory-results.json")
   };
+  const modelRuns = await readModelRuns();
 
   const content = [
     "# Results",
@@ -988,6 +1069,7 @@ export async function generateResultsReport() {
     benchmarkCards(summaries),
     derivedMetrics(summaries),
     statisticalChecks(resultSets),
+    modelComparison(modelRuns, summaries),
     pipelineBreakdown(summaries),
     negativeResults(summaries),
     threatsToValidity(),

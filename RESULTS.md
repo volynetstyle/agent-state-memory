@@ -315,6 +315,14 @@ Bootstrap confidence intervals use 1000 deterministic resamples over question-le
 
 These tests quantify uncertainty on the fixed benchmark samples. They do not remove the synthetic-data and benchmark-design limitations described below.
 
+## Model Comparison
+
+This table is the multi-model history surface for Ollama runs. GitHub Actions writes each model into `results/models/<safe_model>/`, so running a new model adds or refreshes that row instead of replacing the previous model history. The checked-in active LLM summary is shown as a fallback row until per-model history is committed.
+
+| Model | Source | Hybrid LLM Acc | Hybrid Hallucination | Hybrid Avg LLM ms | Real State EM | Real Buffer EM | Extractor Precision | Extractor Recall | Extractor F1 | Extractor QA EM |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| llama3.2:3b | results/llm + results/real + results/extractor | 0.9355 | 0.0000 | 15229.8465 | 1.0000 | 0.7500 | n/a | n/a | n/a | n/a |
+
 ## Pipeline Breakdown
 
 | Stage | Metric | Result |
@@ -383,6 +391,7 @@ The diagnostic oracle and robust rows come from aggregate summaries. The LLM row
 | Robust benchmark heatmap | paraphrase, indirect, noisy and temporal_multi_step by system plus slot inference | results/robust/summary.json |
 | Real trace comparison | Temporal RAG, State Memory and LangChain BufferMemory-style on repository events | results/real/summary.json |
 | Extractor degradation chart | Extraction recall versus downstream State Memory QA | results/extractor/summary.json |
+| Model history comparison | Hybrid LLM quality, real-trace accuracy and extractor degradation across Ollama models | results/models/*/{llm,real,extractor}/summary.json |
 | Failure taxonomy chart | incomplete_answer, missing_fact, possible_hallucination, stale_fact and slot_inference_failed | LLM result files plus robust summaries |
 
 ## Metric Definitions
