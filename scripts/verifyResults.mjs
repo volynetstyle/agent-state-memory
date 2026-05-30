@@ -12,6 +12,8 @@ const REQUIRED_REPORT_SECTIONS = [
   "## Derived Metrics",
   "## Statistical Checks",
   "## Model Comparison",
+  "## Critical Evidence Gaps",
+  "## Slot Inference Error Analysis",
   "## Pipeline Breakdown",
   "## Negative Results",
   "## Threats To Validity",
@@ -67,6 +69,7 @@ const llmResultSets = {
   state: await readJson("results/llm/state-llm-results.json"),
   hybrid: await readJson("results/llm/hybrid-llm-results.json")
 };
+const robustVectorResults = await readJson("results/robust/vector-rag-results.json");
 
 assert.equal(main.dataset.events, 1000, "deterministic dataset event count");
 assert.equal(main.dataset.questions, 42, "deterministic dataset question count");
@@ -85,10 +88,17 @@ approximately(mixed.byType.ragOnly.document_detail.exactMatchAccuracy, 1, "RAG d
 approximately(mixed.byType.stateOnly.document_detail.exactMatchAccuracy, 0, "State-only document detail");
 approximately(mixed.hybrid.exactMatchAccuracy, 1, "Hybrid mixed EM");
 
-assert.equal(robust.dataset.questions, 52, "robust question count");
+assert.equal(robust.dataset.questions, 60, "robust question count");
+assert.ok(robust.dataset.domains.includes("cross_domain"), "robust cross-domain questions");
 assertSummaryRates(robust.rag, "robust.rag");
+assertSummaryRates(robust.vectorRag, "robust.vectorRag");
 assertSummaryRates(robust.temporalRag, "robust.temporalRag");
 assertSummaryRates(robust.stateNoOracle, "robust.stateNoOracle");
+assert.equal(robustVectorResults.length, robust.dataset.questions, "Vector RAG result count");
+assert.ok(
+  robust.vectorRag.exactMatchAccuracy > robust.rag.exactMatchAccuracy,
+  "Vector RAG must outperform naive RAG in robust benchmark"
+);
 approximately(
   robust.stateNoOracle.exactMatchAccuracy,
   robust.stateNoOracle.slotInferenceAccuracy,
@@ -97,6 +107,14 @@ approximately(
 assert.ok(
   robust.stateNoOracle.exactMatchAccuracy > robust.temporalRag.exactMatchAccuracy,
   "State no-oracle must outperform Temporal RAG in robust benchmark"
+);
+assert.ok(
+  robust.byDomain.stateNoOracle.cross_domain.totalQuestions > 0,
+  "robust benchmark must include cross-domain dependency questions"
+);
+assert.ok(
+  robust.slotInferenceAnalysis.failures > 0,
+  "robust benchmark must report slot inference failures"
 );
 
 const missingUpdates = stress.scenarios.find((scenario) => scenario.name === "missing_final_updates");
@@ -113,6 +131,8 @@ assert.ok(
 const lastScale = scalability.rows.at(-1);
 const lastScaleSpeedup = lastScale.rag.averageLatencyMsMean / lastScale.stateMemory.averageLatencyMsMean;
 assert.equal(lastScale.eventCount, 5000, "largest scalability event count");
+assert.ok(lastScale.stateUpdate.buildMsMean > 0, "state build cost must be measured");
+assert.ok(lastScale.stateUpdate.writeMsPerEventMean > 0, "state write cost must be measured");
 assert.ok(
   lastScale.rag.averageLatencyMsMean > lastScale.stateMemory.averageLatencyMsMean,
   "RAG latency must exceed State latency at the largest scale"
@@ -185,6 +205,12 @@ assertReportContains(afterReport, "Real Project Trace Benchmark");
 assertReportContains(afterReport, "Real Extractor Benchmark");
 assertReportContains(afterReport, "results/models/<safe_model>/");
 assertReportContains(afterReport, "Hybrid LLM Acc");
+assertReportContains(afterReport, "Critical Evidence Gaps");
+assertReportContains(afterReport, "Slot Inference Error Analysis");
+assertReportContains(afterReport, "200-500 manually verified real events");
+assertReportContains(afterReport, "Chroma, Pinecone or Weaviate");
+assertReportContains(afterReport, "Local vector RAG");
+assertReportContains(afterReport, "State write cost");
 assertReportContains(afterReport, "Extraction Precision");
 assertReportContains(afterReport, "LangChain BufferMemory-style");
 assertReportContains(afterReport, "The experiments do not show that State Memory is a universal replacement for RAG.");

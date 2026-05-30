@@ -2,6 +2,7 @@ import { buildDataset } from "../dataset/generateDataset.mjs";
 import { writeJson, writeText } from "../shared/io.mjs";
 import { tokenCount } from "../shared/text.mjs";
 import { buildWorldState } from "../state-memory/worldState.mjs";
+import { performance } from "node:perf_hooks";
 import { pairedComparison, summarizeResults } from "../eval/metrics.mjs";
 import { evaluateRag, evaluateStateMemory } from "./deterministic.mjs";
 
@@ -42,7 +43,9 @@ function summarizeAcrossSeeds(rows, system) {
 
 function runSingle({ eventCount, seed, ragTopK, stateLimit }) {
   const dataset = buildDataset({ eventCount, seed });
+  const updateStart = performance.now();
   const worldState = buildWorldState(dataset.events);
+  const stateBuildMs = performance.now() - updateStart;
   const fullHistoryTokens = tokenCount(dataset.events.map((event) => event.text).join("\n"));
   const ragResults = evaluateRag(dataset.events, dataset.questions, { topK: ragTopK });
   const stateResults = evaluateStateMemory(worldState, dataset.questions, { limit: stateLimit });
@@ -52,6 +55,8 @@ function runSingle({ eventCount, seed, ragTopK, stateLimit }) {
     eventCount,
     fullHistoryTokens,
     questions: dataset.questions.length,
+    stateBuildMs,
+    stateWriteMsPerEvent: stateBuildMs / Math.max(1, dataset.events.length),
     rag: summarizeResults(ragResults),
     stateMemory: summarizeResults(stateResults),
     pairedComparison: pairedComparison(ragResults, stateResults)
@@ -82,6 +87,8 @@ function buildCsv(rows) {
     "state_avg_context",
     "rag_avg_latency",
     "state_avg_latency",
+    "state_build_ms",
+    "state_write_ms_per_event",
     "rag_context_efficiency",
     "state_context_efficiency"
   ];
@@ -109,6 +116,8 @@ function buildCsv(rows) {
     rounded(row.stateMemory.averageContextTokensMean),
     rounded(row.rag.averageLatencyMsMean),
     rounded(row.stateMemory.averageLatencyMsMean),
+    rounded(row.stateUpdate.buildMsMean),
+    rounded(row.stateUpdate.writeMsPerEventMean),
     rounded(row.rag.contextEfficiencyMean),
     rounded(row.stateMemory.contextEfficiencyMean)
   ]);
@@ -140,6 +149,12 @@ Quality degradation from ${summary.degradation.fromEvents} to ${summary.degradat
 | --- | ---: | ---: |
 | RAG | ${rounded(summary.degradation.ragExactMatch)} | ${rounded(summary.degradation.ragCurrentFact)} |
 | State Memory | ${rounded(summary.degradation.stateExactMatch)} | ${rounded(summary.degradation.stateCurrentFact)} |
+
+State update/write cost:
+
+| Events | Build state ms | Write ms / event |
+| ---: | ---: | ---: |
+${summary.rows.map((row) => `| ${row.eventCount} | ${rounded(row.stateUpdate.buildMsMean)} | ${rounded(row.stateUpdate.writeMsPerEventMean)} |`).join("\n")}
 `;
 }
 
@@ -173,6 +188,12 @@ export async function runScalabilityExperiment({
       seedRuns,
       questions: perSeed[0]?.questions ?? 0,
       fullHistoryTokensMean: average(perSeed.map((run) => run.fullHistoryTokens)),
+      stateUpdate: {
+        buildMsMean: average(perSeed.map((run) => run.stateBuildMs)),
+        buildMsStd: std(perSeed.map((run) => run.stateBuildMs)),
+        writeMsPerEventMean: average(perSeed.map((run) => run.stateWriteMsPerEvent)),
+        writeMsPerEventStd: std(perSeed.map((run) => run.stateWriteMsPerEvent))
+      },
       rag: summarizeAcrossSeeds(perSeed, "rag"),
       stateMemory: summarizeAcrossSeeds(perSeed, "stateMemory")
     });

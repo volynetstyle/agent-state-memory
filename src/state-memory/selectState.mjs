@@ -111,8 +111,36 @@ function activeQuestionSlotFacts(facts, question) {
   return slotFacts;
 }
 
+function activeHopFacts(facts, question) {
+  if (!Array.isArray(question.hops) || question.hops.length <= 1) return [];
+
+  const selected = [];
+  let subjects = [question.hops[0].subject ?? question.subject];
+
+  for (const hop of question.hops) {
+    const nextSubjects = [];
+
+    for (const subject of subjects) {
+      for (const fact of facts) {
+        if (isActiveFact(fact) && fact.subject === subject && fact.predicate === hop.predicate) {
+          selected.push(fact);
+          nextSubjects.push(fact.object);
+        }
+      }
+    }
+
+    subjects = nextSubjects;
+    if (subjects.length === 0) break;
+  }
+
+  return selected;
+}
+
 export function selectRelevantFacts(worldState, question, { limit = 8 } = {}) {
-  const requiredSlotFacts = activeQuestionSlotFacts(worldState.facts, question);
+  const requiredSlotFacts = [
+    ...activeQuestionSlotFacts(worldState.facts, question),
+    ...activeHopFacts(worldState.facts, question)
+  ];
   const rankedCandidates = rankedActiveFactCandidates(worldState.facts, question);
   const selectionLimit = Math.max(limit, requiredSlotFacts.length);
   const selection = new FactSelection();

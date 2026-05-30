@@ -1,3 +1,5 @@
+import { hasHopChain, hopAnswerValues } from "../shared/multihop.mjs";
+
 function factMatchesQuestionSlot(fact, question) {
   return fact.subject === question.subject && fact.predicate === question.predicate;
 }
@@ -52,6 +54,14 @@ export function buildPrompt(question, facts) {
 }
 
 export function answerFromFacts(question, facts) {
+  if (hasHopChain(question)) {
+    const values = hopAnswerValues(facts, question);
+    return {
+      answer: values.length > 0 ? values.join(", ") : "unknown",
+      values
+    };
+  }
+
   const matchingFacts = slotFacts(facts, question);
 
   if (Array.isArray(question.expected)) {

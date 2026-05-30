@@ -1,10 +1,11 @@
 import { performance } from "node:perf_hooks";
 import { buildDataset } from "../dataset/generateDataset.mjs";
-import { retrieveEvents, retrieveEventsWithRecency } from "../rag/index.mjs";
+import { createEmbeddingRetriever, retrieveEvents, retrieveEventsWithRecency } from "../rag/index.mjs";
 import { answerFromRetrievedEvents, answerLatestFromRetrievedEvents } from "../rag/answer.mjs";
 import { buildWorldState } from "../state-memory/worldState.mjs";
 import { answerFromFacts, buildPrompt } from "../state-memory/buildPrompt.mjs";
 import { selectRelevantFacts } from "../state-memory/selectState.mjs";
+import { hasHopChain, hopAnswerValues } from "../shared/multihop.mjs";
 import { normalize, tokenCount, tokenize } from "../shared/text.mjs";
 import { writeJson, writeText } from "../shared/io.mjs";
 import { gradeAnswer, summarizeResults } from "../eval/metrics.mjs";
@@ -58,7 +59,9 @@ const SLOT_ALIASES = {
   status: ["status", "state", "done", "blocked", "task"],
   budget: ["budget", "spend", "cost", "shopping"],
   priority: ["priority", "urgent", "severity", "chat"],
-  assignee: ["assignee", "assigned", "owner", "task"]
+  assignee: ["assignee", "assigned", "owner", "task"],
+  calendar_dependency: ["calendar", "meeting", "dependency", "depends", "after"],
+  delivery_task: ["delivery", "task", "depends", "work", "project"]
 };
 
 const QUESTION_TEMPLATES = {
@@ -139,6 +142,18 @@ const QUESTION_TEMPLATES = {
     indirect: "How urgent is the billing support conversation currently?",
     noisy: "Ignore the low-priority note: what is the billing thread priority now?",
     multi_step: "After the support chat priority changed, what is the final priority?"
+  },
+  "Task.mobile_checkout.calendar_dependency": {
+    paraphrase: "What time should the mobile checkout follow-up use from its calendar dependency?",
+    indirect: "The mobile checkout task depends on a meeting; what is that meeting's current time?",
+    noisy: "Ignore old meeting invites and task status chatter: what time is the meeting that mobile checkout depends on?",
+    multi_step: "Following the mobile checkout dependency to the calendar event, what is the latest meeting time?"
+  },
+  "CRM.Acme.delivery_task": {
+    paraphrase: "What is the status of the delivery task connected to the Acme account?",
+    indirect: "Acme points to a delivery task; after following that link, what state is the task in?",
+    noisy: "Ignore old CRM owner notes and earlier blocked task notes: what is Acme's linked task status now?",
+    multi_step: "From Acme to its delivery task and then to task status, what final status should be reported?"
   }
 };
 
@@ -186,6 +201,12 @@ function buildDomainDataset() {
     ]),
     event("domain-chat-002", 11, "Final support chat update: Support chat billing thread priority is urgent.", [
       { subject: "Support chat.billing_thread", predicate: "priority", object: "urgent", mutable: true, confidence: 0.95 }
+    ]),
+    event("domain-cross-001", 12, "Cross-domain link: Task mobile checkout depends on Calendar planning meeting.", [
+      { subject: "Task.mobile_checkout", predicate: "calendar_dependency", object: "Calendar.planning_meeting", mutable: true, confidence: 0.95 }
+    ]),
+    event("domain-cross-002", 13, "Cross-domain CRM link: CRM Acme delivery task is Task mobile checkout.", [
+      { subject: "CRM.Acme", predicate: "delivery_task", object: "Task.mobile_checkout", mutable: true, confidence: 0.95 }
     ])
   ];
   const questions = [
@@ -228,6 +249,30 @@ function buildDomainDataset() {
       expected: "urgent",
       obsoleteAnswers: ["low"],
       domain: "chat"
+    },
+    {
+      id: "domain-cross-task-calendar",
+      subject: "Task.mobile_checkout",
+      predicate: "calendar_dependency",
+      expected: "11:30",
+      obsoleteAnswers: ["10:00"],
+      domain: "cross_domain",
+      hops: [
+        { subject: "Task.mobile_checkout", predicate: "calendar_dependency" },
+        { predicate: "meeting_time" }
+      ]
+    },
+    {
+      id: "domain-cross-crm-task",
+      subject: "CRM.Acme",
+      predicate: "delivery_task",
+      expected: "done",
+      obsoleteAnswers: ["todo", "blocked"],
+      domain: "cross_domain",
+      hops: [
+        { subject: "CRM.Acme", predicate: "delivery_task" },
+        { predicate: "status" }
+      ]
     }
   ];
 
@@ -429,8 +474,23 @@ function expectedValues(question) {
   return Array.isArray(question.expected) ? question.expected : [question.expected];
 }
 
+function contextMetricsFromResolvedValues(question, values) {
+  const contextHasGoldFact = expectedValues(question).every((expected) => values.includes(expected));
+
+  return {
+    contextHasGoldFact,
+    goldRank: contextHasGoldFact ? 1 : null,
+    reciprocalRank: contextHasGoldFact ? 1 : 0
+  };
+}
+
 function contextMetricsFromEvents(question, rankedEvents) {
   const facts = rankedEvents.flatMap((eventItem) => eventItem.facts ?? []);
+
+  if (hasHopChain(question)) {
+    return contextMetricsFromResolvedValues(question, hopAnswerValues(facts, question));
+  }
+
   const contextHasGoldFact = expectedValues(question).every((expected) =>
     facts.some(
       (fact) =>
@@ -456,6 +516,10 @@ function contextMetricsFromEvents(question, rankedEvents) {
 }
 
 function contextMetricsFromFacts(question, facts) {
+  if (hasHopChain(question)) {
+    return contextMetricsFromResolvedValues(question, hopAnswerValues(facts, question));
+  }
+
   const contextHasGoldFact = expectedValues(question).every((expected) =>
     facts.some(
       (fact) =>
@@ -501,9 +565,16 @@ function decorateResult({ system, question, inferredSlot, answer, contextMetrics
     requiresCurrentFact: question.obsoleteAnswers.length > 0,
     question: question.question,
     expected: question.expected,
+    subject: question.subject,
+    predicate: question.predicate,
     inferredSubject: inferredSlot.subject,
     inferredPredicate: inferredSlot.predicate,
     slotInferenceScore: inferredSlot.score,
+    slotCandidates: inferredSlot.candidates.map((candidate) => ({
+      subject: candidate.slot.subject,
+      predicate: candidate.slot.predicate,
+      score: candidate.score
+    })),
     slotCorrect,
     answer: answer.answer,
     answerValues: answer.values,
@@ -517,10 +588,29 @@ function decorateResult({ system, question, inferredSlot, answer, contextMetrics
 }
 
 function inferredQuestion(question, inferredSlot) {
-  return {
+  const inferred = {
     ...question,
     subject: inferredSlot.subject ?? "__unknown__",
     predicate: inferredSlot.predicate ?? "__unknown__"
+  };
+
+  if (hasHopChain(question)) {
+    const [firstHop, ...remainingHops] = question.hops;
+    return {
+      ...inferred,
+      hops: [
+        {
+          ...firstHop,
+          subject: inferred.subject,
+          predicate: inferred.predicate
+        },
+        ...remainingHops
+      ]
+    };
+  }
+
+  return {
+    ...inferred
   };
 }
 
@@ -539,6 +629,30 @@ function evaluateRag(events, questions, slots, { topK, temporal = false }) {
 
     return decorateResult({
       system: temporal ? "temporal_rag" : "rag",
+      question,
+      inferredSlot,
+      answer,
+      contextMetrics: contextMetricsFromEvents(question, retrievedEvents),
+      contextTokens: tokenCount(retrievedEvents.map((eventItem) => eventItem.text).join("\n")),
+      latencyMs,
+      contextIds: retrievedEvents.map((eventItem) => eventItem.id)
+    });
+  });
+}
+
+function evaluateVectorRag(events, questions, slots, { topK }) {
+  const retriever = createEmbeddingRetriever(events);
+
+  return questions.map((question) => {
+    const start = performance.now();
+    const inferredSlot = inferSlot(question.question, slots);
+    const lookupQuestion = inferredQuestion(question, inferredSlot);
+    const retrievedEvents = retriever.retrieveEvents(question.question, { topK });
+    const answer = answerLatestFromRetrievedEvents(lookupQuestion, retrievedEvents);
+    const latencyMs = performance.now() - start;
+
+    return decorateResult({
+      system: "vector_rag",
       question,
       inferredSlot,
       answer,
@@ -603,6 +717,27 @@ function groupSummary(results, key) {
   );
 }
 
+function slotInferenceAnalysis(results) {
+  const failures = results.filter((result) => !result.slotCorrect);
+  const failureRows = (key) => groupSummary(failures, key);
+
+  return {
+    failures: failures.length,
+    failureRate: failures.length / Math.max(1, results.length),
+    byType: failureRows("questionType"),
+    byDomain: failureRows("domain"),
+    examples: failures.slice(0, 8).map((result) => ({
+      questionId: result.questionId,
+      questionType: result.questionType,
+      domain: result.domain,
+      question: result.question,
+      expectedSlot: `${result.subject ?? ""}.${result.predicate ?? ""}`,
+      inferredSlot: `${result.inferredSubject ?? "unknown"}.${result.inferredPredicate ?? "unknown"}`,
+      topCandidates: result.slotCandidates
+    }))
+  };
+}
+
 function rounded(value) {
   return Number(value ?? 0).toFixed(4);
 }
@@ -615,43 +750,58 @@ function buildMarkdown(summary) {
   const typeRows = Object.keys(summary.byType.stateNoOracle)
     .map((type) => {
       const rag = summary.byType.rag[type] ?? {};
+      const vector = summary.byType.vectorRag[type] ?? {};
       const temporal = summary.byType.temporalRag[type] ?? {};
       const state = summary.byType.stateNoOracle[type] ?? {};
-      return `| ${type} | ${rounded(rag.exactMatchAccuracy)} | ${rounded(temporal.exactMatchAccuracy)} | ${rounded(state.exactMatchAccuracy)} | ${rounded(state.slotInferenceAccuracy)} |`;
+      return `| ${type} | ${rounded(rag.exactMatchAccuracy)} | ${rounded(vector.exactMatchAccuracy)} | ${rounded(temporal.exactMatchAccuracy)} | ${rounded(state.exactMatchAccuracy)} | ${rounded(state.slotInferenceAccuracy)} |`;
     })
     .join("\n");
   const domainRows = Object.keys(summary.byDomain.stateNoOracle)
     .map((domain) => {
       const rag = summary.byDomain.rag[domain] ?? {};
+      const vector = summary.byDomain.vectorRag[domain] ?? {};
       const temporal = summary.byDomain.temporalRag[domain] ?? {};
       const state = summary.byDomain.stateNoOracle[domain] ?? {};
-      return `| ${domain} | ${rounded(rag.exactMatchAccuracy)} | ${rounded(temporal.exactMatchAccuracy)} | ${rounded(state.exactMatchAccuracy)} | ${rounded(state.slotInferenceAccuracy)} |`;
+      return `| ${domain} | ${rounded(rag.exactMatchAccuracy)} | ${rounded(vector.exactMatchAccuracy)} | ${rounded(temporal.exactMatchAccuracy)} | ${rounded(state.exactMatchAccuracy)} | ${rounded(state.slotInferenceAccuracy)} |`;
     })
+    .join("\n");
+  const slotFailureRows = Object.entries(summary.slotInferenceAnalysis.byType)
+    .map(
+      ([type, metrics]) =>
+        `| ${type} | ${metrics.totalQuestions} | ${rounded(metrics.slotInferenceAccuracy)} | ${rounded(metrics.exactMatchAccuracy)} |`
+    )
     .join("\n");
 
   return `# Robust Question Experiment
 
-This is the main non-oracle current-state benchmark. Systems receive only the question text and must infer the target subject/predicate slot before answering. The slot metadata is used only for grading. Temporal RAG is the primary retrieval baseline; naive RAG is retained as a weak baseline.
+This is the main non-oracle current-state benchmark. Systems receive only the question text and must infer the target subject/predicate slot before answering. The slot metadata is used only for grading. Temporal RAG is the primary retrieval baseline; local vector RAG is included as a stronger vector-store-shaped retrieval baseline, and naive RAG is retained as a weak baseline.
 
 | System | Exact Match | Current Fact Accuracy | Context Hit | Slot Inference Accuracy | Avg Context Tokens | Avg Latency ms |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 ${row("RAG", summary.rag)}
+${row("Vector RAG", summary.vectorRag)}
 ${row("Temporal RAG", summary.temporalRag)}
 ${row("State Memory, no oracle", summary.stateNoOracle)}
 
 Accuracy by question type:
 
-| Type | RAG | Temporal RAG | State no-oracle | State slot inference |
-| --- | ---: | ---: | ---: | ---: |
+| Type | RAG | Vector RAG | Temporal RAG | State no-oracle | State slot inference |
+| --- | ---: | ---: | ---: | ---: | ---: |
 ${typeRows}
 
 Accuracy by domain:
 
-| Domain | RAG | Temporal RAG | State no-oracle | State slot inference |
-| --- | ---: | ---: | ---: | ---: |
+| Domain | RAG | Vector RAG | Temporal RAG | State no-oracle | State slot inference |
+| --- | ---: | ---: | ---: | ---: | ---: |
 ${domainRows}
 
-Interpretation: this is a harder benchmark than the oracle memory-isolation experiment. Temporal RAG closes much of the naive-RAG gap, which means the measured State Memory advantage should be read against the stronger recency/latest-fact baseline. The benchmark includes paraphrased, indirect, noisy and temporal multi-step questions across coursework memory plus calendar, CRM, task, shopping and chat domains.
+Slot inference failures by question type:
+
+| Type | Failure count | Slot accuracy on failures | Exact match on failures |
+| --- | ---: | ---: | ---: |
+${slotFailureRows}
+
+Interpretation: this is a harder benchmark than the oracle memory-isolation experiment. Temporal RAG closes much of the naive-RAG gap, which means the measured State Memory advantage should be read against the stronger recency/latest-fact baseline. The benchmark includes paraphrased, indirect, noisy and temporal multi-step questions across coursework memory plus calendar, CRM, task, shopping, chat and cross-domain dependency questions.
 `;
 }
 
@@ -670,6 +820,7 @@ export async function runRobustQuestionExperiment({
   const worldState = buildWorldState(events);
 
   const ragResults = evaluateRag(events, questions, slots, { topK: ragTopK });
+  const vectorRagResults = evaluateVectorRag(events, questions, slots, { topK: ragTopK });
   const temporalRagResults = evaluateRag(events, questions, slots, {
     topK: ragTopK,
     temporal: true
@@ -689,21 +840,26 @@ export async function runRobustQuestionExperiment({
       slotInferenceThreshold: 5
     },
     rag: addRobustSummary(ragResults),
+    vectorRag: addRobustSummary(vectorRagResults),
     temporalRag: addRobustSummary(temporalRagResults),
     stateNoOracle: addRobustSummary(stateResults),
+    slotInferenceAnalysis: slotInferenceAnalysis(stateResults),
     byType: {
       rag: groupSummary(ragResults, "questionType"),
+      vectorRag: groupSummary(vectorRagResults, "questionType"),
       temporalRag: groupSummary(temporalRagResults, "questionType"),
       stateNoOracle: groupSummary(stateResults, "questionType")
     },
     byDomain: {
       rag: groupSummary(ragResults, "domain"),
+      vectorRag: groupSummary(vectorRagResults, "domain"),
       temporalRag: groupSummary(temporalRagResults, "domain"),
       stateNoOracle: groupSummary(stateResults, "domain")
     }
   };
 
   await writeJson(`${resultsDir}/rag-results.json`, ragResults);
+  await writeJson(`${resultsDir}/vector-rag-results.json`, vectorRagResults);
   await writeJson(`${resultsDir}/temporal-rag-results.json`, temporalRagResults);
   await writeJson(`${resultsDir}/state-no-oracle-results.json`, stateResults);
   await writeJson(`${resultsDir}/summary.json`, summary);

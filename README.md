@@ -147,15 +147,16 @@ Run the robust question experiment:
 npm run experiment:robust
 ```
 
-This benchmark removes the oracle assumption from the deterministic setup. The systems receive only paraphrased, indirect, noisy and temporal multi-step question text, then infer the target `subject/predicate` slot before answering. Slot metadata is still present in the dataset, but only for grading. It also adds extra domains beyond the coursework world:
+This benchmark removes the oracle assumption from the deterministic setup. The systems receive only paraphrased, indirect, noisy, temporal multi-step and cross-domain dependency question text, then infer the target `subject/predicate` slot before answering. Slot metadata is still present in the dataset, but only for grading. It compares naive lexical RAG, local TF-IDF vector RAG, Temporal RAG and State Memory without oracle access. It also adds extra domains beyond the coursework world:
 
 - calendar
 - CRM
 - tasks
 - shopping
 - support chat
+- cross-domain dependencies
 
-The robust results are written to `results/robust/`.
+The robust results are written to `results/robust/`. The report also includes slot-inference failure examples with expected slot, inferred slot and top candidate slots, because slot inference is the main remaining non-oracle bottleneck.
 
 Run the stress experiment:
 
@@ -327,6 +328,8 @@ The evaluator reports:
 - `contextCompressionRatio`: full history tokens divided by average context tokens
 - `contextEfficiency`: exact-match accuracy divided by average context tokens
 - `latencyEfficiency`: exact-match accuracy divided by average latency
+- `stateBuildMs`: total in-process state construction/update time in the scalability benchmark
+- `stateWriteMsPerEvent`: average state update/write cost per event
 
 The results also include a paired comparison table:
 
@@ -346,19 +349,21 @@ This gives complementary experiments:
 - `Experiment 1`: oracle/diagnostic RAG vs State Memory with deterministic answerer over 1000 events.
 - `Experiment 2`: RAG vs State Memory with local LLM answerer over a smaller question subset.
 - `Experiment 3`: RAG-only vs State-only vs Hybrid on mixed structured state and unstructured 100-page document QA.
-- `Experiment 4`: robust non-oracle question answering with paraphrases, noisy wording, temporal multi-step questions and multiple domains.
+- `Experiment 4`: robust non-oracle question answering with paraphrases, noisy wording, temporal multi-step questions, vector RAG, slot-error analysis and cross-domain dependencies.
 - `Experiment 5`: real project trace over repository-derived events with Temporal RAG, State Memory and LangChain BufferMemory-style memory.
 - `Experiment 6`: real extractor benchmark from raw repository-derived events through extractor, State Store and downstream QA.
 
 The third experiment is important for limitations: State Memory is not a replacement for RAG over large unstructured documents. It is a state layer for evolving facts, goals, tasks and user/project state. For document-heavy QA, the stronger architecture is hybrid.
 
-The fourth experiment is the main benchmark for current-state claims: the base deterministic benchmark intentionally isolates memory quality, but it gives the answerer explicit `subject/predicate` metadata. The robust benchmark removes that shortcut by forcing a slot-inference step from question text before retrieval or state lookup, and it compares State Memory against Temporal RAG as the stronger temporal baseline.
+The fourth experiment is the main benchmark for current-state claims: the base deterministic benchmark intentionally isolates memory quality, but it gives the answerer explicit `subject/predicate` metadata. The robust benchmark removes that shortcut by forcing a slot-inference step from question text before retrieval or state lookup, and it compares State Memory against Temporal RAG and local vector RAG as stronger retrieval baselines.
 
-The fifth experiment is important for external validity: it uses real repository-derived events rather than generated coursework events, and it includes an external memory-framework style baseline inspired by LangChain ConversationBufferMemory. It is small, so it is validation evidence rather than a replacement for larger benchmarks.
+The fifth experiment is important for external validity: it uses real repository-derived events rather than generated coursework events, and it includes an external memory-framework style baseline inspired by LangChain ConversationBufferMemory. It is small, so it is validation evidence rather than a replacement for larger benchmarks. A stronger paper needs 200-500 manually verified real events across repository, calendar, CRM, task, support and shopping/task-management logs.
 
 The sixth experiment directly addresses the clean extraction assumption: it measures extractor precision, recall, slot accuracy, entity resolution, conflict detection and downstream QA degradation.
 
 The stress experiment is important for self-criticism: perfect State Memory scores depend on clean extraction. If final updates are missing or facts are assigned to the wrong slot, State Memory degrades. The defensive variant shows practical mitigations: low-confidence facts are rejected into a buffer, conflicting facts are preserved instead of silently overwriting each other, recent versions are retained, and uncertain slots fall back to Temporal RAG. It also shows the remaining hard limit: if extraction fully misses an update, the state layer needs reconciliation against raw events or documents to recover it. Stronger temporal RAG baselines can reduce stale errors, so future work should compare State Memory against temporal-aware RAG instead of only naive RAG.
+
+Production-vector-store comparison remains an explicit gap. The repository now includes a local vector-style RAG proxy, but a publication-grade baseline should run Chroma, Pinecone or Weaviate with the same paired question sets and statistical tests.
 
 ## Docker And CI
 
@@ -385,6 +390,7 @@ GitHub Actions includes:
 
 - `CI/CD`: runs syntax checks on Node 20 and 22, unit/invariant tests, deterministic/mixed/real/extractor/robust/scalability/stress benchmark verification, report validation, CLI smoke checks, Docker image build, and uploads verified artifacts.
 - `Ollama LLM Experiment`: manual workflow that accepts a comma- or newline-separated `models` input, starts one matrix job per model, installs Ollama, pulls that model, runs `npm run experiment:llm`, `npm run experiment:real -- --llm-extractor`, and `npm run experiment:extractor -- --llm-extractor`, writes each run to `results/models/<safe_model>/`, then aggregates all model artifacts into one `RESULTS.md` update. If `publish_results` is enabled, only the aggregate job commits, so parallel model runs do not race on `git push`.
+- `Aggregate Ollama Results`: manual recovery workflow for an existing run. Pass the previous GitHub Actions `run_id`; it downloads that run's `ollama-results-*` artifacts, merges `results/models/`, regenerates `RESULTS.md`, verifies the report, and optionally commits the aggregated table.
 
 The Ollama workflow caches downloaded model files with `actions/cache`. The first run for a model still downloads it, but later runs restore `${{ github.workspace }}/.ollama/models` before `ollama pull`, so the pull step should become a quick availability check. If a model tag changes or the cache needs to be refreshed, bump the workflow input `cache_version`.
 
@@ -397,6 +403,8 @@ qwen2.5:1.5b
 ```
 
 Ollama workflow concurrency is scoped by branch and model name. Different models can execute at the same time, while duplicate runs for the same model on the same branch queue behind each other to avoid racing on the same `results/models/<safe_model>/` directory. The final aggregation/publish job is also serialized per branch.
+
+If the model jobs finished but the final aggregation failed, rerun only the aggregation by opening `Aggregate Ollama Results` and passing the numeric run ID of the earlier `Ollama LLM Experiment` run.
 
 ## Repository Shape
 

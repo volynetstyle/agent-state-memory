@@ -8,9 +8,28 @@
     "requiresCurrentFact": true,
     "question": "Which execution engine powers Reflex now?",
     "expected": "reactive graph runtime",
+    "subject": "Reflex",
+    "predicate": "runtime",
     "inferredSubject": "Reflex",
     "inferredPredicate": "runtime",
     "slotInferenceScore": 16,
+    "slotCandidates": [
+      {
+        "subject": "Reflex",
+        "predicate": "runtime",
+        "score": 16
+      },
+      {
+        "subject": "Reflex",
+        "predicate": "selector_strategy",
+        "score": 10
+      },
+      {
+        "subject": "Reflex",
+        "predicate": "storage",
+        "score": 10
+      }
+    ],
     "slotCorrect": true,
     "answer": "event-sourced runtime",
     "answerValues": [
@@ -31,7 +50,7 @@
       "e0953"
     ],
     "contextTokens": 81,
-    "latencyMs": 5.584399999999995,
+    "latencyMs": 6.3293000000000035,
     "contextHasGoldFact": true,
     "goldRank": 11,
     "reciprocalRank": 0.09090909090909091,
@@ -49,9 +68,28 @@
     "requiresCurrentFact": true,
     "question": "If I describe Reflex architecture, what should I call the runtime it currently uses?",
     "expected": "reactive graph runtime",
+    "subject": "Reflex",
+    "predicate": "runtime",
     "inferredSubject": "Reflex",
     "inferredPredicate": "runtime",
     "slotInferenceScore": 19,
+    "slotCandidates": [
+      {
+        "subject": "Reflex",
+        "predicate": "runtime",
+        "score": 19
+      },
+      {
+        "subject": "Reflex",
+        "predicate": "selector_strategy",
+        "score": 10
+      },
+      {
+        "subject": "Reflex",
+        "predicate": "storage",
+        "score": 10
+      }
+    ],
     "slotCorrect": true,
     "answer": "event-sourced runtime",
     "answerValues": [
@@ -69,7 +107,7 @@
       "e0953"
     ],
     "contextTokens": 59,
-    "latencyMs": 5.105199999999996,
+    "latencyMs": 4.6972999999999985,
     "contextHasGoldFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
@@ -87,9 +125,28 @@
     "requiresCurrentFact": true,
     "question": "Ignore old drafts and unrelated README notes: what engine does Reflex run on after all updates?",
     "expected": "reactive graph runtime",
+    "subject": "Reflex",
+    "predicate": "runtime",
     "inferredSubject": "README",
     "inferredPredicate": "note",
     "slotInferenceScore": 14,
+    "slotCandidates": [
+      {
+        "subject": "README",
+        "predicate": "note",
+        "score": 14
+      },
+      {
+        "subject": "Reflex",
+        "predicate": "runtime",
+        "score": 12
+      },
+      {
+        "subject": "README",
+        "predicate": "status",
+        "score": 10
+      }
+    ],
     "slotCorrect": false,
     "answer": "not part of the scored questions",
     "answerValues": [
@@ -110,7 +167,7 @@
       "e0056"
     ],
     "contextTokens": 97,
-    "latencyMs": 5.702300000000001,
+    "latencyMs": 4.9214000000000055,
     "contextHasGoldFact": false,
     "goldRank": null,
     "reciprocalRank": 0,
@@ -128,9 +185,28 @@
     "requiresCurrentFact": true,
     "question": "After the initial and revision notes, what is the latest runtime for Reflex?",
     "expected": "reactive graph runtime",
+    "subject": "Reflex",
+    "predicate": "runtime",
     "inferredSubject": "Reflex",
     "inferredPredicate": "runtime",
     "slotInferenceScore": 19,
+    "slotCandidates": [
+      {
+        "subject": "Reflex",
+        "predicate": "runtime",
+        "score": 19
+      },
+      {
+        "subject": "Reflex",
+        "predicate": "selector_strategy",
+        "score": 10
+      },
+      {
+        "subject": "Reflex",
+        "predicate": "storage",
+        "score": 10
+      }
+    ],
     "slotCorrect": true,
     "answer": "event-sourced runtime",
     "answerValues": [
@@ -151,7 +227,7 @@
       "e0035"
     ],
     "contextTokens": 84,
-    "latencyMs": 4.4014999999999915,
+    "latencyMs": 4.611900000000006,
     "contextHasGoldFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
@@ -169,9 +245,28 @@
     "requiresCurrentFact": true,
     "question": "How are selectors handled in Reflex now?",
     "expected": "dependency-tracked selectors",
+    "subject": "Reflex",
+    "predicate": "selector_strategy",
     "inferredSubject": "Reflex",
     "inferredPredicate": "selector_strategy",
     "slotInferenceScore": 12,
+    "slotCandidates": [
+      {
+        "subject": "Reflex",
+        "predicate": "selector_strategy",
+        "score": 12
+      },
+      {
+        "subject": "Reflex",
+        "predicate": "runtime",
+        "score": 10
+      },
+      {
+        "subject": "Reflex",
+        "predicate": "storage",
+        "score": 10
+      }
+    ],
     "slotCorrect": true,
     "answer": "dependency-tracked selectors",
     "answerValues": [
@@ -189,7 +284,7 @@
       "e0948"
     ],
     "contextTokens": 59,
-    "latencyMs": 4.274900000000002,
+    "latencyMs": 4.227000000000004,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
@@ -207,9 +302,28 @@
     "requiresCurrentFact": true,
     "question": "When explaining Reflex reactivity, which selector approach should be mentioned?",
     "expected": "dependency-tracked selectors",
+    "subject": "Reflex",
+    "predicate": "selector_strategy",
     "inferredSubject": "Reflex",
     "inferredPredicate": "selector_strategy",
     "slotInferenceScore": 15,
+    "slotCandidates": [
+      {
+        "subject": "Reflex",
+        "predicate": "selector_strategy",
+        "score": 15
+      },
+      {
+        "subject": "Reflex",
+        "predicate": "runtime",
+        "score": 10
+      },
+      {
+        "subject": "Reflex",
+        "predicate": "storage",
+        "score": 10
+      }
+    ],
     "slotCorrect": true,
     "answer": "selector cache",
     "answerValues": [
@@ -230,7 +344,7 @@
       "e0696"
     ],
     "contextTokens": 78,
-    "latencyMs": 4.257500000000007,
+    "latencyMs": 4.159400000000005,
     "contextHasGoldFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
@@ -248,9 +362,28 @@
     "requiresCurrentFact": true,
     "question": "Skipping background notes, what selector mechanism is currently associated with Reflex?",
     "expected": "dependency-tracked selectors",
+    "subject": "Reflex",
+    "predicate": "selector_strategy",
     "inferredSubject": "Reflex",
     "inferredPredicate": "selector_strategy",
     "slotInferenceScore": 15,
+    "slotCandidates": [
+      {
+        "subject": "Reflex",
+        "predicate": "selector_strategy",
+        "score": 15
+      },
+      {
+        "subject": "Reflex",
+        "predicate": "runtime",
+        "score": 10
+      },
+      {
+        "subject": "Reflex",
+        "predicate": "storage",
+        "score": 10
+      }
+    ],
     "slotCorrect": true,
     "answer": "selector cache",
     "answerValues": [
@@ -271,7 +404,7 @@
       "e0354"
     ],
     "contextTokens": 105,
-    "latencyMs": 4.747299999999996,
+    "latencyMs": 3.9692000000000007,
     "contextHasGoldFact": false,
     "goldRank": null,
     "reciprocalRank": 0,
@@ -289,9 +422,28 @@
     "requiresCurrentFact": true,
     "question": "What selector strategy remains after the later Reflex updates?",
     "expected": "dependency-tracked selectors",
+    "subject": "Reflex",
+    "predicate": "selector_strategy",
     "inferredSubject": "Reflex",
     "inferredPredicate": "selector_strategy",
     "slotInferenceScore": 24,
+    "slotCandidates": [
+      {
+        "subject": "Reflex",
+        "predicate": "selector_strategy",
+        "score": 24
+      },
+      {
+        "subject": "Reflex",
+        "predicate": "runtime",
+        "score": 10
+      },
+      {
+        "subject": "Reflex",
+        "predicate": "storage",
+        "score": 10
+      }
+    ],
     "slotCorrect": true,
     "answer": "selector cache",
     "answerValues": [
@@ -312,7 +464,7 @@
       "e0503"
     ],
     "contextTokens": 80,
-    "latencyMs": 4.561800000000005,
+    "latencyMs": 3.9643999999999977,
     "contextHasGoldFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
@@ -330,9 +482,28 @@
     "requiresCurrentFact": true,
     "question": "What is the final subject of the coursework?",
     "expected": "State Memory for LLM agents",
+    "subject": "State Memory coursework",
+    "predicate": "topic",
     "inferredSubject": "State Memory coursework",
     "inferredPredicate": "topic",
     "slotInferenceScore": 6,
+    "slotCandidates": [
+      {
+        "subject": "State Memory coursework",
+        "predicate": "topic",
+        "score": 6
+      },
+      {
+        "subject": "Coursework repository",
+        "predicate": "data_directory",
+        "score": 4
+      },
+      {
+        "subject": "State Memory coursework",
+        "predicate": "implementation_language",
+        "score": 4
+      }
+    ],
     "slotCorrect": true,
     "answer": "State Memory for LLM agents",
     "answerValues": [
@@ -353,7 +524,7 @@
       "e0052"
     ],
     "contextTokens": 99,
-    "latencyMs": 3.8455999999999904,
+    "latencyMs": 3.579499999999996,
     "contextHasGoldFact": true,
     "goldRank": 4,
     "reciprocalRank": 0.25,
@@ -371,9 +542,28 @@
     "requiresCurrentFact": true,
     "question": "If the title changed over time, what topic should be used in the final report?",
     "expected": "State Memory for LLM agents",
+    "subject": "State Memory coursework",
+    "predicate": "topic",
     "inferredSubject": "State Memory coursework",
     "inferredPredicate": "topic",
     "slotInferenceScore": 9,
+    "slotCandidates": [
+      {
+        "subject": "State Memory coursework",
+        "predicate": "topic",
+        "score": 9
+      },
+      {
+        "subject": "Calendar.planning_meeting",
+        "predicate": "meeting_time",
+        "score": 5
+      },
+      {
+        "subject": "Metrics report",
+        "predicate": "output",
+        "score": 4
+      }
+    ],
     "slotCorrect": true,
     "answer": "State Memory for LLM agents",
     "answerValues": [
@@ -394,7 +584,7 @@
       "e0059"
     ],
     "contextTokens": 106,
-    "latencyMs": 4.190100000000001,
+    "latencyMs": 3.9432999999999936,
     "contextHasGoldFact": true,
     "goldRank": 2,
     "reciprocalRank": 0.5,
@@ -412,9 +602,28 @@
     "requiresCurrentFact": true,
     "question": "Do not use the old RAG draft: what is the coursework about now?",
     "expected": "State Memory for LLM agents",
+    "subject": "State Memory coursework",
+    "predicate": "topic",
     "inferredSubject": "State Memory coursework",
     "inferredPredicate": "topic",
     "slotInferenceScore": 6,
+    "slotCandidates": [
+      {
+        "subject": "State Memory coursework",
+        "predicate": "topic",
+        "score": 6
+      },
+      {
+        "subject": "State updater",
+        "predicate": "old_fact_status",
+        "score": 5
+      },
+      {
+        "subject": "RAG baseline",
+        "predicate": "retriever",
+        "score": 4
+      }
+    ],
     "slotCorrect": true,
     "answer": "RAG for agents",
     "answerValues": [
@@ -435,7 +644,7 @@
       "e0026"
     ],
     "contextTokens": 100,
-    "latencyMs": 4.004599999999996,
+    "latencyMs": 4.075300000000013,
     "contextHasGoldFact": false,
     "goldRank": null,
     "reciprocalRank": 0,
@@ -453,9 +662,28 @@
     "requiresCurrentFact": true,
     "question": "After the topic moved through earlier drafts, what is the current coursework topic?",
     "expected": "State Memory for LLM agents",
+    "subject": "State Memory coursework",
+    "predicate": "topic",
     "inferredSubject": "State Memory coursework",
     "inferredPredicate": "topic",
     "slotInferenceScore": 13,
+    "slotCandidates": [
+      {
+        "subject": "State Memory coursework",
+        "predicate": "topic",
+        "score": 13
+      },
+      {
+        "subject": "Coursework repository",
+        "predicate": "data_directory",
+        "score": 4
+      },
+      {
+        "subject": "State Memory coursework",
+        "predicate": "implementation_language",
+        "score": 4
+      }
+    ],
     "slotCorrect": true,
     "answer": "RAG for agents",
     "answerValues": [
@@ -476,7 +704,7 @@
       "e0070"
     ],
     "contextTokens": 98,
-    "latencyMs": 4.108000000000004,
+    "latencyMs": 4.1458999999999975,
     "contextHasGoldFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
@@ -494,9 +722,28 @@
     "requiresCurrentFact": true,
     "question": "When is the coursework due now?",
     "expected": "one week",
+    "subject": "State Memory coursework",
+    "predicate": "deadline",
     "inferredSubject": "State Memory coursework",
     "inferredPredicate": "deadline",
     "slotInferenceScore": 8,
+    "slotCandidates": [
+      {
+        "subject": "State Memory coursework",
+        "predicate": "deadline",
+        "score": 8
+      },
+      {
+        "subject": "Coursework repository",
+        "predicate": "data_directory",
+        "score": 4
+      },
+      {
+        "subject": "State Memory coursework",
+        "predicate": "topic",
+        "score": 4
+      }
+    ],
     "slotCorrect": true,
     "answer": "unknown",
     "answerValues": [],
@@ -515,7 +762,7 @@
       "e0081"
     ],
     "contextTokens": 96,
-    "latencyMs": 3.717100000000002,
+    "latencyMs": 3.613500000000002,
     "contextHasGoldFact": false,
     "goldRank": null,
     "reciprocalRank": 0,
@@ -533,9 +780,28 @@
     "requiresCurrentFact": true,
     "question": "What timeframe should planning use for finishing the coursework?",
     "expected": "one week",
+    "subject": "State Memory coursework",
+    "predicate": "deadline",
     "inferredSubject": "State Memory coursework",
     "inferredPredicate": "deadline",
     "slotInferenceScore": 6,
+    "slotCandidates": [
+      {
+        "subject": "State Memory coursework",
+        "predicate": "deadline",
+        "score": 6
+      },
+      {
+        "subject": "Coursework repository",
+        "predicate": "data_directory",
+        "score": 4
+      },
+      {
+        "subject": "State Memory coursework",
+        "predicate": "topic",
+        "score": 4
+      }
+    ],
     "slotCorrect": true,
     "answer": "unknown",
     "answerValues": [],
@@ -554,7 +820,7 @@
       "e0081"
     ],
     "contextTokens": 96,
-    "latencyMs": 3.813200000000009,
+    "latencyMs": 3.766599999999997,
     "contextHasGoldFact": false,
     "goldRank": null,
     "reciprocalRank": 0,
@@ -572,9 +838,28 @@
     "requiresCurrentFact": true,
     "question": "Ignoring older schedule notes, what is the current coursework deadline?",
     "expected": "one week",
+    "subject": "State Memory coursework",
+    "predicate": "deadline",
     "inferredSubject": "State Memory coursework",
     "inferredPredicate": "deadline",
     "slotInferenceScore": 13,
+    "slotCandidates": [
+      {
+        "subject": "State Memory coursework",
+        "predicate": "deadline",
+        "score": 13
+      },
+      {
+        "subject": "Experiment notes",
+        "predicate": "note",
+        "score": 8
+      },
+      {
+        "subject": "Chart script",
+        "predicate": "note",
+        "score": 4
+      }
+    ],
     "slotCorrect": true,
     "answer": "ten days",
     "answerValues": [
@@ -595,7 +880,7 @@
       "e0243"
     ],
     "contextTokens": 96,
-    "latencyMs": 3.8097000000000065,
+    "latencyMs": 4.1678,
     "contextHasGoldFact": false,
     "goldRank": null,
     "reciprocalRank": 0,
@@ -613,9 +898,28 @@
     "requiresCurrentFact": true,
     "question": "After all deadline revisions, what is the latest deadline?",
     "expected": "one week",
+    "subject": "State Memory coursework",
+    "predicate": "deadline",
     "inferredSubject": "State Memory coursework",
     "inferredPredicate": "deadline",
     "slotInferenceScore": 9,
+    "slotCandidates": [
+      {
+        "subject": "State Memory coursework",
+        "predicate": "deadline",
+        "score": 9
+      },
+      {
+        "subject": "State updater",
+        "predicate": "mutable_rule",
+        "score": 2
+      },
+      {
+        "subject": "Task.mobile_checkout",
+        "predicate": "calendar_dependency",
+        "score": 2
+      }
+    ],
     "slotCorrect": true,
     "answer": "unknown",
     "answerValues": [],
@@ -634,7 +938,7 @@
       "e0053"
     ],
     "contextTokens": 99,
-    "latencyMs": 4.17410000000001,
+    "latencyMs": 4.370599999999996,
     "contextHasGoldFact": false,
     "goldRank": null,
     "reciprocalRank": 0,
@@ -652,9 +956,28 @@
     "requiresCurrentFact": true,
     "question": "Which search component is used by the RAG baseline?",
     "expected": "lexical top-k retriever",
+    "subject": "RAG baseline",
+    "predicate": "retriever",
     "inferredSubject": "RAG baseline",
     "inferredPredicate": "retriever",
     "slotInferenceScore": 16,
+    "slotCandidates": [
+      {
+        "subject": "RAG baseline",
+        "predicate": "retriever",
+        "score": 16
+      },
+      {
+        "subject": "RAG baseline",
+        "predicate": "chunk_unit",
+        "score": 14
+      },
+      {
+        "subject": "RAG baseline",
+        "predicate": "top_k",
+        "score": 14
+      }
+    ],
     "slotCorrect": true,
     "answer": "cosine embedding search",
     "answerValues": [
@@ -675,7 +998,7 @@
       "e0023"
     ],
     "contextTokens": 94,
-    "latencyMs": 3.8452000000000055,
+    "latencyMs": 3.466700000000003,
     "contextHasGoldFact": true,
     "goldRank": 9,
     "reciprocalRank": 0.1111111111111111,
@@ -693,9 +1016,28 @@
     "requiresCurrentFact": true,
     "question": "When describing the baseline, how does it retrieve memories?",
     "expected": "lexical top-k retriever",
+    "subject": "RAG baseline",
+    "predicate": "retriever",
     "inferredSubject": "RAG baseline",
     "inferredPredicate": "top_k",
     "slotInferenceScore": 6,
+    "slotCandidates": [
+      {
+        "subject": "RAG baseline",
+        "predicate": "top_k",
+        "score": 6
+      },
+      {
+        "subject": "RAG baseline",
+        "predicate": "retriever",
+        "score": 4
+      },
+      {
+        "subject": "RAG baseline",
+        "predicate": "chunk_unit",
+        "score": 4
+      }
+    ],
     "slotCorrect": false,
     "answer": "3",
     "answerValues": [
@@ -716,7 +1058,7 @@
       "e0944"
     ],
     "contextTokens": 94,
-    "latencyMs": 3.7839000000000027,
+    "latencyMs": 3.4403000000000077,
     "contextHasGoldFact": true,
     "goldRank": 11,
     "reciprocalRank": 0.09090909090909091,
@@ -734,9 +1076,28 @@
     "requiresCurrentFact": true,
     "question": "Ignore random sampler mentions from older notes: what retriever does the baseline use?",
     "expected": "lexical top-k retriever",
+    "subject": "RAG baseline",
+    "predicate": "retriever",
     "inferredSubject": "RAG baseline",
     "inferredPredicate": "retriever",
     "slotInferenceScore": 13,
+    "slotCandidates": [
+      {
+        "subject": "RAG baseline",
+        "predicate": "retriever",
+        "score": 13
+      },
+      {
+        "subject": "Experiment notes",
+        "predicate": "note",
+        "score": 8
+      },
+      {
+        "subject": "Chart script",
+        "predicate": "note",
+        "score": 4
+      }
+    ],
     "slotCorrect": true,
     "answer": "random memory sampler",
     "answerValues": [
@@ -757,7 +1118,7 @@
       "e0054"
     ],
     "contextTokens": 97,
-    "latencyMs": 4.331100000000006,
+    "latencyMs": 3.484499999999997,
     "contextHasGoldFact": true,
     "goldRank": 2,
     "reciprocalRank": 0.5,
@@ -775,9 +1136,28 @@
     "requiresCurrentFact": true,
     "question": "After retriever revisions, which retrieval method is current for the RAG baseline?",
     "expected": "lexical top-k retriever",
+    "subject": "RAG baseline",
+    "predicate": "retriever",
     "inferredSubject": "RAG baseline",
     "inferredPredicate": "retriever",
     "slotInferenceScore": 25,
+    "slotCandidates": [
+      {
+        "subject": "RAG baseline",
+        "predicate": "retriever",
+        "score": 25
+      },
+      {
+        "subject": "RAG baseline",
+        "predicate": "chunk_unit",
+        "score": 14
+      },
+      {
+        "subject": "RAG baseline",
+        "predicate": "top_k",
+        "score": 14
+      }
+    ],
     "slotCorrect": true,
     "answer": "lexical top-k retriever",
     "answerValues": [
@@ -798,7 +1178,7 @@
       "e0002"
     ],
     "contextTokens": 89,
-    "latencyMs": 4.153200000000012,
+    "latencyMs": 3.4452,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
@@ -816,9 +1196,28 @@
     "requiresCurrentFact": true,
     "question": "How does the updater handle changing facts?",
     "expected": "latest wins",
+    "subject": "State updater",
+    "predicate": "mutable_rule",
     "inferredSubject": null,
     "inferredPredicate": null,
     "slotInferenceScore": 4,
+    "slotCandidates": [
+      {
+        "subject": "State updater",
+        "predicate": "old_fact_status",
+        "score": 4
+      },
+      {
+        "subject": "State selector",
+        "predicate": "limit",
+        "score": 4
+      },
+      {
+        "subject": "State updater",
+        "predicate": "mutable_rule",
+        "score": 4
+      }
+    ],
     "slotCorrect": false,
     "answer": "unknown",
     "answerValues": [],
@@ -837,7 +1236,7 @@
       "e0633"
     ],
     "contextTokens": 92,
-    "latencyMs": 3.903800000000018,
+    "latencyMs": 3.232200000000006,
     "contextHasGoldFact": false,
     "goldRank": null,
     "reciprocalRank": 0,
@@ -855,9 +1254,28 @@
     "requiresCurrentFact": true,
     "question": "What rule should be named for mutable state updates?",
     "expected": "latest wins",
+    "subject": "State updater",
+    "predicate": "mutable_rule",
     "inferredSubject": "State updater",
     "inferredPredicate": "mutable_rule",
     "slotInferenceScore": 14,
+    "slotCandidates": [
+      {
+        "subject": "State updater",
+        "predicate": "mutable_rule",
+        "score": 14
+      },
+      {
+        "subject": "State Memory",
+        "predicate": "stores",
+        "score": 4
+      },
+      {
+        "subject": "State Memory pipeline",
+        "predicate": "step",
+        "score": 4
+      }
+    ],
     "slotCorrect": true,
     "answer": "append everything",
     "answerValues": [
@@ -878,7 +1296,7 @@
       "e0143"
     ],
     "contextTokens": 102,
-    "latencyMs": 3.8507999999999925,
+    "latencyMs": 3.2972000000000037,
     "contextHasGoldFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
@@ -896,9 +1314,28 @@
     "requiresCurrentFact": true,
     "question": "Skipping unrelated state notes, what update rule is active for mutable facts?",
     "expected": "latest wins",
+    "subject": "State updater",
+    "predicate": "mutable_rule",
     "inferredSubject": "State updater",
     "inferredPredicate": "mutable_rule",
     "slotInferenceScore": 16,
+    "slotCandidates": [
+      {
+        "subject": "State updater",
+        "predicate": "mutable_rule",
+        "score": 16
+      },
+      {
+        "subject": "Experiment notes",
+        "predicate": "note",
+        "score": 8
+      },
+      {
+        "subject": "Experiment notes",
+        "predicate": "status",
+        "score": 6
+      }
+    ],
     "slotCorrect": true,
     "answer": "latest wins",
     "answerValues": [
@@ -919,7 +1356,7 @@
       "e0064"
     ],
     "contextTokens": 105,
-    "latencyMs": 3.9613999999999976,
+    "latencyMs": 3.5394000000000005,
     "contextHasGoldFact": true,
     "goldRank": 2,
     "reciprocalRank": 0.5,
@@ -937,9 +1374,28 @@
     "requiresCurrentFact": true,
     "question": "After earlier overwrite ideas, what mutable fact rule is used?",
     "expected": "latest wins",
+    "subject": "State updater",
+    "predicate": "mutable_rule",
     "inferredSubject": "State updater",
     "inferredPredicate": "mutable_rule",
     "slotInferenceScore": 12,
+    "slotCandidates": [
+      {
+        "subject": "State updater",
+        "predicate": "mutable_rule",
+        "score": 12
+      },
+      {
+        "subject": "Fact extractor",
+        "predicate": "confidence_policy",
+        "score": 4
+      },
+      {
+        "subject": "Fact extractor",
+        "predicate": "method",
+        "score": 4
+      }
+    ],
     "slotCorrect": true,
     "answer": "manual overwrite",
     "answerValues": [
@@ -960,7 +1416,7 @@
       "e0054"
     ],
     "contextTokens": 103,
-    "latencyMs": 3.8769000000000062,
+    "latencyMs": 3.3969999999999914,
     "contextHasGoldFact": true,
     "goldRank": 4,
     "reciprocalRank": 0.25,
@@ -985,9 +1441,28 @@
       "error analysis",
       "conclusions"
     ],
+    "subject": "State Memory coursework",
+    "predicate": "requires",
     "inferredSubject": "State Memory coursework",
     "inferredPredicate": "requires",
     "slotInferenceScore": 6,
+    "slotCandidates": [
+      {
+        "subject": "State Memory coursework",
+        "predicate": "requires",
+        "score": 6
+      },
+      {
+        "subject": "Coursework repository",
+        "predicate": "data_directory",
+        "score": 4
+      },
+      {
+        "subject": "State Memory coursework",
+        "predicate": "topic",
+        "score": 4
+      }
+    ],
     "slotCorrect": true,
     "answer": "unknown",
     "answerValues": [],
@@ -1006,7 +1481,7 @@
       "e0081"
     ],
     "contextTokens": 96,
-    "latencyMs": 3.727100000000007,
+    "latencyMs": 3.1389000000000067,
     "contextHasGoldFact": false,
     "goldRank": null,
     "reciprocalRank": 0,
@@ -1031,9 +1506,28 @@
       "error analysis",
       "conclusions"
     ],
+    "subject": "State Memory coursework",
+    "predicate": "requires",
     "inferredSubject": null,
     "inferredPredicate": null,
     "slotInferenceScore": 4,
+    "slotCandidates": [
+      {
+        "subject": "Metrics report",
+        "predicate": "output",
+        "score": 4
+      },
+      {
+        "subject": "Metrics",
+        "predicate": "include",
+        "score": 4
+      },
+      {
+        "subject": "Methodology section",
+        "predicate": "summary",
+        "score": 0
+      }
+    ],
     "slotCorrect": false,
     "answer": "unknown",
     "answerValues": [],
@@ -1052,7 +1546,7 @@
       "e0734"
     ],
     "contextTokens": 94,
-    "latencyMs": 3.8652999999999906,
+    "latencyMs": 3.356200000000001,
     "contextHasGoldFact": false,
     "goldRank": null,
     "reciprocalRank": 0,
@@ -1077,9 +1571,28 @@
       "error analysis",
       "conclusions"
     ],
+    "subject": "State Memory coursework",
+    "predicate": "requires",
     "inferredSubject": "State Memory coursework",
     "inferredPredicate": "implementation_language",
     "slotInferenceScore": 18,
+    "slotCandidates": [
+      {
+        "subject": "State Memory coursework",
+        "predicate": "implementation_language",
+        "score": 18
+      },
+      {
+        "subject": "Experiment notes",
+        "predicate": "note",
+        "score": 8
+      },
+      {
+        "subject": "State Memory coursework",
+        "predicate": "requires",
+        "score": 6
+      }
+    ],
     "slotCorrect": false,
     "answer": "Python, TypeScript, zero-dependency Node.js",
     "answerValues": [
@@ -1102,7 +1615,7 @@
       "e0307"
     ],
     "contextTokens": 98,
-    "latencyMs": 4.3799000000000206,
+    "latencyMs": 3.286599999999993,
     "contextHasGoldFact": false,
     "goldRank": 10,
     "reciprocalRank": 0.1,
@@ -1127,9 +1640,28 @@
       "error analysis",
       "conclusions"
     ],
+    "subject": "State Memory coursework",
+    "predicate": "requires",
     "inferredSubject": "Experiment notes",
     "inferredPredicate": "note",
     "slotInferenceScore": 8,
+    "slotCandidates": [
+      {
+        "subject": "Experiment notes",
+        "predicate": "note",
+        "score": 8
+      },
+      {
+        "subject": "State Memory coursework",
+        "predicate": "requires",
+        "score": 6
+      },
+      {
+        "subject": "Chart script",
+        "predicate": "note",
+        "score": 4
+      }
+    ],
     "slotCorrect": false,
     "answer": "ready for coursework text",
     "answerValues": [
@@ -1150,7 +1682,7 @@
       "e0624"
     ],
     "contextTokens": 96,
-    "latencyMs": 4.537000000000006,
+    "latencyMs": 3.2264999999999873,
     "contextHasGoldFact": false,
     "goldRank": null,
     "reciprocalRank": 0,
@@ -1175,9 +1707,28 @@
       "stale fact error rate",
       "compression ratio"
     ],
+    "subject": "Metrics",
+    "predicate": "include",
     "inferredSubject": "Metrics",
     "inferredPredicate": "include",
     "slotInferenceScore": 12,
+    "slotCandidates": [
+      {
+        "subject": "Metrics",
+        "predicate": "include",
+        "score": 12
+      },
+      {
+        "subject": "Evaluation suite",
+        "predicate": "primary_metric",
+        "score": 4
+      },
+      {
+        "subject": "Evaluation suite",
+        "predicate": "latency_unit",
+        "score": 4
+      }
+    ],
     "slotCorrect": true,
     "answer": "unknown",
     "answerValues": [],
@@ -1196,7 +1747,7 @@
       "e0051"
     ],
     "contextTokens": 104,
-    "latencyMs": 3.7319999999999993,
+    "latencyMs": 3.5534999999999854,
     "contextHasGoldFact": false,
     "goldRank": null,
     "reciprocalRank": 0,
@@ -1221,9 +1772,28 @@
       "stale fact error rate",
       "compression ratio"
     ],
+    "subject": "Metrics",
+    "predicate": "include",
     "inferredSubject": "State Memory agent",
     "inferredPredicate": "memory_strategy",
     "slotInferenceScore": 9,
+    "slotCandidates": [
+      {
+        "subject": "State Memory agent",
+        "predicate": "memory_strategy",
+        "score": 9
+      },
+      {
+        "subject": "State Memory coursework",
+        "predicate": "deadline",
+        "score": 6
+      },
+      {
+        "subject": "State Memory",
+        "predicate": "stores",
+        "score": 4
+      }
+    ],
     "slotCorrect": false,
     "answer": "full history, RAG retrieval, structured world state",
     "answerValues": [
@@ -1246,7 +1816,7 @@
       "e0135"
     ],
     "contextTokens": 106,
-    "latencyMs": 3.8471999999999866,
+    "latencyMs": 3.697100000000006,
     "contextHasGoldFact": false,
     "goldRank": null,
     "reciprocalRank": 0,
@@ -1271,9 +1841,28 @@
       "stale fact error rate",
       "compression ratio"
     ],
+    "subject": "Metrics",
+    "predicate": "include",
     "inferredSubject": "Chart script",
     "inferredPredicate": "note",
     "slotInferenceScore": 18,
+    "slotCandidates": [
+      {
+        "subject": "Chart script",
+        "predicate": "note",
+        "score": 18
+      },
+      {
+        "subject": "Metrics",
+        "predicate": "include",
+        "score": 16
+      },
+      {
+        "subject": "Chart script",
+        "predicate": "summary",
+        "score": 14
+      }
+    ],
     "slotCorrect": false,
     "answer": "included for retrieval noise",
     "answerValues": [
@@ -1294,7 +1883,7 @@
       "e0469"
     ],
     "contextTokens": 96,
-    "latencyMs": 3.856400000000008,
+    "latencyMs": 3.4116000000000213,
     "contextHasGoldFact": false,
     "goldRank": null,
     "reciprocalRank": 0,
@@ -1319,9 +1908,28 @@
       "stale fact error rate",
       "compression ratio"
     ],
+    "subject": "Metrics",
+    "predicate": "include",
     "inferredSubject": "Experiment notes",
     "inferredPredicate": "note",
     "slotInferenceScore": 8,
+    "slotCandidates": [
+      {
+        "subject": "Experiment notes",
+        "predicate": "note",
+        "score": 8
+      },
+      {
+        "subject": "Evaluation suite",
+        "predicate": "primary_metric",
+        "score": 5
+      },
+      {
+        "subject": "Chart script",
+        "predicate": "note",
+        "score": 4
+      }
+    ],
     "slotCorrect": false,
     "answer": "included for retrieval noise",
     "answerValues": [
@@ -1342,7 +1950,7 @@
       "e0486"
     ],
     "contextTokens": 96,
-    "latencyMs": 4.103100000000012,
+    "latencyMs": 3.448599999999999,
     "contextHasGoldFact": false,
     "goldRank": null,
     "reciprocalRank": 0,
@@ -1360,9 +1968,28 @@
     "requiresCurrentFact": true,
     "question": "When is the planning meeting scheduled now?",
     "expected": "11:30",
+    "subject": "Calendar.planning_meeting",
+    "predicate": "meeting_time",
     "inferredSubject": "Calendar.planning_meeting",
     "inferredPredicate": "meeting_time",
     "slotInferenceScore": 15,
+    "slotCandidates": [
+      {
+        "subject": "Calendar.planning_meeting",
+        "predicate": "meeting_time",
+        "score": 15
+      },
+      {
+        "subject": "State Memory coursework",
+        "predicate": "deadline",
+        "score": 2
+      },
+      {
+        "subject": "Task.mobile_checkout",
+        "predicate": "calendar_dependency",
+        "score": 2
+      }
+    ],
     "slotCorrect": true,
     "answer": "10:00",
     "answerValues": [
@@ -1371,10 +1998,11 @@
     "contextIds": [
       "domain-calendar-001",
       "domain-calendar-002",
+      "domain-cross-001",
       "e0944"
     ],
-    "contextTokens": 29,
-    "latencyMs": 3.3962999999999965,
+    "contextTokens": 39,
+    "latencyMs": 3.1333999999999946,
     "contextHasGoldFact": true,
     "goldRank": 2,
     "reciprocalRank": 0.5,
@@ -1392,9 +2020,28 @@
     "requiresCurrentFact": true,
     "question": "What time should I put on the calendar for the planning meeting?",
     "expected": "11:30",
+    "subject": "Calendar.planning_meeting",
+    "predicate": "meeting_time",
     "inferredSubject": "Calendar.planning_meeting",
     "inferredPredicate": "meeting_time",
     "slotInferenceScore": 24,
+    "slotCandidates": [
+      {
+        "subject": "Calendar.planning_meeting",
+        "predicate": "meeting_time",
+        "score": 24
+      },
+      {
+        "subject": "Task.mobile_checkout",
+        "predicate": "calendar_dependency",
+        "score": 7
+      },
+      {
+        "subject": "Evaluation suite",
+        "predicate": "latency_unit",
+        "score": 2
+      }
+    ],
     "slotCorrect": true,
     "answer": "10:00",
     "answerValues": [
@@ -1402,10 +2049,11 @@
     ],
     "contextIds": [
       "domain-calendar-001",
-      "domain-calendar-002"
+      "domain-calendar-002",
+      "domain-cross-001"
     ],
-    "contextTokens": 18,
-    "latencyMs": 3.760799999999989,
+    "contextTokens": 28,
+    "latencyMs": 3.3733000000000004,
     "contextHasGoldFact": true,
     "goldRank": 2,
     "reciprocalRank": 0.5,
@@ -1423,9 +2071,28 @@
     "requiresCurrentFact": true,
     "question": "Ignore the first invite: what is the updated planning meeting time?",
     "expected": "11:30",
+    "subject": "Calendar.planning_meeting",
+    "predicate": "meeting_time",
     "inferredSubject": "Calendar.planning_meeting",
     "inferredPredicate": "meeting_time",
     "slotInferenceScore": 22,
+    "slotCandidates": [
+      {
+        "subject": "Calendar.planning_meeting",
+        "predicate": "meeting_time",
+        "score": 22
+      },
+      {
+        "subject": "Evaluation suite",
+        "predicate": "latency_unit",
+        "score": 2
+      },
+      {
+        "subject": "Task.mobile_checkout",
+        "predicate": "calendar_dependency",
+        "score": 2
+      }
+    ],
     "slotCorrect": true,
     "answer": "10:00",
     "answerValues": [
@@ -1433,10 +2100,11 @@
     ],
     "contextIds": [
       "domain-calendar-001",
-      "domain-calendar-002"
+      "domain-calendar-002",
+      "domain-cross-001"
     ],
-    "contextTokens": 18,
-    "latencyMs": 3.5818999999999903,
+    "contextTokens": 28,
+    "latencyMs": 3.3608999999999867,
     "contextHasGoldFact": true,
     "goldRank": 2,
     "reciprocalRank": 0.5,
@@ -1454,9 +2122,28 @@
     "requiresCurrentFact": true,
     "question": "After the meeting was rescheduled, what is its latest time?",
     "expected": "11:30",
+    "subject": "Calendar.planning_meeting",
+    "predicate": "meeting_time",
     "inferredSubject": "Calendar.planning_meeting",
     "inferredPredicate": "meeting_time",
     "slotInferenceScore": 14,
+    "slotCandidates": [
+      {
+        "subject": "Calendar.planning_meeting",
+        "predicate": "meeting_time",
+        "score": 14
+      },
+      {
+        "subject": "Task.mobile_checkout",
+        "predicate": "calendar_dependency",
+        "score": 4
+      },
+      {
+        "subject": "Evaluation suite",
+        "predicate": "latency_unit",
+        "score": 2
+      }
+    ],
     "slotCorrect": true,
     "answer": "10:00",
     "answerValues": [
@@ -1465,10 +2152,11 @@
     "contextIds": [
       "domain-calendar-001",
       "domain-calendar-002",
-      "e0882"
+      "e0882",
+      "domain-cross-001"
     ],
-    "contextTokens": 26,
-    "latencyMs": 3.528700000000015,
+    "contextTokens": 36,
+    "latencyMs": 3.432299999999998,
     "contextHasGoldFact": true,
     "goldRank": 2,
     "reciprocalRank": 0.5,
@@ -1486,9 +2174,28 @@
     "requiresCurrentFact": true,
     "question": "Who owns the Acme account now?",
     "expected": "Maria",
+    "subject": "CRM.Acme",
+    "predicate": "account_owner",
     "inferredSubject": "CRM.Acme",
     "inferredPredicate": "account_owner",
     "slotInferenceScore": 11,
+    "slotCandidates": [
+      {
+        "subject": "CRM.Acme",
+        "predicate": "account_owner",
+        "score": 11
+      },
+      {
+        "subject": "CRM.Acme",
+        "predicate": "delivery_task",
+        "score": 4
+      },
+      {
+        "subject": "Methodology section",
+        "predicate": "summary",
+        "score": 0
+      }
+    ],
     "slotCorrect": true,
     "answer": "Ivan",
     "answerValues": [
@@ -1496,10 +2203,11 @@
     ],
     "contextIds": [
       "domain-crm-001",
-      "domain-crm-002"
+      "domain-crm-002",
+      "domain-cross-002"
     ],
-    "contextTokens": 16,
-    "latencyMs": 3.7883999999999958,
+    "contextTokens": 27,
+    "latencyMs": 3.104900000000015,
     "contextHasGoldFact": true,
     "goldRank": 2,
     "reciprocalRank": 0.5,
@@ -1517,9 +2225,28 @@
     "requiresCurrentFact": true,
     "question": "Who should be treated as responsible for Acme in the CRM?",
     "expected": "Maria",
+    "subject": "CRM.Acme",
+    "predicate": "account_owner",
     "inferredSubject": "CRM.Acme",
     "inferredPredicate": "account_owner",
     "slotInferenceScore": 10,
+    "slotCandidates": [
+      {
+        "subject": "CRM.Acme",
+        "predicate": "account_owner",
+        "score": 10
+      },
+      {
+        "subject": "CRM.Acme",
+        "predicate": "delivery_task",
+        "score": 8
+      },
+      {
+        "subject": "Methodology section",
+        "predicate": "summary",
+        "score": 0
+      }
+    ],
     "slotCorrect": true,
     "answer": "Ivan",
     "answerValues": [
@@ -1527,10 +2254,11 @@
     ],
     "contextIds": [
       "domain-crm-001",
-      "domain-crm-002"
+      "domain-crm-002",
+      "domain-cross-002"
     ],
-    "contextTokens": 16,
-    "latencyMs": 3.886899999999997,
+    "contextTokens": 27,
+    "latencyMs": 3.378700000000009,
     "contextHasGoldFact": true,
     "goldRank": 2,
     "reciprocalRank": 0.5,
@@ -1548,9 +2276,28 @@
     "requiresCurrentFact": true,
     "question": "Ignore the old owner note: who is the current Acme owner?",
     "expected": "Maria",
+    "subject": "CRM.Acme",
+    "predicate": "account_owner",
     "inferredSubject": "CRM.Acme",
     "inferredPredicate": "account_owner",
     "slotInferenceScore": 9,
+    "slotCandidates": [
+      {
+        "subject": "CRM.Acme",
+        "predicate": "account_owner",
+        "score": 9
+      },
+      {
+        "subject": "Chart script",
+        "predicate": "note",
+        "score": 7
+      },
+      {
+        "subject": "Experiment notes",
+        "predicate": "note",
+        "score": 7
+      }
+    ],
     "slotCorrect": true,
     "answer": "Ivan",
     "answerValues": [
@@ -1571,7 +2318,7 @@
       "e0041"
     ],
     "contextTokens": 101,
-    "latencyMs": 4.0175000000000125,
+    "latencyMs": 3.4506000000000085,
     "contextHasGoldFact": true,
     "goldRank": 2,
     "reciprocalRank": 0.5,
@@ -1589,9 +2336,28 @@
     "requiresCurrentFact": true,
     "question": "After reassignment, who is responsible for the Acme account?",
     "expected": "Maria",
+    "subject": "CRM.Acme",
+    "predicate": "account_owner",
     "inferredSubject": "CRM.Acme",
     "inferredPredicate": "account_owner",
     "slotInferenceScore": 11,
+    "slotCandidates": [
+      {
+        "subject": "CRM.Acme",
+        "predicate": "account_owner",
+        "score": 11
+      },
+      {
+        "subject": "CRM.Acme",
+        "predicate": "delivery_task",
+        "score": 4
+      },
+      {
+        "subject": "Task.mobile_checkout",
+        "predicate": "calendar_dependency",
+        "score": 2
+      }
+    ],
     "slotCorrect": true,
     "answer": "Ivan",
     "answerValues": [
@@ -1599,10 +2365,11 @@
     ],
     "contextIds": [
       "domain-crm-001",
-      "domain-crm-002"
+      "domain-crm-002",
+      "domain-cross-002"
     ],
-    "contextTokens": 16,
-    "latencyMs": 3.3444000000000074,
+    "contextTokens": 27,
+    "latencyMs": 3.1854000000000156,
     "contextHasGoldFact": true,
     "goldRank": 2,
     "reciprocalRank": 0.5,
@@ -1620,33 +2387,52 @@
     "requiresCurrentFact": true,
     "question": "What is the latest state of the mobile checkout task?",
     "expected": "done",
+    "subject": "Task.mobile_checkout",
+    "predicate": "status",
     "inferredSubject": "Task.mobile_checkout",
     "inferredPredicate": "status",
     "slotInferenceScore": 16,
+    "slotCandidates": [
+      {
+        "subject": "Task.mobile_checkout",
+        "predicate": "status",
+        "score": 16
+      },
+      {
+        "subject": "Task.mobile_checkout",
+        "predicate": "calendar_dependency",
+        "score": 12
+      },
+      {
+        "subject": "State updater",
+        "predicate": "mutable_rule",
+        "score": 6
+      }
+    ],
     "slotCorrect": true,
     "answer": "todo",
     "answerValues": [
       "todo"
     ],
     "contextIds": [
+      "domain-cross-002",
       "domain-task-001",
       "domain-task-002",
       "domain-task-003",
+      "domain-cross-001",
       "e0882",
       "e0036",
       "e0235",
       "e0683",
       "e0960",
       "e0017",
-      "e0049",
-      "e0064",
-      "e0093"
+      "e0049"
     ],
-    "contextTokens": 103,
-    "latencyMs": 3.256200000000007,
+    "contextTokens": 108,
+    "latencyMs": 3.3573000000000093,
     "contextHasGoldFact": true,
-    "goldRank": 3,
-    "reciprocalRank": 0.3333333333333333,
+    "goldRank": 4,
+    "reciprocalRank": 0.25,
     "errorType": "stale_fact",
     "answered": true,
     "correct": false,
@@ -1661,9 +2447,28 @@
     "requiresCurrentFact": true,
     "question": "If someone asks whether mobile checkout is still blocked, what status should we report?",
     "expected": "done",
+    "subject": "Task.mobile_checkout",
+    "predicate": "status",
     "inferredSubject": "Task.mobile_checkout",
     "inferredPredicate": "status",
     "slotInferenceScore": 19,
+    "slotCandidates": [
+      {
+        "subject": "Task.mobile_checkout",
+        "predicate": "status",
+        "score": 19
+      },
+      {
+        "subject": "Notebook",
+        "predicate": "status",
+        "score": 11
+      },
+      {
+        "subject": "README",
+        "predicate": "status",
+        "score": 11
+      }
+    ],
     "slotCorrect": true,
     "answer": "blocked",
     "answerValues": [
@@ -1673,18 +2478,18 @@
       "domain-task-002",
       "domain-task-001",
       "domain-task-003",
+      "domain-cross-001",
+      "domain-cross-002",
       "e0002",
       "e0010",
       "e0026",
       "e0034",
       "e0035",
       "e0038",
-      "e0042",
-      "e0062",
-      "e0064"
+      "e0042"
     ],
-    "contextTokens": 99,
-    "latencyMs": 3.6428999999999974,
+    "contextTokens": 103,
+    "latencyMs": 3.60390000000001,
     "contextHasGoldFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
@@ -1702,9 +2507,28 @@
     "requiresCurrentFact": true,
     "question": "Ignore earlier blocked/todo notes: what is the mobile checkout task status now?",
     "expected": "done",
+    "subject": "Task.mobile_checkout",
+    "predicate": "status",
     "inferredSubject": "Task.mobile_checkout",
     "inferredPredicate": "status",
     "slotInferenceScore": 25,
+    "slotCandidates": [
+      {
+        "subject": "Task.mobile_checkout",
+        "predicate": "status",
+        "score": 25
+      },
+      {
+        "subject": "Experiment notes",
+        "predicate": "status",
+        "score": 17
+      },
+      {
+        "subject": "Notebook",
+        "predicate": "status",
+        "score": 13
+      }
+    ],
     "slotCorrect": true,
     "answer": "todo",
     "answerValues": [
@@ -1714,18 +2538,18 @@
       "domain-task-001",
       "domain-task-002",
       "domain-task-003",
+      "domain-cross-002",
+      "domain-cross-001",
       "e0035",
       "e0096",
       "e0155",
       "e0181",
       "e0241",
       "e0321",
-      "e0325",
-      "e0330",
-      "e0350"
+      "e0325"
     ],
-    "contextTokens": 101,
-    "latencyMs": 3.5774000000000115,
+    "contextTokens": 105,
+    "latencyMs": 3.430199999999985,
     "contextHasGoldFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
@@ -1743,9 +2567,28 @@
     "requiresCurrentFact": true,
     "question": "After todo and blocked states, what is the final status of mobile checkout?",
     "expected": "done",
+    "subject": "Task.mobile_checkout",
+    "predicate": "status",
     "inferredSubject": "Task.mobile_checkout",
     "inferredPredicate": "status",
     "slotInferenceScore": 19,
+    "slotCandidates": [
+      {
+        "subject": "Task.mobile_checkout",
+        "predicate": "status",
+        "score": 19
+      },
+      {
+        "subject": "Notebook",
+        "predicate": "status",
+        "score": 11
+      },
+      {
+        "subject": "README",
+        "predicate": "status",
+        "score": 11
+      }
+    ],
     "slotCorrect": true,
     "answer": "todo",
     "answerValues": [
@@ -1755,18 +2598,18 @@
       "domain-task-001",
       "domain-task-002",
       "domain-task-003",
+      "domain-cross-001",
+      "domain-cross-002",
       "e0911",
       "e0002",
       "e0010",
       "e0026",
       "e0034",
       "e0035",
-      "e0038",
-      "e0042",
-      "e0062"
+      "e0038"
     ],
-    "contextTokens": 99,
-    "latencyMs": 3.789999999999992,
+    "contextTokens": 103,
+    "latencyMs": 3.827399999999983,
     "contextHasGoldFact": true,
     "goldRank": 3,
     "reciprocalRank": 0.3333333333333333,
@@ -1784,9 +2627,28 @@
     "requiresCurrentFact": true,
     "question": "What budget is currently set for the laptop purchase?",
     "expected": "1500 USD",
+    "subject": "Shopping.laptop",
+    "predicate": "budget",
     "inferredSubject": "Shopping.laptop",
     "inferredPredicate": "budget",
     "slotInferenceScore": 13,
+    "slotCandidates": [
+      {
+        "subject": "Shopping.laptop",
+        "predicate": "budget",
+        "score": 13
+      },
+      {
+        "subject": "Methodology section",
+        "predicate": "summary",
+        "score": 0
+      },
+      {
+        "subject": "Notebook",
+        "predicate": "status",
+        "score": 0
+      }
+    ],
     "slotCorrect": true,
     "answer": "1200 USD",
     "answerValues": [
@@ -1797,7 +2659,7 @@
       "domain-shopping-002"
     ],
     "contextTokens": 16,
-    "latencyMs": 3.509600000000006,
+    "latencyMs": 3.6681000000000097,
     "contextHasGoldFact": true,
     "goldRank": 2,
     "reciprocalRank": 0.5,
@@ -1815,9 +2677,28 @@
     "requiresCurrentFact": true,
     "question": "How much can be spent on the laptop after the budget change?",
     "expected": "1500 USD",
+    "subject": "Shopping.laptop",
+    "predicate": "budget",
     "inferredSubject": "Shopping.laptop",
     "inferredPredicate": "budget",
     "slotInferenceScore": 13,
+    "slotCandidates": [
+      {
+        "subject": "Shopping.laptop",
+        "predicate": "budget",
+        "score": 13
+      },
+      {
+        "subject": "Synthetic dataset",
+        "predicate": "size",
+        "score": 2
+      },
+      {
+        "subject": "RAG baseline",
+        "predicate": "top_k",
+        "score": 2
+      }
+    ],
     "slotCorrect": true,
     "answer": "1200 USD",
     "answerValues": [
@@ -1828,7 +2709,7 @@
       "domain-shopping-002"
     ],
     "contextTokens": 16,
-    "latencyMs": 3.8688999999999965,
+    "latencyMs": 3.5168000000000177,
     "contextHasGoldFact": true,
     "goldRank": 2,
     "reciprocalRank": 0.5,
@@ -1846,9 +2727,28 @@
     "requiresCurrentFact": true,
     "question": "Ignore the earlier shopping budget: what is the laptop budget now?",
     "expected": "1500 USD",
+    "subject": "Shopping.laptop",
+    "predicate": "budget",
     "inferredSubject": "Shopping.laptop",
     "inferredPredicate": "budget",
     "slotInferenceScore": 19,
+    "slotCandidates": [
+      {
+        "subject": "Shopping.laptop",
+        "predicate": "budget",
+        "score": 19
+      },
+      {
+        "subject": "Methodology section",
+        "predicate": "summary",
+        "score": 0
+      },
+      {
+        "subject": "Notebook",
+        "predicate": "status",
+        "score": 0
+      }
+    ],
     "slotCorrect": true,
     "answer": "1200 USD",
     "answerValues": [
@@ -1859,7 +2759,7 @@
       "domain-shopping-002"
     ],
     "contextTokens": 16,
-    "latencyMs": 3.697900000000004,
+    "latencyMs": 3.363599999999991,
     "contextHasGoldFact": true,
     "goldRank": 2,
     "reciprocalRank": 0.5,
@@ -1877,9 +2777,28 @@
     "requiresCurrentFact": true,
     "question": "After the budget was updated, what amount is current for the laptop?",
     "expected": "1500 USD",
+    "subject": "Shopping.laptop",
+    "predicate": "budget",
     "inferredSubject": "Shopping.laptop",
     "inferredPredicate": "budget",
     "slotInferenceScore": 13,
+    "slotCandidates": [
+      {
+        "subject": "Shopping.laptop",
+        "predicate": "budget",
+        "score": 13
+      },
+      {
+        "subject": "Task.mobile_checkout",
+        "predicate": "calendar_dependency",
+        "score": 2
+      },
+      {
+        "subject": "Methodology section",
+        "predicate": "summary",
+        "score": 0
+      }
+    ],
     "slotCorrect": true,
     "answer": "1200 USD",
     "answerValues": [
@@ -1890,7 +2809,7 @@
       "domain-shopping-002"
     ],
     "contextTokens": 16,
-    "latencyMs": 3.6875,
+    "latencyMs": 3.382300000000015,
     "contextHasGoldFact": true,
     "goldRank": 2,
     "reciprocalRank": 0.5,
@@ -1908,9 +2827,28 @@
     "requiresCurrentFact": true,
     "question": "What priority does the billing thread have now?",
     "expected": "urgent",
+    "subject": "Support chat.billing_thread",
+    "predicate": "priority",
     "inferredSubject": "Support chat.billing_thread",
     "inferredPredicate": "priority",
     "slotInferenceScore": 17,
+    "slotCandidates": [
+      {
+        "subject": "Support chat.billing_thread",
+        "predicate": "priority",
+        "score": 17
+      },
+      {
+        "subject": "Methodology section",
+        "predicate": "summary",
+        "score": 0
+      },
+      {
+        "subject": "Notebook",
+        "predicate": "status",
+        "score": 0
+      }
+    ],
     "slotCorrect": true,
     "answer": "low",
     "answerValues": [
@@ -1921,7 +2859,7 @@
       "domain-chat-002"
     ],
     "contextTokens": 20,
-    "latencyMs": 3.4610000000000127,
+    "latencyMs": 3.1066000000000145,
     "contextHasGoldFact": true,
     "goldRank": 2,
     "reciprocalRank": 0.5,
@@ -1939,9 +2877,28 @@
     "requiresCurrentFact": true,
     "question": "How urgent is the billing support conversation currently?",
     "expected": "urgent",
+    "subject": "Support chat.billing_thread",
+    "predicate": "priority",
     "inferredSubject": "Support chat.billing_thread",
     "inferredPredicate": "priority",
     "slotInferenceScore": 10,
+    "slotCandidates": [
+      {
+        "subject": "Support chat.billing_thread",
+        "predicate": "priority",
+        "score": 10
+      },
+      {
+        "subject": "Synthetic dataset",
+        "predicate": "size",
+        "score": 2
+      },
+      {
+        "subject": "RAG baseline",
+        "predicate": "top_k",
+        "score": 2
+      }
+    ],
     "slotCorrect": true,
     "answer": "urgent",
     "answerValues": [
@@ -1952,7 +2909,7 @@
       "domain-chat-001"
     ],
     "contextTokens": 20,
-    "latencyMs": 3.4431999999999903,
+    "latencyMs": 3.2561000000000035,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
@@ -1970,9 +2927,28 @@
     "requiresCurrentFact": true,
     "question": "Ignore the low-priority note: what is the billing thread priority now?",
     "expected": "urgent",
+    "subject": "Support chat.billing_thread",
+    "predicate": "priority",
     "inferredSubject": "Support chat.billing_thread",
     "inferredPredicate": "priority",
     "slotInferenceScore": 17,
+    "slotCandidates": [
+      {
+        "subject": "Support chat.billing_thread",
+        "predicate": "priority",
+        "score": 17
+      },
+      {
+        "subject": "Chart script",
+        "predicate": "note",
+        "score": 7
+      },
+      {
+        "subject": "Experiment notes",
+        "predicate": "note",
+        "score": 7
+      }
+    ],
     "slotCorrect": true,
     "answer": "low",
     "answerValues": [
@@ -1993,7 +2969,7 @@
       "e0045"
     ],
     "contextTokens": 105,
-    "latencyMs": 3.7693999999999903,
+    "latencyMs": 3.5172000000000025,
     "contextHasGoldFact": true,
     "goldRank": 2,
     "reciprocalRank": 0.5,
@@ -2011,9 +2987,28 @@
     "requiresCurrentFact": true,
     "question": "After the support chat priority changed, what is the final priority?",
     "expected": "urgent",
+    "subject": "Support chat.billing_thread",
+    "predicate": "priority",
     "inferredSubject": "Support chat.billing_thread",
     "inferredPredicate": "priority",
     "slotInferenceScore": 19,
+    "slotCandidates": [
+      {
+        "subject": "Support chat.billing_thread",
+        "predicate": "priority",
+        "score": 19
+      },
+      {
+        "subject": "Task.mobile_checkout",
+        "predicate": "calendar_dependency",
+        "score": 2
+      },
+      {
+        "subject": "Methodology section",
+        "predicate": "summary",
+        "score": 0
+      }
+    ],
     "slotCorrect": true,
     "answer": "urgent",
     "answerValues": [
@@ -2034,7 +3029,473 @@
       "e0732"
     ],
     "contextTokens": 100,
-    "latencyMs": 3.5438999999999794,
+    "latencyMs": 3.3670999999999935,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false
+  },
+  {
+    "system": "rag",
+    "questionId": "robust-domain-cross-task-calendar-paraphrase",
+    "questionType": "paraphrase",
+    "domain": "cross_domain",
+    "variant": "paraphrase",
+    "requiresCurrentFact": true,
+    "question": "What time should the mobile checkout follow-up use from its calendar dependency?",
+    "expected": "11:30",
+    "subject": "Task.mobile_checkout",
+    "predicate": "calendar_dependency",
+    "inferredSubject": "Task.mobile_checkout",
+    "inferredPredicate": "calendar_dependency",
+    "slotInferenceScore": 22,
+    "slotCandidates": [
+      {
+        "subject": "Task.mobile_checkout",
+        "predicate": "calendar_dependency",
+        "score": 22
+      },
+      {
+        "subject": "Calendar.planning_meeting",
+        "predicate": "meeting_time",
+        "score": 11
+      },
+      {
+        "subject": "Task.mobile_checkout",
+        "predicate": "status",
+        "score": 8
+      }
+    ],
+    "slotCorrect": true,
+    "answer": "10:00",
+    "answerValues": [
+      "10:00"
+    ],
+    "contextIds": [
+      "domain-cross-001",
+      "domain-calendar-001",
+      "domain-calendar-002",
+      "domain-task-001",
+      "domain-task-002",
+      "domain-task-003",
+      "domain-cross-002",
+      "e0871",
+      "e0953"
+    ],
+    "contextTokens": 82,
+    "latencyMs": 4.299499999999995,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "stale_fact",
+    "answered": true,
+    "correct": false,
+    "staleFactError": true
+  },
+  {
+    "system": "rag",
+    "questionId": "robust-domain-cross-task-calendar-indirect",
+    "questionType": "indirect",
+    "domain": "cross_domain",
+    "variant": "indirect",
+    "requiresCurrentFact": true,
+    "question": "The mobile checkout task depends on a meeting; what is that meeting's current time?",
+    "expected": "11:30",
+    "subject": "Task.mobile_checkout",
+    "predicate": "calendar_dependency",
+    "inferredSubject": "Task.mobile_checkout",
+    "inferredPredicate": "calendar_dependency",
+    "slotInferenceScore": 16,
+    "slotCandidates": [
+      {
+        "subject": "Task.mobile_checkout",
+        "predicate": "calendar_dependency",
+        "score": 16
+      },
+      {
+        "subject": "Calendar.planning_meeting",
+        "predicate": "meeting_time",
+        "score": 14
+      },
+      {
+        "subject": "Task.mobile_checkout",
+        "predicate": "status",
+        "score": 14
+      }
+    ],
+    "slotCorrect": true,
+    "answer": "10:00",
+    "answerValues": [
+      "10:00"
+    ],
+    "contextIds": [
+      "domain-cross-001",
+      "domain-cross-002",
+      "domain-task-001",
+      "domain-task-002",
+      "domain-task-003",
+      "domain-calendar-001",
+      "domain-calendar-002"
+    ],
+    "contextTokens": 63,
+    "latencyMs": 3.9551999999999907,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "stale_fact",
+    "answered": true,
+    "correct": false,
+    "staleFactError": true
+  },
+  {
+    "system": "rag",
+    "questionId": "robust-domain-cross-task-calendar-noisy",
+    "questionType": "noisy",
+    "domain": "cross_domain",
+    "variant": "noisy",
+    "requiresCurrentFact": true,
+    "question": "Ignore old meeting invites and task status chatter: what time is the meeting that mobile checkout depends on?",
+    "expected": "11:30",
+    "subject": "Task.mobile_checkout",
+    "predicate": "calendar_dependency",
+    "inferredSubject": "Task.mobile_checkout",
+    "inferredPredicate": "status",
+    "slotInferenceScore": 23,
+    "slotCandidates": [
+      {
+        "subject": "Task.mobile_checkout",
+        "predicate": "status",
+        "score": 23
+      },
+      {
+        "subject": "Task.mobile_checkout",
+        "predicate": "calendar_dependency",
+        "score": 16
+      },
+      {
+        "subject": "Calendar.planning_meeting",
+        "predicate": "meeting_time",
+        "score": 14
+      }
+    ],
+    "slotCorrect": false,
+    "answer": "unknown",
+    "answerValues": [],
+    "contextIds": [
+      "domain-cross-001",
+      "domain-task-001",
+      "domain-task-002",
+      "domain-task-003",
+      "domain-cross-002",
+      "domain-calendar-001",
+      "domain-calendar-002",
+      "e0064",
+      "e0434",
+      "e0911",
+      "e0002",
+      "e0010"
+    ],
+    "contextTokens": 103,
+    "latencyMs": 4.078000000000003,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "slot_inference_failed",
+    "answered": false,
+    "correct": false,
+    "staleFactError": false
+  },
+  {
+    "system": "rag",
+    "questionId": "robust-domain-cross-task-calendar-multi_step",
+    "questionType": "temporal_multi_step",
+    "domain": "cross_domain",
+    "variant": "multi_step",
+    "requiresCurrentFact": true,
+    "question": "Following the mobile checkout dependency to the calendar event, what is the latest meeting time?",
+    "expected": "11:30",
+    "subject": "Task.mobile_checkout",
+    "predicate": "calendar_dependency",
+    "inferredSubject": "Calendar.planning_meeting",
+    "inferredPredicate": "meeting_time",
+    "slotInferenceScore": 24,
+    "slotCandidates": [
+      {
+        "subject": "Calendar.planning_meeting",
+        "predicate": "meeting_time",
+        "score": 24
+      },
+      {
+        "subject": "Task.mobile_checkout",
+        "predicate": "calendar_dependency",
+        "score": 20
+      },
+      {
+        "subject": "Task.mobile_checkout",
+        "predicate": "status",
+        "score": 8
+      }
+    ],
+    "slotCorrect": false,
+    "answer": "unknown",
+    "answerValues": [],
+    "contextIds": [
+      "domain-cross-001",
+      "domain-calendar-001",
+      "domain-calendar-002",
+      "domain-task-001",
+      "domain-task-002",
+      "domain-task-003",
+      "domain-cross-002",
+      "e0128",
+      "e0196",
+      "e0287",
+      "e0637",
+      "e0685"
+    ],
+    "contextTokens": 100,
+    "latencyMs": 3.817700000000002,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "slot_inference_failed",
+    "answered": false,
+    "correct": false,
+    "staleFactError": false
+  },
+  {
+    "system": "rag",
+    "questionId": "robust-domain-cross-crm-task-paraphrase",
+    "questionType": "paraphrase",
+    "domain": "cross_domain",
+    "variant": "paraphrase",
+    "requiresCurrentFact": true,
+    "question": "What is the status of the delivery task connected to the Acme account?",
+    "expected": "done",
+    "subject": "CRM.Acme",
+    "predicate": "delivery_task",
+    "inferredSubject": "CRM.Acme",
+    "inferredPredicate": "delivery_task",
+    "slotInferenceScore": 18,
+    "slotCandidates": [
+      {
+        "subject": "CRM.Acme",
+        "predicate": "delivery_task",
+        "score": 18
+      },
+      {
+        "subject": "Task.mobile_checkout",
+        "predicate": "status",
+        "score": 15
+      },
+      {
+        "subject": "Notebook",
+        "predicate": "status",
+        "score": 11
+      }
+    ],
+    "slotCorrect": true,
+    "answer": "todo",
+    "answerValues": [
+      "todo"
+    ],
+    "contextIds": [
+      "domain-cross-002",
+      "domain-task-001",
+      "domain-task-002",
+      "domain-task-003",
+      "domain-crm-001",
+      "domain-crm-002",
+      "e0002",
+      "e0010",
+      "e0026",
+      "e0034",
+      "e0035",
+      "e0038"
+    ],
+    "contextTokens": 100,
+    "latencyMs": 3.634299999999996,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "stale_fact",
+    "answered": true,
+    "correct": false,
+    "staleFactError": true
+  },
+  {
+    "system": "rag",
+    "questionId": "robust-domain-cross-crm-task-indirect",
+    "questionType": "indirect",
+    "domain": "cross_domain",
+    "variant": "indirect",
+    "requiresCurrentFact": true,
+    "question": "Acme points to a delivery task; after following that link, what state is the task in?",
+    "expected": "done",
+    "subject": "CRM.Acme",
+    "predicate": "delivery_task",
+    "inferredSubject": "CRM.Acme",
+    "inferredPredicate": "delivery_task",
+    "slotInferenceScore": 18,
+    "slotCandidates": [
+      {
+        "subject": "CRM.Acme",
+        "predicate": "delivery_task",
+        "score": 18
+      },
+      {
+        "subject": "Task.mobile_checkout",
+        "predicate": "status",
+        "score": 8
+      },
+      {
+        "subject": "Task.mobile_checkout",
+        "predicate": "calendar_dependency",
+        "score": 6
+      }
+    ],
+    "slotCorrect": true,
+    "answer": "todo",
+    "answerValues": [
+      "todo"
+    ],
+    "contextIds": [
+      "domain-cross-002",
+      "domain-cross-001",
+      "e0036",
+      "e0235",
+      "e0683",
+      "e0960",
+      "domain-task-001",
+      "domain-task-002",
+      "domain-task-003",
+      "e0017",
+      "e0049",
+      "e0064"
+    ],
+    "contextTokens": 109,
+    "latencyMs": 3.9379000000000133,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "stale_fact",
+    "answered": true,
+    "correct": false,
+    "staleFactError": true
+  },
+  {
+    "system": "rag",
+    "questionId": "robust-domain-cross-crm-task-noisy",
+    "questionType": "noisy",
+    "domain": "cross_domain",
+    "variant": "noisy",
+    "requiresCurrentFact": true,
+    "question": "Ignore old CRM owner notes and earlier blocked task notes: what is Acme's linked task status now?",
+    "expected": "done",
+    "subject": "CRM.Acme",
+    "predicate": "delivery_task",
+    "inferredSubject": "Experiment notes",
+    "inferredPredicate": "status",
+    "slotInferenceScore": 17,
+    "slotCandidates": [
+      {
+        "subject": "Experiment notes",
+        "predicate": "status",
+        "score": 17
+      },
+      {
+        "subject": "Task.mobile_checkout",
+        "predicate": "status",
+        "score": 17
+      },
+      {
+        "subject": "Notebook",
+        "predicate": "status",
+        "score": 13
+      }
+    ],
+    "slotCorrect": false,
+    "answer": "unknown",
+    "answerValues": [],
+    "contextIds": [
+      "domain-cross-002",
+      "domain-task-002",
+      "domain-crm-001",
+      "domain-crm-002",
+      "domain-task-001",
+      "domain-task-003",
+      "e0035",
+      "e0096",
+      "e0155",
+      "e0181",
+      "e0241",
+      "e0321"
+    ],
+    "contextTokens": 102,
+    "latencyMs": 3.9927999999999884,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "slot_inference_failed",
+    "answered": false,
+    "correct": false,
+    "staleFactError": false
+  },
+  {
+    "system": "rag",
+    "questionId": "robust-domain-cross-crm-task-multi_step",
+    "questionType": "temporal_multi_step",
+    "domain": "cross_domain",
+    "variant": "multi_step",
+    "requiresCurrentFact": true,
+    "question": "From Acme to its delivery task and then to task status, what final status should be reported?",
+    "expected": "done",
+    "subject": "CRM.Acme",
+    "predicate": "delivery_task",
+    "inferredSubject": "CRM.Acme",
+    "inferredPredicate": "delivery_task",
+    "slotInferenceScore": 18,
+    "slotCandidates": [
+      {
+        "subject": "CRM.Acme",
+        "predicate": "delivery_task",
+        "score": 18
+      },
+      {
+        "subject": "Task.mobile_checkout",
+        "predicate": "status",
+        "score": 15
+      },
+      {
+        "subject": "Notebook",
+        "predicate": "status",
+        "score": 11
+      }
+    ],
+    "slotCorrect": true,
+    "answer": "done",
+    "answerValues": [
+      "done"
+    ],
+    "contextIds": [
+      "domain-cross-002",
+      "domain-task-003",
+      "domain-task-001",
+      "domain-task-002",
+      "e0911",
+      "domain-crm-002",
+      "e0002",
+      "e0010",
+      "e0026",
+      "e0034",
+      "e0035",
+      "e0038"
+    ],
+    "contextTokens": 101,
+    "latencyMs": 3.9461000000000013,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,

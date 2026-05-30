@@ -3,11 +3,11 @@ This file is generated from `results/**/summary.json` and LLM result files by `n
 ## Executive Summary
 
 1. The deterministic 1.0000 score is an oracle/diagnostic upper-bound result, not the main agent-level claim.
-2. The main non-oracle comparison is State Memory versus Temporal RAG: State no-oracle reaches 0.8269 Exact Match, while Temporal RAG reaches 0.6923 and naive RAG reaches 0.1346.
-3. The small State-vs-Temporal gap shows that much of the naive-RAG failure comes from missing temporal/latest-fact handling; explicit state still improves accuracy, context hit rate and latency in the robust benchmark.
+2. The main non-oracle comparison is State Memory versus Temporal/vector RAG: State no-oracle reaches 0.8000 Exact Match, while Temporal RAG reaches 0.6833, local vector RAG reaches 0.6667 and naive RAG reaches 0.1333.
+3. The small State-vs-Temporal/vector gap shows that much of the naive-RAG failure comes from missing temporal/latest-fact handling; explicit state still improves accuracy, context hit rate and latency in the robust benchmark.
 4. RAG remains strong for document-detail questions, while State-only fails on document details. Hybrid reaches 1.0000 Exact Match on mixed structured/document tasks.
 5. Defensive State is useful when uncertainty is visible: it recovers near-simultaneous conflicts at 1.0000 Exact Match, but cannot recover missing final updates (0.1429).
-6. State Memory lookup scales with near-constant latency. At 5000 events, RAG averages 15.5933 ms and State Memory averages 0.5495 ms, a 28.4x speedup.
+6. State Memory lookup scales with near-constant latency. At 5000 events, RAG averages 13.7903 ms and State Memory averages 0.4510 ms, a 30.6x speedup; state build/write cost is 0.0053 ms per event.
 7. The LLM benchmark supports hybrid routing: Hybrid + LLM reaches 0.9355 normalized accuracy with 0.0000 hallucination rate.
 8. A real project-trace benchmark is included: State Memory reaches 1.0000 Exact Match, while the LangChain BufferMemory-style baseline reaches 0.7500.
 9. The real extractor benchmark shows extraction sensitivity: the rule extractor reaches 0.7143 extraction recall and 0.8750 downstream QA Exact Match.
@@ -17,14 +17,15 @@ This file is generated from `results/**/summary.json` and LLM result files by `n
 | Finding | Main evidence |
 | --- | --- |
 | Oracle benchmark is diagnostic | Controlled slot access gives State 1.0000 Exact Match |
-| Temporal RAG is the main baseline | Robust State 0.8269 vs Temporal RAG 0.6923 |
-| Naive RAG is a weak baseline | Robust naive RAG 0.1346 Exact Match |
-| Slot inference is bottleneck | Slot inference = 0.8269 |
+| Temporal and vector RAG are stronger baselines | Robust State 0.8000 vs Temporal RAG 0.6833 and local vector RAG 0.6667 |
+| Naive RAG is a weak baseline | Robust naive RAG 0.1333 Exact Match |
+| Slot inference is bottleneck | Slot inference = 0.8000 with 12 analyzed failures |
 | Hybrid is best for mixed knowledge | Hybrid = 1.0000 in mixed benchmark |
 | Real trace reduces synthetic-only risk | Real project trace: State 1.0000 vs LangChain BufferMemory-style 0.7500 |
 | Extraction quality bounds State Memory | Rule extractor recall 0.7143 -> QA 0.8750 |
 | Defensive policy helps conflicts | Defensive State = 1.0000 in near-simultaneous conflicts |
-| State lookup scales better | 5000 events: State 0.5495 ms vs RAG 15.5933 ms |
+| State lookup scales better | 5000 events: State 0.4510 ms vs RAG 13.7903 ms |
+| State writes are measured | 5000 events: state build 26.2552 ms, 0.0053 ms/event |
 
 ## Research Questions
 
@@ -36,6 +37,10 @@ This file is generated from `results/**/summary.json` and LLM result files by `n
 - **RQ6:** Does Hybrid improve LLM-based answering?
 - **RQ7:** Does the approach work on a small real project trace and against an external memory-framework baseline?
 - **RQ8:** How does State Memory degrade when real extraction misses facts?
+- **RQ9:** How does State Memory compare with vector-store-shaped RAG rather than only lexical RAG?
+- **RQ10:** Which slot-inference errors explain the remaining non-oracle failures?
+- **RQ11:** What is the write/update cost of maintaining explicit state under a stream of events?
+- **RQ12:** What happens when questions require cross-domain, multi-hop dependencies?
 
 ## Claim -> Evidence -> Limitation
 
@@ -50,16 +55,16 @@ With structured subject/predicate access, explicit active/obsolete fact tracking
 **Limitation.**
 This is an oracle-style memory-isolation benchmark. It should be treated as an upper-bound diagnostic, not as the headline agent result.
 
-### Claim 2: State Memory remains stronger than Temporal RAG in the main robust benchmark
+### Claim 2: State Memory remains stronger than Temporal/vector RAG in the main robust benchmark
 
 **Evidence.**
-In the robust non-oracle benchmark, State Memory reaches 0.8269 Exact Match, compared with Temporal RAG at 0.6923 and naive RAG at 0.1346.
+In the robust non-oracle benchmark, State Memory reaches 0.8000 Exact Match, compared with Temporal RAG at 0.6833, local vector RAG at 0.6667 and naive RAG at 0.1333.
 
 **Interpretation.**
-Naive RAG fails largely because it lacks recency/latest-fact handling. Temporal RAG closes much of that gap, so the remaining State Memory gain is a narrower but more meaningful comparison.
+Naive RAG fails largely because it lacks recency/latest-fact handling. Temporal and vector-style RAG close much of that gap, so the remaining State Memory gain is a narrower but more meaningful comparison.
 
 **Limitation.**
-The robust benchmark is still synthetic, and the slot inference module is lightweight lexical logic rather than a trained semantic parser.
+The robust benchmark is still synthetic, and the slot inference module is lightweight lexical logic rather than a trained semantic parser. The vector baseline is an in-process TF-IDF vector-store proxy, not Chroma, Pinecone or Weaviate.
 
 ### Claim 3: Hybrid memory is the strongest architecture for mixed knowledge
 
@@ -86,13 +91,24 @@ If the final update is never extracted or stored, state lookup cannot infer it f
 ### Claim 5: State lookup scales better than lexical event retrieval
 
 **Evidence.**
-At 5000 events, RAG averages 15.5933 ms and State Memory averages 0.5495 ms, a 28.4x speedup.
+At 5000 events, RAG averages 13.7903 ms and State Memory averages 0.4510 ms, a 30.6x speedup.
 
 **Interpretation.**
 The explicit state store avoids scanning and ranking the full event history for every question.
 
 **Limitation.**
 These timings are local JavaScript measurements, not a full production database benchmark.
+
+### Claim 5b: State maintenance write cost is measurable and currently low in-process
+
+**Evidence.**
+At 5000 events, building the state store averages 26.2552 ms, or 0.0053 ms per event.
+
+**Interpretation.**
+The current state update path is cheap for the benchmark sizes and should be reported alongside read latency.
+
+**Limitation.**
+This is an in-process JavaScript update path without network persistence, locking, compaction or production database writes.
 
 ### Claim 6: LLM answering preserves the hybrid advantage
 
@@ -152,19 +168,19 @@ This is an oracle-style memory isolation benchmark.
 Tests whether State Memory remains useful when oracle subject/predicate access is removed.
 
 **Dataset.**
-1011 events and 52 non-oracle questions.
+1013 events and 60 non-oracle questions.
 
 **Question types.**
 paraphrase, indirect, noisy, temporal_multi_step.
 
 **Systems.**
-RAG, Temporal RAG and State no-oracle.
+RAG, local vector RAG, Temporal RAG and State no-oracle.
 
 **Key result.**
-State no-oracle reaches 0.8269 Exact Match, compared with Temporal RAG at 0.6923 and naive RAG at 0.1346.
+State no-oracle reaches 0.8000 Exact Match, compared with Temporal RAG at 0.6833, local vector RAG at 0.6667 and naive RAG at 0.1333.
 
 **Main failure source.**
-Slot inference accuracy is 0.8269, matching State no-oracle Exact Match.
+Slot inference accuracy is 0.8000, matching State no-oracle Exact Match. The benchmark now includes 8 cross-domain multi-hop dependency questions.
 
 ### Mixed Structured And Document Benchmark
 
@@ -209,7 +225,10 @@ Tests whether latency grows with event count.
 100, 250, 500, 1000, 2500, 5000 events across 3 seeds.
 
 **Key result.**
-At 5000 events, State Memory averages 0.5495 ms while RAG averages 15.5933 ms.
+At 5000 events, State Memory averages 0.4510 ms while RAG averages 13.7903 ms.
+
+**Write cost.**
+At 5000 events, state build/update cost is 26.2552 ms total and 0.0053 ms per event.
 
 **Main limitation.**
 This benchmark measures local in-process code rather than networked storage or vector infrastructure.
@@ -268,9 +287,12 @@ The default report does not include LLM extractor rows unless the benchmark is r
 
 | Comparison | Absolute gain | Relative note |
 | --- | ---: | --- |
-| State no-oracle vs RAG | 0.6923 EM | Large non-oracle gap |
-| State no-oracle vs Temporal RAG | 0.1346 EM | State still wins after recency/latest fix |
-| State latency vs Temporal RAG | 3.4x faster | 1.1228 ms vs 3.8460 ms |
+| State no-oracle vs RAG | 0.6667 EM | Large non-oracle gap |
+| State no-oracle vs local vector RAG | 0.1333 EM | Vector-store-shaped retrieval baseline |
+| State no-oracle vs Temporal RAG | 0.1167 EM | State still wins after recency/latest fix |
+| State latency vs Temporal RAG | 3.2x faster | 1.1056 ms vs 3.5138 ms |
+| Cross-domain State EM | 0.6250 | 8 multi-hop dependency questions |
+| Slot inference failures | 12 | Failure rate 0.2000 |
 
 ### Mixed Benchmark Deltas
 
@@ -284,7 +306,13 @@ The default report does not include LLM extractor rows unless the benchmark is r
 
 | Events | RAG latency ms | State latency ms | Speedup |
 | ---: | ---: | ---: | ---: |
-| 5000 | 15.5933 | 0.5495 | 28.4x |
+| 5000 | 13.7903 | 0.4510 | 30.6x |
+
+### State Update Cost
+
+| Events | State build ms | Write ms / event |
+| ---: | ---: | ---: |
+| 5000 | 26.2552 | 0.0053 |
 
 ## Statistical Checks
 
@@ -294,9 +322,10 @@ Bootstrap confidence intervals use 1000 deterministic resamples over question-le
 | --- | --- | ---: | ---: |
 | Diagnostic oracle | RAG | 0.2143 [0.0952, 0.3571] | 0.2169 [0.0952, 0.3571] |
 | Diagnostic oracle | State Memory | 1.0000 [1.0000, 1.0000] | 1.0000 [1.0000, 1.0000] |
-| Robust non-oracle | RAG | 0.1346 [0.0577, 0.2308] | 0.1443 [0.0606, 0.2424] |
-| Robust non-oracle | Temporal RAG | 0.6923 [0.5577, 0.8077] | 0.7579 [0.6304, 0.8600] |
-| Robust non-oracle | State no-oracle | 0.8269 [0.7115, 0.9231] | 0.8431 [0.7400, 0.9412] |
+| Robust non-oracle | RAG | 0.1333 [0.0500, 0.2167] | 0.1455 [0.0550, 0.2407] |
+| Robust non-oracle | Local vector RAG | 0.6667 [0.5500, 0.7833] | 0.7407 [0.6274, 0.8468] |
+| Robust non-oracle | Temporal RAG | 0.6833 [0.5667, 0.8000] | 0.7593 [0.6486, 0.8571] |
+| Robust non-oracle | State no-oracle | 0.8000 [0.7000, 0.9000] | 0.8348 [0.7368, 0.9217] |
 | Mixed | RAG-only | 0.6765 [0.5882, 0.7745] | 0.6798 [0.5882, 0.7745] |
 | Mixed | State-only | 0.4118 [0.3137, 0.5000] | 0.5833 [0.4776, 0.6667] |
 | Mixed | Hybrid | 1.0000 [1.0000, 1.0000] | 1.0000 [1.0000, 1.0000] |
@@ -307,8 +336,9 @@ Bootstrap confidence intervals use 1000 deterministic resamples over question-le
 | Benchmark | Comparison | Paired N | Candidate-only wins | Baseline-only wins | McNemar p | Note |
 | --- | --- | ---: | ---: | ---: | ---: | --- |
 | Diagnostic oracle | State Memory vs RAG | 42 | 33 | 0 | <0.0001 | paired difference detected |
-| Robust non-oracle | Temporal RAG vs naive RAG | 52 | 29 | 0 | <0.0001 | paired difference detected |
-| Robust non-oracle | State no-oracle vs Temporal RAG | 52 | 7 | 0 | 0.0156 | paired difference detected |
+| Robust non-oracle | Temporal RAG vs naive RAG | 60 | 33 | 0 | <0.0001 | paired difference detected |
+| Robust non-oracle | State no-oracle vs local vector RAG | 60 | 8 | 0 | 0.0078 | paired difference detected |
+| Robust non-oracle | State no-oracle vs Temporal RAG | 60 | 7 | 0 | 0.0156 | paired difference detected |
 | Mixed | Hybrid vs RAG-only | 102 | 33 | 0 | <0.0001 | paired difference detected |
 | Mixed | Hybrid vs State-only | 102 | 60 | 0 | <0.0001 | paired difference detected |
 | Real trace | State Memory vs LangChain BufferMemory-style | 8 | 2 | 0 | 0.5000 | not significant on this sample |
@@ -325,6 +355,55 @@ This table is the multi-model history surface for Ollama runs. GitHub Actions wr
 | llama3.2:3b | results/models/llama3.2-3b | 0.9355 | 0.0000 | 15329.8363 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 12 | 0.0000 |
 | qwen2.5:1.5b | results/models/qwen2.5-1.5b | 0.8710 | 0.0000 | 8082.9133 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0 | 0.0000 |
 
+## Critical Evidence Gaps
+
+| Gap | Current status | Required next step |
+| --- | --- | --- |
+| Real cross-domain data | Real trace has 12 repository-derived events and 8 questions | Add 200-500 manually verified real events across repository, calendar, CRM, task, support and shopping/task-management logs |
+| Production vector store baseline | Robust benchmark now includes local TF-IDF vector RAG at 0.6667 Exact Match | Add Chroma, Pinecone or Weaviate-backed RAG using the same questions and paired statistical tests |
+| Cross-domain validation | Robust benchmark includes 8 cross-domain multi-hop probes | Expand to real workflows where tasks depend on meetings, CRM state and support conversations |
+| Slot inference error analysis | 12 failures are summarized with examples and top candidate slots | Replace lexical slot inference with semantic parser/LLM extractor and compare error types |
+| State write cost | Scalability benchmark reports state build and write-ms-per-event | Re-run with persistent stores, compaction, concurrent writers and recovery/replay |
+| Hard multi-hop questions | Robust benchmark resolves two-hop entity chains | Add longer chains across three or more entities and agent planning/action success metrics |
+
+## Slot Inference Error Analysis
+
+Slot inference is the main bottleneck in the non-oracle State Memory path: 12 of 60 questions fail slot inference.
+
+By question type:
+
+| Type | Questions | Slot failures | Slot accuracy | State EM |
+| --- | ---: | ---: | ---: | ---: |
+| paraphrase | 15 | 1 | 0.9333 | 0.9333 |
+| indirect | 15 | 3 | 0.8000 | 0.8000 |
+| noisy | 15 | 5 | 0.6667 | 0.6667 |
+| temporal_multi_step | 15 | 3 | 0.8000 | 0.8000 |
+
+By domain:
+
+| Domain | Questions | Slot failures | Slot accuracy | State EM |
+| --- | ---: | ---: | ---: | ---: |
+| coursework_memory | 32 | 9 | 0.7188 | 0.7188 |
+| calendar | 4 | 0 | 1.0000 | 1.0000 |
+| crm | 4 | 0 | 1.0000 | 1.0000 |
+| tasks | 4 | 0 | 1.0000 | 1.0000 |
+| shopping | 4 | 0 | 1.0000 | 1.0000 |
+| chat | 4 | 0 | 1.0000 | 1.0000 |
+| cross_domain | 8 | 3 | 0.6250 | 0.6250 |
+
+Representative failure examples:
+
+| Type | Domain | Expected slot | Inferred slot | Top candidates |
+| --- | --- | --- | --- | --- |
+| noisy | coursework_memory | Reflex.runtime | README.note | README.note:14; Reflex.runtime:12; README.status:10 |
+| indirect | coursework_memory | RAG baseline.retriever | RAG baseline.top_k | RAG baseline.top_k:6; RAG baseline.retriever:4; RAG baseline.chunk_unit:4 |
+| paraphrase | coursework_memory | State updater.mutable_rule | unknown.unknown | State updater.old_fact_status:4; State selector.limit:4; State updater.mutable_rule:4 |
+| indirect | coursework_memory | State Memory coursework.requires | unknown.unknown | Metrics report.output:4; Metrics.include:4; Methodology section.summary:0 |
+| noisy | coursework_memory | State Memory coursework.requires | State Memory coursework.implementation_language | State Memory coursework.implementation_language:18; Experiment notes.note:8; State Memory coursework.requires:6 |
+| temporal_multi_step | coursework_memory | State Memory coursework.requires | Experiment notes.note | Experiment notes.note:8; State Memory coursework.requires:6; Chart script.note:4 |
+| indirect | coursework_memory | Metrics.include | State Memory agent.memory_strategy | State Memory agent.memory_strategy:9; State Memory coursework.deadline:6; State Memory.stores:4 |
+| noisy | coursework_memory | Metrics.include | Chart script.note | Chart script.note:18; Metrics.include:16; Chart script.summary:14 |
+
 ## Pipeline Breakdown
 
 | Stage | Metric | Result |
@@ -332,9 +411,10 @@ This table is the multi-model history surface for Ollama runs. GitHub Actions wr
 | Event generation | deterministic seed | seeded synthetic events |
 | Fact extraction | extraction accuracy | Real extractor benchmark reports precision, recall, slot, entity and conflict metrics |
 | State update | stale rejection | 1.0000 obsolete rejection in the diagnostic oracle benchmark |
-| Slot inference | slot accuracy | 0.8269 in robust non-oracle benchmark |
-| State selection / retrieval | context hit | 0.8846 for State no-oracle; 0.7308 for Temporal RAG |
-| Answering | exact match | 0.8269 State no-oracle Exact Match |
+| Slot inference | slot accuracy | 0.8000 in robust non-oracle benchmark |
+| State selection / retrieval | context hit | 0.9000 for State no-oracle; 0.7667 for Temporal RAG; 0.7500 for local vector RAG |
+| Answering | exact match | 0.8000 State no-oracle Exact Match |
+| Cross-domain multi-hop | exact match | 0.6250 State EM on 8 dependency-chain questions |
 | Document retrieval | document-detail accuracy | Hybrid 1.0000; State-only 0.0000 |
 | LLM output | hallucination rate | Hybrid + LLM 0.0000 |
 | Real-trace validation | external framework baseline | State Memory vs LangChain BufferMemory-style |
@@ -357,9 +437,9 @@ In the mixed benchmark, State-only scores 0.0000 on document-detail questions. T
 
 - **Synthetic data bias:** the events, facts and questions are generated in a controlled environment. The experiments show behavior under designed temporal-memory conditions, not proven superiority on arbitrary real agent tasks.
 - **Oracle access:** the deterministic benchmark uses structured subject/predicate access and is therefore an oracle/diagnostic upper-bound setting. The robust benchmark is the main evidence for non-oracle behavior.
-- **Baseline strength:** naive lexical RAG is intentionally weak for temporal updates. Temporal RAG is the primary implemented baseline for current-fact claims, but the project still does not benchmark production vector stores, learned retrievers or full agent frameworks.
+- **Baseline strength:** naive lexical RAG is intentionally weak for temporal updates. Temporal RAG and local vector RAG are stronger implemented baselines, but the project still does not benchmark production vector stores such as Chroma, Pinecone or Weaviate.
 - **Extraction assumptions:** the main experiments use clean structured facts. The extractor benchmark measures fact precision, recall, slot accuracy, entity resolution, mutable classification and conflict detection, but the default CI run uses a deterministic rule extractor; LLM extractor scores require a local Ollama run.
-- **Limited real-world validation:** the robust benchmark adds semi-realistic calendar, CRM, task, shopping and support-chat domains, and the real-trace benchmark adds repository-derived events. The real trace is still small and should be expanded.
+- **Limited real-world validation:** the robust benchmark adds semi-realistic calendar, CRM, task, shopping, support-chat and cross-domain dependency domains, and the real-trace benchmark adds repository-derived events. The real trace is still small and should be expanded to 200-500 manually verified real events before making broad real-world claims.
 - **Sample size:** question counts are modest, so confidence intervals and McNemar tests should be read as benchmark diagnostics rather than universal population estimates.
 
 ## Related Work Positioning
@@ -370,6 +450,7 @@ In the mixed benchmark, State-only scores 0.0000 on document-detail questions. T
 | [LangChain memory concepts](https://docs.langchain.com/oss/python/concepts/memory) | Short-term thread state and long-term namespaced memory | Provides the broader agent-memory architecture around which LangGraph state stores are positioned | Implemented as a ConversationBufferMemory-style real-trace baseline |
 | [MemGPT](https://arxiv.org/abs/2310.08560) | OS-inspired virtual context management across memory tiers | Related motivation: managing limited context by moving information between active and external memory | Conceptual comparison; no MemGPT runtime baseline |
 | [Letta stateful agents](https://docs.letta.com/guides/core-concepts/stateful-agents) and [memory blocks](https://docs.letta.com/guides/core-concepts/memory/memory-blocks) | Persistent editable memory blocks pinned into context plus external memory | Similar emphasis on persistent agent state, but Letta memory blocks are agent-managed text/context units rather than deterministic slot records | Conceptual comparison; no Letta baseline |
+| Chroma / Pinecone / Weaviate vector stores | Production vector indexes with embedding search, metadata filters and persistence | Stronger RAG baselines than lexical retrieval and closer to deployed agent memory systems | Local TF-IDF vector RAG proxy implemented; production vector DB baseline remains required |
 | Temporal RAG in this repo | Recency reranking plus latest-fact answering over raw events | Strongest implemented retrieval baseline for temporal updates | Main baseline for robust current-state claims |
 
 ## Failure Taxonomy
@@ -377,7 +458,7 @@ In the mixed benchmark, State-only scores 0.0000 on document-detail questions. T
 | Error type | Count | Systems affected | Source |
 | --- | ---: | --- | --- |
 | stale_fact | 30 | RAG | Diagnostic oracle benchmark |
-| slot_inference_failed | 9 | State no-oracle | Robust benchmark |
+| slot_inference_failed | 12 | State no-oracle | Robust benchmark |
 | incomplete_answer | 8 | RAG + LLM, State + LLM, Hybrid + LLM | Mixed LLM benchmark |
 | missing_fact | 13 | RAG + LLM, State + LLM | Mixed LLM benchmark |
 
@@ -391,6 +472,9 @@ The diagnostic oracle and robust rows come from aggregate summaries. The LLM row
 | Quality vs latency scatter plot | Accuracy/normalized accuracy versus average latency | diagnostic oracle, robust, mixed and LLM summaries |
 | Scalability line chart | RAG and State latency from 100 to 5000 events | results/scalability/summary.json |
 | Robust benchmark heatmap | paraphrase, indirect, noisy and temporal_multi_step by system plus slot inference | results/robust/summary.json |
+| Slot inference error table | failure examples with expected slot, inferred slot and top candidate slots | results/robust/summary.json |
+| Cross-domain multi-hop chart | State, Temporal RAG and vector RAG on dependency-chain questions | results/robust/summary.json |
+| State write cost line chart | state build time and write-ms-per-event across event counts | results/scalability/summary.json |
 | Real trace comparison | Temporal RAG, State Memory and LangChain BufferMemory-style on repository events | results/real/summary.json |
 | Extractor degradation chart | Extraction recall versus downstream State Memory QA | results/extractor/summary.json |
 | Model history comparison | Hybrid LLM quality, real-trace accuracy and extractor degradation across Ollama models | results/models/*/{llm,real,extractor}/summary.json |
@@ -451,29 +535,44 @@ Dataset: 1000 events, 100 document pages, 102 questions.
 
 ### Robust Question Benchmark
 
-Dataset: 1011 events, 52 non-oracle questions.
+Dataset: 1013 events, 60 non-oracle questions.
 
 | System | Exact Match | Current Fact Accuracy | Context Hit | Slot Inference Accuracy | Avg Context Tokens | Avg Latency ms |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| RAG | 0.1346 | 0.1591 | 0.6923 | 0.8269 | 75.8846 | 3.9732 |
-| Temporal RAG | 0.6923 | 0.8182 | 0.7308 | 0.8269 | 76.8077 | 3.8460 |
-| State no-oracle | 0.8269 | 0.9318 | 0.8846 | 0.8269 | 69.2308 | 1.1228 |
+| RAG | 0.1333 | 0.1538 | 0.7333 | 0.8000 | 79.9333 | 3.7074 |
+| Local vector RAG | 0.6667 | 0.7692 | 0.7500 | 0.8000 | 75.8500 | 0.5830 |
+| Temporal RAG | 0.6833 | 0.7885 | 0.7667 | 0.8000 | 80.9500 | 3.5138 |
+| State no-oracle | 0.8000 | 0.8846 | 0.9000 | 0.8000 | 72.1833 | 1.1056 |
 
-| Type | RAG | Temporal RAG | State no-oracle | State slot inference |
-| --- | ---: | ---: | ---: | ---: |
-| paraphrase | 0.1538 | 0.6923 | 0.9231 | 0.9231 |
-| indirect | 0.1538 | 0.6923 | 0.7692 | 0.7692 |
-| noisy | 0.0769 | 0.6154 | 0.7692 | 0.7692 |
-| temporal_multi_step | 0.1538 | 0.7692 | 0.8462 | 0.8462 |
+| Type | RAG | Local vector RAG | Temporal RAG | State no-oracle | State slot inference |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| paraphrase | 0.1333 | 0.6667 | 0.7333 | 0.9333 | 0.9333 |
+| indirect | 0.1333 | 0.7333 | 0.7333 | 0.8000 | 0.8000 |
+| noisy | 0.0667 | 0.5333 | 0.5333 | 0.6667 | 0.6667 |
+| temporal_multi_step | 0.2000 | 0.7333 | 0.7333 | 0.8000 | 0.8000 |
 
-| Domain | RAG | Temporal RAG | State no-oracle | State slot inference |
-| --- | ---: | ---: | ---: | ---: |
-| coursework_memory | 0.1563 | 0.5000 | 0.7188 | 0.7188 |
-| calendar | 0.0000 | 1.0000 | 1.0000 | 1.0000 |
-| crm | 0.0000 | 1.0000 | 1.0000 | 1.0000 |
-| tasks | 0.0000 | 1.0000 | 1.0000 | 1.0000 |
-| shopping | 0.0000 | 1.0000 | 1.0000 | 1.0000 |
-| chat | 0.5000 | 1.0000 | 1.0000 | 1.0000 |
+| Domain | RAG | Local vector RAG | Temporal RAG | State no-oracle | State slot inference |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| coursework_memory | 0.1563 | 0.4688 | 0.5000 | 0.7188 | 0.7188 |
+| calendar | 0.0000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 |
+| crm | 0.0000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 |
+| tasks | 0.0000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 |
+| shopping | 0.0000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 |
+| chat | 0.5000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 |
+| cross_domain | 0.1250 | 0.6250 | 0.6250 | 0.6250 | 0.6250 |
+
+Slot inference failure examples:
+
+| Type | Domain | Expected slot | Inferred slot | Question |
+| --- | --- | --- | --- | --- |
+| noisy | coursework_memory | Reflex.runtime | README.note | Ignore old drafts and unrelated README notes: what engine does Reflex run on after all updates? |
+| indirect | coursework_memory | RAG baseline.retriever | RAG baseline.top_k | When describing the baseline, how does it retrieve memories? |
+| paraphrase | coursework_memory | State updater.mutable_rule | unknown.unknown | How does the updater handle changing facts? |
+| indirect | coursework_memory | State Memory coursework.requires | unknown.unknown | What should the final report include to satisfy the requirements? |
+| noisy | coursework_memory | State Memory coursework.requires | State Memory coursework.implementation_language | Ignore implementation-language notes; list the coursework deliverables. |
+| temporal_multi_step | coursework_memory | State Memory coursework.requires | Experiment notes.note | Across all requirement notes, what must the coursework include? |
+| indirect | coursework_memory | Metrics.include | State Memory agent.memory_strategy | What should be reported when evaluating the memory approaches? |
+| noisy | coursework_memory | Metrics.include | Chart script.note | Ignoring chart script notes, which metrics are included? |
 
 ### Stress Benchmark
 
@@ -517,14 +616,14 @@ Defensive State diagnostics:
 
 ### Scalability Benchmark
 
-| Events | RAG Exact Match | State Exact Match | RAG Current Fact | State Current Fact | RAG Latency ms | State Latency ms |
-| ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| 100 | 0.2460 +/- 0.0275 | 1.0000 +/- 0.0000 | 0.1759 | 1.0000 | 0.4826 | 0.2754 |
-| 250 | 0.2143 +/- 0.0000 | 1.0000 +/- 0.0000 | 0.1667 | 1.0000 | 0.9306 | 0.4471 |
-| 500 | 0.2143 +/- 0.0000 | 1.0000 +/- 0.0000 | 0.1667 | 1.0000 | 1.6941 | 0.5882 |
-| 1000 | 0.2143 +/- 0.0000 | 1.0000 +/- 0.0000 | 0.1667 | 1.0000 | 3.1892 | 0.5957 |
-| 2500 | 0.2143 +/- 0.0000 | 1.0000 +/- 0.0000 | 0.1667 | 1.0000 | 7.7221 | 0.5962 |
-| 5000 | 0.2143 +/- 0.0000 | 1.0000 +/- 0.0000 | 0.1667 | 1.0000 | 15.5933 | 0.5495 |
+| Events | RAG Exact Match | State Exact Match | RAG Current Fact | State Current Fact | RAG Latency ms | State Latency ms | State build ms | Write ms/event |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 100 | 0.2460 +/- 0.0275 | 1.0000 +/- 0.0000 | 0.1759 | 1.0000 | 0.4470 | 0.2582 | 1.5452 | 0.0155 |
+| 250 | 0.2143 +/- 0.0000 | 1.0000 +/- 0.0000 | 0.1667 | 1.0000 | 0.8023 | 0.4011 | 2.4825 | 0.0099 |
+| 500 | 0.2143 +/- 0.0000 | 1.0000 +/- 0.0000 | 0.1667 | 1.0000 | 1.6017 | 0.4953 | 4.0705 | 0.0081 |
+| 1000 | 0.2143 +/- 0.0000 | 1.0000 +/- 0.0000 | 0.1667 | 1.0000 | 2.8312 | 0.4847 | 6.4577 | 0.0065 |
+| 2500 | 0.2143 +/- 0.0000 | 1.0000 +/- 0.0000 | 0.1667 | 1.0000 | 6.9784 | 0.4772 | 16.4946 | 0.0066 |
+| 5000 | 0.2143 +/- 0.0000 | 1.0000 +/- 0.0000 | 0.1667 | 1.0000 | 13.7903 | 0.4510 | 26.2552 | 0.0053 |
 
 | System | Exact Match Degradation | Current Fact Degradation |
 | --- | ---: | ---: |

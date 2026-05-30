@@ -1,3 +1,4 @@
+import { hasHopChain, hopAnswerValues } from "../shared/multihop.mjs";
 import { unique } from "../shared/text.mjs";
 
 function factMatchesQuestionSlot(fact, question) {
@@ -39,6 +40,14 @@ function compareNewestEventsFirst(left, right) {
   return new Date(right.timestamp).getTime() - new Date(left.timestamp).getTime();
 }
 
+function factsFromEvents(events) {
+  return events.flatMap((event) => event.facts ?? []);
+}
+
+function factsFromNewestEvents(events) {
+  return [...events].sort(compareNewestEventsFirst).flatMap((event) => event.facts ?? []);
+}
+
 function answerFromValues(question, values) {
   if (Array.isArray(question.expected)) {
     const uniqueValues = unique(values);
@@ -58,11 +67,19 @@ function answerFromValues(question, values) {
 }
 
 export function answerFromRetrievedEvents(question, retrievedEvents) {
+  if (hasHopChain(question)) {
+    return answerFromValues(question, hopAnswerValues(factsFromEvents(retrievedEvents), question));
+  }
+
   const values = slotValuesFromEvents(retrievedEvents, question);
   return answerFromValues(question, values);
 }
 
 export function answerLatestFromRetrievedEvents(question, retrievedEvents) {
+  if (hasHopChain(question)) {
+    return answerFromValues(question, hopAnswerValues(factsFromNewestEvents(retrievedEvents), question));
+  }
+
   const newestSlotEvents = eventsContainingQuestionSlot(retrievedEvents, question);
 
   newestSlotEvents.sort(compareNewestEventsFirst);

@@ -6,6 +6,7 @@ import test from "node:test";
 import { buildDataset } from "../src/dataset/generateDataset.mjs";
 import { evaluateRag, evaluateStateMemory, runExperiment as runDeterministicExperiment } from "../src/experiments/deterministic.mjs";
 import { availableExperiments, runExperiment } from "../src/experiments/runner.mjs";
+import { retrieveEventsWithVector } from "../src/rag/index.mjs";
 import { buildExtractionPrompt, factsFromLlmText } from "../src/state-memory/llmExtractor.mjs";
 import { buildWorldState } from "../src/state-memory/worldState.mjs";
 
@@ -63,6 +64,16 @@ test("real trace experiment compares State Memory with external memory baseline"
   assert.equal(summary.stateMemory.exactMatchAccuracy, 1);
   assert.ok(summary.langChainBufferMemory.exactMatchAccuracy < summary.stateMemory.exactMatchAccuracy);
   assert.equal(summary.extractor.mode, "annotated-real-trace");
+});
+
+test("vector retriever returns semantically matching events", () => {
+  const events = [
+    { id: "a", text: "Calendar planning meeting moved to 11:30.", facts: [] },
+    { id: "b", text: "Shopping laptop budget increased to 1500 USD.", facts: [] }
+  ];
+  const [event] = retrieveEventsWithVector(events, "meeting time", { topK: 1 });
+
+  assert.equal(event.id, "a");
 });
 
 test("LLM extractor prompt requests structured mutable facts", () => {

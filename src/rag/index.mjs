@@ -2,6 +2,10 @@ import {
   retrieveEvents as retrieveLexicalEvents,
   retrieveEventsWithRecency as retrieveLexicalEventsWithRecency
 } from "./retrievers/lexical.mjs";
+import {
+  createEmbeddingRetriever,
+  retrieveEventsWithVector
+} from "./retrievers/embedding.mjs";
 
 export {
   answerFromRetrievedEvents,
@@ -14,12 +18,16 @@ export {
 } from "./retrievers/lexical.mjs";
 
 export { createBm25Retriever } from "./retrievers/bm25.mjs";
-export { createEmbeddingRetriever } from "./retrievers/embedding.mjs";
+export { createEmbeddingRetriever, retrieveEventsWithVector } from "./retrievers/embedding.mjs";
 
 export const retrievers = {
   lexical: {
     retrieveEvents: retrieveLexicalEvents,
     retrieveEventsWithRecency: retrieveLexicalEventsWithRecency
+  },
+  vector: {
+    createEmbeddingRetriever,
+    retrieveEvents: retrieveEventsWithVector
   }
 };
 

@@ -4,6 +4,8 @@
     "eventCount": 100,
     "fullHistoryTokens": 1046,
     "questions": 42,
+    "stateBuildMs": 2.695700000000002,
+    "stateWriteMsPerEvent": 0.026957000000000023,
     "rag": {
       "totalQuestions": 42,
       "answered": 42,
@@ -21,9 +23,9 @@
       "contextHitRate": 0.9523809523809523,
       "meanReciprocalRank": 0.5297619047619049,
       "averageContextTokens": 127.97619047619048,
-      "averageLatencyMs": 0.5098380952380953,
+      "averageLatencyMs": 0.5184619047619047,
       "contextEfficiency": 0.002046511627906977,
-      "latencyEfficiency": 0.5137018287785104,
+      "latencyEfficiency": 0.5051571957346365,
       "errorTaxonomy": {
         "none": 11,
         "stale_fact": 29,
@@ -47,9 +49,9 @@
       "contextHitRate": 1,
       "meanReciprocalRank": 1,
       "averageContextTokens": 64.42857142857143,
-      "averageLatencyMs": 0.395019047619048,
+      "averageLatencyMs": 0.3961904761904772,
       "contextEfficiency": 0.015521064301552106,
-      "latencyEfficiency": 2.5315234949490053,
+      "latencyEfficiency": 2.524038461538455,
       "errorTaxonomy": {
         "none": 42
       }
@@ -66,6 +68,8 @@
     "eventCount": 100,
     "fullHistoryTokens": 1046,
     "questions": 42,
+    "stateBuildMs": 0.9072000000000031,
+    "stateWriteMsPerEvent": 0.009072000000000031,
     "rag": {
       "totalQuestions": 42,
       "answered": 41,
@@ -83,9 +87,9 @@
       "contextHitRate": 0.9285714285714286,
       "meanReciprocalRank": 0.4704648526077098,
       "averageContextTokens": 126.45238095238095,
-      "averageLatencyMs": 0.4614857142857147,
+      "averageLatencyMs": 0.4116595238095244,
       "contextEfficiency": 0.0020711730370928266,
-      "latencyEfficiency": 0.5675251774806005,
+      "latencyEfficiency": 0.6362169384084156,
       "errorTaxonomy": {
         "stale_fact": 29,
         "none": 11,
@@ -109,9 +113,9 @@
       "contextHitRate": 1,
       "meanReciprocalRank": 1,
       "averageContextTokens": 64.11904761904762,
-      "averageLatencyMs": 0.21159285714285675,
+      "averageLatencyMs": 0.18720238095238223,
       "contextEfficiency": 0.015595989602673598,
-      "latencyEfficiency": 4.726057455355645,
+      "latencyEfficiency": 5.341812400635893,
       "errorTaxonomy": {
         "none": 42
       }
@@ -128,6 +132,8 @@
     "eventCount": 100,
     "fullHistoryTokens": 1046,
     "questions": 42,
+    "stateBuildMs": 1.0326999999999913,
+    "stateWriteMsPerEvent": 0.010326999999999913,
     "rag": {
       "totalQuestions": 42,
       "answered": 42,
@@ -145,9 +151,9 @@
       "contextHitRate": 0.9523809523809523,
       "meanReciprocalRank": 0.4910533910533911,
       "averageContextTokens": 124.76190476190476,
-      "averageLatencyMs": 0.4765857142857142,
+      "averageLatencyMs": 0.4107952380952391,
       "contextEfficiency": 0.001717557251908397,
-      "latencyEfficiency": 0.44962680974790925,
+      "latencyEfficiency": 0.5216363151610683,
       "errorTaxonomy": {
         "stale_fact": 31,
         "none": 9,
@@ -171,9 +177,9 @@
       "contextHitRate": 1,
       "meanReciprocalRank": 1,
       "averageContextTokens": 65.42857142857143,
-      "averageLatencyMs": 0.21972857142857277,
+      "averageLatencyMs": 0.19107857142857113,
       "contextEfficiency": 0.015283842794759825,
-      "latencyEfficiency": 4.551069501332785,
+      "latencyEfficiency": 5.233449216851715,
       "errorTaxonomy": {
         "none": 42
       }
@@ -190,6 +196,8 @@
     "eventCount": 250,
     "fullHistoryTokens": 1980,
     "questions": 42,
+    "stateBuildMs": 2.6206999999999994,
+    "stateWriteMsPerEvent": 0.010482799999999997,
     "rag": {
       "totalQuestions": 42,
       "answered": 42,
@@ -207,9 +215,9 @@
       "contextHitRate": 0.9285714285714286,
       "meanReciprocalRank": 0.454016354016354,
       "averageContextTokens": 87.45238095238095,
-      "averageLatencyMs": 0.9334142857142895,
+      "averageLatencyMs": 0.7996666666666656,
       "contextEfficiency": 0.002450313095562211,
-      "latencyEfficiency": 0.22957192488406522,
+      "latencyEfficiency": 0.26796879652236083,
       "errorTaxonomy": {
         "stale_fact": 30,
         "none": 9,
@@ -233,9 +241,9 @@
       "contextHitRate": 1,
       "meanReciprocalRank": 1,
       "averageContextTokens": 65.19047619047619,
-      "averageLatencyMs": 0.46614761904762064,
+      "averageLatencyMs": 0.472399999999998,
       "contextEfficiency": 0.015339663988312637,
-      "latencyEfficiency": 2.1452431786374566,
+      "latencyEfficiency": 2.1168501270110167,
       "errorTaxonomy": {
         "none": 42
       }
@@ -252,6 +260,8 @@
     "eventCount": 250,
     "fullHistoryTokens": 1970,
     "questions": 42,
+    "stateBuildMs": 2.6329999999999814,
+    "stateWriteMsPerEvent": 0.010531999999999925,
     "rag": {
       "totalQuestions": 42,
       "answered": 41,
@@ -269,9 +279,9 @@
       "contextHitRate": 0.9285714285714286,
       "meanReciprocalRank": 0.4502370645227789,
       "averageContextTokens": 87.5,
-      "averageLatencyMs": 0.9513547619047664,
+      "averageLatencyMs": 0.809723809523806,
       "contextEfficiency": 0.0024489795918367346,
-      "latencyEfficiency": 0.22524269900818022,
+      "latencyEfficiency": 0.2646405005822102,
       "errorTaxonomy": {
         "stale_fact": 30,
         "none": 9,
@@ -295,9 +305,9 @@
       "contextHitRate": 1,
       "meanReciprocalRank": 1,
       "averageContextTokens": 65.0952380952381,
-      "averageLatencyMs": 0.4153428571428551,
+      "averageLatencyMs": 0.36329523809524067,
       "contextEfficiency": 0.015362106803218726,
-      "latencyEfficiency": 2.4076494462406393,
+      "latencyEfficiency": 2.7525821842394813,
       "errorTaxonomy": {
         "none": 42
       }
@@ -314,6 +324,8 @@
     "eventCount": 250,
     "fullHistoryTokens": 1957,
     "questions": 42,
+    "stateBuildMs": 2.193700000000007,
+    "stateWriteMsPerEvent": 0.008774800000000027,
     "rag": {
       "totalQuestions": 42,
       "answered": 41,
@@ -331,9 +343,9 @@
       "contextHitRate": 0.9285714285714286,
       "meanReciprocalRank": 0.4555555555555556,
       "averageContextTokens": 87.9047619047619,
-      "averageLatencyMs": 0.9071023809523863,
+      "averageLatencyMs": 0.7974904761904733,
       "contextEfficiency": 0.002437703141928494,
-      "latencyEfficiency": 0.23623101293233417,
+      "latencyEfficiency": 0.2687000292584486,
       "errorTaxonomy": {
         "stale_fact": 30,
         "none": 9,
@@ -357,9 +369,9 @@
       "contextHitRate": 1,
       "meanReciprocalRank": 1,
       "averageContextTokens": 66.30952380952381,
-      "averageLatencyMs": 0.4598357142857202,
+      "averageLatencyMs": 0.367628571428569,
       "contextEfficiency": 0.015080789946140035,
-      "latencyEfficiency": 2.1746897183776537,
+      "latencyEfficiency": 2.7201367840211574,
       "errorTaxonomy": {
         "none": 42
       }
@@ -376,6 +388,8 @@
     "eventCount": 500,
     "fullHistoryTokens": 4046,
     "questions": 42,
+    "stateBuildMs": 7.239300000000014,
+    "stateWriteMsPerEvent": 0.014478600000000029,
     "rag": {
       "totalQuestions": 42,
       "answered": 42,
@@ -393,9 +407,9 @@
       "contextHitRate": 0.9285714285714286,
       "meanReciprocalRank": 0.4536195286195287,
       "averageContextTokens": 87.83333333333333,
-      "averageLatencyMs": 1.6899071428571395,
+      "averageLatencyMs": 1.8045809523809535,
       "contextEfficiency": 0.002439685551640011,
-      "latencyEfficiency": 0.12680324785385527,
+      "latencyEfficiency": 0.11874541510758327,
       "errorTaxonomy": {
         "stale_fact": 30,
         "none": 9,
@@ -419,9 +433,9 @@
       "contextHitRate": 1,
       "meanReciprocalRank": 1,
       "averageContextTokens": 65.30952380952381,
-      "averageLatencyMs": 0.5956047619047592,
+      "averageLatencyMs": 0.5050261904761983,
       "contextEfficiency": 0.015311702515493984,
-      "latencyEfficiency": 1.678965757093638,
+      "latencyEfficiency": 1.9800953274464477,
       "errorTaxonomy": {
         "none": 42
       }
@@ -438,6 +452,8 @@
     "eventCount": 500,
     "fullHistoryTokens": 4040,
     "questions": 42,
+    "stateBuildMs": 2.4145000000000323,
+    "stateWriteMsPerEvent": 0.004829000000000064,
     "rag": {
       "totalQuestions": 42,
       "answered": 42,
@@ -455,9 +471,9 @@
       "contextHitRate": 0.9285714285714286,
       "meanReciprocalRank": 0.45098433312719033,
       "averageContextTokens": 87.92857142857143,
-      "averageLatencyMs": 1.6131499999999985,
+      "averageLatencyMs": 1.4604380952380946,
       "contextEfficiency": 0.0024370430544272946,
-      "latencyEfficiency": 0.13283681882386292,
+      "latencyEfficiency": 0.14672700950791026,
       "errorTaxonomy": {
         "stale_fact": 30,
         "none": 9,
@@ -481,9 +497,9 @@
       "contextHitRate": 1,
       "meanReciprocalRank": 1,
       "averageContextTokens": 65.11904761904762,
-      "averageLatencyMs": 0.5663571428571397,
+      "averageLatencyMs": 0.49328571428571744,
       "contextEfficiency": 0.015356489945155392,
-      "latencyEfficiency": 1.7656703241266336,
+      "latencyEfficiency": 2.0272227048942817,
       "errorTaxonomy": {
         "none": 42
       }
@@ -500,6 +516,8 @@
     "eventCount": 500,
     "fullHistoryTokens": 4013,
     "questions": 42,
+    "stateBuildMs": 2.557799999999986,
+    "stateWriteMsPerEvent": 0.005115599999999972,
     "rag": {
       "totalQuestions": 42,
       "answered": 40,
@@ -517,9 +535,9 @@
       "contextHitRate": 0.9285714285714286,
       "meanReciprocalRank": 0.45158730158730165,
       "averageContextTokens": 88,
-      "averageLatencyMs": 1.7791904761904707,
+      "averageLatencyMs": 1.5400666666666691,
       "contextEfficiency": 0.002435064935064935,
-      "latencyEfficiency": 0.12044000749404528,
+      "latencyEfficiency": 0.13914054431780915,
       "errorTaxonomy": {
         "stale_fact": 30,
         "none": 9,
@@ -543,9 +561,9 @@
       "contextHitRate": 1,
       "meanReciprocalRank": 1,
       "averageContextTokens": 66.11904761904762,
-      "averageLatencyMs": 0.6026190476190463,
+      "averageLatencyMs": 0.4874880952381015,
       "contextEfficiency": 0.015124234785740006,
-      "latencyEfficiency": 1.6594231529039942,
+      "latencyEfficiency": 2.051332144863096,
       "errorTaxonomy": {
         "none": 42
       }
@@ -562,6 +580,8 @@
     "eventCount": 1000,
     "fullHistoryTokens": 8158,
     "questions": 42,
+    "stateBuildMs": 8.495900000000006,
+    "stateWriteMsPerEvent": 0.008495900000000006,
     "rag": {
       "totalQuestions": 42,
       "answered": 41,
@@ -579,9 +599,9 @@
       "contextHitRate": 0.9285714285714286,
       "meanReciprocalRank": 0.45145502645502655,
       "averageContextTokens": 87.88095238095238,
-      "averageLatencyMs": 3.2669333333333404,
+      "averageLatencyMs": 2.8589619047619057,
       "contextEfficiency": 0.002438363587103766,
-      "latencyEfficiency": 0.06559231316393982,
+      "latencyEfficiency": 0.07495228038149042,
       "errorTaxonomy": {
         "stale_fact": 30,
         "none": 9,
@@ -605,9 +625,9 @@
       "contextHitRate": 1,
       "meanReciprocalRank": 1,
       "averageContextTokens": 65.33333333333333,
-      "averageLatencyMs": 0.608099999999998,
+      "averageLatencyMs": 0.49354761904762007,
       "contextEfficiency": 0.015306122448979593,
-      "latencyEfficiency": 1.6444663706627254,
+      "latencyEfficiency": 2.026146943895022,
       "errorTaxonomy": {
         "none": 42
       }
@@ -624,6 +644,8 @@
     "eventCount": 1000,
     "fullHistoryTokens": 8167,
     "questions": 42,
+    "stateBuildMs": 5.43240000000003,
+    "stateWriteMsPerEvent": 0.00543240000000003,
     "rag": {
       "totalQuestions": 42,
       "answered": 41,
@@ -641,9 +663,9 @@
       "contextHitRate": 0.9285714285714286,
       "meanReciprocalRank": 0.44900020614306335,
       "averageContextTokens": 87.35714285714286,
-      "averageLatencyMs": 3.1544785714285615,
+      "averageLatencyMs": 2.8138785714285692,
       "contextEfficiency": 0.002452984464431725,
-      "latencyEfficiency": 0.06793062924141888,
+      "latencyEfficiency": 0.07615314905963559,
       "errorTaxonomy": {
         "stale_fact": 30,
         "none": 9,
@@ -667,9 +689,9 @@
       "contextHitRate": 1,
       "meanReciprocalRank": 1,
       "averageContextTokens": 64.95238095238095,
-      "averageLatencyMs": 0.60424523809524,
+      "averageLatencyMs": 0.4883619047619055,
       "contextEfficiency": 0.015395894428152493,
-      "latencyEfficiency": 1.6549571878336953,
+      "latencyEfficiency": 2.047661765279454,
       "errorTaxonomy": {
         "none": 42
       }
@@ -686,6 +708,8 @@
     "eventCount": 1000,
     "fullHistoryTokens": 8140,
     "questions": 42,
+    "stateBuildMs": 5.4447999999999865,
+    "stateWriteMsPerEvent": 0.005444799999999987,
     "rag": {
       "totalQuestions": 42,
       "answered": 40,
@@ -703,9 +727,9 @@
       "contextHitRate": 0.9285714285714286,
       "meanReciprocalRank": 0.45158730158730165,
       "averageContextTokens": 87.95238095238095,
-      "averageLatencyMs": 3.1462428571428354,
+      "averageLatencyMs": 2.820645238095245,
       "contextEfficiency": 0.0024363833243096914,
-      "latencyEfficiency": 0.06810844680957379,
+      "latencyEfficiency": 0.07597045930895563,
       "errorTaxonomy": {
         "stale_fact": 30,
         "none": 9,
@@ -729,9 +753,9 @@
       "contextHitRate": 1,
       "meanReciprocalRank": 1,
       "averageContextTokens": 66.07142857142857,
-      "averageLatencyMs": 0.5746333333333301,
+      "averageLatencyMs": 0.4722428571428601,
       "contextEfficiency": 0.015135135135135135,
-      "latencyEfficiency": 1.7402401531411433,
+      "latencyEfficiency": 2.117554527029058,
       "errorTaxonomy": {
         "none": 42
       }
@@ -748,6 +772,8 @@
     "eventCount": 2500,
     "fullHistoryTokens": 20552,
     "questions": 42,
+    "stateBuildMs": 15.219400000000178,
+    "stateWriteMsPerEvent": 0.006087760000000071,
     "rag": {
       "totalQuestions": 42,
       "answered": 41,
@@ -765,9 +791,9 @@
       "contextHitRate": 0.9285714285714286,
       "meanReciprocalRank": 0.45145502645502655,
       "averageContextTokens": 87.78571428571429,
-      "averageLatencyMs": 7.675430952380961,
+      "averageLatencyMs": 7.056000000000019,
       "contextEfficiency": 0.002441008950366151,
-      "latencyEfficiency": 0.02791839515138126,
+      "latencyEfficiency": 0.030369290573372124,
       "errorTaxonomy": {
         "stale_fact": 30,
         "none": 9,
@@ -791,9 +817,9 @@
       "contextHitRate": 1,
       "meanReciprocalRank": 1,
       "averageContextTokens": 65.42857142857143,
-      "averageLatencyMs": 0.6120500000000025,
+      "averageLatencyMs": 0.48806666666667387,
       "contextEfficiency": 0.015283842794759825,
-      "latencyEfficiency": 1.6338534433461251,
+      "latencyEfficiency": 2.048900423439391,
       "errorTaxonomy": {
         "none": 42
       }
@@ -810,6 +836,8 @@
     "eventCount": 2500,
     "fullHistoryTokens": 20551,
     "questions": 42,
+    "stateBuildMs": 18.2491,
+    "stateWriteMsPerEvent": 0.00729964,
     "rag": {
       "totalQuestions": 42,
       "answered": 41,
@@ -827,9 +855,9 @@
       "contextHitRate": 0.9285714285714286,
       "meanReciprocalRank": 0.44921665635951363,
       "averageContextTokens": 87.92857142857143,
-      "averageLatencyMs": 7.631204761904764,
+      "averageLatencyMs": 6.948878571428579,
       "contextEfficiency": 0.0024370430544272946,
-      "latencyEfficiency": 0.028080194539587763,
+      "latencyEfficiency": 0.03083745270305688,
       "errorTaxonomy": {
         "stale_fact": 30,
         "none": 9,
@@ -853,9 +881,9 @@
       "contextHitRate": 1,
       "meanReciprocalRank": 1,
       "averageContextTokens": 65.11904761904762,
-      "averageLatencyMs": 0.5616095238095253,
+      "averageLatencyMs": 0.4881142857142755,
       "contextEfficiency": 0.015356489945155392,
-      "latencyEfficiency": 1.780596584646165,
+      "latencyEfficiency": 2.048700538515613,
       "errorTaxonomy": {
         "none": 42
       }
@@ -872,6 +900,8 @@
     "eventCount": 2500,
     "fullHistoryTokens": 20490,
     "questions": 42,
+    "stateBuildMs": 16.015299999999797,
+    "stateWriteMsPerEvent": 0.006406119999999919,
     "rag": {
       "totalQuestions": 42,
       "answered": 40,
@@ -889,9 +919,9 @@
       "contextHitRate": 0.9285714285714286,
       "meanReciprocalRank": 0.45158730158730165,
       "averageContextTokens": 88.16666666666667,
-      "averageLatencyMs": 7.859638095238113,
+      "averageLatencyMs": 6.930188095238074,
       "contextEfficiency": 0.0024304617877396704,
-      "latencyEfficiency": 0.027264068865402682,
+      "latencyEfficiency": 0.030920620240157116,
       "errorTaxonomy": {
         "stale_fact": 30,
         "none": 9,
@@ -915,9 +945,9 @@
       "contextHitRate": 1,
       "meanReciprocalRank": 1,
       "averageContextTokens": 66.23809523809524,
-      "averageLatencyMs": 0.6148833333332905,
+      "averageLatencyMs": 0.4553928571428536,
       "contextEfficiency": 0.01509705248023005,
-      "latencyEfficiency": 1.6263247770580918,
+      "latencyEfficiency": 2.1959062034350416,
       "errorTaxonomy": {
         "none": 42
       }
@@ -934,6 +964,8 @@
     "eventCount": 5000,
     "fullHistoryTokens": 41183,
     "questions": 42,
+    "stateBuildMs": 24.278299999999945,
+    "stateWriteMsPerEvent": 0.004855659999999989,
     "rag": {
       "totalQuestions": 42,
       "answered": 41,
@@ -951,9 +983,9 @@
       "contextHitRate": 0.9285714285714286,
       "meanReciprocalRank": 0.45145502645502655,
       "averageContextTokens": 87.47619047619048,
-      "averageLatencyMs": 15.77153333333332,
+      "averageLatencyMs": 13.685564285714246,
       "contextEfficiency": 0.0024496461622210124,
-      "latencyEfficiency": 0.013586866270815845,
+      "latencyEfficiency": 0.015657791656380413,
       "errorTaxonomy": {
         "stale_fact": 30,
         "none": 9,
@@ -977,9 +1009,9 @@
       "contextHitRate": 1,
       "meanReciprocalRank": 1,
       "averageContextTokens": 65.21428571428571,
-      "averageLatencyMs": 0.5615309523809628,
+      "averageLatencyMs": 0.467399999999987,
       "contextEfficiency": 0.015334063526834613,
-      "latencyEfficiency": 1.7808457321183677,
+      "latencyEfficiency": 2.1394950791613776,
       "errorTaxonomy": {
         "none": 42
       }
@@ -996,6 +1028,8 @@
     "eventCount": 5000,
     "fullHistoryTokens": 41209,
     "questions": 42,
+    "stateBuildMs": 28.74409999999989,
+    "stateWriteMsPerEvent": 0.005748819999999978,
     "rag": {
       "totalQuestions": 42,
       "answered": 41,
@@ -1013,9 +1047,9 @@
       "contextHitRate": 0.9285714285714286,
       "meanReciprocalRank": 0.44921665635951363,
       "averageContextTokens": 88.14285714285714,
-      "averageLatencyMs": 15.543597619047638,
+      "averageLatencyMs": 13.922442857142803,
       "contextEfficiency": 0.002431118314424635,
-      "latencyEfficiency": 0.013786107922860887,
+      "latencyEfficiency": 0.015391387595157313,
       "errorTaxonomy": {
         "stale_fact": 30,
         "none": 9,
@@ -1039,9 +1073,9 @@
       "contextHitRate": 1,
       "meanReciprocalRank": 1,
       "averageContextTokens": 65.14285714285714,
-      "averageLatencyMs": 0.555261904761881,
+      "averageLatencyMs": 0.4452333333332869,
       "contextEfficiency": 0.015350877192982457,
-      "latencyEfficiency": 1.800951931735423,
+      "latencyEfficiency": 2.2460133263459707,
       "errorTaxonomy": {
         "none": 42
       }
@@ -1058,6 +1092,8 @@
     "eventCount": 5000,
     "fullHistoryTokens": 41192,
     "questions": 42,
+    "stateBuildMs": 25.74310000000014,
+    "stateWriteMsPerEvent": 0.005148620000000028,
     "rag": {
       "totalQuestions": 42,
       "answered": 40,
@@ -1075,9 +1111,9 @@
       "contextHitRate": 0.9285714285714286,
       "meanReciprocalRank": 0.45158730158730165,
       "averageContextTokens": 88.0952380952381,
-      "averageLatencyMs": 15.464721428571487,
+      "averageLatencyMs": 13.762907142857168,
       "contextEfficiency": 0.0024324324324324323,
-      "latencyEfficiency": 0.0138564225211206,
+      "latencyEfficiency": 0.015569800192754097,
       "errorTaxonomy": {
         "stale_fact": 30,
         "none": 9,
@@ -1101,9 +1137,9 @@
       "contextHitRate": 1,
       "meanReciprocalRank": 1,
       "averageContextTokens": 66.11904761904762,
-      "averageLatencyMs": 0.531616666666737,
+      "averageLatencyMs": 0.4402690476190509,
       "contextEfficiency": 0.015124234785740006,
-      "latencyEfficiency": 1.8810546446371779,
+      "latencyEfficiency": 2.271338413199704,
       "errorTaxonomy": {
         "none": 42
       }

@@ -19,6 +19,12 @@
       "seedRuns": 3,
       "questions": 42,
       "fullHistoryTokensMean": 1046,
+      "stateUpdate": {
+        "buildMsMean": 1.5451999999999988,
+        "buildMsStd": 0.9983362409529191,
+        "writeMsPerEventMean": 0.015451999999999988,
+        "writeMsPerEventStd": 0.009983362409529193
+      },
       "rag": {
         "exactMatchAccuracyMean": 0.24603174603174605,
         "exactMatchAccuracyStd": 0.027492869961410763,
@@ -29,9 +35,9 @@
         "contextHitRateMean": 0.9444444444444443,
         "meanReciprocalRankMean": 0.4970933828076685,
         "averageContextTokensMean": 126.3968253968254,
-        "averageLatencyMsMean": 0.4826365079365081,
+        "averageLatencyMsMean": 0.4469722222222227,
         "contextEfficiencyMean": 0.0019450806389694,
-        "latencyEfficiencyMean": 0.5102846053356734
+        "latencyEfficiencyMean": 0.5543368164347068
       },
       "stateMemory": {
         "exactMatchAccuracyMean": 1,
@@ -43,9 +49,9 @@
         "contextHitRateMean": 1,
         "meanReciprocalRankMean": 1,
         "averageContextTokensMean": 64.65873015873017,
-        "averageLatencyMsMean": 0.27544682539682586,
+        "averageLatencyMsMean": 0.25815714285714353,
         "contextEfficiencyMean": 0.01546696556632851,
-        "latencyEfficiencyMean": 3.9362168172124785
+        "latencyEfficiencyMean": 4.366433359675354
       }
     },
     {
@@ -53,6 +59,12 @@
       "seedRuns": 3,
       "questions": 42,
       "fullHistoryTokensMean": 1969,
+      "stateUpdate": {
+        "buildMsMean": 2.4824666666666624,
+        "buildMsStd": 0.2501548786918385,
+        "writeMsPerEventMean": 0.00992986666666665,
+        "writeMsPerEventStd": 0.0010006195147673543
+      },
       "rag": {
         "exactMatchAccuracyMean": 0.21428571428571427,
         "exactMatchAccuracyStd": 0,
@@ -63,9 +75,9 @@
         "contextHitRateMean": 0.9285714285714285,
         "meanReciprocalRankMean": 0.4532696580315629,
         "averageContextTokensMean": 87.61904761904763,
-        "averageLatencyMsMean": 0.9306238095238141,
+        "averageLatencyMsMean": 0.8022936507936483,
         "contextEfficiencyMean": 0.0024456652764424797,
-        "latencyEfficiencyMean": 0.2303485456081932
+        "latencyEfficiencyMean": 0.26710310878767324
       },
       "stateMemory": {
         "exactMatchAccuracyMean": 1,
@@ -77,9 +89,9 @@
         "contextHitRateMean": 1,
         "meanReciprocalRankMean": 1,
         "averageContextTokensMean": 65.53174603174602,
-        "averageLatencyMsMean": 0.447108730158732,
+        "averageLatencyMsMean": 0.4011079365079359,
         "contextEfficiencyMean": 0.015260853579223799,
-        "latencyEfficiencyMean": 2.2425274477519164
+        "latencyEfficiencyMean": 2.5298563650905517
       }
     },
     {
@@ -87,6 +99,12 @@
       "seedRuns": 3,
       "questions": 42,
       "fullHistoryTokensMean": 4033,
+      "stateUpdate": {
+        "buildMsMean": 4.070533333333344,
+        "buildMsStd": 2.745167638475535,
+        "writeMsPerEventMean": 0.008141066666666688,
+        "writeMsPerEventStd": 0.00549033527695107
+      },
       "rag": {
         "exactMatchAccuracyMean": 0.21428571428571427,
         "exactMatchAccuracyStd": 0,
@@ -97,9 +115,9 @@
         "contextHitRateMean": 0.9285714285714285,
         "meanReciprocalRankMean": 0.45206372111134024,
         "averageContextTokensMean": 87.92063492063492,
-        "averageLatencyMsMean": 1.694082539682536,
+        "averageLatencyMsMean": 1.601695238095239,
         "contextEfficiencyMean": 0.002437264513710747,
-        "latencyEfficiencyMean": 0.12669335805725448
+        "latencyEfficiencyMean": 0.13487098964443422
       },
       "stateMemory": {
         "exactMatchAccuracyMean": 1,
@@ -111,9 +129,9 @@
         "contextHitRateMean": 1,
         "meanReciprocalRankMean": 1,
         "averageContextTokensMean": 65.51587301587303,
-        "averageLatencyMsMean": 0.5881936507936484,
+        "averageLatencyMsMean": 0.49526666666667246,
         "contextEfficiencyMean": 0.015264142415463129,
-        "latencyEfficiencyMean": 1.701353078041422
+        "latencyEfficiencyMean": 2.019550059067942
       }
     },
     {
@@ -121,6 +139,12 @@
       "seedRuns": 3,
       "questions": 42,
       "fullHistoryTokensMean": 8155,
+      "stateUpdate": {
+        "buildMsMean": 6.457700000000007,
+        "buildMsStd": 1.765143866657898,
+        "writeMsPerEventMean": 0.006457700000000007,
+        "writeMsPerEventStd": 0.0017651438666578978
+      },
       "rag": {
         "exactMatchAccuracyMean": 0.21428571428571427,
         "exactMatchAccuracyStd": 0,
@@ -131,9 +155,9 @@
         "contextHitRateMean": 0.9285714285714285,
         "meanReciprocalRankMean": 0.4506808447284638,
         "averageContextTokensMean": 87.73015873015873,
-        "averageLatencyMsMean": 3.189218253968246,
+        "averageLatencyMsMean": 2.8311619047619065,
         "contextEfficiencyMean": 0.0024425771252817277,
-        "latencyEfficiencyMean": 0.06721046307164416
+        "latencyEfficiencyMean": 0.07569196291669388
       },
       "stateMemory": {
         "exactMatchAccuracyMean": 1,
@@ -145,9 +169,9 @@
         "contextHitRateMean": 1,
         "meanReciprocalRankMean": 1,
         "averageContextTokensMean": 65.45238095238095,
-        "averageLatencyMsMean": 0.5956595238095227,
+        "averageLatencyMsMean": 0.48471746031746193,
         "contextEfficiencyMean": 0.01527905067075574,
-        "latencyEfficiencyMean": 1.679887903879188
+        "latencyEfficiencyMean": 2.063787745401178
       }
     },
     {
@@ -155,6 +179,12 @@
       "seedRuns": 3,
       "questions": 42,
       "fullHistoryTokensMean": 20531,
+      "stateUpdate": {
+        "buildMsMean": 16.49459999999999,
+        "buildMsStd": 1.570689940758477,
+        "writeMsPerEventMean": 0.006597839999999996,
+        "writeMsPerEventStd": 0.0006282759763033909
+      },
       "rag": {
         "exactMatchAccuracyMean": 0.21428571428571427,
         "exactMatchAccuracyStd": 0,
@@ -165,9 +195,9 @@
         "contextHitRateMean": 0.9285714285714285,
         "meanReciprocalRankMean": 0.4507529948006139,
         "averageContextTokensMean": 87.96031746031747,
-        "averageLatencyMsMean": 7.722091269841279,
+        "averageLatencyMsMean": 6.978355555555557,
         "contextEfficiencyMean": 0.0024361712641777053,
-        "latencyEfficiencyMean": 0.027754219518790566
+        "latencyEfficiencyMean": 0.030709121172195375
       },
       "stateMemory": {
         "exactMatchAccuracyMean": 1,
@@ -179,9 +209,9 @@
         "contextHitRateMean": 1,
         "meanReciprocalRankMean": 1,
         "averageContextTokensMean": 65.59523809523809,
-        "averageLatencyMsMean": 0.5961809523809395,
+        "averageLatencyMsMean": 0.47719126984126764,
         "contextEfficiencyMean": 0.015245795073381757,
-        "latencyEfficiencyMean": 1.6802582683501273
+        "latencyEfficiencyMean": 2.0978357217966823
       }
     },
     {
@@ -189,6 +219,12 @@
       "seedRuns": 3,
       "questions": 42,
       "fullHistoryTokensMean": 41194.666666666664,
+      "stateUpdate": {
+        "buildMsMean": 26.255166666666657,
+        "buildMsStd": 2.2765108419098503,
+        "writeMsPerEventMean": 0.005251033333333332,
+        "writeMsPerEventStd": 0.0004553021683819702
+      },
       "rag": {
         "exactMatchAccuracyMean": 0.21428571428571427,
         "exactMatchAccuracyStd": 0,
@@ -199,9 +235,9 @@
         "contextHitRateMean": 0.9285714285714285,
         "meanReciprocalRankMean": 0.4507529948006139,
         "averageContextTokensMean": 87.90476190476191,
-        "averageLatencyMsMean": 15.59328412698415,
+        "averageLatencyMsMean": 13.790304761904737,
         "contextEfficiencyMean": 0.0024377323030260263,
-        "latencyEfficiencyMean": 0.013743132238265779
+        "latencyEfficiencyMean": 0.015539659814763941
       },
       "stateMemory": {
         "exactMatchAccuracyMean": 1,
@@ -213,9 +249,9 @@
         "contextHitRateMean": 1,
         "meanReciprocalRankMean": 1,
         "averageContextTokensMean": 65.49206349206348,
-        "averageLatencyMsMean": 0.5494698412698603,
+        "averageLatencyMsMean": 0.4509674603174416,
         "contextEfficiencyMean": 0.015269725168519025,
-        "latencyEfficiencyMean": 1.8209507694969895
+        "latencyEfficiencyMean": 2.2189489395690174
       }
     }
   ],
