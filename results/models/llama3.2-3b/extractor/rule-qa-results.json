@@ -18,7 +18,7 @@
       "real-002-f1"
     ],
     "contextTokens": 54,
-    "latencyMs": 0.11059599999862257,
+    "latencyMs": 0.16857499999605352,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
@@ -46,7 +46,7 @@
       "real-002-f1"
     ],
     "contextTokens": 55,
-    "latencyMs": 0.10758000001078472,
+    "latencyMs": 0.09022700000059558,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
@@ -74,7 +74,7 @@
       "real-001-f1"
     ],
     "contextTokens": 54,
-    "latencyMs": 0.0855089999968186,
+    "latencyMs": 0.06324600000516511,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
@@ -100,7 +100,7 @@
       "real-005-f1"
     ],
     "contextTokens": 54,
-    "latencyMs": 0.08012899999448564,
+    "latencyMs": 0.057596999999077525,
     "contextHasGoldFact": false,
     "goldRank": null,
     "reciprocalRank": 0,
@@ -128,7 +128,7 @@
       "real-009-f2"
     ],
     "contextTokens": 50,
-    "latencyMs": 0.07910700001229998,
+    "latencyMs": 0.05727699999988545,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
@@ -156,7 +156,7 @@
       "real-003-f1"
     ],
     "contextTokens": 56,
-    "latencyMs": 0.10886199999367818,
+    "latencyMs": 0.05273999999917578,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
@@ -184,7 +184,7 @@
       "real-003-f1"
     ],
     "contextTokens": 56,
-    "latencyMs": 0.07880600000498816,
+    "latencyMs": 0.05286999999952968,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,
@@ -212,7 +212,7 @@
       "real-005-f1"
     ],
     "contextTokens": 55,
-    "latencyMs": 0.0761320000019623,
+    "latencyMs": 0.05641499999910593,
     "contextHasGoldFact": true,
     "goldRank": 1,
     "reciprocalRank": 1,

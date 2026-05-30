@@ -1,0 +1,311 @@
+{
+  "dataset": {
+    "events": 1000,
+    "documentPages": 100,
+    "documentChunks": 300,
+    "questions": 31,
+    "currentStateQuestions": 10,
+    "stableStateQuestions": 6,
+    "documentQuestions": 10,
+    "unknownQuestions": 5
+  },
+  "configuration": {
+    "model": "qwen2.5:3b",
+    "temperature": 0,
+    "seed": 42,
+    "timeoutMs": 120000,
+    "numPredict": 64,
+    "ragTopK": 12,
+    "documentTopK": 8,
+    "stateLimit": 8
+  },
+  "rag": {
+    "totalQuestions": 31,
+    "exactMatchAccuracy": 0.6451612903225806,
+    "normalizedAccuracy": 0.8064516129032258,
+    "promptComplianceRate": 0.9032258064516129,
+    "hallucinationRate": 0,
+    "unknownAccuracy": 1,
+    "averageContextTokens": 207.25806451612902,
+    "averageRetrievalMs": 5.782583129031922,
+    "averagePromptBuildMs": 0.006864354839746148,
+    "averageLlmMs": 17592.492640774195,
+    "averageTotalMs": 17598.330851129034,
+    "byType": {
+      "current_state": {
+        "totalQuestions": 10,
+        "exactMatchAccuracy": 0.5,
+        "normalizedAccuracy": 0.8,
+        "promptComplianceRate": 0.9,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 114.7,
+        "averageLlmMs": 8979.2083495,
+        "averageTotalMs": 8987.210582400001
+      },
+      "stable_state": {
+        "totalQuestions": 6,
+        "exactMatchAccuracy": 0,
+        "normalizedAccuracy": 0.3333333333333333,
+        "promptComplianceRate": 0.6666666666666666,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 117.66666666666667,
+        "averageLlmMs": 8516.9384935,
+        "averageTotalMs": 8522.614960666668
+      },
+      "document_detail": {
+        "totalQuestions": 10,
+        "exactMatchAccuracy": 1,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 363.3,
+        "averageLlmMs": 32960.19753289999,
+        "averageTotalMs": 32964.2455304
+      },
+      "unknown": {
+        "totalQuestions": 5,
+        "exactMatchAccuracy": 1,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 1,
+        "averageContextTokens": 187.8,
+        "averageLlmMs": 14974.31641579999,
+        "averageTotalMs": 14979.601098599995
+      }
+    }
+  },
+  "state": {
+    "totalQuestions": 31,
+    "exactMatchAccuracy": 0.4838709677419355,
+    "normalizedAccuracy": 0.6129032258064516,
+    "promptComplianceRate": 0.9354838709677419,
+    "hallucinationRate": 0,
+    "unknownAccuracy": 1,
+    "averageContextTokens": 64.06451612903226,
+    "averageRetrievalMs": 3.5526583548409922,
+    "averagePromptBuildMs": 0.004012999996062248,
+    "averageLlmMs": 4151.839459354832,
+    "averageTotalMs": 4155.419849354853,
+    "byType": {
+      "current_state": {
+        "totalQuestions": 10,
+        "exactMatchAccuracy": 1,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 79.3,
+        "averageLlmMs": 5983.3863055999855,
+        "averageTotalMs": 5993.161878799996
+      },
+      "stable_state": {
+        "totalQuestions": 6,
+        "exactMatchAccuracy": 0,
+        "normalizedAccuracy": 0.6666666666666666,
+        "promptComplianceRate": 0.6666666666666666,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 76.33333333333333,
+        "averageLlmMs": 6156.673848666658,
+        "averageTotalMs": 6157.616626666723
+      },
+      "document_detail": {
+        "totalQuestions": 10,
+        "exactMatchAccuracy": 0,
+        "normalizedAccuracy": 0,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 35,
+        "averageLlmMs": 853.2488528000074,
+        "averageTotalMs": 853.2617932000081
+      },
+      "unknown": {
+        "totalQuestions": 5,
+        "exactMatchAccuracy": 1,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 1,
+        "averageContextTokens": 77,
+        "averageLlmMs": 4680.12571279998,
+        "averageTotalMs": 4681.615770000009
+      }
+    }
+  },
+  "hybrid": {
+    "totalQuestions": 31,
+    "exactMatchAccuracy": 0.7741935483870968,
+    "normalizedAccuracy": 0.9032258064516129,
+    "promptComplianceRate": 0.9032258064516129,
+    "hallucinationRate": 0.03225806451612903,
+    "unknownAccuracy": 1,
+    "averageContextTokens": 187.90322580645162,
+    "averageRetrievalMs": 2.12867183870666,
+    "averagePromptBuildMs": 0.0035027419442250846,
+    "averageLlmMs": 16193.07926996773,
+    "averageTotalMs": 16195.227307419374,
+    "byType": {
+      "current_state": {
+        "totalQuestions": 10,
+        "exactMatchAccuracy": 0.9,
+        "normalizedAccuracy": 0.9,
+        "promptComplianceRate": 0.9,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 79.3,
+        "averageLlmMs": 5969.913471400016,
+        "averageTotalMs": 5971.175331700023
+      },
+      "stable_state": {
+        "totalQuestions": 6,
+        "exactMatchAccuracy": 0,
+        "normalizedAccuracy": 0.6666666666666666,
+        "promptComplianceRate": 0.6666666666666666,
+        "hallucinationRate": 0.16666666666666666,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 76.33333333333333,
+        "averageLlmMs": 6167.789781833281,
+        "averageTotalMs": 6168.5925411666785
+      },
+      "document_detail": {
+        "totalQuestions": 10,
+        "exactMatchAccuracy": 1,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 363.3,
+        "averageLlmMs": 32944.81851529998,
+        "averageTotalMs": 32948.71440119999
+      },
+      "unknown": {
+        "totalQuestions": 5,
+        "exactMatchAccuracy": 1,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 1,
+        "averageContextTokens": 188.2,
+        "averageLlmMs": 15166.279762199987,
+        "averageTotalMs": 15168.318790800078
+      }
+    }
+  },
+  "failureExamples": [
+    {
+      "system": "rag",
+      "questionType": "current_state",
+      "question": "What selector strategy does Reflex use?",
+      "expected": "dependency-tracked selectors",
+      "rawAnswer": "UNKNOWN",
+      "normalizedAnswer": "unknown",
+      "errorType": "incomplete_answer",
+      "contextHasGoldFact": true,
+      "context": "- Revision: Reflex selector strategy is selector cache.\n- Initial note: Reflex selector strategy is manual subscriptions.\n- Final update: Reflex selector strategy is dependency-tracked selectors.\n- Initial note: State selector limit is 3 facts.\n- Initial note: Reflex runtime is event-sourced runtime.\n- Initial note: Reflex storage is local arrays.\n- Initial note: State Memory agent memory strategy is full history.\n- Initial note: State selector ranking is random facts.\n- Revision: Reflex storage is normalized object store.\n- Revision: State selector limit is 5 facts.\n- Revision: Reflex runtime is actor runtime.\n- Revision: State selector ranking is recency only."
+    },
+    {
+      "system": "rag",
+      "questionType": "current_state",
+      "question": "What memory strategy does the State Memory agent use?",
+      "expected": "structured world state",
+      "rawAnswer": "RAG",
+      "normalizedAnswer": "rag",
+      "errorType": "incomplete_answer",
+      "contextHasGoldFact": true,
+      "context": "- Final update: State Memory agent memory strategy is structured world state.\n- Initial note: State Memory agent memory strategy is full history.\n- Revision: State Memory agent memory strategy is RAG retrieval.\n- Initial note: State Memory agent answer mode is free-form generation.\n- Revision: State Memory agent answer mode is retrieved chunks only.\n- Final update: State Memory agent answer mode is selected active facts.\n- Final update: State Memory coursework topic is State Memory for LLM agents.\n- Stable note: State Memory pipeline step includes state update.\n- Stable note: State Memory pipeline step includes state selection.\n- Initial note: Memory benchmark comparison is State Memory only..."
+    },
+    {
+      "system": "rag",
+      "questionType": "stable_state",
+      "question": "What must the State Memory coursework include?",
+      "expected": "implementation, experiments, metrics, baseline comparison, error analysis, conclusions",
+      "rawAnswer": "Error analysis, experiments, metrics",
+      "normalizedAnswer": "error analysis experiments metrics",
+      "errorType": "missing_fact",
+      "contextHasGoldFact": false,
+      "context": "- Final update: State Memory coursework topic is State Memory for LLM agents.\n- Initial note: State Memory coursework topic is RAG for agents.\n- Initial note: State Memory coursework implementation language is Python.\n- Stable note: State Memory coursework requires includes implementation.\n- Stable note: State Memory coursework requires includes baseline comparison.\n- Initial note: State Memory coursework deadline is ten days.\n- Stable note: State Memory coursework requires includes metrics.\n- Revision: State Memory coursework topic is long-context prompting.\n- Revision: State Memory coursework deadline is two weeks.\n- Revision: State Memory coursework implementation language is TypeScript.\n..."
+    },
+    {
+      "system": "rag",
+      "questionType": "stable_state",
+      "question": "What interests are stored for the user?",
+      "expected": "reactive systems, LLM agents, machine learning, memory architectures",
+      "rawAnswer": "State Memory stores includes user profile.",
+      "normalizedAnswer": "state memory stores includes user profile",
+      "errorType": "incomplete_answer",
+      "contextHasGoldFact": true,
+      "context": "- Stable note: User interest includes memory architectures.\n- Stable note: User interest includes reactive systems.\n- Stable note: User interest includes machine learning.\n- Stable note: User interest includes LLM agents.\n- Stable note: State Memory stores includes user profile."
+    },
+    {
+      "system": "rag",
+      "questionType": "stable_state",
+      "question": "What entity types does State Memory store?",
+      "expected": "user profile, projects, goals, tasks, facts",
+      "rawAnswer": "UNKNOWN",
+      "normalizedAnswer": "unknown",
+      "errorType": "missing_fact",
+      "contextHasGoldFact": false,
+      "context": "- Final update: State Memory agent memory strategy is structured world state.\n- Final update: State Memory coursework topic is State Memory for LLM agents.\n- Stable note: State Memory pipeline step includes state update.\n- Stable note: State Memory pipeline step includes state selection.\n- Initial note: State Memory agent memory strategy is full history.\n- Initial note: Memory benchmark comparison is State Memory only.\n- Revision: State Memory agent memory strategy is RAG retrieval.\n- Final update: Memory benchmark comparison is RAG versus State Memory.\n- Final update: Memory benchmark hypothesis is State Memory reduces stale fact errors.\n- Stable note: State Memory stores includes goals.\n- ..."
+    },
+    {
+      "system": "rag",
+      "questionType": "stable_state",
+      "question": "What metrics are included?",
+      "expected": "recall, precision, context size, latency, stale fact error rate, compression ratio",
+      "rawAnswer": "UNKNOWN",
+      "normalizedAnswer": "unknown",
+      "errorType": "missing_fact",
+      "contextHasGoldFact": false,
+      "context": "- Background note: Notebook status is included for retrieval noise.\n- Background note: Chart script note is included for retrieval noise.\n- Background note: Methodology section focus is included for retrieval noise.\n- Background note: Chart script summary is included for retrieval noise.\n- Background note: Notebook summary is included for retrieval noise.\n- Background note: README summary is included for retrieval noise.\n- Background note: Limitations section note is included for retrieval noise.\n- Background note: Experiment notes status is included for retrieval noise.\n- Background note: Limitations section focus is included for retrieval noise.\n- Background note: Experiment notes note is ..."
+    },
+    {
+      "system": "state",
+      "questionType": "stable_state",
+      "question": "What must the State Memory coursework include?",
+      "expected": "implementation, experiments, metrics, baseline comparison, error analysis, conclusions",
+      "rawAnswer": "State Memory for LLM agents",
+      "normalizedAnswer": "state memory for llm agents",
+      "errorType": "incomplete_answer",
+      "contextHasGoldFact": true,
+      "context": "- State Memory coursework.requires = implementation (active)\n- State Memory coursework.requires = baseline comparison (active)\n- State Memory coursework.requires = metrics (active)\n- State Memory coursework.requires = error analysis (active)\n- State Memory coursework.requires = experiments (active)\n- State Memory coursework.requires = conclusions (active)\n- State Memory coursework.topic = State Memory for LLM agents (active)\n- State Memory coursework.deadline = one week (active)"
+    },
+    {
+      "system": "state",
+      "questionType": "stable_state",
+      "question": "What interests are stored for the user?",
+      "expected": "reactive systems, LLM agents, machine learning, memory architectures",
+      "rawAnswer": "memory architectures, reactive systems, machine learning",
+      "normalizedAnswer": "memory architectures reactive systems machine learning",
+      "errorType": "incomplete_answer",
+      "contextHasGoldFact": true,
+      "context": "- User.interest = memory architectures (active)\n- User.interest = reactive systems (active)\n- User.interest = machine learning (active)\n- User.interest = LLM agents (active)\n- State Memory.stores = user profile (active)\n- State Memory.stores = goals (active)\n- State Memory pipeline.step = state update (active)\n- RAG pipeline.step = chunking (active)"
+    },
+    {
+      "system": "state",
+      "questionType": "document_detail",
+      "question": "In the long document, what answer token is recorded for marker DOC-001-1?",
+      "expected": "VALUE-001-1",
+      "rawAnswer": "UNKNOWN",
+      "normalizedAnswer": "unknown",
+      "errorType": "missing_fact",
+      "contextHasGoldFact": false,
+      "context": ""
+    },
+    {
+      "system": "state",
+      "questionType": "document_detail",
+      "question": "In the long document, what answer token is recorded for marker DOC-011-1?",
+      "expected": "VALUE-011-1",
+      "rawAnswer": "UNKNOWN",
+      "normalizedAnswer": "unknown",
+      "errorType": "missing_fact",
+      "contextHasGoldFact": false,
+      "context": ""
+    }
+  ]
+}

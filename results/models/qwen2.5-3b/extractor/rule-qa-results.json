@@ -1,0 +1,224 @@
+[
+  {
+    "system": "state_memory",
+    "questionId": "real-q-001",
+    "questionType": "stable_fact",
+    "question": "What is the current positioning of the oracle result?",
+    "expected": "diagnostic upper-bound",
+    "answer": "diagnostic upper-bound",
+    "answerValues": [
+      "diagnostic upper-bound"
+    ],
+    "contextIds": [
+      "real-012-f1",
+      "real-004-f1",
+      "real-006-f1",
+      "real-008-f1",
+      "real-001-f1",
+      "real-002-f1"
+    ],
+    "contextTokens": 54,
+    "latencyMs": 0.1733749999984866,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false
+  },
+  {
+    "system": "state_memory",
+    "questionId": "real-q-002",
+    "questionType": "stable_fact",
+    "question": "Which baseline is now primary for the robust benchmark?",
+    "expected": "Temporal RAG",
+    "answer": "Temporal RAG",
+    "answerValues": [
+      "Temporal RAG"
+    ],
+    "contextIds": [
+      "real-012-f2",
+      "real-004-f1",
+      "real-003-f1",
+      "real-011-f1",
+      "real-001-f1",
+      "real-002-f1"
+    ],
+    "contextTokens": 55,
+    "latencyMs": 0.11079699999390868,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false
+  },
+  {
+    "system": "state_memory",
+    "questionId": "real-q-003",
+    "questionType": "stable_fact",
+    "question": "What statistical checks does the results report include?",
+    "expected": "bootstrap confidence intervals and McNemar tests",
+    "answer": "bootstrap confidence intervals and McNemar tests",
+    "answerValues": [
+      "bootstrap confidence intervals and McNemar tests"
+    ],
+    "contextIds": [
+      "real-012-f3",
+      "real-009-f2",
+      "real-011-f1",
+      "real-006-f1",
+      "real-007-f1",
+      "real-001-f1"
+    ],
+    "contextTokens": 54,
+    "latencyMs": 0.0887460000012652,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false
+  },
+  {
+    "system": "state_memory",
+    "questionId": "real-q-004",
+    "questionType": "stable_fact",
+    "question": "What related work does the current report cover?",
+    "expected": "LangGraph/LangChain, MemGPT, Letta, Temporal RAG",
+    "answer": "unknown",
+    "answerValues": [],
+    "contextIds": [
+      "real-003-f1",
+      "real-012-f3",
+      "real-001-f1",
+      "real-002-f1",
+      "real-004-f1",
+      "real-005-f1"
+    ],
+    "contextTokens": 54,
+    "latencyMs": 0.08813499999814667,
+    "contextHasGoldFact": false,
+    "goldRank": null,
+    "reciprocalRank": 0,
+    "errorType": "missing_fact",
+    "answered": false,
+    "correct": false,
+    "staleFactError": false
+  },
+  {
+    "system": "state_memory",
+    "questionId": "real-q-005",
+    "questionType": "current_fact",
+    "question": "What is the latest status of the LLM benchmark results?",
+    "expected": "verified and updated",
+    "answer": "verified and updated",
+    "answerValues": [
+      "verified and updated"
+    ],
+    "contextIds": [
+      "real-011-f1",
+      "real-005-f1",
+      "real-001-f1",
+      "real-003-f1",
+      "real-004-f1",
+      "real-009-f2"
+    ],
+    "contextTokens": 50,
+    "latencyMs": 0.13257799999701092,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false
+  },
+  {
+    "system": "state_memory",
+    "questionId": "real-q-006",
+    "questionType": "stable_fact",
+    "question": "What does the verification pipeline include?",
+    "expected": "syntax checks, result verification, and tests",
+    "answer": "syntax checks, result verification, and tests",
+    "answerValues": [
+      "syntax checks, result verification, and tests"
+    ],
+    "contextIds": [
+      "real-006-f1",
+      "real-007-f1",
+      "real-008-f1",
+      "real-001-f1",
+      "real-002-f1",
+      "real-003-f1"
+    ],
+    "contextTokens": 56,
+    "latencyMs": 0.3010340000037104,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false
+  },
+  {
+    "system": "state_memory",
+    "questionId": "real-q-007",
+    "questionType": "stable_fact",
+    "question": "What condition was refined for results publishing?",
+    "expected": "refined",
+    "answer": "refined",
+    "answerValues": [
+      "refined"
+    ],
+    "contextIds": [
+      "real-009-f2",
+      "real-011-f1",
+      "real-012-f3",
+      "real-001-f1",
+      "real-002-f1",
+      "real-003-f1"
+    ],
+    "contextTokens": 56,
+    "latencyMs": 0.08708399999886751,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false
+  },
+  {
+    "system": "state_memory",
+    "questionId": "real-q-008",
+    "questionType": "stable_fact",
+    "question": "What cache policy was added for the Ollama workflow?",
+    "expected": "cache model files",
+    "answer": "cache model files",
+    "answerValues": [
+      "cache model files"
+    ],
+    "contextIds": [
+      "real-002-f1",
+      "real-008-f1",
+      "real-001-f1",
+      "real-003-f1",
+      "real-004-f1",
+      "real-005-f1"
+    ],
+    "contextTokens": 55,
+    "latencyMs": 0.08214399999997113,
+    "contextHasGoldFact": true,
+    "goldRank": 1,
+    "reciprocalRank": 1,
+    "errorType": "none",
+    "answered": true,
+    "correct": true,
+    "staleFactError": false
+  }
+]

@@ -351,9 +351,16 @@ This table is the multi-model history surface for Ollama runs. GitHub Actions wr
 
 | Model | Source | Hybrid LLM Acc | Hybrid Hallucination | Hybrid Avg LLM ms | Real State EM | Real Buffer EM | Extractor Precision | Extractor Recall | Extractor F1 | Extractor Parse Errors | Extractor QA EM |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| gemma3:1b | results/models/gemma3-1b | 0.9355 | 0.0000 | 5758.3587 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0 | 0.0000 |
-| llama3.2:3b | results/models/llama3.2-3b | 0.9355 | 0.0000 | 15329.8363 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 12 | 0.0000 |
-| qwen2.5:1.5b | results/models/qwen2.5-1.5b | 0.8710 | 0.0000 | 8082.9133 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0 | 0.0000 |
+| gemma3:1b | results/models/gemma3-1b | 0.9355 | 0.0000 | 5747.8673 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0 | 0.0000 |
+| gemma3:4b | results/models/gemma3-4b | 0.9677 | 0.0000 | 19386.4109 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0 | 0.0000 |
+| llama3.1:8b | results/models/llama3.1-8b | 0.9677 | 0.0000 | 36045.8480 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0 | 0.0000 |
+| llama3.2:3b | results/models/llama3.2-3b | 0.9355 | 0.0000 | 11603.0226 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 12 | 0.0000 |
+| mistral:7b | results/models/mistral-7b | 1.0000 | 0.0000 | 43067.1499 | 0.0000 | 0.0000 | 0.0435 | 0.0476 | 0.0455 | 1 | 0.0000 |
+| phi4-mini | results/models/phi4-mini | 0.9677 | 0.0000 | 18504.2194 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 1 | 0.0000 |
+| qwen2.5:1.5b | results/models/qwen2.5-1.5b | 0.8710 | 0.0000 | 8101.7853 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0 | 0.0000 |
+| qwen2.5:3b | results/models/qwen2.5-3b | 0.9032 | 0.0323 | 16193.0793 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0 | 0.0000 |
+| qwen2.5:7b | results/models/qwen2.5-7b | 1.0000 | 0.0000 | 35214.2771 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0 | 0.0000 |
+| qwen3:4b | results/models/qwen3-4b | 0.0000 | 1.0000 | 27944.1519 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 12 | 0.0000 |
 
 ## Critical Evidence Gaps
 

@@ -1,0 +1,107 @@
+{
+  "dataset": {
+    "source": "real repository commits and current coursework working-tree changes",
+    "events": 12,
+    "questions": 8
+  },
+  "configuration": {
+    "topK": 6,
+    "stateLimit": 6,
+    "langChainWindowSize": 6
+  },
+  "extractor": {
+    "mode": "ollama-llm-extractor",
+    "llmEnabled": true,
+    "model": "qwen3:4b",
+    "parseErrorEvents": 12,
+    "note": "Facts were extracted from raw event text by the local Ollama model."
+  },
+  "temporalRag": {
+    "totalQuestions": 8,
+    "answered": 0,
+    "correct": 0,
+    "exactMatchAccuracy": 0,
+    "answerAccuracy": 0,
+    "recallAccuracy": 0,
+    "precision": 0,
+    "f1Score": 0,
+    "currentFactQuestions": 1,
+    "currentFactAccuracy": 0,
+    "staleFactErrorRate": 0,
+    "currentStaleFactErrorRate": 0,
+    "obsoleteFactRejectionRate": 1,
+    "contextHitRate": 0,
+    "meanReciprocalRank": 0,
+    "averageContextTokens": 49,
+    "averageLatencyMs": 0.549534500016307,
+    "contextEfficiency": 0,
+    "latencyEfficiency": 0,
+    "errorTaxonomy": {
+      "missing_fact": 8
+    }
+  },
+  "stateMemory": {
+    "totalQuestions": 8,
+    "answered": 0,
+    "correct": 0,
+    "exactMatchAccuracy": 0,
+    "answerAccuracy": 0,
+    "recallAccuracy": 0,
+    "precision": 0,
+    "f1Score": 0,
+    "currentFactQuestions": 1,
+    "currentFactAccuracy": 0,
+    "staleFactErrorRate": 0,
+    "currentStaleFactErrorRate": 0,
+    "obsoleteFactRejectionRate": 1,
+    "contextHitRate": 0,
+    "meanReciprocalRank": 0,
+    "averageContextTokens": 12.25,
+    "averageLatencyMs": 0.15423274999920977,
+    "contextEfficiency": 0,
+    "latencyEfficiency": 0,
+    "errorTaxonomy": {
+      "missing_fact": 8
+    }
+  },
+  "langChainBufferMemory": {
+    "totalQuestions": 8,
+    "answered": 0,
+    "correct": 0,
+    "exactMatchAccuracy": 0,
+    "answerAccuracy": 0,
+    "recallAccuracy": 0,
+    "precision": 0,
+    "f1Score": 0,
+    "currentFactQuestions": 1,
+    "currentFactAccuracy": 0,
+    "staleFactErrorRate": 0,
+    "currentStaleFactErrorRate": 0,
+    "obsoleteFactRejectionRate": 1,
+    "contextHitRate": 0,
+    "meanReciprocalRank": 0,
+    "averageContextTokens": 70,
+    "averageLatencyMs": 0.16514149999420624,
+    "contextEfficiency": 0,
+    "latencyEfficiency": 0,
+    "errorTaxonomy": {
+      "missing_fact": 8
+    }
+  },
+  "stateVsTemporalRag": {
+    "bothCorrect": 0,
+    "rightCorrectLeftWrong": 0,
+    "leftCorrectRightWrong": 0,
+    "bothWrong": 8
+  },
+  "stateVsLangChain": {
+    "bothCorrect": 0,
+    "rightCorrectLeftWrong": 0,
+    "leftCorrectRightWrong": 0,
+    "bothWrong": 8,
+    "pairedCount": 8,
+    "discordant": 0,
+    "statistic": 0,
+    "pValue": 1
+  }
+}

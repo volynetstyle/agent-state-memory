@@ -33,7 +33,7 @@
     "contextHitRate": 0,
     "meanReciprocalRank": 0,
     "averageContextTokens": 49,
-    "averageLatencyMs": 0.590291000004072,
+    "averageLatencyMs": 0.520152875002168,
     "contextEfficiency": 0,
     "latencyEfficiency": 0,
     "errorTaxonomy": {
@@ -57,7 +57,7 @@
     "contextHitRate": 0,
     "meanReciprocalRank": 0,
     "averageContextTokens": 47.125,
-    "averageLatencyMs": 2.0725449999972625,
+    "averageLatencyMs": 1.2802901250015566,
     "contextEfficiency": 0,
     "latencyEfficiency": 0,
     "errorTaxonomy": {
@@ -81,7 +81,7 @@
     "contextHitRate": 0,
     "meanReciprocalRank": 0,
     "averageContextTokens": 70,
-    "averageLatencyMs": 0.06092387500211771,
+    "averageLatencyMs": 0.03529974999946717,
     "contextEfficiency": 0,
     "latencyEfficiency": 0,
     "errorTaxonomy": {

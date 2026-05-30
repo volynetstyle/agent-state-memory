@@ -14,9 +14,9 @@ Question set: 31 total (10 current_state, 6 stable_state, 10 document_detail, 5 
 
 | System | Normalized Accuracy | Unknown Accuracy | Prompt Compliance | Hallucination Rate | Avg Context Tokens | Avg LLM ms |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| RAG + LLM | 0.7097 | 0.8000 | 0.7419 | 0.0323 | 207.2581 | 5959.4681 |
-| State + LLM | 0.5806 | 1.0000 | 0.9032 | 0.0000 | 64.0645 | 1982.7262 |
-| Hybrid + LLM | 0.9355 | 1.0000 | 0.9355 | 0.0000 | 187.9032 | 5758.3587 |
+| RAG + LLM | 0.7097 | 0.8000 | 0.7419 | 0.0323 | 207.2581 | 5928.1879 |
+| State + LLM | 0.5806 | 1.0000 | 0.9032 | 0.0000 | 64.0645 | 1963.2284 |
+| Hybrid + LLM | 0.9355 | 1.0000 | 0.9355 | 0.0000 | 187.9032 | 5747.8673 |
 
 Accuracy by question type:
 
@@ -31,9 +31,9 @@ Latency breakdown:
 
 | System | Retrieval ms | Prompt Build ms | LLM ms | Total ms |
 | --- | ---: | ---: | ---: | ---: |
-| RAG + LLM | 8.4194 | 0.0087 | 5959.4681 | 5967.9542 |
-| State + LLM | 4.0471 | 0.0044 | 1982.7262 | 1986.8047 |
-| Hybrid + LLM | 2.7971 | 0.0036 | 5758.3587 | 5761.1782 |
+| RAG + LLM | 8.3237 | 0.0080 | 5928.1879 | 5936.5707 |
+| State + LLM | 1.9019 | 0.0046 | 1963.2284 | 1965.1594 |
+| Hybrid + LLM | 3.0919 | 0.0037 | 5747.8673 | 5750.9811 |
 
 Top failure examples:
 

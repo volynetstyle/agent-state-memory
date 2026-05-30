@@ -1,0 +1,311 @@
+{
+  "dataset": {
+    "events": 1000,
+    "documentPages": 100,
+    "documentChunks": 300,
+    "questions": 31,
+    "currentStateQuestions": 10,
+    "stableStateQuestions": 6,
+    "documentQuestions": 10,
+    "unknownQuestions": 5
+  },
+  "configuration": {
+    "model": "mistral:7b",
+    "temperature": 0,
+    "seed": 42,
+    "timeoutMs": 120000,
+    "numPredict": 64,
+    "ragTopK": 12,
+    "documentTopK": 8,
+    "stateLimit": 8
+  },
+  "rag": {
+    "totalQuestions": 31,
+    "exactMatchAccuracy": 0.4838709677419355,
+    "normalizedAccuracy": 0.8709677419354839,
+    "promptComplianceRate": 0.9032258064516129,
+    "hallucinationRate": 0,
+    "unknownAccuracy": 1,
+    "averageContextTokens": 207.25806451612902,
+    "averageRetrievalMs": 5.667530322565793,
+    "averagePromptBuildMs": 0.005748677413495234,
+    "averageLlmMs": 46216.69092096773,
+    "averageTotalMs": 46222.40331903224,
+    "byType": {
+      "current_state": {
+        "totalQuestions": 10,
+        "exactMatchAccuracy": 0.3,
+        "normalizedAccuracy": 0.9,
+        "promptComplianceRate": 0.9,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 114.7,
+        "averageLlmMs": 23985.3771354,
+        "averageTotalMs": 23993.079074900004
+      },
+      "stable_state": {
+        "totalQuestions": 6,
+        "exactMatchAccuracy": 0,
+        "normalizedAccuracy": 0.5,
+        "promptComplianceRate": 0.6666666666666666,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 117.66666666666667,
+        "averageLlmMs": 23055.55251416667,
+        "averageTotalMs": 23061.180010999993
+      },
+      "document_detail": {
+        "totalQuestions": 10,
+        "exactMatchAccuracy": 1,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 363.3,
+        "averageLlmMs": 85080.00676799999,
+        "averageTotalMs": 85084.13041049997
+      },
+      "unknown": {
+        "totalQuestions": 5,
+        "exactMatchAccuracy": 0.4,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 1,
+        "averageContextTokens": 187.8,
+        "averageLlmMs": 40746.05288619995,
+        "averageTotalMs": 40751.06559399995
+      }
+    }
+  },
+  "state": {
+    "totalQuestions": 31,
+    "exactMatchAccuracy": 0.3225806451612903,
+    "normalizedAccuracy": 0.6774193548387096,
+    "promptComplianceRate": 1,
+    "hallucinationRate": 0,
+    "unknownAccuracy": 1,
+    "averageContextTokens": 64.06451612903226,
+    "averageRetrievalMs": 4.7178793548561275,
+    "averagePromptBuildMs": 0.003911290332795151,
+    "averageLlmMs": 12037.338604612922,
+    "averageTotalMs": 12042.080489999982,
+    "byType": {
+      "current_state": {
+        "totalQuestions": 10,
+        "exactMatchAccuracy": 0.9,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 79.3,
+        "averageLlmMs": 17009.239111600047,
+        "averageTotalMs": 17022.656682599965
+      },
+      "stable_state": {
+        "totalQuestions": 6,
+        "exactMatchAccuracy": 0,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 76.33333333333333,
+        "averageLlmMs": 17793.863727166667,
+        "averageTotalMs": 17794.80485983325
+      },
+      "document_detail": {
+        "totalQuestions": 10,
+        "exactMatchAccuracy": 0,
+        "normalizedAccuracy": 0,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 35,
+        "averageLlmMs": 2115.7236829000058,
+        "averageTotalMs": 2115.738190200017
+      },
+      "unknown": {
+        "totalQuestions": 5,
+        "exactMatchAccuracy": 0.2,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 1,
+        "averageContextTokens": 77,
+        "averageLlmMs": 15028.937287000008,
+        "averageTotalMs": 15030.343460600032
+      }
+    }
+  },
+  "hybrid": {
+    "totalQuestions": 31,
+    "exactMatchAccuracy": 0.6774193548387096,
+    "normalizedAccuracy": 1,
+    "promptComplianceRate": 1,
+    "hallucinationRate": 0,
+    "unknownAccuracy": 1,
+    "averageContextTokens": 187.90322580645162,
+    "averageRetrievalMs": 2.1282933548453355,
+    "averagePromptBuildMs": 0.002967870982003308,
+    "averageLlmMs": 43067.14988293554,
+    "averageTotalMs": 43069.29472177418,
+    "byType": {
+      "current_state": {
+        "totalQuestions": 10,
+        "exactMatchAccuracy": 0.9,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 79.3,
+        "averageLlmMs": 17018.098059900036,
+        "averageTotalMs": 17019.248475399963
+      },
+      "stable_state": {
+        "totalQuestions": 6,
+        "exactMatchAccuracy": 0,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 76.33333333333333,
+        "averageLlmMs": 17466.152896833333,
+        "averageTotalMs": 17466.95816683331
+      },
+      "document_detail": {
+        "totalQuestions": 10,
+        "exactMatchAccuracy": 1,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 363.3,
+        "averageLlmMs": 85299.54911060011,
+        "averageTotalMs": 85303.49296180003
+      },
+      "unknown": {
+        "totalQuestions": 5,
+        "exactMatchAccuracy": 0.4,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 1,
+        "averageContextTokens": 188.2,
+        "averageLlmMs": 41421.65145700006,
+        "averageTotalMs": 41423.79460039995
+      }
+    }
+  },
+  "failureExamples": [
+    {
+      "system": "rag",
+      "questionType": "current_state",
+      "question": "What memory strategy does the State Memory agent use?",
+      "expected": "structured world state",
+      "rawAnswer": "RAG",
+      "normalizedAnswer": "rag",
+      "errorType": "incomplete_answer",
+      "contextHasGoldFact": true,
+      "context": "- Final update: State Memory agent memory strategy is structured world state.\n- Initial note: State Memory agent memory strategy is full history.\n- Revision: State Memory agent memory strategy is RAG retrieval.\n- Initial note: State Memory agent answer mode is free-form generation.\n- Revision: State Memory agent answer mode is retrieved chunks only.\n- Final update: State Memory agent answer mode is selected active facts.\n- Final update: State Memory coursework topic is State Memory for LLM agents.\n- Stable note: State Memory pipeline step includes state update.\n- Stable note: State Memory pipeline step includes state selection.\n- Initial note: Memory benchmark comparison is State Memory only..."
+    },
+    {
+      "system": "rag",
+      "questionType": "stable_state",
+      "question": "What must the State Memory coursework include?",
+      "expected": "implementation, experiments, metrics, baseline comparison, error analysis, conclusions",
+      "rawAnswer": "Implementation, baseline comparison, metrics, error analysis, experiments",
+      "normalizedAnswer": "implementation baseline comparison metrics error analysis experiments",
+      "errorType": "missing_fact",
+      "contextHasGoldFact": false,
+      "context": "- Final update: State Memory coursework topic is State Memory for LLM agents.\n- Initial note: State Memory coursework topic is RAG for agents.\n- Initial note: State Memory coursework implementation language is Python.\n- Stable note: State Memory coursework requires includes implementation.\n- Stable note: State Memory coursework requires includes baseline comparison.\n- Initial note: State Memory coursework deadline is ten days.\n- Stable note: State Memory coursework requires includes metrics.\n- Revision: State Memory coursework topic is long-context prompting.\n- Revision: State Memory coursework deadline is two weeks.\n- Revision: State Memory coursework implementation language is TypeScript.\n..."
+    },
+    {
+      "system": "rag",
+      "questionType": "stable_state",
+      "question": "What entity types does State Memory store?",
+      "expected": "user profile, projects, goals, tasks, facts",
+      "rawAnswer": "Goals",
+      "normalizedAnswer": "goals",
+      "errorType": "missing_fact",
+      "contextHasGoldFact": false,
+      "context": "- Final update: State Memory agent memory strategy is structured world state.\n- Final update: State Memory coursework topic is State Memory for LLM agents.\n- Stable note: State Memory pipeline step includes state update.\n- Stable note: State Memory pipeline step includes state selection.\n- Initial note: State Memory agent memory strategy is full history.\n- Initial note: Memory benchmark comparison is State Memory only.\n- Revision: State Memory agent memory strategy is RAG retrieval.\n- Final update: Memory benchmark comparison is RAG versus State Memory.\n- Final update: Memory benchmark hypothesis is State Memory reduces stale fact errors.\n- Stable note: State Memory stores includes goals.\n- ..."
+    },
+    {
+      "system": "rag",
+      "questionType": "stable_state",
+      "question": "What metrics are included?",
+      "expected": "recall, precision, context size, latency, stale fact error rate, compression ratio",
+      "rawAnswer": "UNKNOWN (The context does not provide information about the metrics that are included.)",
+      "normalizedAnswer": "unknown",
+      "errorType": "missing_fact",
+      "contextHasGoldFact": false,
+      "context": "- Background note: Notebook status is included for retrieval noise.\n- Background note: Chart script note is included for retrieval noise.\n- Background note: Methodology section focus is included for retrieval noise.\n- Background note: Chart script summary is included for retrieval noise.\n- Background note: Notebook summary is included for retrieval noise.\n- Background note: README summary is included for retrieval noise.\n- Background note: Limitations section note is included for retrieval noise.\n- Background note: Experiment notes status is included for retrieval noise.\n- Background note: Limitations section focus is included for retrieval noise.\n- Background note: Experiment notes note is ..."
+    },
+    {
+      "system": "state",
+      "questionType": "document_detail",
+      "question": "In the long document, what answer token is recorded for marker DOC-001-1?",
+      "expected": "VALUE-001-1",
+      "rawAnswer": "UNKNOWN (No context provided)",
+      "normalizedAnswer": "unknown",
+      "errorType": "missing_fact",
+      "contextHasGoldFact": false,
+      "context": ""
+    },
+    {
+      "system": "state",
+      "questionType": "document_detail",
+      "question": "In the long document, what answer token is recorded for marker DOC-011-1?",
+      "expected": "VALUE-011-1",
+      "rawAnswer": "UNKNOWN (No context provided)",
+      "normalizedAnswer": "unknown",
+      "errorType": "missing_fact",
+      "contextHasGoldFact": false,
+      "context": ""
+    },
+    {
+      "system": "state",
+      "questionType": "document_detail",
+      "question": "In the long document, what answer token is recorded for marker DOC-021-1?",
+      "expected": "VALUE-021-1",
+      "rawAnswer": "UNKNOWN (No context provided)",
+      "normalizedAnswer": "unknown",
+      "errorType": "missing_fact",
+      "contextHasGoldFact": false,
+      "context": ""
+    },
+    {
+      "system": "state",
+      "questionType": "document_detail",
+      "question": "In the long document, what answer token is recorded for marker DOC-031-1?",
+      "expected": "VALUE-031-1",
+      "rawAnswer": "UNKNOWN (No context provided)",
+      "normalizedAnswer": "unknown",
+      "errorType": "missing_fact",
+      "contextHasGoldFact": false,
+      "context": ""
+    },
+    {
+      "system": "state",
+      "questionType": "document_detail",
+      "question": "In the long document, what answer token is recorded for marker DOC-041-1?",
+      "expected": "VALUE-041-1",
+      "rawAnswer": "UNKNOWN (No context provided)",
+      "normalizedAnswer": "unknown",
+      "errorType": "missing_fact",
+      "contextHasGoldFact": false,
+      "context": ""
+    },
+    {
+      "system": "state",
+      "questionType": "document_detail",
+      "question": "In the long document, what answer token is recorded for marker DOC-051-1?",
+      "expected": "VALUE-051-1",
+      "rawAnswer": "UNKNOWN (No context provided)",
+      "normalizedAnswer": "unknown",
+      "errorType": "missing_fact",
+      "contextHasGoldFact": false,
+      "context": ""
+    }
+  ]
+}

@@ -6,9 +6,9 @@ Extractor mode: ollama-llm-extractor. Parse-error events: 12.
 
 | System | Exact Match | F1 | Context Hit | Avg Context Tokens | Avg Latency ms |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Temporal RAG | 0.0000 | 0.0000 | 0.0000 | 49.0000 | 0.3386 |
-| State Memory | 0.0000 | 0.0000 | 0.0000 | 12.2500 | 0.0364 |
-| LangChain BufferMemory-style | 0.0000 | 0.0000 | 0.0000 | 70.0000 | 0.0320 |
+| Temporal RAG | 0.0000 | 0.0000 | 0.0000 | 49.0000 | 0.2816 |
+| State Memory | 0.0000 | 0.0000 | 0.0000 | 12.2500 | 0.0355 |
+| LangChain BufferMemory-style | 0.0000 | 0.0000 | 0.0000 | 70.0000 | 0.0249 |
 
 Paired comparison against the external memory-framework baseline:
 

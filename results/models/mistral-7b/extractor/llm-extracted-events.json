@@ -1,0 +1,353 @@
+[
+  {
+    "id": "real-001",
+    "timestamp": "2026-05-27T09:00:00.000Z",
+    "type": "git_commit",
+    "text": "Commit 1885c50 improved LLM experiment observability for the coursework-state-memory repository.",
+    "facts": [
+      {
+        "id": "real-001-llm-f1",
+        "subject": "LLM experiment",
+        "predicate": "observability",
+        "object": "improved",
+        "confidence": 1,
+        "sourceEventId": "real-001",
+        "validFrom": "2026-05-27T09:00:00.000Z",
+        "status": "active",
+        "mutable": true
+      },
+      {
+        "id": "real-001-llm-f2",
+        "subject": "coursework-state-memory repository",
+        "predicate": "experiment_status",
+        "object": "undergoing improvement",
+        "confidence": 1,
+        "sourceEventId": "real-001",
+        "validFrom": "2026-05-27T09:00:00.000Z",
+        "status": "active",
+        "mutable": true
+      }
+    ]
+  },
+  {
+    "id": "real-002",
+    "timestamp": "2026-05-27T10:00:00.000Z",
+    "type": "git_commit",
+    "text": "Commit 7185f3c cached Ollama models in the LLM workflow.",
+    "facts": [
+      {
+        "id": "real-002-llm-f1",
+        "subject": "LLM workflow",
+        "predicate": "cached_models",
+        "object": "Ollama",
+        "confidence": 1,
+        "sourceEventId": "real-002",
+        "validFrom": "2026-05-27T10:00:00.000Z",
+        "status": "active",
+        "mutable": true
+      }
+    ]
+  },
+  {
+    "id": "real-003",
+    "timestamp": "2026-05-27T11:00:00.000Z",
+    "type": "git_commit",
+    "text": "Commit 143b4cd added defensive State Memory stress tests.",
+    "facts": [
+      {
+        "id": "real-003-llm-f1",
+        "subject": "commit_143b4cd",
+        "predicate": "added",
+        "object": "defensive State Memory stress tests",
+        "confidence": 1,
+        "sourceEventId": "real-003",
+        "validFrom": "2026-05-27T11:00:00.000Z",
+        "status": "active",
+        "mutable": true
+      }
+    ]
+  },
+  {
+    "id": "real-004",
+    "timestamp": "2026-05-27T12:00:00.000Z",
+    "type": "git_commit",
+    "text": "Commit 938b871 added the non-oracle robust question benchmark.",
+    "facts": [
+      {
+        "id": "real-004-llm-f1",
+        "subject": "non-oracle_robust_question_benchmark",
+        "predicate": "added",
+        "object": "commit 938b871",
+        "confidence": 1,
+        "sourceEventId": "real-004",
+        "validFrom": "2026-05-27T12:00:00.000Z",
+        "status": "active",
+        "mutable": true
+      }
+    ]
+  },
+  {
+    "id": "real-005",
+    "timestamp": "2026-05-27T13:00:00.000Z",
+    "type": "git_commit",
+    "text": "Commit e7dbec4 implemented the experiment runner and scalability and stress experiments.",
+    "facts": [
+      {
+        "id": "real-005-llm-f1",
+        "subject": "experiment_runner",
+        "predicate": "implemented",
+        "object": "e7dbec4",
+        "confidence": 1,
+        "sourceEventId": "real-005",
+        "validFrom": "2026-05-27T13:00:00.000Z",
+        "status": "active",
+        "mutable": false
+      },
+      {
+        "id": "real-005-llm-f2",
+        "subject": "scalability_experiments",
+        "predicate": "implemented",
+        "object": "e7dbec4",
+        "confidence": 1,
+        "sourceEventId": "real-005",
+        "validFrom": "2026-05-27T13:00:00.000Z",
+        "status": "active",
+        "mutable": false
+      },
+      {
+        "id": "real-005-llm-f3",
+        "subject": "stress_experiments",
+        "predicate": "implemented",
+        "object": "e7dbec4",
+        "confidence": 1,
+        "sourceEventId": "real-005",
+        "validFrom": "2026-05-27T13:00:00.000Z",
+        "status": "active",
+        "mutable": false
+      }
+    ]
+  },
+  {
+    "id": "real-006",
+    "timestamp": "2026-05-27T14:00:00.000Z",
+    "type": "git_commit",
+    "text": "Commit ca3b3a9 added syntax checking, result verification scripts, and comprehensive tests.",
+    "facts": [
+      {
+        "id": "real-006-llm-f1",
+        "subject": "ca3b3a9",
+        "predicate": "commit_hash",
+        "object": "ca3b3a9",
+        "confidence": 1,
+        "sourceEventId": "real-006",
+        "validFrom": "2026-05-27T14:00:00.000Z",
+        "status": "active",
+        "mutable": false
+      },
+      {
+        "id": "real-006-llm-f2",
+        "subject": "ca3b3a9",
+        "predicate": "added_syntax_checking",
+        "object": "true",
+        "confidence": 1,
+        "sourceEventId": "real-006",
+        "validFrom": "2026-05-27T14:00:00.000Z",
+        "status": "active",
+        "mutable": true
+      },
+      {
+        "id": "real-006-llm-f3",
+        "subject": "ca3b3a9",
+        "predicate": "result_verification_scripts",
+        "object": "added",
+        "confidence": 1,
+        "sourceEventId": "real-006",
+        "validFrom": "2026-05-27T14:00:00.000Z",
+        "status": "active",
+        "mutable": true
+      },
+      {
+        "id": "real-006-llm-f4",
+        "subject": "ca3b3a9",
+        "predicate": "comprehensive_tests",
+        "object": "added",
+        "confidence": 1,
+        "sourceEventId": "real-006",
+        "validFrom": "2026-05-27T14:00:00.000Z",
+        "status": "active",
+        "mutable": true
+      }
+    ]
+  },
+  {
+    "id": "real-007",
+    "timestamp": "2026-05-27T15:00:00.000Z",
+    "type": "git_commit",
+    "text": "Commit edcb0c9 documented local quality checks in the README verification section.",
+    "facts": [
+      {
+        "id": "real-007-llm-f1",
+        "subject": "edcb0c9",
+        "predicate": "commit_hash",
+        "object": "edcb0c9",
+        "confidence": 1,
+        "sourceEventId": "real-007",
+        "validFrom": "2026-05-27T15:00:00.000Z",
+        "status": "active",
+        "mutable": false
+      },
+      {
+        "id": "real-007-llm-f2",
+        "subject": "edcb0c9",
+        "predicate": "documented_local_quality_checks",
+        "object": "true",
+        "confidence": 1,
+        "sourceEventId": "real-007",
+        "validFrom": "2026-05-27T15:00:00.000Z",
+        "status": "active",
+        "mutable": true
+      }
+    ]
+  },
+  {
+    "id": "real-008",
+    "timestamp": "2026-05-27T16:00:00.000Z",
+    "type": "git_commit",
+    "text": "Commit b87641c enhanced the Ollama LLM workflow with input validation, result verification, and improved logging.",
+    "facts": [
+      {
+        "id": "real-008-llm-f1",
+        "subject": "Ollama LLM workflow",
+        "predicate": "workflow_version",
+        "object": "b87641c",
+        "confidence": 1,
+        "sourceEventId": "real-008",
+        "validFrom": "2026-05-27T16:00:00.000Z",
+        "status": "active",
+        "mutable": true
+      },
+      {
+        "id": "real-008-llm-f2",
+        "subject": "Ollama LLM workflow",
+        "predicate": "input_validation",
+        "object": "enabled",
+        "confidence": 1,
+        "sourceEventId": "real-008",
+        "validFrom": "2026-05-27T16:00:00.000Z",
+        "status": "active",
+        "mutable": false
+      },
+      {
+        "id": "real-008-llm-f3",
+        "subject": "Ollama LLM workflow",
+        "predicate": "result_verification",
+        "object": "enabled",
+        "confidence": 1,
+        "sourceEventId": "real-008",
+        "validFrom": "2026-05-27T16:00:00.000Z",
+        "status": "active",
+        "mutable": false
+      },
+      {
+        "id": "real-008-llm-f4",
+        "subject": "Ollama LLM workflow",
+        "predicate": "logging",
+        "object": "improved",
+        "confidence": 1,
+        "sourceEventId": "real-008",
+        "validFrom": "2026-05-27T16:00:00.000Z",
+        "status": "active",
+        "mutable": false
+      }
+    ]
+  },
+  {
+    "id": "real-009",
+    "timestamp": "2026-05-27T17:00:00.000Z",
+    "type": "git_commit",
+    "text": "Commit 5661bf4 corrected node input handling and refined the condition for publishing results.",
+    "facts": [
+      {
+        "id": "real-009-llm-f1",
+        "subject": "node",
+        "predicate": "input_handling",
+        "object": "corrected",
+        "confidence": 1,
+        "sourceEventId": "real-009",
+        "validFrom": "2026-05-27T17:00:00.000Z",
+        "status": "active",
+        "mutable": true
+      },
+      {
+        "id": "real-009-llm-f2",
+        "subject": "condition",
+        "predicate": "refinement",
+        "object": "for_publishing_results",
+        "confidence": 1,
+        "sourceEventId": "real-009",
+        "validFrom": "2026-05-27T17:00:00.000Z",
+        "status": "active",
+        "mutable": true
+      }
+    ]
+  },
+  {
+    "id": "real-010",
+    "timestamp": "2026-05-27T18:00:00.000Z",
+    "type": "git_commit",
+    "text": "Commit 1e38e96 updated LLM benchmark results and ensured the verification script references the correct output file.",
+    "facts": [
+      {
+        "id": "real-010-llm-f1",
+        "subject": "LLM",
+        "predicate": "benchmark_results",
+        "object": "1e38e96",
+        "confidence": 1,
+        "sourceEventId": "real-010",
+        "validFrom": "2026-05-27T18:00:00.000Z",
+        "status": "active",
+        "mutable": true
+      },
+      {
+        "id": "real-010-llm-f2",
+        "subject": "verification script",
+        "predicate": "output_file_reference",
+        "object": "correct",
+        "confidence": 1,
+        "sourceEventId": "real-010",
+        "validFrom": "2026-05-27T18:00:00.000Z",
+        "status": "active",
+        "mutable": false
+      }
+    ]
+  },
+  {
+    "id": "real-011",
+    "timestamp": "2026-05-27T19:00:00.000Z",
+    "type": "git_commit",
+    "text": "Commit 31b81e0 updated verified LLM results.",
+    "facts": [
+      {
+        "id": "real-011-llm-f1",
+        "subject": "verified LLM",
+        "predicate": "results",
+        "object": "31b81e0",
+        "confidence": 1,
+        "sourceEventId": "real-011",
+        "validFrom": "2026-05-27T19:00:00.000Z",
+        "status": "active",
+        "mutable": true
+      }
+    ]
+  },
+  {
+    "id": "real-012",
+    "timestamp": "2026-05-30T09:00:00.000Z",
+    "type": "working_tree_change",
+    "text": "The current coursework revision reframed oracle results as diagnostic, made Temporal RAG the main robust baseline, added statistical checks, and added related-work positioning.",
+    "facts": [],
+    "extractionError": {
+      "message": "LLM extractor returned invalid JSON: Unexpected non-whitespace character after JSON at position 155 (line 7 column 4)"
+    }
+  }
+]

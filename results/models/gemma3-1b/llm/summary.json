@@ -27,10 +27,10 @@
     "hallucinationRate": 0.03225806451612903,
     "unknownAccuracy": 0.8,
     "averageContextTokens": 207.25806451612902,
-    "averageRetrievalMs": 8.419415064516674,
-    "averagePromptBuildMs": 0.00872916128893469,
-    "averageLlmMs": 5959.4681273548385,
-    "averageTotalMs": 5967.954196935485,
+    "averageRetrievalMs": 8.323727806449941,
+    "averagePromptBuildMs": 0.008041838707393093,
+    "averageLlmMs": 5928.187921612902,
+    "averageTotalMs": 5936.570728354839,
     "byType": {
       "current_state": {
         "totalQuestions": 10,
@@ -40,8 +40,8 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 0,
         "averageContextTokens": 114.7,
-        "averageLlmMs": 3263.3085983,
-        "averageTotalMs": 3275.8254664
+        "averageLlmMs": 3227.0476529000007,
+        "averageTotalMs": 3237.9356350999997
       },
       "stable_state": {
         "totalQuestions": 6,
@@ -51,8 +51,8 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 0,
         "averageContextTokens": 117.66666666666667,
-        "averageLlmMs": 3254.9975954999995,
-        "averageTotalMs": 3262.4550253333327
+        "averageLlmMs": 3216.2323388333334,
+        "averageTotalMs": 3224.0133908333323
       },
       "document_detail": {
         "totalQuestions": 10,
@@ -62,8 +62,8 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 0,
         "averageContextTokens": 363.3,
-        "averageLlmMs": 10721.7550268,
-        "averageTotalMs": 10727.332907000002
+        "averageLlmMs": 10686.756803400003,
+        "averageTotalMs": 10692.841346500001
       },
       "unknown": {
         "totalQuestions": 5,
@@ -73,8 +73,8 @@
         "hallucinationRate": 0.2,
         "unknownAccuracy": 0.8,
         "averageContextTokens": 187.8,
-        "averageLlmMs": 5072.578024800006,
-        "averageTotalMs": 5080.053243800003
+        "averageLlmMs": 5067.677394799987,
+        "averageTotalMs": 5076.368483600008
       }
     }
   },
@@ -86,10 +86,10 @@
     "hallucinationRate": 0,
     "unknownAccuracy": 1,
     "averageContextTokens": 64.06451612903226,
-    "averageRetrievalMs": 4.047104838709798,
-    "averagePromptBuildMs": 0.004361290325065174,
-    "averageLlmMs": 1982.726168064516,
-    "averageTotalMs": 1986.8046980645197,
+    "averageRetrievalMs": 1.9019106774160923,
+    "averagePromptBuildMs": 0.004633774196976916,
+    "averageLlmMs": 1963.228442322582,
+    "averageTotalMs": 1965.1593627419356,
     "byType": {
       "current_state": {
         "totalQuestions": 10,
@@ -99,8 +99,8 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 0,
         "averageContextTokens": 79.3,
-        "averageLlmMs": 2515.9911326,
-        "averageTotalMs": 2526.428940400007
+        "averageLlmMs": 2527.112426599997,
+        "averageTotalMs": 2531.1277742999982
       },
       "stable_state": {
         "totalQuestions": 6,
@@ -110,8 +110,8 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 0,
         "averageContextTokens": 76.33333333333333,
-        "averageLlmMs": 3315.503245999998,
-        "averageTotalMs": 3317.115995
+        "averageLlmMs": 3259.3639771666735,
+        "averageTotalMs": 3260.9854895000026
       },
       "document_detail": {
         "totalQuestions": 10,
@@ -121,8 +121,8 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 0,
         "averageContextTokens": 35,
-        "averageLlmMs": 668.825305900001,
-        "averageTotalMs": 668.8412829000066
+        "averageLlmMs": 650.8411411999987,
+        "averageTotalMs": 650.8583511999983
       },
       "unknown": {
         "totalQuestions": 5,
@@ -132,8 +132,8 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 1,
         "averageContextTokens": 77,
-        "averageLlmMs": 1944.6654697999998,
-        "averageTotalMs": 1947.1094873999944
+        "averageLlmMs": 1904.872434200009,
+        "averageTotalMs": 1906.8332106000046
       }
     }
   },
@@ -145,10 +145,10 @@
     "hallucinationRate": 0,
     "unknownAccuracy": 1,
     "averageContextTokens": 187.90322580645162,
-    "averageRetrievalMs": 2.797144258063429,
-    "averagePromptBuildMs": 0.0035566451589411664,
-    "averageLlmMs": 5758.358674193555,
-    "averageTotalMs": 5761.178240129033,
+    "averageRetrievalMs": 3.0918509354824275,
+    "averagePromptBuildMs": 0.0037243870930040194,
+    "averageLlmMs": 5747.867268645165,
+    "averageTotalMs": 5750.981054774193,
     "byType": {
       "current_state": {
         "totalQuestions": 10,
@@ -158,8 +158,8 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 0,
         "averageContextTokens": 79.3,
-        "averageLlmMs": 2541.282944900004,
-        "averageTotalMs": 2543.237139600003
+        "averageLlmMs": 2510.667523200004,
+        "averageTotalMs": 2512.112631999998
       },
       "stable_state": {
         "totalQuestions": 6,
@@ -169,8 +169,8 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 0,
         "averageContextTokens": 76.33333333333333,
-        "averageLlmMs": 3378.850396499998,
-        "averageTotalMs": 3379.998553333329
+        "averageLlmMs": 3375.0294180000005,
+        "averageTotalMs": 3376.1871916666664
       },
       "document_detail": {
         "totalQuestions": 10,
@@ -180,8 +180,8 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 0,
         "averageContextTokens": 363.3,
-        "averageLlmMs": 10702.439444100013,
-        "averageTotalMs": 10707.356826900004
+        "averageLlmMs": 10705.277537099999,
+        "averageTotalMs": 10711.32244270001
       },
       "unknown": {
         "totalQuestions": 5,
@@ -191,8 +191,8 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 1,
         "averageContextTokens": 188.2,
-        "averageLlmMs": 5159.758526200009,
-        "averageTotalMs": 5162.118891799997
+        "averageLlmMs": 5154.85164340001,
+        "averageTotalMs": 5157.787760199979
       }
     }
   },

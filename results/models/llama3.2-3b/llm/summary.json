@@ -27,10 +27,10 @@
     "hallucinationRate": 0.03225806451612903,
     "unknownAccuracy": 1,
     "averageContextTokens": 207.25806451612902,
-    "averageRetrievalMs": 5.6281771935487095,
-    "averagePromptBuildMs": 0.006050548386405529,
-    "averageLlmMs": 16771.898622838708,
-    "averageTotalMs": 16777.57204641935,
+    "averageRetrievalMs": 4.371232645165736,
+    "averagePromptBuildMs": 0.005245193546941329,
+    "averageLlmMs": 12657.832373354842,
+    "averageTotalMs": 12662.245552096776,
     "byType": {
       "current_state": {
         "totalQuestions": 10,
@@ -40,8 +40,8 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 0,
         "averageContextTokens": 114.7,
-        "averageLlmMs": 8932.8861675,
-        "averageTotalMs": 8940.392682100002
+        "averageLlmMs": 6731.7104983,
+        "averageTotalMs": 6737.654701199999
       },
       "stable_state": {
         "totalQuestions": 6,
@@ -51,8 +51,8 @@
         "hallucinationRate": 0.16666666666666666,
         "unknownAccuracy": 0,
         "averageContextTokens": 117.66666666666667,
-        "averageLlmMs": 8668.35912133333,
-        "averageTotalMs": 8674.29180683333
+        "averageLlmMs": 6625.1431606666665,
+        "averageTotalMs": 6629.5221856666685
       },
       "document_detail": {
         "totalQuestions": 10,
@@ -62,8 +62,8 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 0,
         "averageContextTokens": 363.3,
-        "averageLlmMs": 30786.971815300007,
-        "averageTotalMs": 30790.923037299995
+        "averageLlmMs": 23198.163223700005,
+        "averageTotalMs": 23201.31108080001
       },
       "unknown": {
         "totalQuestions": 5,
@@ -73,8 +73,8 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 1,
         "averageContextTokens": 187.8,
-        "averageLlmMs": 14144.024550399987,
-        "averageTotalMs": 14149.165080799989
+        "averageLlmMs": 10668.64147800001,
+        "averageTotalMs": 10672.564236199996
       }
     }
   },
@@ -83,13 +83,13 @@
     "exactMatchAccuracy": 0.3870967741935484,
     "normalizedAccuracy": 0.5806451612903226,
     "promptComplianceRate": 0.9032258064516129,
-    "hallucinationRate": 0,
+    "hallucinationRate": 0.03225806451612903,
     "unknownAccuracy": 1,
     "averageContextTokens": 64.06451612903226,
-    "averageRetrievalMs": 4.988755935472587,
-    "averagePromptBuildMs": 0.00471858065312488,
-    "averageLlmMs": 4068.1128265161287,
-    "averageTotalMs": 4073.128978064522,
+    "averageRetrievalMs": 0.9184758709706066,
+    "averagePromptBuildMs": 0.003634774191830788,
+    "averageLlmMs": 3118.679343774188,
+    "averageTotalMs": 3119.6189576451584,
     "byType": {
       "current_state": {
         "totalQuestions": 10,
@@ -99,19 +99,19 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 0,
         "averageContextTokens": 79.3,
-        "averageLlmMs": 5888.365133499989,
-        "averageTotalMs": 5902.51058800001
+        "averageLlmMs": 4453.356485399988,
+        "averageTotalMs": 4455.158232900006
       },
       "stable_state": {
         "totalQuestions": 6,
         "exactMatchAccuracy": 0,
         "normalizedAccuracy": 0.6666666666666666,
         "promptComplianceRate": 0.6666666666666666,
-        "hallucinationRate": 0,
+        "hallucinationRate": 0.16666666666666666,
         "unknownAccuracy": 0,
         "averageContextTokens": 76.33333333333333,
-        "averageLlmMs": 6048.60886716668,
-        "averageTotalMs": 6049.746426499992
+        "averageLlmMs": 4789.079803666653,
+        "averageTotalMs": 4789.920810166649
       },
       "document_detail": {
         "totalQuestions": 10,
@@ -121,8 +121,8 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 0,
         "averageContextTokens": 35,
-        "averageLlmMs": 801.8275175999967,
-        "averageTotalMs": 801.8431556000257
+        "averageLlmMs": 617.0437657000032,
+        "averageTotalMs": 617.0593116999953
       },
       "unknown": {
         "totalQuestions": 5,
@@ -132,8 +132,8 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 1,
         "averageContextTokens": 77,
-        "averageLlmMs": 4583.583581600013,
-        "averageTotalMs": 4584.996464999975
+        "averageLlmMs": 3448.1156648000006,
+        "averageTotalMs": 3449.297476000001
       }
     }
   },
@@ -145,10 +145,10 @@
     "hallucinationRate": 0,
     "unknownAccuracy": 1,
     "averageContextTokens": 187.90322580645162,
-    "averageRetrievalMs": 2.1606460000132963,
-    "averagePromptBuildMs": 0.0029590645196637317,
-    "averageLlmMs": 15329.83628041935,
-    "averageTotalMs": 15332.020050354828,
+    "averageRetrievalMs": 1.6513518387049948,
+    "averagePromptBuildMs": 0.005578741938206217,
+    "averageLlmMs": 11603.022608290328,
+    "averageTotalMs": 11604.691241645143,
     "byType": {
       "current_state": {
         "totalQuestions": 10,
@@ -158,8 +158,8 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 0,
         "averageContextTokens": 79.3,
-        "averageLlmMs": 5877.143362899963,
-        "averageTotalMs": 5878.3055488999935
+        "averageLlmMs": 4454.563694700017,
+        "averageTotalMs": 4455.407252599992
       },
       "stable_state": {
         "totalQuestions": 6,
@@ -169,8 +169,8 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 0,
         "averageContextTokens": 76.33333333333333,
-        "averageLlmMs": 6172.919202,
-        "averageTotalMs": 6173.748345833311
+        "averageLlmMs": 4927.132318833338,
+        "averageTotalMs": 4927.757474999972
       },
       "document_detail": {
         "totalQuestions": 10,
@@ -180,8 +180,8 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 0,
         "averageContextTokens": 363.3,
-        "averageLlmMs": 30763.536142500012,
-        "averageTotalMs": 30767.637156200013
+        "averageLlmMs": 23160.535858800005,
+        "averageTotalMs": 23163.705408999976
       },
       "unknown": {
         "totalQuestions": 5,
@@ -191,8 +191,8 @@
         "hallucinationRate": 0,
         "unknownAccuracy": 1,
         "averageContextTokens": 188.2,
-        "averageLlmMs": 14356.122885400011,
-        "averageTotalMs": 14358.140886999947
+        "averageLlmMs": 10795.982281799987,
+        "averageTotalMs": 10797.551404999987
       }
     }
   },
@@ -246,8 +246,8 @@
       "questionType": "stable_state",
       "question": "What entity types does State Memory store?",
       "expected": "user profile, projects, goals, tasks, facts",
-      "rawAnswer": "Goals, facts.",
-      "normalizedAnswer": "goals facts",
+      "rawAnswer": "Goals, state updates.",
+      "normalizedAnswer": "goals state updates",
       "errorType": "missing_fact",
       "contextHasGoldFact": false,
       "context": "- Final update: State Memory agent memory strategy is structured world state.\n- Final update: State Memory coursework topic is State Memory for LLM agents.\n- Stable note: State Memory pipeline step includes state update.\n- Stable note: State Memory pipeline step includes state selection.\n- Initial note: State Memory agent memory strategy is full history.\n- Initial note: Memory benchmark comparison is State Memory only.\n- Revision: State Memory agent memory strategy is RAG retrieval.\n- Final update: Memory benchmark comparison is RAG versus State Memory.\n- Final update: Memory benchmark hypothesis is State Memory reduces stale fact errors.\n- Stable note: State Memory stores includes goals.\n- ..."
@@ -290,9 +290,9 @@
       "questionType": "stable_state",
       "question": "What steps are in the State Memory pipeline?",
       "expected": "event logging, fact extraction, state update, state selection, prompt building",
-      "rawAnswer": "state selection, event logging, fact extraction, prompt building",
-      "normalizedAnswer": "state selection event logging fact extraction prompt building",
-      "errorType": "incomplete_answer",
+      "rawAnswer": "State Memory pipeline:\n\n1. state selection\n2. event logging\n3. fact extraction\n4. prompt building",
+      "normalizedAnswer": "state memory pipeline 1 state selection 2 event logging 3 fact extraction 4 prompt building",
+      "errorType": "possible_hallucination",
       "contextHasGoldFact": true,
       "context": "- State Memory pipeline.step = state update (active)\n- State Memory pipeline.step = state selection (active)\n- State Memory pipeline.step = event logging (active)\n- State Memory pipeline.step = fact extraction (active)\n- State Memory pipeline.step = prompt building (active)\n- State Memory agent.memory_strategy = structured world state (active)\n- State Memory coursework.topic = State Memory for LLM agents (active)\n- RAG pipeline.step = chunking (active)"
     },

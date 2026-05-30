@@ -1,0 +1,175 @@
+{
+  "dataset": {
+    "source": "real repository commits and current coursework working-tree changes",
+    "events": 12,
+    "questions": 8,
+    "goldFacts": 21
+  },
+  "configuration": {
+    "stateLimit": 6,
+    "includeLlmExtractor": true
+  },
+  "extractors": [
+    {
+      "name": "Gold annotations",
+      "key": "gold",
+      "extractor": {
+        "mode": "curated-gold",
+        "llmEnabled": false
+      },
+      "metrics": {
+        "goldFacts": 21,
+        "predictedFacts": 21,
+        "exactMatches": 21,
+        "extractionPrecision": 1,
+        "extractionRecall": 1,
+        "extractionF1": 1,
+        "slotAccuracy": 1,
+        "entityResolutionAccuracy": 1,
+        "mutableClassificationAccuracy": 1,
+        "goldConflicts": 1,
+        "predictedConflicts": 1,
+        "conflictDetectionPrecision": 1,
+        "conflictDetectionRecall": 1,
+        "conflictDetectionAccuracy": 1
+      },
+      "parseErrorEvents": 0,
+      "qa": {
+        "totalQuestions": 8,
+        "answered": 8,
+        "correct": 8,
+        "exactMatchAccuracy": 1,
+        "answerAccuracy": 1,
+        "recallAccuracy": 1,
+        "precision": 1,
+        "f1Score": 1,
+        "currentFactQuestions": 1,
+        "currentFactAccuracy": 1,
+        "staleFactErrorRate": 0,
+        "currentStaleFactErrorRate": 0,
+        "obsoleteFactRejectionRate": 1,
+        "contextHitRate": 1,
+        "meanReciprocalRank": 1,
+        "averageContextTokens": 56.5,
+        "averageLatencyMs": 1.3880532499952096,
+        "contextEfficiency": 0.017699115044247787,
+        "latencyEfficiency": 0.7204334559956191,
+        "errorTaxonomy": {
+          "none": 8
+        }
+      },
+      "resultFiles": {
+        "extractedEvents": "gold-extracted-events.json",
+        "qaResults": "gold-qa-results.json"
+      }
+    },
+    {
+      "name": "Rule extractor",
+      "key": "rule",
+      "extractor": {
+        "mode": "rule-extractor",
+        "llmEnabled": false
+      },
+      "metrics": {
+        "goldFacts": 21,
+        "predictedFacts": 15,
+        "exactMatches": 15,
+        "extractionPrecision": 1,
+        "extractionRecall": 0.7142857142857143,
+        "extractionF1": 0.8333333333333334,
+        "slotAccuracy": 1,
+        "entityResolutionAccuracy": 1,
+        "mutableClassificationAccuracy": 1,
+        "goldConflicts": 1,
+        "predictedConflicts": 1,
+        "conflictDetectionPrecision": 1,
+        "conflictDetectionRecall": 1,
+        "conflictDetectionAccuracy": 1
+      },
+      "parseErrorEvents": 0,
+      "qa": {
+        "totalQuestions": 8,
+        "answered": 7,
+        "correct": 7,
+        "exactMatchAccuracy": 0.875,
+        "answerAccuracy": 0.875,
+        "recallAccuracy": 0.875,
+        "precision": 1,
+        "f1Score": 0.9333333333333333,
+        "currentFactQuestions": 1,
+        "currentFactAccuracy": 1,
+        "staleFactErrorRate": 0,
+        "currentStaleFactErrorRate": 0,
+        "obsoleteFactRejectionRate": 1,
+        "contextHitRate": 0.875,
+        "meanReciprocalRank": 0.875,
+        "averageContextTokens": 54.25,
+        "averageLatencyMs": 0.1195501250003872,
+        "contextEfficiency": 0.016129032258064516,
+        "latencyEfficiency": 7.31910568890803,
+        "errorTaxonomy": {
+          "none": 7,
+          "missing_fact": 1
+        }
+      },
+      "resultFiles": {
+        "extractedEvents": "rule-extracted-events.json",
+        "qaResults": "rule-qa-results.json"
+      }
+    },
+    {
+      "name": "LLM extractor (llama3.1:8b)",
+      "key": "llm",
+      "extractor": {
+        "mode": "ollama-llm-extractor",
+        "llmEnabled": true,
+        "model": "llama3.1:8b"
+      },
+      "metrics": {
+        "goldFacts": 21,
+        "predictedFacts": 0,
+        "exactMatches": 0,
+        "extractionPrecision": 0,
+        "extractionRecall": 0,
+        "extractionF1": 0,
+        "slotAccuracy": 0,
+        "entityResolutionAccuracy": 0,
+        "mutableClassificationAccuracy": 0,
+        "goldConflicts": 1,
+        "predictedConflicts": 0,
+        "conflictDetectionPrecision": 0,
+        "conflictDetectionRecall": 0,
+        "conflictDetectionAccuracy": 0
+      },
+      "parseErrorEvents": 0,
+      "qa": {
+        "totalQuestions": 8,
+        "answered": 0,
+        "correct": 0,
+        "exactMatchAccuracy": 0,
+        "answerAccuracy": 0,
+        "recallAccuracy": 0,
+        "precision": 0,
+        "f1Score": 0,
+        "currentFactQuestions": 1,
+        "currentFactAccuracy": 0,
+        "staleFactErrorRate": 0,
+        "currentStaleFactErrorRate": 0,
+        "obsoleteFactRejectionRate": 1,
+        "contextHitRate": 0,
+        "meanReciprocalRank": 0,
+        "averageContextTokens": 12.25,
+        "averageLatencyMs": 0.0037532499991357327,
+        "contextEfficiency": 0,
+        "latencyEfficiency": 0,
+        "errorTaxonomy": {
+          "missing_fact": 8
+        }
+      },
+      "resultFiles": {
+        "extractedEvents": "llm-extracted-events.json",
+        "qaResults": "llm-qa-results.json"
+      }
+    }
+  ]
+}
