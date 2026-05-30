@@ -1,0 +1,311 @@
+{
+  "dataset": {
+    "events": 1000,
+    "documentPages": 100,
+    "documentChunks": 300,
+    "questions": 31,
+    "currentStateQuestions": 10,
+    "stableStateQuestions": 6,
+    "documentQuestions": 10,
+    "unknownQuestions": 5
+  },
+  "configuration": {
+    "model": "qwen2.5:1.5b",
+    "temperature": 0,
+    "seed": 42,
+    "timeoutMs": 120000,
+    "numPredict": 64,
+    "ragTopK": 12,
+    "documentTopK": 8,
+    "stateLimit": 8
+  },
+  "rag": {
+    "totalQuestions": 31,
+    "exactMatchAccuracy": 0.3548387096774194,
+    "normalizedAccuracy": 0.5806451612903226,
+    "promptComplianceRate": 0.8064516129032258,
+    "hallucinationRate": 0,
+    "unknownAccuracy": 1,
+    "averageContextTokens": 207.25806451612902,
+    "averageRetrievalMs": 5.685459225804724,
+    "averagePromptBuildMs": 0.005768290322305897,
+    "averageLlmMs": 8708.508696,
+    "averageTotalMs": 8714.240975903227,
+    "byType": {
+      "current_state": {
+        "totalQuestions": 10,
+        "exactMatchAccuracy": 0,
+        "normalizedAccuracy": 0.5,
+        "promptComplianceRate": 0.6,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 114.7,
+        "averageLlmMs": 4560.4790037,
+        "averageTotalMs": 4568.4515675
+      },
+      "stable_state": {
+        "totalQuestions": 6,
+        "exactMatchAccuracy": 0,
+        "normalizedAccuracy": 0.3333333333333333,
+        "promptComplianceRate": 0.6666666666666666,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 117.66666666666667,
+        "averageLlmMs": 4193.5169128333355,
+        "averageTotalMs": 4199.194667666667
+      },
+      "document_detail": {
+        "totalQuestions": 10,
+        "exactMatchAccuracy": 0.6,
+        "normalizedAccuracy": 0.6,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 363.3,
+        "averageLlmMs": 16214.7263209,
+        "averageTotalMs": 16218.756917500004
+      },
+      "unknown": {
+        "totalQuestions": 5,
+        "exactMatchAccuracy": 1,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 1,
+        "averageContextTokens": 187.8,
+        "averageLlmMs": 7410.122970600013,
+        "averageTotalMs": 7414.843479400006
+      }
+    }
+  },
+  "state": {
+    "totalQuestions": 31,
+    "exactMatchAccuracy": 0.25806451612903225,
+    "normalizedAccuracy": 0.6451612903225806,
+    "promptComplianceRate": 0.967741935483871,
+    "hallucinationRate": 0,
+    "unknownAccuracy": 1,
+    "averageContextTokens": 64.06451612903226,
+    "averageRetrievalMs": 4.515906290322047,
+    "averagePromptBuildMs": 0.0038302258021318384,
+    "averageLlmMs": 2159.0501250967745,
+    "averageTotalMs": 2163.598746548384,
+    "byType": {
+      "current_state": {
+        "totalQuestions": 10,
+        "exactMatchAccuracy": 0.3,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 79.3,
+        "averageLlmMs": 3066.358758599998,
+        "averageTotalMs": 3079.2221823
+      },
+      "stable_state": {
+        "totalQuestions": 6,
+        "exactMatchAccuracy": 0,
+        "normalizedAccuracy": 0.8333333333333334,
+        "promptComplianceRate": 0.8333333333333334,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 76.33333333333333,
+        "averageLlmMs": 3288.609058833332,
+        "averageTotalMs": 3289.5051618333187
+      },
+      "document_detail": {
+        "totalQuestions": 10,
+        "exactMatchAccuracy": 0,
+        "normalizedAccuracy": 0,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 35,
+        "averageLlmMs": 487.4910055000044,
+        "averageTotalMs": 487.50476609999896
+      },
+      "unknown": {
+        "totalQuestions": 5,
+        "exactMatchAccuracy": 1,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 1,
+        "averageContextTokens": 77,
+        "averageLlmMs": 2332.0803767999982,
+        "averageTotalMs": 2333.452137600002
+      }
+    }
+  },
+  "hybrid": {
+    "totalQuestions": 31,
+    "exactMatchAccuracy": 0.4838709677419355,
+    "normalizedAccuracy": 0.8709677419354839,
+    "promptComplianceRate": 0.967741935483871,
+    "hallucinationRate": 0,
+    "unknownAccuracy": 1,
+    "averageContextTokens": 187.90322580645162,
+    "averageRetrievalMs": 2.0875799354849263,
+    "averagePromptBuildMs": 0.003562870964918646,
+    "averageLlmMs": 8082.91332125807,
+    "averageTotalMs": 8085.021008000003,
+    "byType": {
+      "current_state": {
+        "totalQuestions": 10,
+        "exactMatchAccuracy": 0.3,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 79.3,
+        "averageLlmMs": 3071.6571483000066,
+        "averageTotalMs": 3072.708937599999
+      },
+      "stable_state": {
+        "totalQuestions": 6,
+        "exactMatchAccuracy": 0,
+        "normalizedAccuracy": 0.8333333333333334,
+        "promptComplianceRate": 0.8333333333333334,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 76.33333333333333,
+        "averageLlmMs": 3276.2947536666566,
+        "averageTotalMs": 3277.0648858333298
+      },
+      "document_detail": {
+        "totalQuestions": 10,
+        "exactMatchAccuracy": 0.7,
+        "normalizedAccuracy": 0.7,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 363.3,
+        "averageLlmMs": 16258.741919500015,
+        "averageTotalMs": 16262.767193300004
+      },
+      "unknown": {
+        "totalQuestions": 5,
+        "exactMatchAccuracy": 1,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 1,
+        "averageContextTokens": 188.2,
+        "averageLlmMs": 7521.710751800007,
+        "averageTotalMs": 7523.700124800019
+      }
+    }
+  },
+  "failureExamples": [
+    {
+      "system": "rag",
+      "questionType": "current_state",
+      "question": "What runtime does Reflex use?",
+      "expected": "reactive graph runtime",
+      "rawAnswer": "actor",
+      "normalizedAnswer": "actor",
+      "errorType": "incomplete_answer",
+      "contextHasGoldFact": true,
+      "context": "- Initial note: Reflex runtime is event-sourced runtime.\n- Revision: Reflex runtime is actor runtime.\n- Final update: Reflex runtime is reactive graph runtime.\n- Initial note: Reflex selector strategy is manual subscriptions.\n- Initial note: Reflex storage is local arrays.\n- Revision: Reflex storage is normalized object store.\n- Revision: Reflex selector strategy is selector cache.\n- Final update: Reflex storage is graph-indexed store.\n- Final update: Reflex selector strategy is dependency-tracked selectors."
+    },
+    {
+      "system": "rag",
+      "questionType": "current_state",
+      "question": "What implementation language is used for the coursework MVP?",
+      "expected": "zero-dependency Node.js",
+      "rawAnswer": "TypeScript",
+      "normalizedAnswer": "typescript",
+      "errorType": "incomplete_answer",
+      "contextHasGoldFact": true,
+      "context": "- Initial note: State Memory coursework implementation language is Python.\n- Revision: State Memory coursework implementation language is TypeScript.\n- Final update: State Memory coursework implementation language is zero-dependency Node.js.\n- Stable note: State Memory coursework requires includes implementation.\n- Background note: Related work section focus is used only as background context.\n- Background note: Experiment notes note is used only as background context.\n- Background note: Experiment notes focus is ready for coursework text.\n- Background note: Limitations section focus is ready for coursework text.\n- Background note: README summary is used only as background context.\n- Backgro..."
+    },
+    {
+      "system": "rag",
+      "questionType": "current_state",
+      "question": "What retriever does the RAG baseline use?",
+      "expected": "lexical top-k retriever",
+      "rawAnswer": "UNKNOWN",
+      "normalizedAnswer": "unknown",
+      "errorType": "incomplete_answer",
+      "contextHasGoldFact": true,
+      "context": "- Final update: RAG baseline retriever is lexical top-k retriever.\n- Initial note: RAG baseline retriever is random memory sampler.\n- Revision: RAG baseline retriever is cosine embedding search.\n- Initial note: RAG baseline chunk unit is paragraph chunks.\n- Initial note: RAG baseline top k is 3.\n- Revision: RAG baseline top k is 8.\n- Revision: RAG baseline chunk unit is daily summaries.\n- Final update: RAG baseline chunk unit is event chunks.\n- Final update: RAG baseline top k is 12.\n- Stable note: RAG pipeline step includes chunking.\n- Initial note: State Memory coursework topic is RAG for agents.\n- Initial note: Memory benchmark hypothesis is RAG is always perfect."
+    },
+    {
+      "system": "rag",
+      "questionType": "current_state",
+      "question": "What chunk unit does the RAG baseline use?",
+      "expected": "event chunks",
+      "rawAnswer": "daily summaries",
+      "normalizedAnswer": "daily summaries",
+      "errorType": "incomplete_answer",
+      "contextHasGoldFact": true,
+      "context": "- Initial note: RAG baseline chunk unit is paragraph chunks.\n- Revision: RAG baseline chunk unit is daily summaries.\n- Final update: RAG baseline chunk unit is event chunks.\n- Initial note: RAG baseline retriever is random memory sampler.\n- Initial note: RAG baseline top k is 3.\n- Revision: RAG baseline top k is 8.\n- Revision: RAG baseline retriever is cosine embedding search.\n- Final update: RAG baseline top k is 12.\n- Final update: RAG baseline retriever is lexical top-k retriever.\n- Stable note: RAG pipeline step includes chunking.\n- Initial note: Evaluation suite latency unit is seconds.\n- Initial note: State Memory coursework topic is RAG for agents."
+    },
+    {
+      "system": "rag",
+      "questionType": "current_state",
+      "question": "What top-k value does the RAG baseline use?",
+      "expected": "12",
+      "rawAnswer": "8",
+      "normalizedAnswer": "8",
+      "errorType": "incomplete_answer",
+      "contextHasGoldFact": true,
+      "context": "- Initial note: RAG baseline top k is 3.\n- Revision: RAG baseline top k is 8.\n- Final update: RAG baseline top k is 12.\n- Final update: RAG baseline retriever is lexical top-k retriever.\n- Initial note: RAG baseline retriever is random memory sampler.\n- Initial note: RAG baseline chunk unit is paragraph chunks.\n- Revision: RAG baseline retriever is cosine embedding search.\n- Revision: RAG baseline chunk unit is daily summaries.\n- Final update: RAG baseline chunk unit is event chunks.\n- Stable note: RAG pipeline step includes chunking.\n- Initial note: State Memory coursework topic is RAG for agents.\n- Initial note: Memory benchmark hypothesis is RAG is always perfect."
+    },
+    {
+      "system": "rag",
+      "questionType": "stable_state",
+      "question": "What must the State Memory coursework include?",
+      "expected": "implementation, experiments, metrics, baseline comparison, error analysis, conclusions",
+      "rawAnswer": "Implementation, baseline comparison, metrics, error analysis, and experiments.",
+      "normalizedAnswer": "implementation baseline comparison metrics error analysis and experiments",
+      "errorType": "missing_fact",
+      "contextHasGoldFact": false,
+      "context": "- Final update: State Memory coursework topic is State Memory for LLM agents.\n- Initial note: State Memory coursework topic is RAG for agents.\n- Initial note: State Memory coursework implementation language is Python.\n- Stable note: State Memory coursework requires includes implementation.\n- Stable note: State Memory coursework requires includes baseline comparison.\n- Initial note: State Memory coursework deadline is ten days.\n- Stable note: State Memory coursework requires includes metrics.\n- Revision: State Memory coursework topic is long-context prompting.\n- Revision: State Memory coursework deadline is two weeks.\n- Revision: State Memory coursework implementation language is TypeScript.\n..."
+    },
+    {
+      "system": "rag",
+      "questionType": "stable_state",
+      "question": "What interests are stored for the user?",
+      "expected": "reactive systems, LLM agents, machine learning, memory architectures",
+      "rawAnswer": "UNKNOWN",
+      "normalizedAnswer": "unknown",
+      "errorType": "incomplete_answer",
+      "contextHasGoldFact": true,
+      "context": "- Stable note: User interest includes memory architectures.\n- Stable note: User interest includes reactive systems.\n- Stable note: User interest includes machine learning.\n- Stable note: User interest includes LLM agents.\n- Stable note: State Memory stores includes user profile."
+    },
+    {
+      "system": "rag",
+      "questionType": "stable_state",
+      "question": "What entity types does State Memory store?",
+      "expected": "user profile, projects, goals, tasks, facts",
+      "rawAnswer": "goals",
+      "normalizedAnswer": "goals",
+      "errorType": "missing_fact",
+      "contextHasGoldFact": false,
+      "context": "- Final update: State Memory agent memory strategy is structured world state.\n- Final update: State Memory coursework topic is State Memory for LLM agents.\n- Stable note: State Memory pipeline step includes state update.\n- Stable note: State Memory pipeline step includes state selection.\n- Initial note: State Memory agent memory strategy is full history.\n- Initial note: Memory benchmark comparison is State Memory only.\n- Revision: State Memory agent memory strategy is RAG retrieval.\n- Final update: Memory benchmark comparison is RAG versus State Memory.\n- Final update: Memory benchmark hypothesis is State Memory reduces stale fact errors.\n- Stable note: State Memory stores includes goals.\n- ..."
+    },
+    {
+      "system": "rag",
+      "questionType": "stable_state",
+      "question": "What metrics are included?",
+      "expected": "recall, precision, context size, latency, stale fact error rate, compression ratio",
+      "rawAnswer": "UNKNOWN",
+      "normalizedAnswer": "unknown",
+      "errorType": "missing_fact",
+      "contextHasGoldFact": false,
+      "context": "- Background note: Notebook status is included for retrieval noise.\n- Background note: Chart script note is included for retrieval noise.\n- Background note: Methodology section focus is included for retrieval noise.\n- Background note: Chart script summary is included for retrieval noise.\n- Background note: Notebook summary is included for retrieval noise.\n- Background note: README summary is included for retrieval noise.\n- Background note: Limitations section note is included for retrieval noise.\n- Background note: Experiment notes status is included for retrieval noise.\n- Background note: Limitations section focus is included for retrieval noise.\n- Background note: Experiment notes note is ..."
+    },
+    {
+      "system": "rag",
+      "questionType": "document_detail",
+      "question": "In the long document, what answer token is recorded for marker DOC-011-1?",
+      "expected": "VALUE-011-1",
+      "rawAnswer": "UNKNOWN",
+      "normalizedAnswer": "unknown",
+      "errorType": "incomplete_answer",
+      "contextHasGoldFact": true,
+      "context": "- Page 11, paragraph 1. This unstructured document section discusses state update rules. The reference marker DOC-011-1 is described in prose, not as a structured state fact. For this marker, the recorded answer token is VALUE-011-1. Additional surrounding text mentions experiments, notes, examples and unrelated implementation details.\n- Page 1, paragraph 1. This unstructured document section discusses memory architecture. The reference marker DOC-001-1 is described in prose, not as a structured state fact. For this marker, the recorded answer token is VALUE-001-1. Additional surrounding text mentions experiments, notes, examples and unrelated implementation details.\n- Page 2, paragraph 1. T..."
+    }
+  ]
+}

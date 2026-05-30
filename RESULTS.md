@@ -321,7 +321,9 @@ This table is the multi-model history surface for Ollama runs. GitHub Actions wr
 
 | Model | Source | Hybrid LLM Acc | Hybrid Hallucination | Hybrid Avg LLM ms | Real State EM | Real Buffer EM | Extractor Precision | Extractor Recall | Extractor F1 | Extractor Parse Errors | Extractor QA EM |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| llama3.2:3b | results/llm + results/real + results/extractor | 0.9355 | 0.0000 | 15229.8465 | 1.0000 | 0.7500 | n/a | n/a | n/a | n/a | n/a |
+| gemma3:1b | results/models/gemma3-1b | 0.9355 | 0.0000 | 5758.3587 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0 | 0.0000 |
+| llama3.2:3b | results/models/llama3.2-3b | 0.9355 | 0.0000 | 15329.8363 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 12 | 0.0000 |
+| qwen2.5:1.5b | results/models/qwen2.5-1.5b | 0.8710 | 0.0000 | 8082.9133 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0.0000 | 0 | 0.0000 |
 
 ## Pipeline Breakdown
 

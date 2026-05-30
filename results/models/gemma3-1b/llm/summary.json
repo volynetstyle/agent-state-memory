@@ -1,0 +1,311 @@
+{
+  "dataset": {
+    "events": 1000,
+    "documentPages": 100,
+    "documentChunks": 300,
+    "questions": 31,
+    "currentStateQuestions": 10,
+    "stableStateQuestions": 6,
+    "documentQuestions": 10,
+    "unknownQuestions": 5
+  },
+  "configuration": {
+    "model": "gemma3:1b",
+    "temperature": 0,
+    "seed": 42,
+    "timeoutMs": 120000,
+    "numPredict": 64,
+    "ragTopK": 12,
+    "documentTopK": 8,
+    "stateLimit": 8
+  },
+  "rag": {
+    "totalQuestions": 31,
+    "exactMatchAccuracy": 0.6129032258064516,
+    "normalizedAccuracy": 0.7096774193548387,
+    "promptComplianceRate": 0.7419354838709677,
+    "hallucinationRate": 0.03225806451612903,
+    "unknownAccuracy": 0.8,
+    "averageContextTokens": 207.25806451612902,
+    "averageRetrievalMs": 8.419415064516674,
+    "averagePromptBuildMs": 0.00872916128893469,
+    "averageLlmMs": 5959.4681273548385,
+    "averageTotalMs": 5967.954196935485,
+    "byType": {
+      "current_state": {
+        "totalQuestions": 10,
+        "exactMatchAccuracy": 0.5,
+        "normalizedAccuracy": 0.5,
+        "promptComplianceRate": 0.5,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 114.7,
+        "averageLlmMs": 3263.3085983,
+        "averageTotalMs": 3275.8254664
+      },
+      "stable_state": {
+        "totalQuestions": 6,
+        "exactMatchAccuracy": 0,
+        "normalizedAccuracy": 0.5,
+        "promptComplianceRate": 0.6666666666666666,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 117.66666666666667,
+        "averageLlmMs": 3254.9975954999995,
+        "averageTotalMs": 3262.4550253333327
+      },
+      "document_detail": {
+        "totalQuestions": 10,
+        "exactMatchAccuracy": 1,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 363.3,
+        "averageLlmMs": 10721.7550268,
+        "averageTotalMs": 10727.332907000002
+      },
+      "unknown": {
+        "totalQuestions": 5,
+        "exactMatchAccuracy": 0.8,
+        "normalizedAccuracy": 0.8,
+        "promptComplianceRate": 0.8,
+        "hallucinationRate": 0.2,
+        "unknownAccuracy": 0.8,
+        "averageContextTokens": 187.8,
+        "averageLlmMs": 5072.578024800006,
+        "averageTotalMs": 5080.053243800003
+      }
+    }
+  },
+  "state": {
+    "totalQuestions": 31,
+    "exactMatchAccuracy": 0.25806451612903225,
+    "normalizedAccuracy": 0.5806451612903226,
+    "promptComplianceRate": 0.9032258064516129,
+    "hallucinationRate": 0,
+    "unknownAccuracy": 1,
+    "averageContextTokens": 64.06451612903226,
+    "averageRetrievalMs": 4.047104838709798,
+    "averagePromptBuildMs": 0.004361290325065174,
+    "averageLlmMs": 1982.726168064516,
+    "averageTotalMs": 1986.8046980645197,
+    "byType": {
+      "current_state": {
+        "totalQuestions": 10,
+        "exactMatchAccuracy": 0.3,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 79.3,
+        "averageLlmMs": 2515.9911326,
+        "averageTotalMs": 2526.428940400007
+      },
+      "stable_state": {
+        "totalQuestions": 6,
+        "exactMatchAccuracy": 0,
+        "normalizedAccuracy": 0.5,
+        "promptComplianceRate": 0.5,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 76.33333333333333,
+        "averageLlmMs": 3315.503245999998,
+        "averageTotalMs": 3317.115995
+      },
+      "document_detail": {
+        "totalQuestions": 10,
+        "exactMatchAccuracy": 0,
+        "normalizedAccuracy": 0,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 35,
+        "averageLlmMs": 668.825305900001,
+        "averageTotalMs": 668.8412829000066
+      },
+      "unknown": {
+        "totalQuestions": 5,
+        "exactMatchAccuracy": 1,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 1,
+        "averageContextTokens": 77,
+        "averageLlmMs": 1944.6654697999998,
+        "averageTotalMs": 1947.1094873999944
+      }
+    }
+  },
+  "hybrid": {
+    "totalQuestions": 31,
+    "exactMatchAccuracy": 0.5483870967741935,
+    "normalizedAccuracy": 0.9354838709677419,
+    "promptComplianceRate": 0.9354838709677419,
+    "hallucinationRate": 0,
+    "unknownAccuracy": 1,
+    "averageContextTokens": 187.90322580645162,
+    "averageRetrievalMs": 2.797144258063429,
+    "averagePromptBuildMs": 0.0035566451589411664,
+    "averageLlmMs": 5758.358674193555,
+    "averageTotalMs": 5761.178240129033,
+    "byType": {
+      "current_state": {
+        "totalQuestions": 10,
+        "exactMatchAccuracy": 0.2,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 79.3,
+        "averageLlmMs": 2541.282944900004,
+        "averageTotalMs": 2543.237139600003
+      },
+      "stable_state": {
+        "totalQuestions": 6,
+        "exactMatchAccuracy": 0,
+        "normalizedAccuracy": 0.6666666666666666,
+        "promptComplianceRate": 0.6666666666666666,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 76.33333333333333,
+        "averageLlmMs": 3378.850396499998,
+        "averageTotalMs": 3379.998553333329
+      },
+      "document_detail": {
+        "totalQuestions": 10,
+        "exactMatchAccuracy": 1,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 0,
+        "averageContextTokens": 363.3,
+        "averageLlmMs": 10702.439444100013,
+        "averageTotalMs": 10707.356826900004
+      },
+      "unknown": {
+        "totalQuestions": 5,
+        "exactMatchAccuracy": 1,
+        "normalizedAccuracy": 1,
+        "promptComplianceRate": 1,
+        "hallucinationRate": 0,
+        "unknownAccuracy": 1,
+        "averageContextTokens": 188.2,
+        "averageLlmMs": 5159.758526200009,
+        "averageTotalMs": 5162.118891799997
+      }
+    }
+  },
+  "failureExamples": [
+    {
+      "system": "rag",
+      "questionType": "current_state",
+      "question": "What selector strategy does Reflex use?",
+      "expected": "dependency-tracked selectors",
+      "rawAnswer": "Manual subscriptions",
+      "normalizedAnswer": "manual subscriptions",
+      "errorType": "incomplete_answer",
+      "contextHasGoldFact": true,
+      "context": "- Revision: Reflex selector strategy is selector cache.\n- Initial note: Reflex selector strategy is manual subscriptions.\n- Final update: Reflex selector strategy is dependency-tracked selectors.\n- Initial note: State selector limit is 3 facts.\n- Initial note: Reflex runtime is event-sourced runtime.\n- Initial note: Reflex storage is local arrays.\n- Initial note: State Memory agent memory strategy is full history.\n- Initial note: State selector ranking is random facts.\n- Revision: Reflex storage is normalized object store.\n- Revision: State selector limit is 5 facts.\n- Revision: Reflex runtime is actor runtime.\n- Revision: State selector ranking is recency only."
+    },
+    {
+      "system": "rag",
+      "questionType": "current_state",
+      "question": "What is the current coursework deadline?",
+      "expected": "one week",
+      "rawAnswer": "TWO weeks",
+      "normalizedAnswer": "two weeks",
+      "errorType": "incomplete_answer",
+      "contextHasGoldFact": true,
+      "context": "- Initial note: State Memory coursework deadline is ten days.\n- Revision: State Memory coursework deadline is two weeks.\n- Final update: State Memory coursework deadline is one week.\n- Background note: Experiment notes focus is kept short for the deadline.\n- Background note: Chart script focus is kept short for the deadline.\n- Background note: Experiment notes focus is ready for coursework text.\n- Background note: Limitations section focus is ready for coursework text.\n- Background note: Limitations section focus is kept short for the deadline.\n- Background note: Limitations section focus is kept short for the deadline.\n- Background note: Limitations section focus is ready for coursework tex..."
+    },
+    {
+      "system": "rag",
+      "questionType": "current_state",
+      "question": "What implementation language is used for the coursework MVP?",
+      "expected": "zero-dependency Node.js",
+      "rawAnswer": "TypeScript",
+      "normalizedAnswer": "typescript",
+      "errorType": "incomplete_answer",
+      "contextHasGoldFact": true,
+      "context": "- Initial note: State Memory coursework implementation language is Python.\n- Revision: State Memory coursework implementation language is TypeScript.\n- Final update: State Memory coursework implementation language is zero-dependency Node.js.\n- Stable note: State Memory coursework requires includes implementation.\n- Background note: Related work section focus is used only as background context.\n- Background note: Experiment notes note is used only as background context.\n- Background note: Experiment notes focus is ready for coursework text.\n- Background note: Limitations section focus is ready for coursework text.\n- Background note: README summary is used only as background context.\n- Backgro..."
+    },
+    {
+      "system": "rag",
+      "questionType": "current_state",
+      "question": "What chunk unit does the RAG baseline use?",
+      "expected": "event chunks",
+      "rawAnswer": "paragraph chunks",
+      "normalizedAnswer": "paragraph chunks",
+      "errorType": "incomplete_answer",
+      "contextHasGoldFact": true,
+      "context": "- Initial note: RAG baseline chunk unit is paragraph chunks.\n- Revision: RAG baseline chunk unit is daily summaries.\n- Final update: RAG baseline chunk unit is event chunks.\n- Initial note: RAG baseline retriever is random memory sampler.\n- Initial note: RAG baseline top k is 3.\n- Revision: RAG baseline top k is 8.\n- Revision: RAG baseline retriever is cosine embedding search.\n- Final update: RAG baseline top k is 12.\n- Final update: RAG baseline retriever is lexical top-k retriever.\n- Stable note: RAG pipeline step includes chunking.\n- Initial note: Evaluation suite latency unit is seconds.\n- Initial note: State Memory coursework topic is RAG for agents."
+    },
+    {
+      "system": "rag",
+      "questionType": "current_state",
+      "question": "What memory strategy does the State Memory agent use?",
+      "expected": "structured world state",
+      "rawAnswer": "RAG retrieval",
+      "normalizedAnswer": "rag retrieval",
+      "errorType": "incomplete_answer",
+      "contextHasGoldFact": true,
+      "context": "- Final update: State Memory agent memory strategy is structured world state.\n- Initial note: State Memory agent memory strategy is full history.\n- Revision: State Memory agent memory strategy is RAG retrieval.\n- Initial note: State Memory agent answer mode is free-form generation.\n- Revision: State Memory agent answer mode is retrieved chunks only.\n- Final update: State Memory agent answer mode is selected active facts.\n- Final update: State Memory coursework topic is State Memory for LLM agents.\n- Stable note: State Memory pipeline step includes state update.\n- Stable note: State Memory pipeline step includes state selection.\n- Initial note: Memory benchmark comparison is State Memory only..."
+    },
+    {
+      "system": "rag",
+      "questionType": "stable_state",
+      "question": "What must the State Memory coursework include?",
+      "expected": "implementation, experiments, metrics, baseline comparison, error analysis, conclusions",
+      "rawAnswer": "Includes implementation, baseline comparison, metrics, and error analysis.",
+      "normalizedAnswer": "includes implementation baseline comparison metrics and error analysis",
+      "errorType": "missing_fact",
+      "contextHasGoldFact": false,
+      "context": "- Final update: State Memory coursework topic is State Memory for LLM agents.\n- Initial note: State Memory coursework topic is RAG for agents.\n- Initial note: State Memory coursework implementation language is Python.\n- Stable note: State Memory coursework requires includes implementation.\n- Stable note: State Memory coursework requires includes baseline comparison.\n- Initial note: State Memory coursework deadline is ten days.\n- Stable note: State Memory coursework requires includes metrics.\n- Revision: State Memory coursework topic is long-context prompting.\n- Revision: State Memory coursework deadline is two weeks.\n- Revision: State Memory coursework implementation language is TypeScript.\n..."
+    },
+    {
+      "system": "rag",
+      "questionType": "stable_state",
+      "question": "What entity types does State Memory store?",
+      "expected": "user profile, projects, goals, tasks, facts",
+      "rawAnswer": "goals",
+      "normalizedAnswer": "goals",
+      "errorType": "missing_fact",
+      "contextHasGoldFact": false,
+      "context": "- Final update: State Memory agent memory strategy is structured world state.\n- Final update: State Memory coursework topic is State Memory for LLM agents.\n- Stable note: State Memory pipeline step includes state update.\n- Stable note: State Memory pipeline step includes state selection.\n- Initial note: State Memory agent memory strategy is full history.\n- Initial note: Memory benchmark comparison is State Memory only.\n- Revision: State Memory agent memory strategy is RAG retrieval.\n- Final update: Memory benchmark comparison is RAG versus State Memory.\n- Final update: Memory benchmark hypothesis is State Memory reduces stale fact errors.\n- Stable note: State Memory stores includes goals.\n- ..."
+    },
+    {
+      "system": "rag",
+      "questionType": "stable_state",
+      "question": "What metrics are included?",
+      "expected": "recall, precision, context size, latency, stale fact error rate, compression ratio",
+      "rawAnswer": "UNKNOWN",
+      "normalizedAnswer": "unknown",
+      "errorType": "missing_fact",
+      "contextHasGoldFact": false,
+      "context": "- Background note: Notebook status is included for retrieval noise.\n- Background note: Chart script note is included for retrieval noise.\n- Background note: Methodology section focus is included for retrieval noise.\n- Background note: Chart script summary is included for retrieval noise.\n- Background note: Notebook summary is included for retrieval noise.\n- Background note: README summary is included for retrieval noise.\n- Background note: Limitations section note is included for retrieval noise.\n- Background note: Experiment notes status is included for retrieval noise.\n- Background note: Limitations section focus is included for retrieval noise.\n- Background note: Experiment notes note is ..."
+    },
+    {
+      "system": "rag",
+      "questionType": "unknown",
+      "question": "What production analytics database does the user prefer?",
+      "expected": "UNKNOWN",
+      "rawAnswer": "Memory architectures",
+      "normalizedAnswer": "memory architectures",
+      "errorType": "unknown_failed",
+      "contextHasGoldFact": false,
+      "context": "- Stable note: User interest includes memory architectures.\n- Stable note: User interest includes reactive systems.\n- Stable note: User interest includes machine learning.\n- Stable note: User interest includes LLM agents.\n- Stable note: State Memory stores includes user profile."
+    },
+    {
+      "system": "state",
+      "questionType": "stable_state",
+      "question": "What must the State Memory coursework include?",
+      "expected": "implementation, experiments, metrics, baseline comparison, error analysis, conclusions",
+      "rawAnswer": "state Memory coursework.requires = implementation (active)",
+      "normalizedAnswer": "state memory coursework requires implementation active",
+      "errorType": "incomplete_answer",
+      "contextHasGoldFact": true,
+      "context": "- State Memory coursework.requires = implementation (active)\n- State Memory coursework.requires = baseline comparison (active)\n- State Memory coursework.requires = metrics (active)\n- State Memory coursework.requires = error analysis (active)\n- State Memory coursework.requires = experiments (active)\n- State Memory coursework.requires = conclusions (active)\n- State Memory coursework.topic = State Memory for LLM agents (active)\n- State Memory coursework.deadline = one week (active)"
+    }
+  ]
+}
