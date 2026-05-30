@@ -3,10 +3,13 @@ name: Ollama LLM Experiment
 on:
   workflow_dispatch:
     inputs:
-      model:
-        description: "Ollama model to pull and run"
+      models:
+        description: "Comma- or newline-separated Ollama models to pull and run"
         required: true
-        default: "llama3.2:3b"
+        default: |
+          llama3.2:3b
+          gemma3:1b
+          qwen2.5:1.5b
       questions:
         description: "Answerable LLM questions split across current/stable/document"
         required: true
@@ -36,14 +39,114 @@ on:
 permissions:
   contents: write
 
-concurrency:
-  group: ollama-llm-${{ github.ref }}-${{ inputs.model }}
-  cancel-in-progress: false
-
 jobs:
+  prepare-matrix:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+
+    steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build model matrix
+        id: matrix
+        env:
+          MODELS: ${{ inputs.models }}
+          QUESTIONS: ${{ inputs.questions }}
+          UNKNOWN: ${{ inputs.unknown }}
+          TIMEOUT_MS: ${{ inputs.timeout_ms }}
+          NUM_PREDICT: ${{ inputs.num_predict }}
+        run: |
+          node --input-type=module - <<'NODE'
+          import { appendFileSync } from "node:fs";
+
+          const values = {
+            QUESTIONS: process.env.QUESTIONS,
+            UNKNOWN: process.env.UNKNOWN,
+            TIMEOUT_MS: process.env.TIMEOUT_MS,
+            NUM_PREDICT: process.env.NUM_PREDICT
+          };
+
+          for (const [name, value] of Object.entries(values)) {
+            if (!/^\d+$/.test(value ?? "")) {
+              throw new Error(`${name} must be a non-negative integer, got "${value}"`);
+            }
+          }
+
+          if (Number(values.QUESTIONS) <= 0) throw new Error("QUESTIONS must be greater than 0");
+          if (Number(values.TIMEOUT_MS) < 1000) throw new Error("TIMEOUT_MS must be at least 1000");
+          if (Number(values.NUM_PREDICT) <= 0) throw new Error("NUM_PREDICT must be greater than 0");
+
+          const models = [...new Set(
+            String(process.env.MODELS ?? "")
+              .split(/[\n,]+/u)
+              .map((model) => model.trim())
+              .filter(Boolean)
+          )];
+
+          if (models.length === 0) {
+            throw new Error("At least one model must be provided.");
+          }
+
+          const include = models.map((model) => {
+            if (!/^[A-Za-z0-9._:/-]+$/.test(model)) {
+              throw new Error(`Unsafe model name: ${model}`);
+            }
+
+            return {
+              model,
+              safe_model: model.replace(/[/:]/gu, "-")
+            };
+          });
+
+          const matrix = JSON.stringify({ include });
+          console.log(`Model matrix: ${matrix}`);
+          appendFileSync(process.env.GITHUB_OUTPUT, `matrix=${matrix}\n`);
+          NODE
+
+  quality-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: prepare-matrix
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Run static checks and unit tests
+        run: |
+          npm run check
+          npm test
+
+      - name: Verify checked-in benchmark results before LLM run
+        run: |
+          npm run results
+          node scripts/verifyResults.mjs
+          node scripts/ensureAllowedChanges.mjs RESULTS.md
+
   llm-experiment:
     runs-on: ubuntu-latest
     timeout-minutes: 90
+    needs:
+      - prepare-matrix
+      - quality-gate
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.prepare-matrix.outputs.matrix) }}
+    concurrency:
+      group: ollama-llm-${{ github.ref }}-${{ matrix.safe_model }}
+      cancel-in-progress: false
     env:
       OLLAMA_MODELS: ${{ github.workspace }}/.ollama/models
 
@@ -58,62 +161,19 @@ jobs:
         with:
           node-version: 22
 
-      - name: Validate workflow inputs
-        env:
-          MODEL_NAME: ${{ inputs.model }}
-          QUESTIONS: ${{ inputs.questions }}
-          UNKNOWN: ${{ inputs.unknown }}
-          TIMEOUT_MS: ${{ inputs.timeout_ms }}
-          NUM_PREDICT: ${{ inputs.num_predict }}
-        run: |
-          node --input-type=module - <<'NODE'
-          const values = {
-            QUESTIONS: process.env.QUESTIONS,
-            UNKNOWN: process.env.UNKNOWN,
-            TIMEOUT_MS: process.env.TIMEOUT_MS,
-            NUM_PREDICT: process.env.NUM_PREDICT
-          };
-
-          if (!/^[A-Za-z0-9._:/-]+$/.test(process.env.MODEL_NAME ?? "")) {
-            throw new Error(`Unsafe model name: ${process.env.MODEL_NAME}`);
-          }
-
-          for (const [name, value] of Object.entries(values)) {
-            if (!/^\d+$/.test(value ?? "")) {
-              throw new Error(`${name} must be a non-negative integer, got "${value}"`);
-            }
-          }
-
-          if (Number(values.QUESTIONS) <= 0) throw new Error("QUESTIONS must be greater than 0");
-          if (Number(values.TIMEOUT_MS) < 1000) throw new Error("TIMEOUT_MS must be at least 1000");
-          if (Number(values.NUM_PREDICT) <= 0) throw new Error("NUM_PREDICT must be greater than 0");
-          NODE
-
-      - name: Run static checks and unit tests
-        run: |
-          npm run check
-          npm test
-
-      - name: Verify checked-in benchmark results before LLM run
-        run: |
-          npm run results
-          node scripts/verifyResults.mjs
-          node scripts/ensureAllowedChanges.mjs RESULTS.md
-
       - name: Install Ollama
         run: curl -fsSL https://ollama.com/install.sh | sh
 
       - name: Prepare Ollama model cache
         id: ollama-cache-key
         env:
-          MODEL_NAME: ${{ inputs.model }}
+          MODEL_NAME: ${{ matrix.model }}
+          SAFE_MODEL: ${{ matrix.safe_model }}
           CACHE_VERSION: ${{ inputs.cache_version }}
         run: |
           mkdir -p "$OLLAMA_MODELS"
-          safe_model="$(printf '%s' "$MODEL_NAME" | sed 's#[/:]#-#g')"
           safe_version="$(printf '%s' "$CACHE_VERSION" | sed 's#[/:]#-#g')"
-          echo "key=ollama-${RUNNER_OS}-${safe_model}-${safe_version}" >> "$GITHUB_OUTPUT"
-          echo "safe_model=${safe_model}" >> "$GITHUB_OUTPUT"
+          echo "key=ollama-${RUNNER_OS}-${SAFE_MODEL}-${safe_version}" >> "$GITHUB_OUTPUT"
 
       - name: Restore Ollama model cache
         id: ollama-model-cache
@@ -143,17 +203,17 @@ jobs:
 
       - name: Pull model
         env:
-          MODEL_NAME: ${{ inputs.model }}
+          MODEL_NAME: ${{ matrix.model }}
         run: ollama pull "$MODEL_NAME"
 
       - name: Run mixed LLM experiment
         env:
-          MODEL_NAME: ${{ inputs.model }}
+          MODEL_NAME: ${{ matrix.model }}
           QUESTIONS: ${{ inputs.questions }}
           UNKNOWN: ${{ inputs.unknown }}
           TIMEOUT_MS: ${{ inputs.timeout_ms }}
           NUM_PREDICT: ${{ inputs.num_predict }}
-          MODEL_RESULTS_DIR: results/models/${{ steps.ollama-cache-key.outputs.safe_model }}
+          MODEL_RESULTS_DIR: results/models/${{ matrix.safe_model }}
         run: |
           npm run experiment:llm -- \
             --model="$MODEL_NAME" \
@@ -165,10 +225,10 @@ jobs:
 
       - name: Run real trace with Ollama extractor
         env:
-          MODEL_NAME: ${{ inputs.model }}
+          MODEL_NAME: ${{ matrix.model }}
           TIMEOUT_MS: ${{ inputs.timeout_ms }}
           NUM_PREDICT: ${{ inputs.num_predict }}
-          MODEL_RESULTS_DIR: results/models/${{ steps.ollama-cache-key.outputs.safe_model }}
+          MODEL_RESULTS_DIR: results/models/${{ matrix.safe_model }}
         run: |
           EXTRACTOR_NUM_PREDICT="$NUM_PREDICT"
           if [ "$EXTRACTOR_NUM_PREDICT" -lt 256 ]; then
@@ -183,10 +243,10 @@ jobs:
 
       - name: Run extractor benchmark with Ollama extractor
         env:
-          MODEL_NAME: ${{ inputs.model }}
+          MODEL_NAME: ${{ matrix.model }}
           TIMEOUT_MS: ${{ inputs.timeout_ms }}
           NUM_PREDICT: ${{ inputs.num_predict }}
-          MODEL_RESULTS_DIR: results/models/${{ steps.ollama-cache-key.outputs.safe_model }}
+          MODEL_RESULTS_DIR: results/models/${{ matrix.safe_model }}
         run: |
           EXTRACTOR_NUM_PREDICT="$NUM_PREDICT"
           if [ "$EXTRACTOR_NUM_PREDICT" -lt 256 ]; then
@@ -199,14 +259,75 @@ jobs:
             --num-predict="$EXTRACTOR_NUM_PREDICT" \
             --results-dir="$MODEL_RESULTS_DIR/extractor"
 
-      - name: Generate and verify report with new Ollama results
+      - name: Stage model artifacts
+        if: always()
+        env:
+          SAFE_MODEL: ${{ matrix.safe_model }}
         run: |
+          mkdir -p artifact
+          if [ -d "results/models/$SAFE_MODEL" ]; then
+            mkdir -p artifact/results/models
+            cp -R "results/models/$SAFE_MODEL" artifact/results/models/
+          fi
+          if [ -f ollama.log ]; then
+            cp ollama.log "artifact/ollama-$SAFE_MODEL.log"
+          fi
+
+      - name: Upload model results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ollama-results-${{ matrix.safe_model }}
+          if-no-files-found: warn
+          path: artifact
+
+  aggregate-results:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs:
+      - quality-gate
+      - llm-experiment
+    if: ${{ always() }}
+    concurrency:
+      group: ollama-llm-publish-${{ github.ref }}
+      cancel-in-progress: false
+    env:
+      ARTIFACT_DIR: ${{ runner.temp }}/ollama-artifacts
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Download model result artifacts
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          path: ${{ env.ARTIFACT_DIR }}
+          pattern: ollama-results-*
+          merge-multiple: true
+
+      - name: Merge model results and verify report
+        run: |
+          if [ -d "$ARTIFACT_DIR/results/models" ]; then
+            mkdir -p results/models
+            cp -R "$ARTIFACT_DIR/results/models/." results/models/
+          fi
           npm run results
           node scripts/verifyResults.mjs
           node scripts/ensureAllowedChanges.mjs RESULTS.md results/models/
+          if [ "${{ needs.llm-experiment.result }}" != "success" ]; then
+            echo "::warning::At least one model job failed. Partial artifacts were still merged when available."
+          fi
 
-      - name: Commit verified LLM results
-        if: ${{ inputs.publish_results == true }}
+      - name: Commit verified multi-model results
+        if: ${{ inputs.publish_results == true && needs.llm-experiment.result == 'success' }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -215,20 +336,17 @@ jobs:
           if git diff --cached --quiet; then
             echo "No verified Ollama result changes to commit."
           else
-            git commit -m "Update verified Ollama results"
+            git commit -m "Update verified multi-model Ollama results"
             git push
           fi
 
-      - name: Upload Ollama results
+      - name: Upload aggregated Ollama results
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ollama-results-${{ github.run_id }}
+          name: ollama-results-aggregated-${{ github.run_id }}
           if-no-files-found: warn
           path: |
             RESULTS.md
-            results/llm
-            results/real
-            results/extractor
             results/models
-            ollama.log
+            ${{ env.ARTIFACT_DIR }}/*.log

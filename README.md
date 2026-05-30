@@ -384,11 +384,19 @@ docker run --rm -e OLLAMA_URL=http://host.docker.internal:11434 coursework-state
 GitHub Actions includes:
 
 - `CI/CD`: runs syntax checks on Node 20 and 22, unit/invariant tests, deterministic/mixed/real/extractor/robust/scalability/stress benchmark verification, report validation, CLI smoke checks, Docker image build, and uploads verified artifacts.
-- `Ollama LLM Experiment`: manual workflow that installs Ollama, pulls the selected model, runs `npm run experiment:llm`, `npm run experiment:real -- --llm-extractor`, and `npm run experiment:extractor -- --llm-extractor`, writes the run to `results/models/<safe_model>/`, regenerates `RESULTS.md`, optionally commits `RESULTS.md` plus the per-model history directory back to the branch, and uploads the same files as artifacts.
+- `Ollama LLM Experiment`: manual workflow that accepts a comma- or newline-separated `models` input, starts one matrix job per model, installs Ollama, pulls that model, runs `npm run experiment:llm`, `npm run experiment:real -- --llm-extractor`, and `npm run experiment:extractor -- --llm-extractor`, writes each run to `results/models/<safe_model>/`, then aggregates all model artifacts into one `RESULTS.md` update. If `publish_results` is enabled, only the aggregate job commits, so parallel model runs do not race on `git push`.
 
 The Ollama workflow caches downloaded model files with `actions/cache`. The first run for a model still downloads it, but later runs restore `${{ github.workspace }}/.ollama/models` before `ollama pull`, so the pull step should become a quick availability check. If a model tag changes or the cache needs to be refreshed, bump the workflow input `cache_version`.
 
-Ollama workflow concurrency is scoped by branch and model name. Runs for different models can execute at the same time, while duplicate runs for the same model on the same branch queue behind each other to avoid racing on the same `results/models/<safe_model>/` directory.
+Example `models` input:
+
+```text
+llama3.2:3b
+gemma3:1b
+qwen2.5:1.5b
+```
+
+Ollama workflow concurrency is scoped by branch and model name. Different models can execute at the same time, while duplicate runs for the same model on the same branch queue behind each other to avoid racing on the same `results/models/<safe_model>/` directory. The final aggregation/publish job is also serialized per branch.
 
 ## Repository Shape
 
