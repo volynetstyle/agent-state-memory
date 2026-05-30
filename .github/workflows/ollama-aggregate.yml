@@ -1,0 +1,98 @@
+name: Aggregate Ollama Results
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: "GitHub Actions run ID that uploaded ollama-results-* artifacts"
+        required: true
+      publish_results:
+        description: "Commit verified RESULTS.md and results/models back to the branch"
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  actions: read
+  contents: write
+
+concurrency:
+  group: ollama-aggregate-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  aggregate-results:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      ARTIFACT_DIR: /tmp/ollama-artifacts
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Validate run ID
+        env:
+          RUN_ID: ${{ inputs.run_id }}
+        run: |
+          node --input-type=module - <<'NODE'
+          if (!/^\d+$/.test(process.env.RUN_ID ?? "")) {
+            throw new Error(`run_id must be numeric, got "${process.env.RUN_ID}"`);
+          }
+          NODE
+
+      - name: Download Ollama result artifacts
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ inputs.run_id }}
+          path: ${{ env.ARTIFACT_DIR }}
+          pattern: ollama-results-*
+          merge-multiple: true
+
+      - name: Merge model results and verify report
+        run: |
+          if [ ! -d "$ARTIFACT_DIR/results/models" ]; then
+            echo "::error::No results/models directory found in downloaded ollama-results-* artifacts."
+            find "$ARTIFACT_DIR" -maxdepth 4 -type f | sort || true
+            exit 1
+          fi
+
+          mkdir -p results/models
+          cp -R "$ARTIFACT_DIR/results/models/." results/models/
+
+          npm run results
+          node scripts/verifyResults.mjs
+          node scripts/ensureAllowedChanges.mjs RESULTS.md results/models/
+
+      - name: Commit verified aggregated results
+        if: ${{ inputs.publish_results == true }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add RESULTS.md results/models
+          node scripts/ensureAllowedChanges.mjs RESULTS.md results/models/
+          if git diff --cached --quiet; then
+            echo "No verified Ollama result changes to commit."
+          else
+            git commit -m "Aggregate verified Ollama model results"
+            git push
+          fi
+
+      - name: Upload aggregated Ollama results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ollama-results-aggregated-from-${{ inputs.run_id }}
+          if-no-files-found: warn
+          path: |
+            RESULTS.md
+            results/models
+            ${{ env.ARTIFACT_DIR }}/*.log
