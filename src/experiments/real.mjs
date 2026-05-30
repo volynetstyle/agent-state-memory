@@ -175,6 +175,7 @@ async function maybeExtractWithLlm(events, { useLlmExtractor, ollama }) {
       mode: "ollama-llm-extractor",
       llmEnabled: true,
       model: ollama.model,
+      parseErrorEvents: extractedEvents.filter((event) => event.extractionError).length,
       note: "Facts were extracted from raw event text by the local Ollama model."
     }
   };
@@ -193,7 +194,7 @@ function buildMarkdown(summary) {
 
 This benchmark keeps all synthetic benchmarks intact and adds a small real-project trace derived from actual repository commits and current working-tree changes. It evaluates Temporal RAG, State Memory, and a LangChain ConversationBufferMemory-style external memory-framework baseline.
 
-Extractor mode: ${summary.extractor.mode}.
+Extractor mode: ${summary.extractor.mode}. Parse-error events: ${summary.extractor.parseErrorEvents ?? 0}.
 
 | System | Exact Match | F1 | Context Hit | Avg Context Tokens | Avg Latency ms |
 | --- | ---: | ---: | ---: | ---: | ---: |

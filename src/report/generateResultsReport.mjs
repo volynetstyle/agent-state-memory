@@ -545,12 +545,12 @@ function modelComparison(modelRuns, summaries) {
 
   const rows = runs.map((run) => {
     const llmExtractor = llmExtractorSummary(run.extractor);
-    return `| ${tableCell(modelName(run))} | ${tableCell(run.source)} | ${rounded(run.llm?.hybrid?.normalizedAccuracy)} | ${rounded(run.llm?.hybrid?.hallucinationRate)} | ${rounded(run.llm?.hybrid?.averageLlmMs)} | ${rounded(run.real?.stateMemory?.exactMatchAccuracy)} | ${rounded(run.real?.langChainBufferMemory?.exactMatchAccuracy)} | ${rounded(llmExtractor?.metrics?.extractionPrecision)} | ${rounded(llmExtractor?.metrics?.extractionRecall)} | ${rounded(llmExtractor?.metrics?.extractionF1)} | ${rounded(llmExtractor?.qa?.exactMatchAccuracy)} |`;
+    return `| ${tableCell(modelName(run))} | ${tableCell(run.source)} | ${rounded(run.llm?.hybrid?.normalizedAccuracy)} | ${rounded(run.llm?.hybrid?.hallucinationRate)} | ${rounded(run.llm?.hybrid?.averageLlmMs)} | ${rounded(run.real?.stateMemory?.exactMatchAccuracy)} | ${rounded(run.real?.langChainBufferMemory?.exactMatchAccuracy)} | ${rounded(llmExtractor?.metrics?.extractionPrecision)} | ${rounded(llmExtractor?.metrics?.extractionRecall)} | ${rounded(llmExtractor?.metrics?.extractionF1)} | ${llmExtractor?.parseErrorEvents ?? "n/a"} | ${rounded(llmExtractor?.qa?.exactMatchAccuracy)} |`;
   });
 
   const body =
     rows.length === 0
-      ? "| n/a | No `results/models/<model>/` runs are available yet | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |"
+      ? "| n/a | No `results/models/<model>/` runs are available yet | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a |"
       : rows.join("\n");
 
   return section(
@@ -558,8 +558,8 @@ function modelComparison(modelRuns, summaries) {
     `
 This table is the multi-model history surface for Ollama runs. GitHub Actions writes each model into \`results/models/<safe_model>/\`, so running a new model adds or refreshes that row instead of replacing the previous model history. The checked-in active LLM summary is shown as a fallback row until per-model history is committed.
 
-| Model | Source | Hybrid LLM Acc | Hybrid Hallucination | Hybrid Avg LLM ms | Real State EM | Real Buffer EM | Extractor Precision | Extractor Recall | Extractor F1 | Extractor QA EM |
-| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Model | Source | Hybrid LLM Acc | Hybrid Hallucination | Hybrid Avg LLM ms | Real State EM | Real Buffer EM | Extractor Precision | Extractor Recall | Extractor F1 | Extractor Parse Errors | Extractor QA EM |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 ${body}
 `
   );
@@ -978,7 +978,7 @@ function extractorBenchmark(summary) {
   const rows = summary.extractors
     .map(
       (extractor) =>
-        `| ${tableCell(extractor.name)} | ${rounded(extractor.metrics.extractionPrecision)} | ${rounded(extractor.metrics.extractionRecall)} | ${rounded(extractor.metrics.extractionF1)} | ${rounded(extractor.metrics.slotAccuracy)} | ${rounded(extractor.metrics.entityResolutionAccuracy)} | ${rounded(extractor.metrics.mutableClassificationAccuracy)} | ${rounded(extractor.metrics.conflictDetectionAccuracy)} | ${rounded(extractor.qa.exactMatchAccuracy)} |`
+        `| ${tableCell(extractor.name)} | ${rounded(extractor.metrics.extractionPrecision)} | ${rounded(extractor.metrics.extractionRecall)} | ${rounded(extractor.metrics.extractionF1)} | ${rounded(extractor.metrics.slotAccuracy)} | ${rounded(extractor.metrics.entityResolutionAccuracy)} | ${rounded(extractor.metrics.mutableClassificationAccuracy)} | ${rounded(extractor.metrics.conflictDetectionAccuracy)} | ${extractor.parseErrorEvents ?? 0} | ${rounded(extractor.qa.exactMatchAccuracy)} |`
     )
     .join("\n");
 
@@ -987,8 +987,8 @@ function extractorBenchmark(summary) {
     `
 Dataset: ${summary.dataset.events} raw repository-derived events, ${summary.dataset.goldFacts} gold facts, ${summary.dataset.questions} downstream questions.
 
-| Extractor | Extraction Precision | Extraction Recall | Extraction F1 | Slot Accuracy | Entity Resolution | Mutable Classification | Conflict Detection | Downstream QA EM |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Extractor | Extraction Precision | Extraction Recall | Extraction F1 | Slot Accuracy | Entity Resolution | Mutable Classification | Conflict Detection | Parse-error Events | Downstream QA EM |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 ${rows}
 `
   );

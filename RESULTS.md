@@ -319,9 +319,9 @@ These tests quantify uncertainty on the fixed benchmark samples. They do not rem
 
 This table is the multi-model history surface for Ollama runs. GitHub Actions writes each model into `results/models/<safe_model>/`, so running a new model adds or refreshes that row instead of replacing the previous model history. The checked-in active LLM summary is shown as a fallback row until per-model history is committed.
 
-| Model | Source | Hybrid LLM Acc | Hybrid Hallucination | Hybrid Avg LLM ms | Real State EM | Real Buffer EM | Extractor Precision | Extractor Recall | Extractor F1 | Extractor QA EM |
-| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| llama3.2:3b | results/llm + results/real + results/extractor | 0.9355 | 0.0000 | 15229.8465 | 1.0000 | 0.7500 | n/a | n/a | n/a | n/a |
+| Model | Source | Hybrid LLM Acc | Hybrid Hallucination | Hybrid Avg LLM ms | Real State EM | Real Buffer EM | Extractor Precision | Extractor Recall | Extractor F1 | Extractor Parse Errors | Extractor QA EM |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| llama3.2:3b | results/llm + results/real + results/extractor | 0.9355 | 0.0000 | 15229.8465 | 1.0000 | 0.7500 | n/a | n/a | n/a | n/a | n/a |
 
 ## Pipeline Breakdown
 
@@ -581,10 +581,10 @@ Extractor mode: annotated-real-trace.
 
 Dataset: 12 raw repository-derived events, 21 gold facts, 8 downstream questions.
 
-| Extractor | Extraction Precision | Extraction Recall | Extraction F1 | Slot Accuracy | Entity Resolution | Mutable Classification | Conflict Detection | Downstream QA EM |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| Gold annotations | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 |
-| Rule extractor | 1.0000 | 0.7143 | 0.8333 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 0.8750 |
+| Extractor | Extraction Precision | Extraction Recall | Extraction F1 | Slot Accuracy | Entity Resolution | Mutable Classification | Conflict Detection | Parse-error Events | Downstream QA EM |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Gold annotations | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 0 | 1.0000 |
+| Rule extractor | 1.0000 | 0.7143 | 0.8333 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 0 | 0.8750 |
 
 ## Interpretation
 

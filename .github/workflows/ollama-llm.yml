@@ -170,11 +170,15 @@ jobs:
           NUM_PREDICT: ${{ inputs.num_predict }}
           MODEL_RESULTS_DIR: results/models/${{ steps.ollama-cache-key.outputs.safe_model }}
         run: |
+          EXTRACTOR_NUM_PREDICT="$NUM_PREDICT"
+          if [ "$EXTRACTOR_NUM_PREDICT" -lt 256 ]; then
+            EXTRACTOR_NUM_PREDICT=256
+          fi
           npm run experiment:real -- \
             --llm-extractor \
             --model="$MODEL_NAME" \
             --timeout-ms="$TIMEOUT_MS" \
-            --num-predict="$NUM_PREDICT" \
+            --num-predict="$EXTRACTOR_NUM_PREDICT" \
             --results-dir="$MODEL_RESULTS_DIR/real"
 
       - name: Run extractor benchmark with Ollama extractor
@@ -184,11 +188,15 @@ jobs:
           NUM_PREDICT: ${{ inputs.num_predict }}
           MODEL_RESULTS_DIR: results/models/${{ steps.ollama-cache-key.outputs.safe_model }}
         run: |
+          EXTRACTOR_NUM_PREDICT="$NUM_PREDICT"
+          if [ "$EXTRACTOR_NUM_PREDICT" -lt 256 ]; then
+            EXTRACTOR_NUM_PREDICT=256
+          fi
           npm run experiment:extractor -- \
             --llm-extractor \
             --model="$MODEL_NAME" \
             --timeout-ms="$TIMEOUT_MS" \
-            --num-predict="$NUM_PREDICT" \
+            --num-predict="$EXTRACTOR_NUM_PREDICT" \
             --results-dir="$MODEL_RESULTS_DIR/extractor"
 
       - name: Generate and verify report with new Ollama results

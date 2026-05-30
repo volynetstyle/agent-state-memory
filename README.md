@@ -290,7 +290,9 @@ npm run experiment:extractor -- --llm-extractor --model=llama3.2:3b --results-di
 npm run results
 ```
 
-`RESULTS.md` includes a `Model Comparison` table that reads all `results/models/<safe_model>/` runs and compares Hybrid LLM accuracy, hallucination, real-trace State Memory accuracy, BufferMemory accuracy, and LLM extractor degradation metrics. Running a new model updates that model's row without deleting previous model rows.
+`RESULTS.md` includes a `Model Comparison` table that reads all `results/models/<safe_model>/` runs and compares Hybrid LLM accuracy, hallucination, real-trace State Memory accuracy, BufferMemory accuracy, LLM extractor degradation metrics, and extractor parse-error counts. Running a new model updates that model's row without deleting previous model rows.
+
+The extractor path is tolerant of weaker models that return prose instead of JSON. Invalid extractor responses are recorded as parse-error events with zero extracted facts for that event, so the benchmark captures the model failure as lower extraction recall/downstream QA instead of aborting the whole workflow. The GitHub workflow also gives extractor calls at least 256 generated tokens even when the answer-generation benchmark uses a shorter `num_predict`.
 
 Use this mode in the coursework as an additional validation experiment, not as the primary controlled benchmark.
 

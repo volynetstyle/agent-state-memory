@@ -6,7 +6,7 @@ import test from "node:test";
 import { buildDataset } from "../src/dataset/generateDataset.mjs";
 import { evaluateRag, evaluateStateMemory, runExperiment as runDeterministicExperiment } from "../src/experiments/deterministic.mjs";
 import { availableExperiments, runExperiment } from "../src/experiments/runner.mjs";
-import { buildExtractionPrompt } from "../src/state-memory/llmExtractor.mjs";
+import { buildExtractionPrompt, factsFromLlmText } from "../src/state-memory/llmExtractor.mjs";
 import { buildWorldState } from "../src/state-memory/worldState.mjs";
 
 test("deterministic evaluators produce one result per question", () => {
@@ -76,6 +76,17 @@ test("LLM extractor prompt requests structured mutable facts", () => {
   assert.match(prompt, /subject/u);
   assert.match(prompt, /predicate/u);
   assert.match(prompt, /mutable/u);
+});
+
+test("LLM extractor parser accepts common JSON wrappers", () => {
+  const fenced = factsFromLlmText(`Here is the JSON:\n\`\`\`json\n[{"subject":"Project","predicate":"status","object":"shipped","mutable":true}]\n\`\`\``);
+  const wrapped = factsFromLlmText(
+    '{"facts":[{"subject":"Release","predicate":"owner","object":"Alice","mutable":true}]}'
+  );
+
+  assert.equal(fenced[0].subject, "Project");
+  assert.equal(wrapped[0].predicate, "owner");
+  assert.throws(() => factsFromLlmText("No durable facts found."), /invalid JSON|did not return/u);
 });
 
 test("deterministic experiment writes a coherent result bundle", async () => {

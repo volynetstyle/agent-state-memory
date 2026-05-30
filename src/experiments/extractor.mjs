@@ -254,7 +254,7 @@ function rounded(value) {
 }
 
 function metricRow(run) {
-  return `| ${run.name} | ${rounded(run.metrics.extractionPrecision)} | ${rounded(run.metrics.extractionRecall)} | ${rounded(run.metrics.extractionF1)} | ${rounded(run.metrics.slotAccuracy)} | ${rounded(run.metrics.entityResolutionAccuracy)} | ${rounded(run.metrics.mutableClassificationAccuracy)} | ${rounded(run.metrics.conflictDetectionAccuracy)} | ${rounded(run.qa.exactMatchAccuracy)} |`;
+  return `| ${run.name} | ${rounded(run.metrics.extractionPrecision)} | ${rounded(run.metrics.extractionRecall)} | ${rounded(run.metrics.extractionF1)} | ${rounded(run.metrics.slotAccuracy)} | ${rounded(run.metrics.entityResolutionAccuracy)} | ${rounded(run.metrics.mutableClassificationAccuracy)} | ${rounded(run.metrics.conflictDetectionAccuracy)} | ${run.parseErrorEvents ?? 0} | ${rounded(run.qa.exactMatchAccuracy)} |`;
 }
 
 function buildMarkdown(summary) {
@@ -264,8 +264,8 @@ function buildMarkdown(summary) {
 
 This benchmark evaluates the full raw-event pipeline: raw event text -> extractor -> State Store -> QA.
 
-| Extractor | Extraction Precision | Extraction Recall | Extraction F1 | Slot Accuracy | Entity Resolution | Mutable Classification | Conflict Detection | Downstream QA EM |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Extractor | Extraction Precision | Extraction Recall | Extraction F1 | Slot Accuracy | Entity Resolution | Mutable Classification | Conflict Detection | Parse-error Events | Downstream QA EM |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 ${rows}
 
 Interpretation: the gold extractor is the clean-extraction upper bound. The rule extractor shows how State Memory degrades when extraction misses facts. Passing \`--llm-extractor\` adds a real Ollama-backed LLM extractor to the same benchmark.
@@ -293,6 +293,7 @@ export async function runExtractorBenchmark({
       key: run.key,
       extractor: run.extractor,
       metrics: extractionMetrics(run.events, goldNormalizedEvents),
+      parseErrorEvents: run.events.filter((event) => event.extractionError).length,
       qa: summarizeResults(qaResults),
       resultFiles: {
         extractedEvents: `${run.key}-extracted-events.json`,

@@ -1,17 +1,59 @@
 import { generateWithOllama } from "../llm/ollama.mjs";
 
+export class ExtractorParseError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "ExtractorParseError";
+  }
+}
+
 function jsonFromText(text) {
   const trimmed = String(text ?? "").trim();
-  const fenced = trimmed.match(/```(?:json)?\s*([\s\S]*?)```/u);
-  const candidate = fenced ? fenced[1].trim() : trimmed;
-  const start = candidate.indexOf("[");
-  const end = candidate.lastIndexOf("]");
+  const candidates = [];
+  const fenced = [...trimmed.matchAll(/```(?:json)?\s*([\s\S]*?)```/gu)].map((match) =>
+    match[1].trim()
+  );
 
-  if (start < 0 || end < start) {
-    throw new Error("LLM extractor did not return a JSON array.");
+  candidates.push(...fenced, trimmed);
+
+  for (const candidate of [...candidates]) {
+    const arrayStart = candidate.indexOf("[");
+    const arrayEnd = candidate.lastIndexOf("]");
+    const objectStart = candidate.indexOf("{");
+    const objectEnd = candidate.lastIndexOf("}");
+
+    if (arrayStart >= 0 && arrayEnd > arrayStart) {
+      candidates.push(candidate.slice(arrayStart, arrayEnd + 1));
+    }
+
+    if (objectStart >= 0 && objectEnd > objectStart) {
+      candidates.push(candidate.slice(objectStart, objectEnd + 1));
+    }
   }
 
-  return JSON.parse(candidate.slice(start, end + 1));
+  let lastError = null;
+  for (const candidate of candidates) {
+    try {
+      return JSON.parse(candidate);
+    } catch (error) {
+      lastError = error;
+    }
+  }
+
+  if (lastError) {
+    throw new ExtractorParseError(`LLM extractor returned invalid JSON: ${lastError.message}`);
+  }
+
+  throw new ExtractorParseError("LLM extractor did not return JSON.");
+}
+
+export function factsFromLlmText(text) {
+  const parsed = jsonFromText(text);
+
+  if (Array.isArray(parsed)) return parsed;
+  if (Array.isArray(parsed?.facts)) return parsed.facts;
+
+  throw new ExtractorParseError("LLM extractor JSON payload is not an array.");
 }
 
 function normalizeFact(event, fact, index) {
@@ -35,7 +77,9 @@ function validFact(fact) {
 export function buildExtractionPrompt(event) {
   return `Extract durable agent-memory facts from the event below.
 
-Return only a JSON array. Each item must have:
+Return only a JSON array. Do not use markdown fences or explanatory text.
+If the event contains no durable facts, return [].
+Each item must have:
 - subject: stable entity name
 - predicate: snake_case property name
 - object: concise value string
@@ -50,25 +94,34 @@ ${event.text}
 }
 
 export async function extractFactsWithLlm(event, ollama = {}) {
+  const { failOnError: _failOnError, ...ollamaOptions } = ollama;
   const response = await generateWithOllama(buildExtractionPrompt(event), {
     numPredict: 256,
-    ...ollama
+    ...ollamaOptions
   });
-  const parsedFacts = jsonFromText(response);
-
-  if (!Array.isArray(parsedFacts)) {
-    throw new Error("LLM extractor JSON payload is not an array.");
-  }
+  const parsedFacts = factsFromLlmText(response);
 
   return parsedFacts.map((fact, index) => normalizeFact(event, fact, index)).filter(validFact);
 }
 
 export async function extractEventsWithLlm(events, ollama = {}) {
+  const { failOnError = false, ...ollamaOptions } = ollama;
   const extractedEvents = [];
 
   for (const event of events) {
-    const facts = await extractFactsWithLlm(event, ollama);
-    extractedEvents.push({ ...event, facts });
+    try {
+      const facts = await extractFactsWithLlm(event, ollamaOptions);
+      extractedEvents.push({ ...event, facts });
+    } catch (error) {
+      if (failOnError || !(error instanceof ExtractorParseError)) throw error;
+      extractedEvents.push({
+        ...event,
+        facts: [],
+        extractionError: {
+          message: error.message
+        }
+      });
+    }
   }
 
   return extractedEvents;
