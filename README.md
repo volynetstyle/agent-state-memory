@@ -5,24 +5,24 @@ Minimal reproducible coursework MVP for comparing two memory strategies for long
 - `RAG baseline`: question -> lexical retriever -> relevant event memories -> answer
 - `State Memory`: question -> structured world state -> relevant active facts -> answer
 
-The main experiment is intentionally zero-dependency. It uses deterministic synthetic data and a deterministic answerer so the memory layer can be evaluated without API keys or non-reproducible LLM calls.
+The core experiments are intentionally zero-dependency. They use deterministic synthetic data and deterministic answerers so the memory layer can be evaluated without API keys or non-reproducible LLM calls.
 
-An optional LLM-backed experiment is also included. The deterministic experiment isolates memory quality; the LLM experiment validates the same RAG and State Memory contexts with a real local language model.
+An optional LLM-backed experiment is also included. The oracle experiment isolates memory quality under controlled slot access; the robust experiment removes that shortcut; the LLM experiment validates the same RAG and State Memory contexts with a real local language model.
 
 ## Key Results
 
-### Evolving Current Facts
+### Diagnostic Oracle Current Facts
 
-State Memory avoids stale facts better than lexical RAG in the controlled memory benchmark.
+State Memory avoids stale facts better than lexical RAG when the benchmark gives controlled `subject/predicate` access. This is an oracle-style memory isolation diagnostic, not the main agent-level result.
 
 | System | Exact Match | Stale Error |
 | --- | ---: | ---: |
 | RAG | 0.2143 | 0.7143 |
 | State Memory | 1.0000 | 0.0000 |
 
-### Non-Oracle Robust Questions
+### Main Non-Oracle Robust Questions
 
-Removing oracle slot access reduces State Memory from perfect to more realistic performance.
+Removing oracle slot access makes Temporal RAG the primary baseline. Naive lexical RAG remains useful as a weak baseline that shows what happens without latest-fact handling.
 
 | System | Exact Match | Slot Inference |
 | --- | ---: | ---: |
@@ -39,6 +39,25 @@ Hybrid wins because evolving state and document details need different memory me
 | RAG-only | 0.6765 |
 | State-only | 0.4118 |
 | Hybrid | 1.0000 |
+
+### Real Project Trace
+
+A separate real-trace benchmark uses repository commit history and current project changes rather than generated events.
+
+| System | Exact Match |
+| --- | ---: |
+| Temporal RAG | 1.0000 |
+| State Memory | 1.0000 |
+| LangChain BufferMemory-style | 0.7500 |
+
+### Real Extractor Benchmark
+
+The extractor benchmark evaluates the full raw-event pipeline instead of assuming clean structured facts.
+
+| Extractor | Extraction Precision | Extraction Recall | Downstream QA EM |
+| --- | ---: | ---: | ---: |
+| Gold annotations | 1.0000 | 1.0000 | 1.0000 |
+| Rule extractor | 1.0000 | 0.7143 | 0.8750 |
 
 ## Run
 
@@ -162,6 +181,49 @@ It compares:
 
 The stress results are written to `results/stress/`.
 
+Run the real project trace experiment:
+
+```bash
+npm run experiment:real
+```
+
+This keeps the synthetic benchmarks unchanged and evaluates repository-derived events against:
+
+- Temporal RAG
+- State Memory
+- LangChain ConversationBufferMemory-style baseline
+
+By default, this mode uses curated structured facts stored with `data/real/events.jsonl`, so CI remains deterministic. To use the real local LLM extractor over raw event text, run:
+
+```bash
+npm run experiment:real -- --llm-extractor --model=llama3.2:3b
+```
+
+The real-trace results are written to `results/real/`.
+
+Run the real extractor benchmark:
+
+```bash
+npm run experiment:extractor
+```
+
+This evaluates:
+
+- extraction precision and recall
+- slot accuracy
+- entity resolution accuracy
+- mutable/static classification accuracy
+- conflict detection accuracy
+- downstream State Memory QA accuracy
+
+The default run compares curated gold facts with a deterministic rule extractor for reproducible CI. To add a real local LLM extractor row, run:
+
+```bash
+npm run experiment:extractor -- --llm-extractor --model=llama3.2:3b
+```
+
+The extractor results are written to `results/extractor/`.
+
 ## Optional LLM Experiment
 
 The LLM-backed experiment uses local Ollama by default:
@@ -266,16 +328,22 @@ The most important metric for the coursework argument is `staleFactErrorRate`, b
 
 In the base experiment, the language model is replaced with a deterministic answer module to isolate the quality of the memory mechanism. In the optional experiment, a local LLM is used as the answerer to validate that the same effect can be observed with a real generative component.
 
-This gives two complementary experiments:
+This gives complementary experiments:
 
-- `Experiment 1`: RAG vs State Memory with deterministic answerer over 1000 events.
+- `Experiment 1`: oracle/diagnostic RAG vs State Memory with deterministic answerer over 1000 events.
 - `Experiment 2`: RAG vs State Memory with local LLM answerer over a smaller question subset.
 - `Experiment 3`: RAG-only vs State-only vs Hybrid on mixed structured state and unstructured 100-page document QA.
 - `Experiment 4`: robust non-oracle question answering with paraphrases, noisy wording, temporal multi-step questions and multiple domains.
+- `Experiment 5`: real project trace over repository-derived events with Temporal RAG, State Memory and LangChain BufferMemory-style memory.
+- `Experiment 6`: real extractor benchmark from raw repository-derived events through extractor, State Store and downstream QA.
 
 The third experiment is important for limitations: State Memory is not a replacement for RAG over large unstructured documents. It is a state layer for evolving facts, goals, tasks and user/project state. For document-heavy QA, the stronger architecture is hybrid.
 
-The fourth experiment is important for validity: the base deterministic benchmark intentionally isolates memory quality, but it gives the answerer explicit `subject/predicate` metadata. The robust benchmark removes that shortcut by forcing a slot-inference step from question text before retrieval or state lookup.
+The fourth experiment is the main benchmark for current-state claims: the base deterministic benchmark intentionally isolates memory quality, but it gives the answerer explicit `subject/predicate` metadata. The robust benchmark removes that shortcut by forcing a slot-inference step from question text before retrieval or state lookup, and it compares State Memory against Temporal RAG as the stronger temporal baseline.
+
+The fifth experiment is important for external validity: it uses real repository-derived events rather than generated coursework events, and it includes an external memory-framework style baseline inspired by LangChain ConversationBufferMemory. It is small, so it is validation evidence rather than a replacement for larger benchmarks.
+
+The sixth experiment directly addresses the clean extraction assumption: it measures extractor precision, recall, slot accuracy, entity resolution, conflict detection and downstream QA degradation.
 
 The stress experiment is important for self-criticism: perfect State Memory scores depend on clean extraction. If final updates are missing or facts are assigned to the wrong slot, State Memory degrades. The defensive variant shows practical mitigations: low-confidence facts are rejected into a buffer, conflicting facts are preserved instead of silently overwriting each other, recent versions are retained, and uncertain slots fall back to Temporal RAG. It also shows the remaining hard limit: if extraction fully misses an update, the state layer needs reconciliation against raw events or documents to recover it. Stronger temporal RAG baselines can reduce stale errors, so future work should compare State Memory against temporal-aware RAG instead of only naive RAG.
 
@@ -302,8 +370,8 @@ docker run --rm -e OLLAMA_URL=http://host.docker.internal:11434 coursework-state
 
 GitHub Actions includes:
 
-- `CI/CD`: runs syntax checks on Node 20 and 22, unit/invariant tests, deterministic/mixed/robust/scalability/stress benchmark verification, report validation, CLI smoke checks, Docker image build, and uploads verified artifacts.
-- `Ollama LLM Experiment`: manual workflow that installs Ollama, pulls the selected model, runs `npm run experiment:llm`, regenerates `RESULTS.md`, commits `RESULTS.md` plus `results/llm` back to the branch, and uploads the same files as artifacts.
+- `CI/CD`: runs syntax checks on Node 20 and 22, unit/invariant tests, deterministic/mixed/real/extractor/robust/scalability/stress benchmark verification, report validation, CLI smoke checks, Docker image build, and uploads verified artifacts.
+- `Ollama LLM Experiment`: manual workflow that installs Ollama, pulls the selected model, runs `npm run experiment:llm`, `npm run experiment:real -- --llm-extractor`, and `npm run experiment:extractor -- --llm-extractor`, regenerates `RESULTS.md`, optionally commits `RESULTS.md` plus `results/llm`, `results/real`, and `results/extractor` back to the branch, and uploads the same files as artifacts.
 
 The Ollama workflow caches downloaded model files with `actions/cache`. The first run for a model still downloads it, but later runs restore `${{ github.workspace }}/.ollama/models` before `ollama pull`, so the pull step should become a quick availability check. If a model tag changes or the cache needs to be refreshed, bump the workflow input `cache_version`.
 

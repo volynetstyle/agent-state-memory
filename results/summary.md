@@ -1,6 +1,8 @@
-# Experiment Summary
+# Diagnostic Oracle Experiment Summary
 
 Dataset: 1000 events, 42 questions, 8158 approximate full-history tokens.
+
+This benchmark gives controlled subject/predicate access to isolate memory-state behavior. Treat it as an oracle/diagnostic upper-bound setting rather than the main agent-level result.
 
 | System | Exact Match | F1 | Current Fact Accuracy | Obsolete Rejection | Stale Error | Context Hit | MRR |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -21,4 +23,4 @@ Paired comparison:
 | RAG correct, State wrong | 0 |
 | Both wrong | 0 |
 
-Interpretation: State Memory keeps mutable facts as explicit active/obsolete state, so current-fact questions avoid stale answers in this synthetic benchmark. RAG retrieves raw historical event chunks and can surface old versions of mutable facts.
+Interpretation: State Memory keeps mutable facts as explicit active/obsolete state, so current-fact questions avoid stale answers in this synthetic oracle benchmark. The robust non-oracle benchmark is the main evidence for natural-language question handling.

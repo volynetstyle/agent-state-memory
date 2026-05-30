@@ -197,9 +197,11 @@ function buildMetricsCsv(summary) {
 }
 
 function buildSummaryMarkdown(summary) {
-  return `# Experiment Summary
+  return `# Diagnostic Oracle Experiment Summary
 
 Dataset: ${summary.dataset.events} events, ${summary.dataset.questions} questions, ${summary.dataset.fullHistoryTokens} approximate full-history tokens.
+
+This benchmark gives controlled subject/predicate access to isolate memory-state behavior. Treat it as an oracle/diagnostic upper-bound setting rather than the main agent-level result.
 
 | System | Exact Match | F1 | Current Fact Accuracy | Obsolete Rejection | Stale Error | Context Hit | MRR |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -220,7 +222,7 @@ Paired comparison:
 | RAG correct, State wrong | ${summary.pairedComparison.leftCorrectRightWrong} |
 | Both wrong | ${summary.pairedComparison.bothWrong} |
 
-Interpretation: State Memory keeps mutable facts as explicit active/obsolete state, so current-fact questions avoid stale answers in this synthetic benchmark. RAG retrieves raw historical event chunks and can surface old versions of mutable facts.
+Interpretation: State Memory keeps mutable facts as explicit active/obsolete state, so current-fact questions avoid stale answers in this synthetic oracle benchmark. The robust non-oracle benchmark is the main evidence for natural-language question handling.
 `;
 }
 

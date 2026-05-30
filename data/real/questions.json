@@ -1,0 +1,66 @@
+[
+  {
+    "id": "real-q-001",
+    "question": "What is the current positioning of the oracle result?",
+    "subject": "Oracle result",
+    "predicate": "positioning",
+    "expected": "diagnostic upper-bound",
+    "obsoleteAnswers": []
+  },
+  {
+    "id": "real-q-002",
+    "question": "Which baseline is now primary for the robust benchmark?",
+    "subject": "Robust benchmark",
+    "predicate": "main_baseline",
+    "expected": "Temporal RAG",
+    "obsoleteAnswers": []
+  },
+  {
+    "id": "real-q-003",
+    "question": "What statistical checks does the results report include?",
+    "subject": "Results report",
+    "predicate": "statistics",
+    "expected": "bootstrap confidence intervals and McNemar tests",
+    "obsoleteAnswers": []
+  },
+  {
+    "id": "real-q-004",
+    "question": "What related work does the current report cover?",
+    "subject": "Related work",
+    "predicate": "coverage",
+    "expected": "LangGraph/LangChain, MemGPT, Letta, Temporal RAG",
+    "obsoleteAnswers": []
+  },
+  {
+    "id": "real-q-005",
+    "question": "What is the latest status of the LLM benchmark results?",
+    "subject": "LLM benchmark results",
+    "predicate": "status",
+    "expected": "verified and updated",
+    "obsoleteAnswers": ["updated"]
+  },
+  {
+    "id": "real-q-006",
+    "question": "What does the verification pipeline include?",
+    "subject": "Verification pipeline",
+    "predicate": "includes",
+    "expected": "syntax checks, result verification, and tests",
+    "obsoleteAnswers": []
+  },
+  {
+    "id": "real-q-007",
+    "question": "What condition was refined for results publishing?",
+    "subject": "Results publishing",
+    "predicate": "condition",
+    "expected": "refined",
+    "obsoleteAnswers": []
+  },
+  {
+    "id": "real-q-008",
+    "question": "What cache policy was added for the Ollama workflow?",
+    "subject": "Ollama workflow",
+    "predicate": "cache_policy",
+    "expected": "cache model files",
+    "obsoleteAnswers": []
+  }
+]

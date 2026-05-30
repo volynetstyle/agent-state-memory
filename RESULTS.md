@@ -2,57 +2,64 @@
 This file is generated from `results/**/summary.json` and LLM result files by `npm run results`.
 ## Executive Summary
 
-1. State Memory solves current-state questions much better than lexical RAG under controlled slot access: 1.0000 Exact Match and 0.0000 Stale Error versus RAG at 0.2143 Exact Match and 0.7143 Stale Error.
-2. The deterministic 1.0000 score is not an agent-level result. Removing oracle subject/predicate access reduces State Memory to 0.8269 Exact Match.
-3. Slot inference is the main bottleneck in the robust setup: State no-oracle Exact Match (0.8269) matches slot inference accuracy (0.8269).
+1. The deterministic 1.0000 score is an oracle/diagnostic upper-bound result, not the main agent-level claim.
+2. The main non-oracle comparison is State Memory versus Temporal RAG: State no-oracle reaches 0.8269 Exact Match, while Temporal RAG reaches 0.6923 and naive RAG reaches 0.1346.
+3. The small State-vs-Temporal gap shows that much of the naive-RAG failure comes from missing temporal/latest-fact handling; explicit state still improves accuracy, context hit rate and latency in the robust benchmark.
 4. RAG remains strong for document-detail questions, while State-only fails on document details. Hybrid reaches 1.0000 Exact Match on mixed structured/document tasks.
 5. Defensive State is useful when uncertainty is visible: it recovers near-simultaneous conflicts at 1.0000 Exact Match, but cannot recover missing final updates (0.1429).
 6. State Memory lookup scales with near-constant latency. At 5000 events, RAG averages 15.5933 ms and State Memory averages 0.5495 ms, a 28.4x speedup.
-7. The LLM benchmark supports the same conclusion at generation time: Hybrid + LLM reaches 0.9355 normalized accuracy with 0.0000 hallucination rate.
+7. The LLM benchmark supports hybrid routing: Hybrid + LLM reaches 0.9355 normalized accuracy with 0.0000 hallucination rate.
+8. A real project-trace benchmark is included: State Memory reaches 1.0000 Exact Match, while the LangChain BufferMemory-style baseline reaches 0.7500.
+9. The real extractor benchmark shows extraction sensitivity: the rule extractor reaches 0.7143 extraction recall and 0.8750 downstream QA Exact Match.
 
 ## Level 1: Main Findings
 
 | Finding | Main evidence |
 | --- | --- |
-| State Memory handles current state | Deterministic: 1.0000 vs RAG 0.2143 Exact Match |
-| Non-oracle benchmark removes overclaim | Robust State no-oracle: 0.8269, not 1.0000 |
+| Oracle benchmark is diagnostic | Controlled slot access gives State 1.0000 Exact Match |
+| Temporal RAG is the main baseline | Robust State 0.8269 vs Temporal RAG 0.6923 |
+| Naive RAG is a weak baseline | Robust naive RAG 0.1346 Exact Match |
 | Slot inference is bottleneck | Slot inference = 0.8269 |
 | Hybrid is best for mixed knowledge | Hybrid = 1.0000 in mixed benchmark |
+| Real trace reduces synthetic-only risk | Real project trace: State 1.0000 vs LangChain BufferMemory-style 0.7500 |
+| Extraction quality bounds State Memory | Rule extractor recall 0.7143 -> QA 0.8750 |
 | Defensive policy helps conflicts | Defensive State = 1.0000 in near-simultaneous conflicts |
 | State lookup scales better | 5000 events: State 0.5495 ms vs RAG 15.5933 ms |
 
 ## Research Questions
 
 - **RQ1:** Does explicit State Memory reduce stale fact errors compared to RAG?
-- **RQ2:** Does the advantage remain when oracle subject/predicate access is removed?
+- **RQ2:** Does the advantage remain against Temporal RAG when oracle subject/predicate access is removed?
 - **RQ3:** Is State Memory sufficient for document-detail questions?
 - **RQ4:** How does the approach behave under stress conditions?
 - **RQ5:** How does latency scale with event count?
 - **RQ6:** Does Hybrid improve LLM-based answering?
+- **RQ7:** Does the approach work on a small real project trace and against an external memory-framework baseline?
+- **RQ8:** How does State Memory degrade when real extraction misses facts?
 
 ## Claim -> Evidence -> Limitation
 
-### Claim 1: State Memory is stronger than RAG for evolving current facts
+### Claim 1: The oracle result is a diagnostic upper bound
 
 **Evidence.**
 In the deterministic memory benchmark, State Memory reaches 1.0000 Exact Match and 0.0000 Stale Error, while RAG reaches 0.2143 Exact Match and 0.7143 Stale Error.
 
 **Interpretation.**
-Explicit active/obsolete fact tracking is better suited for evolving facts than lexical retrieval over historical events.
+With structured subject/predicate access, explicit active/obsolete fact tracking can represent the current state without stale retrieved facts.
 
 **Limitation.**
-This benchmark uses structured subject/predicate access, so it measures memory isolation rather than full natural-language question understanding.
+This is an oracle-style memory-isolation benchmark. It should be treated as an upper-bound diagnostic, not as the headline agent result.
 
-### Claim 2: Removing oracle slot access makes the result more realistic
+### Claim 2: State Memory remains stronger than Temporal RAG in the main robust benchmark
 
 **Evidence.**
-In the robust non-oracle benchmark, State Memory drops from 1.0000 deterministic Exact Match to 0.8269. Its slot inference accuracy is also 0.8269.
+In the robust non-oracle benchmark, State Memory reaches 0.8269 Exact Match, compared with Temporal RAG at 0.6923 and naive RAG at 0.1346.
 
 **Interpretation.**
-The memory store is not the only source of error. Natural-language slot inference becomes the limiting stage.
+Naive RAG fails largely because it lacks recency/latest-fact handling. Temporal RAG closes much of that gap, so the remaining State Memory gain is a narrower but more meaningful comparison.
 
 **Limitation.**
-The slot inference module is still lightweight lexical logic, not a trained semantic parser.
+The robust benchmark is still synthetic, and the slot inference module is lightweight lexical logic rather than a trained semantic parser.
 
 ### Claim 3: Hybrid memory is the strongest architecture for mixed knowledge
 
@@ -90,7 +97,7 @@ These timings are local JavaScript measurements, not a full production database 
 ### Claim 6: LLM answering preserves the hybrid advantage
 
 **Evidence.**
-Hybrid + LLM reaches 0.9355 normalized accuracy, above RAG + LLM at 0.8065 and State + LLM at 0.5806.
+Hybrid + LLM reaches 0.9355 normalized accuracy, compared with RAG + LLM at 0.8065 and State + LLM at 0.5806.
 
 **Interpretation.**
 The retrieval/state routing decision remains useful even when a generative model produces the final answer.
@@ -98,12 +105,34 @@ The retrieval/state routing decision remains useful even when a generative model
 **Limitation.**
 LLM latency dominates runtime and depends on the local model, hardware and Ollama configuration.
 
+### Claim 7: Real-trace validation reduces synthetic-only risk
+
+**Evidence.**
+On the real repository-derived project trace, State Memory reaches 1.0000 Exact Match, compared with the LangChain BufferMemory-style baseline at 0.7500.
+
+**Interpretation.**
+Explicit state can retain older but still relevant project facts that fall out of a fixed recent-message buffer.
+
+**Limitation.**
+The real trace is small and repository-specific. It should be treated as a validation slice, not as a broad real-world benchmark.
+
+### Claim 8: Extraction quality is a measurable bottleneck
+
+**Evidence.**
+In the real extractor benchmark, the rule extractor reaches 1.0000 precision, 0.7143 recall and 0.8750 downstream QA Exact Match.
+
+**Interpretation.**
+State Memory degrades when the extractor misses facts, even when the facts it does extract are precise. This makes extraction recall a visible bottleneck rather than a hidden assumption.
+
+**Limitation.**
+The default extractor benchmark runs the deterministic rule extractor for CI. Passing `--llm-extractor` adds a real Ollama-backed LLM extractor, but those results depend on the local model.
+
 ## Level 2: Benchmark Cards
 
-### Deterministic Memory Benchmark
+### Diagnostic Oracle Memory Benchmark
 
 **Purpose.**
-Tests memory correctness when the system has controlled subject/predicate access.
+Tests memory correctness under controlled subject/predicate access as an upper-bound diagnostic.
 
 **Dataset.**
 1000 events and 42 questions.
@@ -132,7 +161,7 @@ paraphrase, indirect, noisy, temporal_multi_step.
 RAG, Temporal RAG and State no-oracle.
 
 **Key result.**
-State no-oracle reaches 0.8269 Exact Match, compared with Temporal RAG at 0.6923 and RAG at 0.1346.
+State no-oracle reaches 0.8269 Exact Match, compared with Temporal RAG at 0.6923 and naive RAG at 0.1346.
 
 **Main failure source.**
 Slot inference accuracy is 0.8269, matching State no-oracle Exact Match.
@@ -199,6 +228,40 @@ Hybrid + LLM reaches 0.9355 normalized accuracy with 0.0000 hallucination rate.
 **Main limitation.**
 LLM output introduces formatting and incomplete-answer errors that are separate from memory retrieval.
 
+### Real Project Trace Benchmark
+
+**Purpose.**
+Reduces synthetic-only bias by evaluating a real repository-derived event trace.
+
+**Dataset.**
+12 real project events and 8 questions.
+
+**Systems.**
+Temporal RAG, State Memory and LangChain ConversationBufferMemory-style baseline.
+
+**Key result.**
+State Memory reaches 1.0000 Exact Match; LangChain BufferMemory-style reaches 0.7500.
+
+**Main limitation.**
+The dataset is intentionally small and should later be expanded with more manually curated real traces.
+
+### Real Extractor Benchmark
+
+**Purpose.**
+Tests the full raw-event pipeline: raw event text -> extractor -> State Store -> QA.
+
+**Dataset.**
+12 real project events, 21 gold facts and 8 downstream questions.
+
+**Systems.**
+Curated gold extractor, deterministic rule extractor, and optional Ollama LLM extractor.
+
+**Key result.**
+The rule extractor reaches 0.7143 extraction recall and 0.8750 downstream QA Exact Match.
+
+**Main limitation.**
+The default report does not include LLM extractor rows unless the benchmark is run with `--llm-extractor`.
+
 ## Derived Metrics
 
 ### Robust Benchmark Deltas
@@ -223,18 +286,48 @@ LLM output introduces formatting and incomplete-answer errors that are separate 
 | ---: | ---: | ---: | ---: |
 | 5000 | 15.5933 | 0.5495 | 28.4x |
 
+## Statistical Checks
+
+Bootstrap confidence intervals use 1000 deterministic resamples over question-level results and report 95% intervals for Exact Match and F1. McNemar exact tests use paired exact-match outcomes for systems evaluated on the same question IDs.
+
+| Benchmark | System | Exact Match 95% CI | F1 95% CI |
+| --- | --- | ---: | ---: |
+| Diagnostic oracle | RAG | 0.2143 [0.0952, 0.3571] | 0.2169 [0.0952, 0.3571] |
+| Diagnostic oracle | State Memory | 1.0000 [1.0000, 1.0000] | 1.0000 [1.0000, 1.0000] |
+| Robust non-oracle | RAG | 0.1346 [0.0577, 0.2308] | 0.1443 [0.0606, 0.2424] |
+| Robust non-oracle | Temporal RAG | 0.6923 [0.5577, 0.8077] | 0.7579 [0.6304, 0.8600] |
+| Robust non-oracle | State no-oracle | 0.8269 [0.7115, 0.9231] | 0.8431 [0.7400, 0.9412] |
+| Mixed | RAG-only | 0.6765 [0.5882, 0.7745] | 0.6798 [0.5882, 0.7745] |
+| Mixed | State-only | 0.4118 [0.3137, 0.5000] | 0.5833 [0.4776, 0.6667] |
+| Mixed | Hybrid | 1.0000 [1.0000, 1.0000] | 1.0000 [1.0000, 1.0000] |
+| Real trace | Temporal RAG | 1.0000 [1.0000, 1.0000] | 1.0000 [1.0000, 1.0000] |
+| Real trace | State Memory | 1.0000 [1.0000, 1.0000] | 1.0000 [1.0000, 1.0000] |
+| Real trace | LangChain BufferMemory-style | 0.7500 [0.5000, 1.0000] | 0.8571 [0.6667, 1.0000] |
+
+| Benchmark | Comparison | Paired N | Candidate-only wins | Baseline-only wins | McNemar p | Note |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| Diagnostic oracle | State Memory vs RAG | 42 | 33 | 0 | <0.0001 | paired difference detected |
+| Robust non-oracle | Temporal RAG vs naive RAG | 52 | 29 | 0 | <0.0001 | paired difference detected |
+| Robust non-oracle | State no-oracle vs Temporal RAG | 52 | 7 | 0 | 0.0156 | paired difference detected |
+| Mixed | Hybrid vs RAG-only | 102 | 33 | 0 | <0.0001 | paired difference detected |
+| Mixed | Hybrid vs State-only | 102 | 60 | 0 | <0.0001 | paired difference detected |
+| Real trace | State Memory vs LangChain BufferMemory-style | 8 | 2 | 0 | 0.5000 | not significant on this sample |
+
+These tests quantify uncertainty on the fixed benchmark samples. They do not remove the synthetic-data and benchmark-design limitations described below.
+
 ## Pipeline Breakdown
 
 | Stage | Metric | Result |
 | --- | --- | --- |
 | Event generation | deterministic seed | seeded synthetic events |
-| Fact extraction | extraction accuracy | Not directly measured; stress tests simulate extraction failures |
-| State update | stale rejection | 1.0000 obsolete rejection in deterministic benchmark |
+| Fact extraction | extraction accuracy | Real extractor benchmark reports precision, recall, slot, entity and conflict metrics |
+| State update | stale rejection | 1.0000 obsolete rejection in the diagnostic oracle benchmark |
 | Slot inference | slot accuracy | 0.8269 in robust non-oracle benchmark |
 | State selection / retrieval | context hit | 0.8846 for State no-oracle; 0.7308 for Temporal RAG |
 | Answering | exact match | 0.8269 State no-oracle Exact Match |
 | Document retrieval | document-detail accuracy | Hybrid 1.0000; State-only 0.0000 |
 | LLM output | hallucination rate | Hybrid + LLM 0.0000 |
+| Real-trace validation | external framework baseline | State Memory vs LangChain BufferMemory-style |
 
 The key diagnostic result is that State Memory degrades primarily at the natural-language slot inference stage, not because explicit active/obsolete state is ineffective.
 
@@ -250,25 +343,46 @@ This is expected: a state-based system cannot infer the final state if the final
 
 In the mixed benchmark, State-only scores 0.0000 on document-detail questions. This is not a failure of state update logic; it shows that arbitrary document details should remain in a retrieval/document memory path.
 
+## Threats To Validity
+
+- **Synthetic data bias:** the events, facts and questions are generated in a controlled environment. The experiments show behavior under designed temporal-memory conditions, not proven superiority on arbitrary real agent tasks.
+- **Oracle access:** the deterministic benchmark uses structured subject/predicate access and is therefore an oracle/diagnostic upper-bound setting. The robust benchmark is the main evidence for non-oracle behavior.
+- **Baseline strength:** naive lexical RAG is intentionally weak for temporal updates. Temporal RAG is the primary implemented baseline for current-fact claims, but the project still does not benchmark production vector stores, learned retrievers or full agent frameworks.
+- **Extraction assumptions:** the main experiments use clean structured facts. The extractor benchmark measures fact precision, recall, slot accuracy, entity resolution, mutable classification and conflict detection, but the default CI run uses a deterministic rule extractor; LLM extractor scores require a local Ollama run.
+- **Limited real-world validation:** the robust benchmark adds semi-realistic calendar, CRM, task, shopping and support-chat domains, and the real-trace benchmark adds repository-derived events. The real trace is still small and should be expanded.
+- **Sample size:** question counts are modest, so confidence intervals and McNemar tests should be read as benchmark diagnostics rather than universal population estimates.
+
+## Related Work Positioning
+
+| Approach | Memory model | Relationship to this project | Status in this coursework |
+| --- | --- | --- | --- |
+| [LangGraph persistence and stores](https://docs.langchain.com/oss/python/langgraph/persistence) | Thread state checkpoints plus cross-thread stores with optional semantic search | Closest framework-level analogue for persisted graph state and long-term user/application memory | Conceptual comparison; not implemented as a runtime baseline |
+| [LangChain memory concepts](https://docs.langchain.com/oss/python/concepts/memory) | Short-term thread state and long-term namespaced memory | Provides the broader agent-memory architecture around which LangGraph state stores are positioned | Implemented as a ConversationBufferMemory-style real-trace baseline |
+| [MemGPT](https://arxiv.org/abs/2310.08560) | OS-inspired virtual context management across memory tiers | Related motivation: managing limited context by moving information between active and external memory | Conceptual comparison; no MemGPT runtime baseline |
+| [Letta stateful agents](https://docs.letta.com/guides/core-concepts/stateful-agents) and [memory blocks](https://docs.letta.com/guides/core-concepts/memory/memory-blocks) | Persistent editable memory blocks pinned into context plus external memory | Similar emphasis on persistent agent state, but Letta memory blocks are agent-managed text/context units rather than deterministic slot records | Conceptual comparison; no Letta baseline |
+| Temporal RAG in this repo | Recency reranking plus latest-fact answering over raw events | Strongest implemented retrieval baseline for temporal updates | Main baseline for robust current-state claims |
+
 ## Failure Taxonomy
 
 | Error type | Count | Systems affected | Source |
 | --- | ---: | --- | --- |
-| stale_fact | 30 | RAG | Deterministic benchmark |
+| stale_fact | 30 | RAG | Diagnostic oracle benchmark |
 | slot_inference_failed | 9 | State no-oracle | Robust benchmark |
 | incomplete_answer | 8 | RAG + LLM, State + LLM, Hybrid + LLM | Mixed LLM benchmark |
 | missing_fact | 13 | RAG + LLM, State + LLM | Mixed LLM benchmark |
 
-The deterministic and robust rows come from aggregate summaries. The LLM rows are counted from full result files, not only from the displayed failure examples.
+The diagnostic oracle and robust rows come from aggregate summaries. The LLM rows are counted from full result files, not only from the displayed failure examples.
 
 ## Recommended Visualizations
 
 | Visualization | What it should show | Data source |
 | --- | --- | --- |
 | Accuracy overview bar chart | RAG, Temporal RAG, State Memory and Hybrid across main benchmarks | summary JSON files |
-| Quality vs latency scatter plot | Accuracy/normalized accuracy versus average latency | deterministic, robust, mixed and LLM summaries |
+| Quality vs latency scatter plot | Accuracy/normalized accuracy versus average latency | diagnostic oracle, robust, mixed and LLM summaries |
 | Scalability line chart | RAG and State latency from 100 to 5000 events | results/scalability/summary.json |
 | Robust benchmark heatmap | paraphrase, indirect, noisy and temporal_multi_step by system plus slot inference | results/robust/summary.json |
+| Real trace comparison | Temporal RAG, State Memory and LangChain BufferMemory-style on repository events | results/real/summary.json |
+| Extractor degradation chart | Extraction recall versus downstream State Memory QA | results/extractor/summary.json |
 | Failure taxonomy chart | incomplete_answer, missing_fact, possible_hallucination, stale_fact and slot_inference_failed | LLM result files plus robust summaries |
 
 ## Metric Definitions
@@ -282,15 +396,19 @@ The deterministic and robust rows come from aggregate summaries. The LLM rows ar
 - **Context Hit:** whether the relevant supporting context was retrieved or selected.
 - **MRR:** mean reciprocal rank of the first relevant retrieved item.
 - **Slot Inference Accuracy:** whether the system inferred the correct subject/predicate from a natural-language question.
+- **Extraction Precision:** share of extracted facts that exactly match a gold subject/predicate/object fact.
+- **Extraction Recall:** share of gold subject/predicate/object facts recovered by the extractor.
+- **Entity Resolution Accuracy:** share of extracted facts whose subject matches a gold entity.
+- **Conflict Detection Accuracy:** agreement between predicted and gold mutable-slot replacement events.
 - **Fallback Rate:** how often the defensive system refused direct state answering and fell back to temporal RAG.
 - **Prompt Compliance:** whether the LLM followed the requested answer format.
 - **Hallucination Rate:** rate of LLM answers that introduce unsupported content.
 
 ## Level 3: Raw Benchmark Tables
 
-### Deterministic Memory Benchmark
+### Diagnostic Oracle Memory Benchmark
 
-Dataset: 1000 events, 42 questions.
+Dataset: 1000 events, 42 questions. This benchmark provides controlled subject/predicate access and should be read as an upper-bound memory-isolation diagnostic.
 
 | System | Exact Match | F1 | Current Fact Accuracy | Obsolete Rejection | Stale Error | Context Hit | MRR |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -433,6 +551,31 @@ Top failure examples:
 | state | stable_state | incomplete_answer | implementation, experiments, metrics, baseline comparison, error analysis, conclusions | experiments and conclusions |
 | state | stable_state | incomplete_answer | event logging, fact extraction, state update, state selection, prompt building | state selection, event logging, fact extraction, prompt building |
 | state | document_detail | missing_fact | VALUE-001-1 | UNKNOWN |
+
+### Real Project Trace Benchmark
+
+Dataset: 12 real repository-derived events, 8 questions.
+
+Extractor mode: annotated-real-trace.
+
+| System | Exact Match | F1 | Context Hit | Avg Context Tokens | Avg Latency ms |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Temporal RAG | 1.0000 | 1.0000 | 1.0000 | 52.5000 | 0.2721 |
+| State Memory | 1.0000 | 1.0000 | 1.0000 | 56.5000 | 1.0154 |
+| LangChain BufferMemory-style | 0.7500 | 0.8571 | 0.7500 | 70.0000 | 0.0259 |
+
+| Comparison | Candidate-only wins | Baseline-only wins | McNemar p |
+| --- | ---: | ---: | ---: |
+| State Memory vs LangChain BufferMemory-style | 2 | 0 | 0.5000 |
+
+### Real Extractor Benchmark
+
+Dataset: 12 raw repository-derived events, 21 gold facts, 8 downstream questions.
+
+| Extractor | Extraction Precision | Extraction Recall | Extraction F1 | Slot Accuracy | Entity Resolution | Mutable Classification | Conflict Detection | Downstream QA EM |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Gold annotations | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 1.0000 |
+| Rule extractor | 1.0000 | 0.7143 | 0.8333 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | 0.8750 |
 
 ## Interpretation
 

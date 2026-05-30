@@ -66,6 +66,47 @@ function f1Score(precision, recall) {
   return precision + recall === 0 ? 0 : (2 * precision * recall) / (precision + recall);
 }
 
+function createPrng(seed) {
+  let state = seed >>> 0;
+
+  return function next() {
+    state = (1664525 * state + 1013904223) >>> 0;
+    return state / 0x100000000;
+  };
+}
+
+function quantile(sortedValues, probability) {
+  if (sortedValues.length === 0) return 0;
+  if (sortedValues.length === 1) return sortedValues[0];
+
+  const index = probability * (sortedValues.length - 1);
+  const lower = Math.floor(index);
+  const upper = Math.ceil(index);
+  const weight = index - lower;
+
+  return sortedValues[lower] * (1 - weight) + sortedValues[upper] * weight;
+}
+
+function bootstrapSample(results, random) {
+  const sample = [];
+
+  for (let index = 0; index < results.length; index += 1) {
+    sample.push(results[Math.floor(random() * results.length)]);
+  }
+
+  return sample;
+}
+
+function interval(values, confidenceLevel) {
+  const alpha = 1 - confidenceLevel;
+  const sorted = [...values].sort((left, right) => left - right);
+
+  return {
+    lower: quantile(sorted, alpha / 2),
+    upper: quantile(sorted, 1 - alpha / 2)
+  };
+}
+
 function classifyError(result) {
   if (result.correct) return "none";
   if (result.staleFactError) return "stale_fact";
@@ -155,6 +196,49 @@ export function summarizeResults(results) {
   };
 }
 
+export function bootstrapMetricIntervals(
+  results,
+  { iterations = 1000, confidenceLevel = 0.95, seed = 12345 } = {}
+) {
+  if (results.length === 0) {
+    return {
+      iterations,
+      confidenceLevel,
+      seed,
+      exactMatchAccuracy: { estimate: 0, lower: 0, upper: 0 },
+      f1Score: { estimate: 0, lower: 0, upper: 0 }
+    };
+  }
+
+  const random = createPrng(seed);
+  const exactMatchValues = [];
+  const f1Values = [];
+
+  for (let iteration = 0; iteration < iterations; iteration += 1) {
+    const summary = summarizeResults(bootstrapSample(results, random));
+    exactMatchValues.push(summary.exactMatchAccuracy);
+    f1Values.push(summary.f1Score);
+  }
+
+  const pointEstimate = summarizeResults(results);
+  const exactMatchInterval = interval(exactMatchValues, confidenceLevel);
+  const f1Interval = interval(f1Values, confidenceLevel);
+
+  return {
+    iterations,
+    confidenceLevel,
+    seed,
+    exactMatchAccuracy: {
+      estimate: pointEstimate.exactMatchAccuracy,
+      ...exactMatchInterval
+    },
+    f1Score: {
+      estimate: pointEstimate.f1Score,
+      ...f1Interval
+    }
+  };
+}
+
 function resultsByQuestionId(results) {
   const byId = new Map();
 
@@ -185,4 +269,45 @@ export function pairedComparison(leftResults, rightResults) {
   }
 
   return comparison;
+}
+
+function binomialLowerTail(n, k) {
+  let term = 2 ** -n;
+  let sum = term;
+
+  for (let i = 1; i <= k; i += 1) {
+    term *= (n - i + 1) / i;
+    sum += term;
+  }
+
+  return sum;
+}
+
+export function mcnemarExactTest(leftResults, rightResults) {
+  const comparison = pairedComparison(leftResults, rightResults);
+  const discordant =
+    comparison.rightCorrectLeftWrong + comparison.leftCorrectRightWrong;
+  const smallerDiscordant = Math.min(
+    comparison.rightCorrectLeftWrong,
+    comparison.leftCorrectRightWrong
+  );
+  const pValue =
+    discordant === 0 ? 1 : Math.min(1, 2 * binomialLowerTail(discordant, smallerDiscordant));
+  const statistic =
+    discordant === 0
+      ? 0
+      : ((Math.abs(comparison.rightCorrectLeftWrong - comparison.leftCorrectRightWrong) - 1) ** 2) /
+        discordant;
+
+  return {
+    ...comparison,
+    pairedCount:
+      comparison.bothCorrect +
+      comparison.rightCorrectLeftWrong +
+      comparison.leftCorrectRightWrong +
+      comparison.bothWrong,
+    discordant,
+    statistic,
+    pValue
+  };
 }

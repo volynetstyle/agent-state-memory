@@ -160,33 +160,59 @@ jobs:
             --timeout-ms="$TIMEOUT_MS" \
             --num-predict="$NUM_PREDICT"
 
-      - name: Generate and verify report with new LLM results
+      - name: Run real trace with Ollama extractor
+        env:
+          MODEL_NAME: ${{ inputs.model }}
+          TIMEOUT_MS: ${{ inputs.timeout_ms }}
+          NUM_PREDICT: ${{ inputs.num_predict }}
+        run: |
+          npm run experiment:real -- \
+            --llm-extractor \
+            --model="$MODEL_NAME" \
+            --timeout-ms="$TIMEOUT_MS" \
+            --num-predict="$NUM_PREDICT"
+
+      - name: Run extractor benchmark with Ollama extractor
+        env:
+          MODEL_NAME: ${{ inputs.model }}
+          TIMEOUT_MS: ${{ inputs.timeout_ms }}
+          NUM_PREDICT: ${{ inputs.num_predict }}
+        run: |
+          npm run experiment:extractor -- \
+            --llm-extractor \
+            --model="$MODEL_NAME" \
+            --timeout-ms="$TIMEOUT_MS" \
+            --num-predict="$NUM_PREDICT"
+
+      - name: Generate and verify report with new Ollama results
         run: |
           npm run results
           node scripts/verifyResults.mjs
-          node scripts/ensureAllowedChanges.mjs RESULTS.md results/llm/
+          node scripts/ensureAllowedChanges.mjs RESULTS.md results/llm/ results/real/ results/extractor/
 
       - name: Commit verified LLM results
         if: ${{ inputs.publish_results == true }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add RESULTS.md results/llm
-          node scripts/ensureAllowedChanges.mjs RESULTS.md results/llm/
+          git add RESULTS.md results/llm results/real results/extractor
+          node scripts/ensureAllowedChanges.mjs RESULTS.md results/llm/ results/real/ results/extractor/
           if git diff --cached --quiet; then
-            echo "No verified LLM result changes to commit."
+            echo "No verified Ollama result changes to commit."
           else
-            git commit -m "Update verified LLM results"
+            git commit -m "Update verified Ollama results"
             git push
           fi
 
-      - name: Upload LLM results
+      - name: Upload Ollama results
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: llm-results-${{ github.run_id }}
+          name: ollama-results-${{ github.run_id }}
           if-no-files-found: warn
           path: |
             RESULTS.md
             results/llm
+            results/real
+            results/extractor
             ollama.log

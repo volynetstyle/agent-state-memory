@@ -1,6 +1,13 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { gradeAnswer, gradeGeneratedAnswer, pairedComparison, summarizeResults } from "../src/eval/metrics.mjs";
+import {
+  bootstrapMetricIntervals,
+  gradeAnswer,
+  gradeGeneratedAnswer,
+  mcnemarExactTest,
+  pairedComparison,
+  summarizeResults
+} from "../src/eval/metrics.mjs";
 import { gradeLlmAnswer, normalizeLlmAnswer, summarizeLlmResults } from "../src/eval/llmGrading.mjs";
 
 test("gradeAnswer handles scalar, list and stale answers", () => {
@@ -68,6 +75,31 @@ test("summarizeResults aggregates rates and paired comparison", () => {
     leftCorrectRightWrong: 0,
     bothWrong: 0
   });
+});
+
+test("bootstrap intervals and McNemar test use paired question outcomes", () => {
+  const left = [
+    { questionId: "q1", answered: true, correct: true, staleFactError: false, contextTokens: 1, latencyMs: 1 },
+    { questionId: "q2", answered: true, correct: false, staleFactError: false, contextTokens: 1, latencyMs: 1 },
+    { questionId: "q3", answered: true, correct: false, staleFactError: false, contextTokens: 1, latencyMs: 1 },
+    { questionId: "q4", answered: true, correct: false, staleFactError: false, contextTokens: 1, latencyMs: 1 }
+  ];
+  const right = [
+    { questionId: "q1", answered: true, correct: true, staleFactError: false, contextTokens: 1, latencyMs: 1 },
+    { questionId: "q2", answered: true, correct: true, staleFactError: false, contextTokens: 1, latencyMs: 1 },
+    { questionId: "q3", answered: true, correct: true, staleFactError: false, contextTokens: 1, latencyMs: 1 },
+    { questionId: "q4", answered: true, correct: false, staleFactError: false, contextTokens: 1, latencyMs: 1 }
+  ];
+  const intervals = bootstrapMetricIntervals(right, { iterations: 100, seed: 7 });
+  const testResult = mcnemarExactTest(left, right);
+
+  assert.equal(intervals.exactMatchAccuracy.estimate, 0.75);
+  assert.ok(intervals.exactMatchAccuracy.lower <= 0.75);
+  assert.ok(intervals.exactMatchAccuracy.upper >= 0.75);
+  assert.equal(testResult.rightCorrectLeftWrong, 2);
+  assert.equal(testResult.leftCorrectRightWrong, 0);
+  assert.equal(testResult.discordant, 2);
+  assert.equal(testResult.pValue, 0.5);
 });
 
 test("LLM grading separates normalization, missing facts and hallucination", () => {

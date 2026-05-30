@@ -62,6 +62,12 @@ jobs:
       - name: Run mixed structured/document benchmark
         run: npm run experiment:mixed
 
+      - name: Run real project trace benchmark
+        run: npm run experiment:real
+
+      - name: Run real extractor benchmark
+        run: npm run experiment:extractor
+
       - name: Run robust non-oracle benchmark
         run: npm run experiment:robust
 
@@ -104,6 +110,9 @@ jobs:
 
       - name: LLM dry run without Ollama
         run: npm run experiment:llm -- --dry-run
+
+      - name: LLM extractor benchmark dry run without Ollama
+        run: npm run experiment:extractor
 
       - name: Import public module entry points
         run: |

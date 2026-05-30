@@ -10,8 +10,11 @@ const REQUIRED_REPORT_SECTIONS = [
   "## Claim -> Evidence -> Limitation",
   "## Level 2: Benchmark Cards",
   "## Derived Metrics",
+  "## Statistical Checks",
   "## Pipeline Breakdown",
   "## Negative Results",
+  "## Threats To Validity",
+  "## Related Work Positioning",
   "## Failure Taxonomy",
   "## Recommended Visualizations",
   "## Metric Definitions",
@@ -56,6 +59,8 @@ const robust = await readJson("results/robust/summary.json");
 const stress = await readJson("results/stress/summary.json");
 const scalability = await readJson("results/scalability/summary.json");
 const llm = await readJson("results/llm/summary.json");
+const real = await readJson("results/real/summary.json");
+const extractor = await readJson("results/extractor/summary.json");
 const llmResultSets = {
   rag: await readJson("results/llm/rag-llm-results.json"),
   state: await readJson("results/llm/state-llm-results.json"),
@@ -147,6 +152,23 @@ assert.ok(
   "Hybrid + LLM must outperform State + LLM on normalized accuracy"
 );
 
+assert.equal(real.dataset.events, 12, "real trace event count");
+assert.equal(real.dataset.questions, 8, "real trace question count");
+approximately(real.stateMemory.exactMatchAccuracy, 1, "real trace State EM");
+assert.ok(
+  real.stateMemory.exactMatchAccuracy >= real.langChainBufferMemory.exactMatchAccuracy,
+  "State Memory should match or outperform LangChain BufferMemory-style on real trace"
+);
+
+const goldExtractor = extractor.extractors.find((item) => item.key === "gold");
+const ruleExtractor = extractor.extractors.find((item) => item.key === "rule");
+assert.equal(extractor.dataset.events, 12, "extractor event count");
+assert.equal(extractor.dataset.goldFacts, 21, "extractor gold fact count");
+approximately(goldExtractor.metrics.extractionRecall, 1, "gold extractor recall");
+approximately(goldExtractor.qa.exactMatchAccuracy, 1, "gold extractor downstream QA");
+assert.ok(ruleExtractor.metrics.extractionRecall < 1, "rule extractor should miss some facts");
+assert.ok(ruleExtractor.qa.exactMatchAccuracy < 1, "rule extractor misses should affect QA");
+
 const beforeReport = await readFile("RESULTS.md", "utf8");
 await generateResultsReport();
 const afterReport = await readFile("RESULTS.md", "utf8");
@@ -158,6 +180,10 @@ for (const section of REQUIRED_REPORT_SECTIONS) {
 
 assertReportContains(afterReport, `${oneDecimal(lastScaleSpeedup)}x speedup`);
 assertReportContains(afterReport, "State Memory cannot recover facts that were never stored");
+assertReportContains(afterReport, "Real Project Trace Benchmark");
+assertReportContains(afterReport, "Real Extractor Benchmark");
+assertReportContains(afterReport, "Extraction Precision");
+assertReportContains(afterReport, "LangChain BufferMemory-style");
 assertReportContains(afterReport, "The experiments do not show that State Memory is a universal replacement for RAG.");
 
 console.log("Result verification passed.");

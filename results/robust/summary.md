@@ -1,6 +1,6 @@
 # Robust Question Experiment
 
-This benchmark removes the oracle lookup assumption: systems receive only the question text and must infer the target subject/predicate slot before answering. The slot metadata is used only for grading.
+This is the main non-oracle current-state benchmark. Systems receive only the question text and must infer the target subject/predicate slot before answering. The slot metadata is used only for grading. Temporal RAG is the primary retrieval baseline; naive RAG is retained as a weak baseline.
 
 | System | Exact Match | Current Fact Accuracy | Context Hit | Slot Inference Accuracy | Avg Context Tokens | Avg Latency ms |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -28,4 +28,4 @@ Accuracy by domain:
 | shopping | 0.0000 | 1.0000 | 1.0000 | 1.0000 |
 | chat | 0.5000 | 1.0000 | 1.0000 | 1.0000 |
 
-Interpretation: this is a harder benchmark than the base memory-isolation experiment. It includes paraphrased, indirect, noisy and temporal multi-step questions across coursework memory plus calendar, CRM, task, shopping and chat domains.
+Interpretation: this is a harder benchmark than the oracle memory-isolation experiment. Temporal RAG closes much of the naive-RAG gap, which means the measured State Memory advantage should be read against the stronger recency/latest-fact baseline. The benchmark includes paraphrased, indirect, noisy and temporal multi-step questions across coursework memory plus calendar, CRM, task, shopping and chat domains.

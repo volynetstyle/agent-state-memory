@@ -1,5 +1,6 @@
 import { existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
+import { bootstrapMetricIntervals, mcnemarExactTest } from "../eval/metrics.mjs";
 import { readJson, writeText } from "../shared/io.mjs";
 
 const OUT = "RESULTS.md";
@@ -16,6 +17,17 @@ function rounded(value) {
 function oneDecimal(value) {
   if (typeof value !== "number" || Number.isNaN(value)) return "n/a";
   return Number(value).toFixed(1);
+}
+
+function pValue(value) {
+  if (typeof value !== "number" || Number.isNaN(value)) return "n/a";
+  if (value < 0.0001) return "<0.0001";
+  return Number(value).toFixed(4);
+}
+
+function metricIntervalCell(interval) {
+  if (!interval) return "n/a";
+  return `${rounded(interval.estimate)} [${rounded(interval.lower)}, ${rounded(interval.upper)}]`;
 }
 
 function tableCell(value) {
@@ -49,7 +61,7 @@ function lastScalabilityRow(scalability) {
   return scalability?.rows?.at(-1) ?? null;
 }
 
-function executiveSummary({ main, mixed, robust, stress, scalability, llm }) {
+function executiveSummary({ main, mixed, robust, stress, scalability, llm, real, extractor }) {
   if (!main || !mixed || !robust || !stress || !scalability) return "";
 
   const missingUpdates = scenarioByName(stress, "missing_final_updates");
@@ -59,36 +71,43 @@ function executiveSummary({ main, mixed, robust, stress, scalability, llm }) {
     lastScale?.rag.averageLatencyMsMean,
     lastScale?.stateMemory.averageLatencyMsMean
   );
+  const ruleExtractor = extractor?.extractors?.find((item) => item.key === "rule");
 
   return section(
     "Executive Summary",
     `
-1. State Memory solves current-state questions much better than lexical RAG under controlled slot access: ${rounded(main.stateMemory.exactMatchAccuracy)} Exact Match and ${rounded(main.stateMemory.staleFactErrorRate)} Stale Error versus RAG at ${rounded(main.rag.exactMatchAccuracy)} Exact Match and ${rounded(main.rag.staleFactErrorRate)} Stale Error.
-2. The deterministic ${rounded(main.stateMemory.exactMatchAccuracy)} score is not an agent-level result. Removing oracle subject/predicate access reduces State Memory to ${rounded(robust.stateNoOracle.exactMatchAccuracy)} Exact Match.
-3. Slot inference is the main bottleneck in the robust setup: State no-oracle Exact Match (${rounded(robust.stateNoOracle.exactMatchAccuracy)}) matches slot inference accuracy (${rounded(robust.stateNoOracle.slotInferenceAccuracy)}).
+1. The deterministic ${rounded(main.stateMemory.exactMatchAccuracy)} score is an oracle/diagnostic upper-bound result, not the main agent-level claim.
+2. The main non-oracle comparison is State Memory versus Temporal RAG: State no-oracle reaches ${rounded(robust.stateNoOracle.exactMatchAccuracy)} Exact Match, while Temporal RAG reaches ${rounded(robust.temporalRag.exactMatchAccuracy)} and naive RAG reaches ${rounded(robust.rag.exactMatchAccuracy)}.
+3. The small State-vs-Temporal gap shows that much of the naive-RAG failure comes from missing temporal/latest-fact handling; explicit state still improves accuracy, context hit rate and latency in the robust benchmark.
 4. RAG remains strong for document-detail questions, while State-only fails on document details. Hybrid reaches ${rounded(mixed.hybrid.exactMatchAccuracy)} Exact Match on mixed structured/document tasks.
 5. Defensive State is useful when uncertainty is visible: it recovers near-simultaneous conflicts at ${rounded(nearConflicts?.defensiveStateMemory.exactMatchAccuracy)} Exact Match, but cannot recover missing final updates (${rounded(missingUpdates?.defensiveStateMemory.exactMatchAccuracy)}).
 6. State Memory lookup scales with near-constant latency. At ${lastScale?.eventCount} events, RAG averages ${rounded(lastScale?.rag.averageLatencyMsMean)} ms and State Memory averages ${rounded(lastScale?.stateMemory.averageLatencyMsMean)} ms, a ${oneDecimal(scaleSpeedup)}x speedup.
-7. The LLM benchmark supports the same conclusion at generation time: Hybrid + LLM reaches ${rounded(llm?.hybrid?.normalizedAccuracy)} normalized accuracy with ${rounded(llm?.hybrid?.hallucinationRate)} hallucination rate.
+7. The LLM benchmark supports hybrid routing: Hybrid + LLM reaches ${rounded(llm?.hybrid?.normalizedAccuracy)} normalized accuracy with ${rounded(llm?.hybrid?.hallucinationRate)} hallucination rate.
+8. A real project-trace benchmark is included: State Memory reaches ${rounded(real?.stateMemory?.exactMatchAccuracy)} Exact Match, while the LangChain BufferMemory-style baseline reaches ${rounded(real?.langChainBufferMemory?.exactMatchAccuracy)}.
+9. The real extractor benchmark shows extraction sensitivity: the rule extractor reaches ${rounded(ruleExtractor?.metrics.extractionRecall)} extraction recall and ${rounded(ruleExtractor?.qa.exactMatchAccuracy)} downstream QA Exact Match.
 `
   );
 }
 
-function mainFindings({ main, mixed, robust, stress, scalability }) {
+function mainFindings({ main, mixed, robust, stress, scalability, real, extractor }) {
   if (!main || !mixed || !robust || !stress || !scalability) return "";
 
   const conflictScenario = scenarioByName(stress, "near_simultaneous_conflicts");
   const lastScale = lastScalabilityRow(scalability);
+  const ruleExtractor = extractor?.extractors?.find((item) => item.key === "rule");
 
   return section(
     "Level 1: Main Findings",
     `
 | Finding | Main evidence |
 | --- | --- |
-| State Memory handles current state | Deterministic: ${rounded(main.stateMemory.exactMatchAccuracy)} vs RAG ${rounded(main.rag.exactMatchAccuracy)} Exact Match |
-| Non-oracle benchmark removes overclaim | Robust State no-oracle: ${rounded(robust.stateNoOracle.exactMatchAccuracy)}, not ${rounded(main.stateMemory.exactMatchAccuracy)} |
+| Oracle benchmark is diagnostic | Controlled slot access gives State ${rounded(main.stateMemory.exactMatchAccuracy)} Exact Match |
+| Temporal RAG is the main baseline | Robust State ${rounded(robust.stateNoOracle.exactMatchAccuracy)} vs Temporal RAG ${rounded(robust.temporalRag.exactMatchAccuracy)} |
+| Naive RAG is a weak baseline | Robust naive RAG ${rounded(robust.rag.exactMatchAccuracy)} Exact Match |
 | Slot inference is bottleneck | Slot inference = ${rounded(robust.stateNoOracle.slotInferenceAccuracy)} |
 | Hybrid is best for mixed knowledge | Hybrid = ${rounded(mixed.hybrid.exactMatchAccuracy)} in mixed benchmark |
+| Real trace reduces synthetic-only risk | Real project trace: State ${rounded(real?.stateMemory?.exactMatchAccuracy)} vs LangChain BufferMemory-style ${rounded(real?.langChainBufferMemory?.exactMatchAccuracy)} |
+| Extraction quality bounds State Memory | Rule extractor recall ${rounded(ruleExtractor?.metrics.extractionRecall)} -> QA ${rounded(ruleExtractor?.qa.exactMatchAccuracy)} |
 | Defensive policy helps conflicts | Defensive State = ${rounded(conflictScenario?.defensiveStateMemory.exactMatchAccuracy)} in near-simultaneous conflicts |
 | State lookup scales better | ${lastScale?.eventCount} events: State ${rounded(lastScale?.stateMemory.averageLatencyMsMean)} ms vs RAG ${rounded(lastScale?.rag.averageLatencyMsMean)} ms |
 `
@@ -100,16 +119,18 @@ function researchQuestions() {
     "Research Questions",
     `
 - **RQ1:** Does explicit State Memory reduce stale fact errors compared to RAG?
-- **RQ2:** Does the advantage remain when oracle subject/predicate access is removed?
+- **RQ2:** Does the advantage remain against Temporal RAG when oracle subject/predicate access is removed?
 - **RQ3:** Is State Memory sufficient for document-detail questions?
 - **RQ4:** How does the approach behave under stress conditions?
 - **RQ5:** How does latency scale with event count?
 - **RQ6:** Does Hybrid improve LLM-based answering?
+- **RQ7:** Does the approach work on a small real project trace and against an external memory-framework baseline?
+- **RQ8:** How does State Memory degrade when real extraction misses facts?
 `
   );
 }
 
-function claims({ main, mixed, robust, stress, scalability, llm }) {
+function claims({ main, mixed, robust, stress, scalability, llm, real, extractor }) {
   if (!main || !mixed || !robust || !stress || !scalability) return "";
 
   const missingUpdates = scenarioByName(stress, "missing_final_updates");
@@ -120,31 +141,32 @@ function claims({ main, mixed, robust, stress, scalability, llm }) {
     lastScale?.rag.averageLatencyMsMean,
     lastScale?.stateMemory.averageLatencyMsMean
   );
+  const ruleExtractor = extractor?.extractors?.find((item) => item.key === "rule");
 
   return section(
     "Claim -> Evidence -> Limitation",
     `
-### Claim 1: State Memory is stronger than RAG for evolving current facts
+### Claim 1: The oracle result is a diagnostic upper bound
 
 **Evidence.**
 In the deterministic memory benchmark, State Memory reaches ${rounded(main.stateMemory.exactMatchAccuracy)} Exact Match and ${rounded(main.stateMemory.staleFactErrorRate)} Stale Error, while RAG reaches ${rounded(main.rag.exactMatchAccuracy)} Exact Match and ${rounded(main.rag.staleFactErrorRate)} Stale Error.
 
 **Interpretation.**
-Explicit active/obsolete fact tracking is better suited for evolving facts than lexical retrieval over historical events.
+With structured subject/predicate access, explicit active/obsolete fact tracking can represent the current state without stale retrieved facts.
 
 **Limitation.**
-This benchmark uses structured subject/predicate access, so it measures memory isolation rather than full natural-language question understanding.
+This is an oracle-style memory-isolation benchmark. It should be treated as an upper-bound diagnostic, not as the headline agent result.
 
-### Claim 2: Removing oracle slot access makes the result more realistic
+### Claim 2: State Memory remains stronger than Temporal RAG in the main robust benchmark
 
 **Evidence.**
-In the robust non-oracle benchmark, State Memory drops from ${rounded(main.stateMemory.exactMatchAccuracy)} deterministic Exact Match to ${rounded(robust.stateNoOracle.exactMatchAccuracy)}. Its slot inference accuracy is also ${rounded(robust.stateNoOracle.slotInferenceAccuracy)}.
+In the robust non-oracle benchmark, State Memory reaches ${rounded(robust.stateNoOracle.exactMatchAccuracy)} Exact Match, compared with Temporal RAG at ${rounded(robust.temporalRag.exactMatchAccuracy)} and naive RAG at ${rounded(robust.rag.exactMatchAccuracy)}.
 
 **Interpretation.**
-The memory store is not the only source of error. Natural-language slot inference becomes the limiting stage.
+Naive RAG fails largely because it lacks recency/latest-fact handling. Temporal RAG closes much of that gap, so the remaining State Memory gain is a narrower but more meaningful comparison.
 
 **Limitation.**
-The slot inference module is still lightweight lexical logic, not a trained semantic parser.
+The robust benchmark is still synthetic, and the slot inference module is lightweight lexical logic rather than a trained semantic parser.
 
 ### Claim 3: Hybrid memory is the strongest architecture for mixed knowledge
 
@@ -182,18 +204,40 @@ These timings are local JavaScript measurements, not a full production database 
 ### Claim 6: LLM answering preserves the hybrid advantage
 
 **Evidence.**
-Hybrid + LLM reaches ${rounded(llm?.hybrid?.normalizedAccuracy)} normalized accuracy, above RAG + LLM at ${rounded(llm?.rag?.normalizedAccuracy)} and State + LLM at ${rounded(llm?.state?.normalizedAccuracy)}.
+Hybrid + LLM reaches ${rounded(llm?.hybrid?.normalizedAccuracy)} normalized accuracy, compared with RAG + LLM at ${rounded(llm?.rag?.normalizedAccuracy)} and State + LLM at ${rounded(llm?.state?.normalizedAccuracy)}.
 
 **Interpretation.**
 The retrieval/state routing decision remains useful even when a generative model produces the final answer.
 
 **Limitation.**
 LLM latency dominates runtime and depends on the local model, hardware and Ollama configuration.
+
+### Claim 7: Real-trace validation reduces synthetic-only risk
+
+**Evidence.**
+On the real repository-derived project trace, State Memory reaches ${rounded(real?.stateMemory?.exactMatchAccuracy)} Exact Match, compared with the LangChain BufferMemory-style baseline at ${rounded(real?.langChainBufferMemory?.exactMatchAccuracy)}.
+
+**Interpretation.**
+Explicit state can retain older but still relevant project facts that fall out of a fixed recent-message buffer.
+
+**Limitation.**
+The real trace is small and repository-specific. It should be treated as a validation slice, not as a broad real-world benchmark.
+
+### Claim 8: Extraction quality is a measurable bottleneck
+
+**Evidence.**
+In the real extractor benchmark, the rule extractor reaches ${rounded(ruleExtractor?.metrics.extractionPrecision)} precision, ${rounded(ruleExtractor?.metrics.extractionRecall)} recall and ${rounded(ruleExtractor?.qa.exactMatchAccuracy)} downstream QA Exact Match.
+
+**Interpretation.**
+State Memory degrades when the extractor misses facts, even when the facts it does extract are precise. This makes extraction recall a visible bottleneck rather than a hidden assumption.
+
+**Limitation.**
+The default extractor benchmark runs the deterministic rule extractor for CI. Passing \`--llm-extractor\` adds a real Ollama-backed LLM extractor, but those results depend on the local model.
 `
   );
 }
 
-function benchmarkCards({ main, mixed, robust, stress, scalability, llm }) {
+function benchmarkCards({ main, mixed, robust, stress, scalability, llm, real, extractor }) {
   if (!main || !mixed || !robust || !stress || !scalability) return "";
 
   const missingUpdates = scenarioByName(stress, "missing_final_updates");
@@ -203,10 +247,10 @@ function benchmarkCards({ main, mixed, robust, stress, scalability, llm }) {
   return section(
     "Level 2: Benchmark Cards",
     `
-### Deterministic Memory Benchmark
+### Diagnostic Oracle Memory Benchmark
 
 **Purpose.**
-Tests memory correctness when the system has controlled subject/predicate access.
+Tests memory correctness under controlled subject/predicate access as an upper-bound diagnostic.
 
 **Dataset.**
 ${main.dataset.events} events and ${main.dataset.questions} questions.
@@ -235,7 +279,7 @@ ${robust.dataset.questionTypes.join(", ")}.
 RAG, Temporal RAG and State no-oracle.
 
 **Key result.**
-State no-oracle reaches ${rounded(robust.stateNoOracle.exactMatchAccuracy)} Exact Match, compared with Temporal RAG at ${rounded(robust.temporalRag.exactMatchAccuracy)} and RAG at ${rounded(robust.rag.exactMatchAccuracy)}.
+State no-oracle reaches ${rounded(robust.stateNoOracle.exactMatchAccuracy)} Exact Match, compared with Temporal RAG at ${rounded(robust.temporalRag.exactMatchAccuracy)} and naive RAG at ${rounded(robust.rag.exactMatchAccuracy)}.
 
 **Main failure source.**
 Slot inference accuracy is ${rounded(robust.stateNoOracle.slotInferenceAccuracy)}, matching State no-oracle Exact Match.
@@ -301,6 +345,40 @@ Hybrid + LLM reaches ${rounded(llm?.hybrid?.normalizedAccuracy)} normalized accu
 
 **Main limitation.**
 LLM output introduces formatting and incomplete-answer errors that are separate from memory retrieval.
+
+### Real Project Trace Benchmark
+
+**Purpose.**
+Reduces synthetic-only bias by evaluating a real repository-derived event trace.
+
+**Dataset.**
+${real?.dataset?.events ?? "n/a"} real project events and ${real?.dataset?.questions ?? "n/a"} questions.
+
+**Systems.**
+Temporal RAG, State Memory and LangChain ConversationBufferMemory-style baseline.
+
+**Key result.**
+State Memory reaches ${rounded(real?.stateMemory?.exactMatchAccuracy)} Exact Match; LangChain BufferMemory-style reaches ${rounded(real?.langChainBufferMemory?.exactMatchAccuracy)}.
+
+**Main limitation.**
+The dataset is intentionally small and should later be expanded with more manually curated real traces.
+
+### Real Extractor Benchmark
+
+**Purpose.**
+Tests the full raw-event pipeline: raw event text -> extractor -> State Store -> QA.
+
+**Dataset.**
+${extractor?.dataset?.events ?? "n/a"} real project events, ${extractor?.dataset?.goldFacts ?? "n/a"} gold facts and ${extractor?.dataset?.questions ?? "n/a"} downstream questions.
+
+**Systems.**
+Curated gold extractor, deterministic rule extractor, and optional Ollama LLM extractor.
+
+**Key result.**
+The rule extractor reaches ${rounded(extractor?.extractors?.find((item) => item.key === "rule")?.metrics.extractionRecall)} extraction recall and ${rounded(extractor?.extractors?.find((item) => item.key === "rule")?.qa.exactMatchAccuracy)} downstream QA Exact Match.
+
+**Main limitation.**
+The default report does not include LLM extractor rows unless the benchmark is run with \`--llm-extractor\`.
 `
   );
 }
@@ -338,6 +416,105 @@ function derivedMetrics({ mixed, robust, scalability }) {
   );
 }
 
+function statisticalChecks(resultSets) {
+  const confidenceRows = [
+    ["Diagnostic oracle", "RAG", resultSets.mainRag],
+    ["Diagnostic oracle", "State Memory", resultSets.mainState],
+    ["Robust non-oracle", "RAG", resultSets.robustRag],
+    ["Robust non-oracle", "Temporal RAG", resultSets.robustTemporalRag],
+    ["Robust non-oracle", "State no-oracle", resultSets.robustState],
+    ["Mixed", "RAG-only", resultSets.mixedRagOnly],
+    ["Mixed", "State-only", resultSets.mixedStateOnly],
+    ["Mixed", "Hybrid", resultSets.mixedHybrid],
+    ["Real trace", "Temporal RAG", resultSets.realTemporalRag],
+    ["Real trace", "State Memory", resultSets.realState],
+    ["Real trace", "LangChain BufferMemory-style", resultSets.realLangChain]
+  ]
+    .filter(([, , results]) => Array.isArray(results))
+    .map(([benchmark, system, results]) => {
+      const intervals = bootstrapMetricIntervals(results);
+      return `| ${benchmark} | ${system} | ${metricIntervalCell(intervals.exactMatchAccuracy)} | ${metricIntervalCell(intervals.f1Score)} |`;
+    })
+    .join("\n");
+
+  const comparisonRows = [
+    [
+      "Diagnostic oracle",
+      "State Memory vs RAG",
+      resultSets.mainRag,
+      resultSets.mainState
+    ],
+    [
+      "Robust non-oracle",
+      "Temporal RAG vs naive RAG",
+      resultSets.robustRag,
+      resultSets.robustTemporalRag
+    ],
+    [
+      "Robust non-oracle",
+      "State no-oracle vs Temporal RAG",
+      resultSets.robustTemporalRag,
+      resultSets.robustState
+    ],
+    ["Mixed", "Hybrid vs RAG-only", resultSets.mixedRagOnly, resultSets.mixedHybrid],
+    ["Mixed", "Hybrid vs State-only", resultSets.mixedStateOnly, resultSets.mixedHybrid],
+    ["Real trace", "State Memory vs LangChain BufferMemory-style", resultSets.realLangChain, resultSets.realState]
+  ]
+    .filter(([, , left, right]) => Array.isArray(left) && Array.isArray(right))
+    .map(([benchmark, comparison, left, right]) => {
+      const test = mcnemarExactTest(left, right);
+      const note = test.pValue < 0.05 ? "paired difference detected" : "not significant on this sample";
+      return `| ${benchmark} | ${comparison} | ${test.pairedCount} | ${test.rightCorrectLeftWrong} | ${test.leftCorrectRightWrong} | ${pValue(test.pValue)} | ${note} |`;
+    })
+    .join("\n");
+
+  return section(
+    "Statistical Checks",
+    `
+Bootstrap confidence intervals use 1000 deterministic resamples over question-level results and report 95% intervals for Exact Match and F1. McNemar exact tests use paired exact-match outcomes for systems evaluated on the same question IDs.
+
+| Benchmark | System | Exact Match 95% CI | F1 95% CI |
+| --- | --- | ---: | ---: |
+${confidenceRows}
+
+| Benchmark | Comparison | Paired N | Candidate-only wins | Baseline-only wins | McNemar p | Note |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+${comparisonRows}
+
+These tests quantify uncertainty on the fixed benchmark samples. They do not remove the synthetic-data and benchmark-design limitations described below.
+`
+  );
+}
+
+function threatsToValidity() {
+  return section(
+    "Threats To Validity",
+    `
+- **Synthetic data bias:** the events, facts and questions are generated in a controlled environment. The experiments show behavior under designed temporal-memory conditions, not proven superiority on arbitrary real agent tasks.
+- **Oracle access:** the deterministic benchmark uses structured subject/predicate access and is therefore an oracle/diagnostic upper-bound setting. The robust benchmark is the main evidence for non-oracle behavior.
+- **Baseline strength:** naive lexical RAG is intentionally weak for temporal updates. Temporal RAG is the primary implemented baseline for current-fact claims, but the project still does not benchmark production vector stores, learned retrievers or full agent frameworks.
+- **Extraction assumptions:** the main experiments use clean structured facts. The extractor benchmark measures fact precision, recall, slot accuracy, entity resolution, mutable classification and conflict detection, but the default CI run uses a deterministic rule extractor; LLM extractor scores require a local Ollama run.
+- **Limited real-world validation:** the robust benchmark adds semi-realistic calendar, CRM, task, shopping and support-chat domains, and the real-trace benchmark adds repository-derived events. The real trace is still small and should be expanded.
+- **Sample size:** question counts are modest, so confidence intervals and McNemar tests should be read as benchmark diagnostics rather than universal population estimates.
+`
+  );
+}
+
+function relatedWorkPositioning() {
+  return section(
+    "Related Work Positioning",
+    `
+| Approach | Memory model | Relationship to this project | Status in this coursework |
+| --- | --- | --- | --- |
+| [LangGraph persistence and stores](https://docs.langchain.com/oss/python/langgraph/persistence) | Thread state checkpoints plus cross-thread stores with optional semantic search | Closest framework-level analogue for persisted graph state and long-term user/application memory | Conceptual comparison; not implemented as a runtime baseline |
+| [LangChain memory concepts](https://docs.langchain.com/oss/python/concepts/memory) | Short-term thread state and long-term namespaced memory | Provides the broader agent-memory architecture around which LangGraph state stores are positioned | Implemented as a ConversationBufferMemory-style real-trace baseline |
+| [MemGPT](https://arxiv.org/abs/2310.08560) | OS-inspired virtual context management across memory tiers | Related motivation: managing limited context by moving information between active and external memory | Conceptual comparison; no MemGPT runtime baseline |
+| [Letta stateful agents](https://docs.letta.com/guides/core-concepts/stateful-agents) and [memory blocks](https://docs.letta.com/guides/core-concepts/memory/memory-blocks) | Persistent editable memory blocks pinned into context plus external memory | Similar emphasis on persistent agent state, but Letta memory blocks are agent-managed text/context units rather than deterministic slot records | Conceptual comparison; no Letta baseline |
+| Temporal RAG in this repo | Recency reranking plus latest-fact answering over raw events | Strongest implemented retrieval baseline for temporal updates | Main baseline for robust current-state claims |
+`
+  );
+}
+
 function pipelineBreakdown({ main, mixed, robust, llm }) {
   if (!main || !mixed || !robust) return "";
 
@@ -347,13 +524,14 @@ function pipelineBreakdown({ main, mixed, robust, llm }) {
 | Stage | Metric | Result |
 | --- | --- | --- |
 | Event generation | deterministic seed | ${main.configuration ? "seeded synthetic events" : "n/a"} |
-| Fact extraction | extraction accuracy | Not directly measured; stress tests simulate extraction failures |
-| State update | stale rejection | ${rounded(main.stateMemory.obsoleteFactRejectionRate)} obsolete rejection in deterministic benchmark |
+| Fact extraction | extraction accuracy | Real extractor benchmark reports precision, recall, slot, entity and conflict metrics |
+| State update | stale rejection | ${rounded(main.stateMemory.obsoleteFactRejectionRate)} obsolete rejection in the diagnostic oracle benchmark |
 | Slot inference | slot accuracy | ${rounded(robust.stateNoOracle.slotInferenceAccuracy)} in robust non-oracle benchmark |
 | State selection / retrieval | context hit | ${rounded(robust.stateNoOracle.contextHitRate)} for State no-oracle; ${rounded(robust.temporalRag.contextHitRate)} for Temporal RAG |
 | Answering | exact match | ${rounded(robust.stateNoOracle.exactMatchAccuracy)} State no-oracle Exact Match |
 | Document retrieval | document-detail accuracy | Hybrid ${rounded(mixed.byType.hybrid.document_detail.exactMatchAccuracy)}; State-only ${rounded(mixed.byType.stateOnly.document_detail.exactMatchAccuracy)} |
 | LLM output | hallucination rate | Hybrid + LLM ${rounded(llm?.hybrid?.hallucinationRate)} |
+| Real-trace validation | external framework baseline | State Memory vs LangChain BufferMemory-style |
 
 The key diagnostic result is that State Memory degrades primarily at the natural-language slot inference stage, not because explicit active/obsolete state is ineffective.
 `
@@ -388,9 +566,11 @@ function visualizationPlan() {
 | Visualization | What it should show | Data source |
 | --- | --- | --- |
 | Accuracy overview bar chart | RAG, Temporal RAG, State Memory and Hybrid across main benchmarks | summary JSON files |
-| Quality vs latency scatter plot | Accuracy/normalized accuracy versus average latency | deterministic, robust, mixed and LLM summaries |
+| Quality vs latency scatter plot | Accuracy/normalized accuracy versus average latency | diagnostic oracle, robust, mixed and LLM summaries |
 | Scalability line chart | RAG and State latency from 100 to 5000 events | results/scalability/summary.json |
 | Robust benchmark heatmap | paraphrase, indirect, noisy and temporal_multi_step by system plus slot inference | results/robust/summary.json |
+| Real trace comparison | Temporal RAG, State Memory and LangChain BufferMemory-style on repository events | results/real/summary.json |
+| Extractor degradation chart | Extraction recall versus downstream State Memory QA | results/extractor/summary.json |
 | Failure taxonomy chart | incomplete_answer, missing_fact, possible_hallucination, stale_fact and slot_inference_failed | LLM result files plus robust summaries |
 `
   );
@@ -419,7 +599,7 @@ function failureTaxonomy({ main, robust, llmResultSets }) {
   const rows = [];
 
   if (main?.rag?.errorTaxonomy?.stale_fact) {
-    rows.push(["stale_fact", main.rag.errorTaxonomy.stale_fact, "RAG", "Deterministic benchmark"]);
+    rows.push(["stale_fact", main.rag.errorTaxonomy.stale_fact, "RAG", "Diagnostic oracle benchmark"]);
   }
 
   if (robust?.stateNoOracle?.errorTaxonomy?.slot_inference_failed) {
@@ -449,7 +629,7 @@ function failureTaxonomy({ main, robust, llmResultSets }) {
 | --- | ---: | --- | --- |
 ${body}
 
-The deterministic and robust rows come from aggregate summaries. The LLM rows are counted from full result files, not only from the displayed failure examples.
+The diagnostic oracle and robust rows come from aggregate summaries. The LLM rows are counted from full result files, not only from the displayed failure examples.
 `
   );
 }
@@ -467,6 +647,10 @@ function metricDefinitions() {
 - **Context Hit:** whether the relevant supporting context was retrieved or selected.
 - **MRR:** mean reciprocal rank of the first relevant retrieved item.
 - **Slot Inference Accuracy:** whether the system inferred the correct subject/predicate from a natural-language question.
+- **Extraction Precision:** share of extracted facts that exactly match a gold subject/predicate/object fact.
+- **Extraction Recall:** share of gold subject/predicate/object facts recovered by the extractor.
+- **Entity Resolution Accuracy:** share of extracted facts whose subject matches a gold entity.
+- **Conflict Detection Accuracy:** agreement between predicted and gold mutable-slot replacement events.
 - **Fallback Rate:** how often the defensive system refused direct state answering and fell back to temporal RAG.
 - **Prompt Compliance:** whether the LLM followed the requested answer format.
 - **Hallucination Rate:** rate of LLM answers that introduce unsupported content.
@@ -478,9 +662,9 @@ function mainBenchmark(summary) {
   if (!summary) return "";
 
   return subsection(
-    "Deterministic Memory Benchmark",
+    "Diagnostic Oracle Memory Benchmark",
     `
-Dataset: ${summary.dataset.events} events, ${summary.dataset.questions} questions.
+Dataset: ${summary.dataset.events} events, ${summary.dataset.questions} questions. This benchmark provides controlled subject/predicate access and should be read as an upper-bound memory-isolation diagnostic.
 
 | System | Exact Match | F1 | Current Fact Accuracy | Obsolete Rejection | Stale Error | Context Hit | MRR |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -685,6 +869,51 @@ ${failureRows}
   );
 }
 
+function realBenchmark(summary) {
+  if (!summary) return "";
+
+  return subsection(
+    "Real Project Trace Benchmark",
+    `
+Dataset: ${summary.dataset.events} real repository-derived events, ${summary.dataset.questions} questions.
+
+Extractor mode: ${summary.extractor.mode}.
+
+| System | Exact Match | F1 | Context Hit | Avg Context Tokens | Avg Latency ms |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Temporal RAG | ${rounded(summary.temporalRag.exactMatchAccuracy)} | ${rounded(summary.temporalRag.f1Score)} | ${rounded(summary.temporalRag.contextHitRate)} | ${rounded(summary.temporalRag.averageContextTokens)} | ${rounded(summary.temporalRag.averageLatencyMs)} |
+| State Memory | ${rounded(summary.stateMemory.exactMatchAccuracy)} | ${rounded(summary.stateMemory.f1Score)} | ${rounded(summary.stateMemory.contextHitRate)} | ${rounded(summary.stateMemory.averageContextTokens)} | ${rounded(summary.stateMemory.averageLatencyMs)} |
+| LangChain BufferMemory-style | ${rounded(summary.langChainBufferMemory.exactMatchAccuracy)} | ${rounded(summary.langChainBufferMemory.f1Score)} | ${rounded(summary.langChainBufferMemory.contextHitRate)} | ${rounded(summary.langChainBufferMemory.averageContextTokens)} | ${rounded(summary.langChainBufferMemory.averageLatencyMs)} |
+
+| Comparison | Candidate-only wins | Baseline-only wins | McNemar p |
+| --- | ---: | ---: | ---: |
+| State Memory vs LangChain BufferMemory-style | ${summary.stateVsLangChain.rightCorrectLeftWrong} | ${summary.stateVsLangChain.leftCorrectRightWrong} | ${pValue(summary.stateVsLangChain.pValue)} |
+`
+  );
+}
+
+function extractorBenchmark(summary) {
+  if (!summary) return "";
+
+  const rows = summary.extractors
+    .map(
+      (extractor) =>
+        `| ${tableCell(extractor.name)} | ${rounded(extractor.metrics.extractionPrecision)} | ${rounded(extractor.metrics.extractionRecall)} | ${rounded(extractor.metrics.extractionF1)} | ${rounded(extractor.metrics.slotAccuracy)} | ${rounded(extractor.metrics.entityResolutionAccuracy)} | ${rounded(extractor.metrics.mutableClassificationAccuracy)} | ${rounded(extractor.metrics.conflictDetectionAccuracy)} | ${rounded(extractor.qa.exactMatchAccuracy)} |`
+    )
+    .join("\n");
+
+  return subsection(
+    "Real Extractor Benchmark",
+    `
+Dataset: ${summary.dataset.events} raw repository-derived events, ${summary.dataset.goldFacts} gold facts, ${summary.dataset.questions} downstream questions.
+
+| Extractor | Extraction Precision | Extraction Recall | Extraction F1 | Slot Accuracy | Entity Resolution | Mutable Classification | Conflict Detection | Downstream QA EM |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+${rows}
+`
+  );
+}
+
 function rawTables(summaries) {
   return section(
     "Level 3: Raw Benchmark Tables",
@@ -694,7 +923,9 @@ function rawTables(summaries) {
       robustBenchmark(summaries.robust),
       stressBenchmark(summaries.stress),
       scalabilityBenchmark(summaries.scalability),
-      llmBenchmark(summaries.llm)
+      llmBenchmark(summaries.llm),
+      realBenchmark(summaries.real),
+      extractorBenchmark(summaries.extractor)
     ]
       .filter(Boolean)
       .join("\n")
@@ -722,12 +953,27 @@ export async function generateResultsReport() {
     robust: await readIfExists("results/robust/summary.json"),
     stress: await readIfExists("results/stress/summary.json"),
     scalability: await readIfExists("results/scalability/summary.json"),
-    llm: await readIfExists("results/llm/summary.json")
+    llm: await readIfExists("results/llm/summary.json"),
+    real: await readIfExists("results/real/summary.json"),
+    extractor: await readIfExists("results/extractor/summary.json")
   };
   const llmResultSets = {
     "RAG + LLM": await readIfExists("results/llm/rag-llm-results.json"),
     "State + LLM": await readIfExists("results/llm/state-llm-results.json"),
     "Hybrid + LLM": await readIfExists("results/llm/hybrid-llm-results.json")
+  };
+  const resultSets = {
+    mainRag: await readIfExists("results/rag-results.json"),
+    mainState: await readIfExists("results/state-results.json"),
+    robustRag: await readIfExists("results/robust/rag-results.json"),
+    robustTemporalRag: await readIfExists("results/robust/temporal-rag-results.json"),
+    robustState: await readIfExists("results/robust/state-no-oracle-results.json"),
+    mixedRagOnly: await readIfExists("results/mixed/rag-only-results.json"),
+    mixedStateOnly: await readIfExists("results/mixed/state-only-results.json"),
+    mixedHybrid: await readIfExists("results/mixed/hybrid-results.json"),
+    realTemporalRag: await readIfExists("results/real/temporal-rag-results.json"),
+    realState: await readIfExists("results/real/state-memory-results.json"),
+    realLangChain: await readIfExists("results/real/langchain-buffer-memory-results.json")
   };
 
   const content = [
@@ -741,8 +987,11 @@ export async function generateResultsReport() {
     claims(summaries),
     benchmarkCards(summaries),
     derivedMetrics(summaries),
+    statisticalChecks(resultSets),
     pipelineBreakdown(summaries),
     negativeResults(summaries),
+    threatsToValidity(),
+    relatedWorkPositioning(),
     failureTaxonomy({ ...summaries, llmResultSets }),
     visualizationPlan(),
     metricDefinitions(),
