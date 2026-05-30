@@ -292,7 +292,7 @@ jobs:
       group: ollama-llm-publish-${{ github.ref }}
       cancel-in-progress: false
     env:
-      ARTIFACT_DIR: ollama-artifacts
+      ARTIFACT_DIR: /tmp/ollama-artifacts
 
     steps:
       - name: Checkout
